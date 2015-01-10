@@ -1,0 +1,38 @@
+::    Simple Todo MVC
+::
+::::  
+  ::
+/?    314
+|%
+++  axle  (map time cord)  ::  type for state
+--
+!:
+::::
+  ::
+|_  [hid=hide vat=axle]
+::
+++  poke-json
+  |=  [ost=bone ship jon=json]
+  =.  vat
+    ^-  axle
+    =-  ?~(b (~(del by vat) a) (~(put by vat) a b))
+    ^-  [a=time b=cord]
+    (need ((at (ci (slat %da) so) so ~):jo jon))  :: ar takes 2; ci composes so+slat 
+  ~&  [in=jon vat]
+  :_  +>.$                                        :: gate context (tail of tail)
+  [ost %give %nice ~]~
+
+::
+++  peek 
+  |=  [ship pax=path]
+  :-  %json
+  =-  ~&  out=-  -
+  ^-  json
+%+  joba  %items
+  :-  %a
+  %+  turn
+    (~(tap by vat))                               ::  map to list
+  |=  [tim=time cor=cord]                         ::  list [time cord] to list [crd json]
+  ^-  json
+  (jobe created/[%s (scot %da tim)] text/[%s cor] ~)                       ::  %da to cord
+--
