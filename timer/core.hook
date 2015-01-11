@@ -1,0 +1,35 @@
+::    Timer, demonstrating simple cards, moves
+::
+::::
+  ::
+  ::                  ::  stack trace
+/?  314               ::  version 314 or lower
+!:
+|%
+++  move  ,[bone (mold note gift)]      ::note is a gift is b in mold
+++  note  ,[%t %wait @da]
+++  sign  ,[%t %wake ~]
+++  gift  ,[%rush %tang (list tank)]    ::  tang is mark
+--
+!:
+::::
+  ::
+|_  [hid=hide vat=~]  ::  global data
+++  peer  ,_`.                              ::  subscription
+::
+++  poke-timer-args                         ::  handle request
+  |=  [ost=bone his=ship tym=@dr ~]          ::  address, ship, args
+  ^-  [(list move) _+>]                     ::  typecheck
+  :_  +>.$                                  ::  send move, reset app
+  =+  lat=`@da`(add tym lat.hid)
+  [ost %pass /time %t [%wait p=lat]]~       ::  call %time with %wait
+
+++  pour                                    ::  handle response
+      |=  [ost=bone way=path sih=sign]
+      ^-  [(list move) _+>]
+      :_  +>.$
+      %+  turn  
+        (~(tap in (~(get ju pus.hid) /out)))
+      |=  ost=bone  ^-  move
+      [ost %give [%rush %tang leaf/"ding" ~]]
+--
