@@ -1,0 +1,64 @@
+::    write with stat
+::
+::::  
+  ::
+/?    314
+|%
+++  sign
+  $:  %g
+  $%  [%nice ~]
+      [%rush %txt p=cord]
+  ==  ==
+--
+!:
+|_  [hid=hide vat=wain]
+++  poke-write-args
+  |=  [ost=bone you=ship ~]
+  :_  +>.$
+  :*  [ost %pass /in %g %show [our.hid +.imp.hid] you /in/[-.imp.hid]]
+    %+  turn  (~(tap by sup.hid))
+      |=  [ost=bone *]
+      :^  ost  %give  %rush
+      :-  %tang  :_  ~
+      leaf/"listening"
+  ==
+
+++  peer                                                  ::  response to subscr
+  |=
+    *
+  `+>
+
+++  pour                                                  ::  handle sbscr data
+  |=  [ost=bone pax=path sih=*]
+  ~&  write-pouring/(,[@tas @tas @tas ~] sih)
+  ~&  vat
+  =>  .(sih ;;(sign sih))
+  ?-  &2.sih                                              ::  2nd item of list
+    %nice  
+      :_  +>.$
+      [ost %give +.sih]~                                  ::  tail [%g %nice ~]
+    %rush
+      =.  vat
+        [p.sih vat]
+      :-  ~
+      +>.$
+  ==
+++  export  (role (flop vat))                             ::  list lines->atom
+++  part                                                  ::  post-mortem moves
+  |=  ost=bone
+  ~&  [%part ost]
+  :_  ~
+  :*  ost  %pass  /  %c  %info  our.hid
+    (foal /(scot %p our.hid)/try/(scot %da lat.hid)/saved export)
+  ==   
+--
+
+
+
+
+
+
+
+
+
+
