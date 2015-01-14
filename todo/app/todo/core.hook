@@ -1,7 +1,7 @@
 ::    simple todo list
 ::    %gall portion
 ::
-::::  /hook/core/app/main
+::::  /hook/core/todo/app/main
   ::
 /?    314
 ::
