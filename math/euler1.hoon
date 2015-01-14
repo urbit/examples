@@ -1,7 +1,7 @@
 ::    project euler 1
 ::    https://projecteuler.net/problem=1
 ::
-::::  /hoon/euler/try/
+::::  /hoon/euler1/try/
   ::
 =<  (sum 1.000)
 ::
