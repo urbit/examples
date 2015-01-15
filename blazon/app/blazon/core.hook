@@ -1,0 +1,67 @@
+:: blazon
+!:
+|_  [hid=hide ~]
+++  poke-blazon-args
+  |=  [ost=bone you=ship her=ship ~]
+  =+  ^=  put
+      %+  turn  %-  flop  %-  lore  %-  crip
+      (blazon-ship her)
+      trip
+  :_  +>.$
+  :*  [ost %pass / %g %cide %$]
+      [ost %give %nice ~]
+      %+  turn  put
+      |=  [lin=tape]
+      [ost %pass / %d %flog %text lin]
+  ==
+::
+++  blazon-ship
+  |=  [her=ship]
+  =+  dok=((hard (unit gcos)) .^(%a /=gcos=/(scot %p her)))
+  ?~  dok
+    "{<her>} is a stranger"
+  =+  dox=`gcos`+.dok
+  ?-  -.dox
+    %czar  "{<her>} is the Imperial Carrier, {(glam her)}"
+    %king  "{<her>} is the Royal Cruiser, {(trip p.dox)}"
+    %earl  """
+           {<her>} is {(trip p.dox)}
+           a yacht under {<(sein her)>}
+           """
+    %pawn  "{<her>} is a submarine"
+    %duke
+    ?-  -.p.dox
+      %anon  "{<her>} is an anonymous destroyer"
+      %punk  """
+             {<her>} is a destroyer flagged pseudonymously under
+             "{(trip q.p.dox)}"
+             flying the banner {<p.p.dox>}
+             """
+      %lady  """
+             {<her>} is a destroyer flagged under
+             {(christen s.p.p.dox)}, Lady {(trip s.s.p.p.dox)}
+             (born {<p.p.p.dox>}, residing in {<q.p.p.dox>})
+             flying the banner {<r.p.p.dox>}
+             """
+      %lord  """
+             {<her>} is a destroyer flagged under
+             {(christen s.p.p.dox)}, Lord {(trip s.s.p.p.dox)}
+             (born {<p.p.p.dox>}, residing in {<q.p.p.dox>})
+             flying the banner {<r.p.p.dox>}
+             """
+    ==
+  ==
+::
+++  christen
+  |=  [whom=name]
+  ^-  tape
+  ;:  weld
+    (trip p.whom)
+    ?~  q.whom
+      ""
+    (weld " " (trip +.q.whom))
+    ?~  r.whom
+      ""
+    :(weld " (" (trip +.r.whom) ")")
+  ==
+--
