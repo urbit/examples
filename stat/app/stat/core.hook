@@ -1,0 +1,237 @@
+::  status
+::  stores a single line status and subscriptions to other single line statues
+::  instructions for testing:
+::  running a fake ~zod on 8080 and a fake ~del on 8081
+::  open http://localhost:8080/stat, and update the text
+::  open http://localhost:8080/gig/del/stat and click subscribe
+::  open http://localhost:8081/stat to see your subscribed state
+::  fun!
+::
+::::  /hook/core/stat/app
+  ::
+  ::
+/?    314                                               ::  need urbit 314
+/-    subs
+/=    urbjs        /:/===/lib/urb:/hymn/                ::  urbit library (js)
+::
+::::  ~nattes-firryc, ~talsur-todres, ~fyr
+  ::
+|%
+  ++  axle
+    $%  [%0 p=(map ,@p ,@t)]
+    ==
+  ++  gilt                                              ::  subscription frame
+    $%  [%hymn p=manx]                                  ::  html tree
+        [%json p=json]                                  ::  json
+        [%stat ship=@p stat=@t]                         ::  stat
+    ==                                                  ::
+  ++  gift                                              ::  output action
+    $%  [%rust gilt]                                    ::  total update
+        [%rush gilt]                                    ::  partial update
+        [%mean (unit (pair term (list tank)))]          ::  error, maybe w/ msg
+        [%nice ~]                                       ::  Response message
+    ==                                                  ::
+  ++  hapt   ,[p=ship q=path]                           ::  Ship, term message
+  ++  kiss
+    $%  [%upd-stat our=ship stat=cord]                  ::  update
+        [%sub-stat his=ship]                            ::  sub
+        [%usu-stat his=ship]                            ::  un-sub
+    ==
+  ++  move  ,[p=bone q=(mold note gift)]                ::  output operation
+  ++  note                                              ::  Calling args
+    $%  $:  %g                                          ::  To %gall
+            $%  [%mess p=hapt q=ship r=cage]
+                [%show p=hapt q=ship r=path]
+                [%nuke p=hapt q=ship]
+    ==  ==  ==
+  ++  sign
+    $%  $:  %g
+            $%  [%rust p=gilt]
+                [%rush p=gilt]
+                [%nice p=~]
+    ==  ==  ==
+--
+::
+!:
+|_  $:  hid=hide
+        vat=axle
+    ==
+::
+::++  prep
+::  |=  old=(unit)
+::  [~ +>.$]
+::
+++  page
+  |=  [vet=json sub=json]
+  ^-  manx
+  ;html
+    ;head
+      ;script(type "text/javascript", src "//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js");
+      ;link(rel "stylesheet", type "text/css", href "/gen/main/pub/stat/src/main.css");
+      ;title: urbit example apps - status
+    ==
+    ;body
+      ;div#cont
+        ;div#stat;
+      ==
+      ;+  urbjs
+      ;script#vat(type "text/json"): {(pojo vet)}
+      ;script#sub(type "text/json"): {(pojo sub)}
+      ;script@"/gen/main/pub/stat/src/main.js";
+    ==
+  ==
+::
+++  peer
+  |=  [ost=bone you=ship pax=path]
+  ^-  [(list move) _+>]
+  ?~  pax
+    :_  +>.$
+      :_  ~
+    =-  [ost %give %rust %hymn -]
+      ?:  =(our.hid you)
+        (page vat-json [%b &])
+      (page our-json [%b (is-sub you)])
+  :_  +>.$
+    :_  ~
+  ?+  -.pax
+    =-  [ost %give %mean -]
+      `[%not-found [%leaf "you need to specify a path"]~]
+    %list
+      ~&  [%give-list our.hid you]
+      [ost %give %rust %stat our-stat]
+    %data
+      [ost %give %rush %json (joba %conn %b &)]
+      
+  ==
+::
+++  our-stat
+  [our.hid (need (~(get by p.vat) our.hid))]
+::
+++  vat-json
+  :-  %o
+    %-  mo
+  %+  turn
+    (~(tap by p.vat) ~)
+  |=  [v=[@p @t]]
+    [(crip (slag 1 (trip (scot %p -.v)))) [%s +.v]]
+::
+++  our-json
+  :-  %o
+    %-  mo
+  %+  turn
+    %+  skim  (~(tap by p.vat))
+  |=  [v=[@p @t]]
+    .=(our.hid -.v)
+  |=  [v=[@p @t]]
+    [(crip (slag 1 (trip (scot %p -.v)))) [%s +.v]]
+::
+++  is-sub
+  |=  [you=ship]
+    %+  lien
+      (~(tap by sup.hid))
+    |=  [ost=bone his=ship pax=path]
+      .=(you his)
+::
+++  deliver-data
+  ^-  (list move)
+  %+  murn
+    (~(tap by sup.hid))
+  |=  [ost=bone his=ship pax=path]
+  ?+  pax
+    ~
+    [%data ~]
+      ?:  =(our.hid his)
+        (some [ost %give %rush %json vat-json])
+      (some [ost %give %rush %json our-json])
+  ==
+::
+++  deliver-list
+  ^-  (list move)
+  %+  murn
+    (~(tap by sup.hid))
+  |=  [ost=bone his=ship pax=path]
+  ?+  pax
+    ~
+    [%list ~]
+      (some [ost %give %rush %stat our-stat])
+  ==
+::
+++  pour
+  |=  [ost=bone way=path sih=*]
+  ^-  [(list move) _+>]
+  =+  sih=((hard sign) sih)
+  ~&  [%pour our.hid way -.sih +<.sih]
+  ?+  -.way
+    [[ost %give %mean `[%bad-path [%leaf "Only subs-send, subs-recv, or subs-unsu"]~]]~ +>.$]
+    %subs-unsu
+      =.  p.vat
+        %-  ~(del by p.vat)
+        (slav %p &2.way)
+      [[deliver-data] +>.$]
+    %subs-send
+      ~&  %pour-send
+      [[ost %give %nice ~]~ +>.$]
+    %subs-recv
+      ~&  [%pour-recv ost]
+      ?-  &2.sih
+        %nice  [[ost %give %nice ~]~ +>.$]
+        ?(%rust %rush)
+          ?>  ?=(%stat -.p.sih)
+          =.  p.vat
+            (upd-stat ship.p.sih stat.p.sih)
+          [deliver-data +>.$]
+      ==
+  ==
+::
+++  poke-subs
+  |=  [ost=bone you=ship sab=subs]
+  ^-  [(list move) _+>]
+  ~&  [%poke-subs our.hid you]
+  :_  +>.$
+    :_  ~
+  [ost %pass /subs-recv %g %show hap.sab our.hid pax.sab]
+::
+++  upd-stat
+  |=  [his=ship sta=@t]
+    %+  ~(put by p.vat)
+      his
+    sta
+::
+++  poke-json
+  |=  [ost=bone you=ship jon=json]
+  ^-  [(list move) _+>]
+  =+  ^=  jop
+      ^-  kiss
+      %-  need  %.  jon
+      =>  jo  %-  of
+      :~  [%upd-stat (at (su fed:ag) so ~)]
+          [%sub-stat (su fed:ag)]
+          [%usu-stat (su fed:ag)]
+      ==
+    ?-  -.jop
+      %upd-stat
+        ?:  =(our.hid you)
+          =.  p.vat
+            (upd-stat our.jop stat.jop)
+          :_  +>.$
+            [[ost %give %nice ~] (weld deliver-data deliver-list)]
+        :_  +>.$
+          [ost %give %mean `[%un-auth [%leaf "You are not authorized to do that."]~]]~
+      %usu-stat
+        ?:  =(our.hid you)
+          :_  +>.$
+            :_  ~
+          [ost %pass /subs-unsu/(scot %p his.jop) %g %nuke [our.hid /stat] his.jop]
+        :_  +>.$
+          [ost %give %mean `[%un-auth [%leaf "You are not authorized to do that."]~]]~
+      %sub-stat
+        ?:  =((is-sub his.jop) &)
+          ~&  [%tell-sub our.hid his.jop]
+          :_  +>.$
+            :_  ~
+          [ost %pass /subs-send %g %mess [his.jop /stat] our.hid %subs !>([[our.hid /stat] /list])]
+        :_  +>.$
+          [ost %give %mean `[%al-subd [%leaf "You are already subscribed."]~]]~
+    ==
+::
+--

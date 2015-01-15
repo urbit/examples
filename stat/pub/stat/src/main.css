@@ -1,0 +1,66 @@
+html {
+  font-size: 27px;
+}
+body {
+  margin-top: 4rem;
+}
+body,
+input {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 1rem;
+}
+#cont {
+  margin-left: auto;
+  margin-right: auto;
+  width: 24rem;
+}
+ul {
+  list-style-type: none;
+  margin: 0; padding: 0;
+}
+ul > li {
+  margin: 2rem 0 2rem 0;
+}
+li > div {
+  display: block;
+}
+.ship:before {
+  content:"~";
+  width:1rem;
+  display: inline-block;
+  text-align:center;
+  font-weight:bold;
+}
+.fiel,
+.actn {
+  margin-bottom: .3rem;
+  display: block;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  font-size: 1rem;
+  height: 2rem;
+  outline: none;
+  border: none;
+}
+.fiel.mine {
+  background-color: #F4F5EF;
+}
+ .fiel.their {
+  background-color: #eee;
+}
+.actn.subsc,
+.actn.unsub {
+  color: #fff;
+  font-weight: bold;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+ .actn.subsc {
+  background-color: rgba(69, 247, 132, 1);
+}
+.actn.unsub {
+  background-color: rgba(235, 235, 235, 1);
+}
+.disabled {
+  opacity:.3;
+}

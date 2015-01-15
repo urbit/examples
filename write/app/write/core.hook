@@ -1,8 +1,12 @@
 ::    write with stat
+::    :write allows you to enter text line by line.
+::    on exit, lines are written to try/saved
+::    when finished, :cat /=try=/saved will print the contents
 ::
-::::  
+::::  /hook/core/write/app/main
   ::
 /?    314
+::
 |%
 ++  sign
   $:  %g
@@ -10,7 +14,11 @@
       [%rush %txt p=cord]
   ==  ==
 --
+::
 !:
+::
+::::  ~sivtyv-barnel
+  ::
 |_  [hid=hide vat=wain]
 ++  poke-write-args
   |=  [ost=bone you=ship ~]
@@ -22,15 +30,14 @@
       :-  %tang  :_  ~
       leaf/"listening"
   ==
-
+::
 ++  peer                                                  ::  response to subscr
   |=
     *
   `+>
-
+::
 ++  pour                                                  ::  handle sbscr data
   |=  [ost=bone pax=path sih=*]
-  ~&  write-pouring/(,[@tas @tas @tas ~] sih)
   ~&  vat
   =>  .(sih ;;(sign sih))
   ?-  &2.sih                                              ::  2nd item of list
@@ -43,7 +50,9 @@
       :-  ~
       +>.$
   ==
+::
 ++  export  (role (flop vat))                             ::  list lines->atom
+::
 ++  part                                                  ::  post-mortem moves
   |=  ost=bone
   ~&  [%part ost]

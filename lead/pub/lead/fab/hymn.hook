@@ -1,0 +1,26 @@
+;html
+  ;head
+    ;link(type "text/css", rel "stylesheet", href "/gen/main/pub/lead/src/main.css");
+    ;script(type "text/javascript", src "/gop/hart.js");
+    ;title: urbit example apps - leaderboard
+  ==
+  ;body
+    ;div#cont
+      ;h1:"Leaderboard"
+      ;input#add(type "text", placeholder "NAME");
+      ;input#go(type "button", value "Add");
+      ;div#err(class "disabled");
+      ;ul#board
+        ;li
+          ;div(class "info")
+            ;div(class "scor"):"Points"
+            ;div(class "name"):"Name"
+          ==
+        ==
+      ==
+    ==
+    ;script(type "text/javascript", src "//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js");
+    ;script(type "text/javascript", src "/gen/main/lib/urb.js");
+    ;script(type "text/javascript", src "/gen/main/pub/lead/src/main.js");
+  ==
+==

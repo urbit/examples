@@ -1,0 +1,12 @@
+::
+::::  /hoon/core/subs/pro
+  ::
+/?  314
+/-  stat
+|_  sta=stat
+::
+++  grab                                                ::  convert from
+  |%
+  ++  noun  stat                                        ::  convert from %noun
+  --
+--
