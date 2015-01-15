@@ -19,33 +19,43 @@ As you play around, please let me know if you find any part of the system partic
 ## Contents
 
 `blog`
+
 A simple blogging platform served by `%ford`.
 
 `count`
+
 `%gall` app that keeps track of the number of times it has been `++peer`ed (loaded).
 
 `lead`
+
 `%gall` app that keeps track of a leaderboard.
 
 `helo`
+
 `%gall` app that allows you to send a single message to another ship on the network.
 
 `math`
+
 Contains a few scripts that each solve one of the project euler problems.
 
 `stat`
+
 `%gall` app that allows you to post statuses.
 
 `strings`
+
 Scripts that perform string manipulations.
 
 `timer`
+
 `%gall` app that uses the `%time` vane to "ding" the terminal after a specified amount of time.
 
 `todo`
+
 `%gall` app that keeps track of a todo list.
 
 `write`
+
 `%gall` app that allows you to save multiple line input from the shell to a file in `%clay` upon exit.
 
 
