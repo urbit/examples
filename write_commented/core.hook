@@ -3,7 +3,7 @@
 ::::  this is an intentionally overcommented application intended to help people  
   ::  better understand how to design apps and make system calls. 
   ::  you can find a correctly formatted of this in this repo.
-  ::  use this app by typing ":write ~shipname" (use "our" to send a message to
+  ::  use this app by typing ":write ~shipname" (use "our" without the ~ to send a message to
   ::  yourself), entering text into the subject line, pressing enter to move on to the
   ::  body. After you've entered as many body lines as you please, send the message by
   ::  killing the app with ctrl-d
@@ -58,17 +58,19 @@
   =.  q.vat  arg
 
   ::  the type system requires you return an app state following a list of ++moves
-  ::  (see line 91). the ':_' rune composes a reverse cell of p q, and is used in this ::  case to adhere to the hoon convention of keeping heavier lines below. '+>.$'
+  ::  (see line 91). the ':_' rune composes a reverse cell of p q, and is used in this
+  ::  case to adhere to the hoon convention of keeping heavier lines below. '+>.$'
   ::  refers to the context of the current core, which in this case is the 
-  ::  originalapplication
+  ::  original application. So the application returns a list of ++moves along with it's unaltered self. 
 
   :_  +>.$
 
   ::  Lines 56-60 is a full system call (++move) put into tall form with
-  ::  various ':' runes to make it easier to dissect.
-  ::  Line 58: casts the result to a ++move, which is defined above.
+  ::  various ':' runes to make it easier to dissect (usually we just put it in one big cell).
+  ::  Line 58: casts the result to a ++move, which is defined above. System calls typically have three
+  ::  layers: the system layer, the %gall (application model/vane) layer, and the application-specific layer. 
 
-  ::  arvo portion of call
+  ::  arvo layer
 
   ::  60: The first element is a ++bone, 'ost'. Bones are similar to
   ::  unix file descriptors. They keep track of where the ++move goes, providing
@@ -78,15 +80,16 @@
   ::  the response is received, that information is available to the receiving ++pour
   ::  arm  as the 'pax' variable.
   
-  ::  %gall portion
+  ::  %gall layer
 
   ::  60: the '%g' argument tells arvo to send the request to %gall as a %show,
   ::  which is a subscription request to the address given in the follow cell.
   ::  73: our.hid is the address of our ship, and imp.hid alone is the path to
   ::  the "current app instance", so +.imp.hid is the path to the parent of the current
-  ::  app instance, which in this case is the shell application of the ship receiving ::  the request.
+  ::  app instance, which in this case is the shell application of the ship receiving
+  ::  the request.
 
-  ::  app portion
+  ::  app layer
 
   ::  75: The last cell contains information for the receiving application:
   ::  the first piece it receives is the ship whom you are subscribing, which in 
