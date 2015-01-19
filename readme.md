@@ -18,8 +18,11 @@ As you play around, please let me know if you find any part of the system partic
 
 ## Contents
 
+`blazon`
+`%gall` app that displays the profile information of a neighbor ship.
+
 `blog`
-A simple blogging platform served by `%ford`.
+simple blogging platform served by `%ford`.
 
 `count`
 `%gall` app that keeps track of the number of times it has been `++peer`ed (loaded).
