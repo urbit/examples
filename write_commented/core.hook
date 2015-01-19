@@ -1,0 +1,175 @@
+::    email app
+::
+::::  this is an intentionally overcommented application intended to help people  
+  ::  better understand how to design apps and make system calls. 
+  ::  you can find a correctly formatted of this in this repo.
+  ::  use this app by typing ":write ~shipname" (use "our" to send a message to
+  ::  yourself), entering text into the subject line, pressing enter to move on to the ::  body. After you've entered as many body lines as you please, send the message by ::  killing the app with ctrl-d
+
+/?    314                                               ::  need v314 or below
+
+::  Tells %ford to load the specified marks (shared datatypes) from /main/sur/
+/-    prompt, mail                                      ::  load marks
+!:                                                      ::  enable trace hints
+|%                                                      ::  cor w/types defined
+::  ++sign defines the responses you accept in return from an initial request(++note).
+++  sign                                                
+  $:  %g
+  $%  [%nice ~]                                         ::  positive ack
+      [%rush %txt p=cord]                               ::  subscription data
+  ==  ==
+++  axle  ,[%0 p=wain q=ship r=@tI]                     ::  state type
+::  ++move defines a general type for any event you emit.
+++  move  ,[bone (mold note gift)]
+
+::  ++note defines the set of (initial) requests you make, which the callee
+::  receives as a ++kiss.
+++  note  $%  $:  %g                                    
+          $%  [%show p=hapt q=ship r=path]              ::  subscription request
+              [%mess p=hapt q=ship r=cage]              ::  typed message
+          ==  ==
+              $:  %d
+              [%flog %text p=tape]                      ::  stderr output
+          ==  ==
+
+++  hapt  ,[ship path]                                  ::  app instance
+
+::  ++gift defines the set of responses you give, which the caller receives as a ++sign
+++  gift  $%  [%nice ~]                                 
+              [%rush gilt]                              
+          ==
+++  gilt  $%  [%mail p=mail]
+              [%prompt p=prompt]
+          ==
+--
+!:
+::  wraps the app in a core that contains both system and app-specific data,
+::  hide and vat respectively.
+|_  [hid=hide vat=axle]
+
+::  called when app is called from command line with
+:: 'APPNAME [args]'.
+::  the last argument in the initial gate receives the args.
+++  poke-write-args
+  |=  [ost=bone you=ship [arg=ship ~]]
+  ^-  [(list move) _+>]
+  =.  q.vat  arg
+
+  ::  the type system requires you return an app state following a list of ++moves
+  ::  (see line 91). the ':_' rune composes a reverse cell of p q, and is used in this ::  case to adhere to the hoon convention of keeping heavier lines below. '+>.$'
+  ::  refers to the context of the current core, which in this case is the 
+  ::  originalapplication
+
+  :_  +>.$
+
+  ::  Lines 56-60 is a full system call (++move) put into tall form with
+  ::  various ':' runes to make it easier to dissect.
+  ::  Line 58: casts the result to a ++move, which is defined above.
+
+  ::  arvo portion of call
+
+  ::  60: The first element is a ++bone, 'ost'. Bones are similar to
+  ::  unix file descriptors. They keep track of where the ++move goes, providing
+  ::  return information. The first command, %pass, is handled at the arvo level.
+  ::  %pass denotes that the move is a request (whereas %give is used to send data/
+  ::  make a response). The third item, '/in', is tacked onto the bone so that when it 
+  ::  the response is received, that information is available to the receiving ++pour
+  ::  arm  as the 'pax' variable.
+  
+  ::  %gall portion
+
+  ::  60: the '%g' argument tells arvo to send the request to %gall as a %show,
+  ::  which is a subscription request to the address given in the follow cell.
+  ::  73: our.hid is the address of our ship, and imp.hid alone is the path to
+  ::  the "current app instance", so +.imp.hid is the path to the parent of the current
+  ::  app instance, which in this case is the shell application of the ship receiving ::  the request.
+
+  ::  app portion
+
+  ::  75: The last cell contains information for the receiving application:
+  ::  the first piece it receives is the ship whom you are subscribing, which in 
+  ::  this case is 'you', the ship making the request. 
+  ::  88: The last item represents the
+  ::  path to which you are subscribing within the receiving application. In this case,
+  ::  this is the '/in', or standard input, of the tail of 'imp.hid', which represents
+  ::  the particular instance of the shell app (you can see this instance number in ::  parens when you kill an instance with ctrl-d).
+
+  :-  ^-  move
+      :^  ost  %pass  /in             ::  make a request
+      :+  %g   %show                  ::  for an app subscription
+      :-  [our.hid +.imp.hid]         ::  to the parent (shell) of this instance
+      [you /in/[-.imp.hid]]           ::  on behalf of you, for this app's stdin
+  `(list move)`(spam 'Subject: ' %text '')
+
+++  spam
+  |=  pom=prompt
+  ^-  (list move)
+  %+  turn  (~(tap by sup.hid))
+    |=  [ost=bone *]
+    ^-  move
+    :^  ost  %give  %rush
+    ^-  gilt  
+    :-  %prompt
+    pom
+
+::  called when app recieves message with a `mail` mark
+::  currently, the arm does not type check the mark.
+++  poke-mail                                           ::  receive `mail`s
+  |*  [ost=bone him=ship msg=*]
+  ~!  +<
+  =>  .(+< `[ost=bone him=ship msg=mail]`+<)
+  ~&  "hi"
+  ^-  [(list move) _+>]
+  :_  +>.$
+  %+  welp  
+    %+  turn  (flop (lore body.msg))
+    |=(a=cord `move`[ost (dillify [' ' (trip a)])])     
+  ^-  (list move)
+  :~  [ost (dillify ?~(body.msg "No body." "Body:"))]   ::  executed backwards
+      [ost (dillify "From: {<him>}")]
+      [ost (dillify "Subject: {(trip sub.msg)}")]
+      [ost %give %nice ~]
+  ==
+
+::  accepts a tape and sends it to %dill (our terminal) to be printed. 
+++  dillify
+  |=(a=trip [%pass /di %d %flog %text a])
+
+::  handles subscription requests (%show) made from  through %gall
+++  peer                                                ::  receive subscript
+  |=
+    *
+  `+>
+
+::  handles responses to ++note(s) that we send out. In this case it either
+::  receives confirmation of our subscription to shell, or stores data that
+::  it receives from shell's standard input.
+++  pour                                                ::  handle sbscr data
+  |=  [ost=bone pax=path sih=*]
+  =>  .(sih ;;(sign sih))
+  ^-  [(list move) _+>]
+  ?-  &2.sih                                            ::  2nd item of list
+    %nice  
+      :_  +>.$
+      [ost %give +.sih]~                                ::  tail [%g %nice ~]
+    %rush
+      :-  (spam ?~(p.vat 'Body: ' '> ') %text '')  
+      =.  p.vat
+        [p.sih p.vat]
+      +>.$
+  ==
+
+::  converts the text stored in our vat as a ++wain to a `mail`.
+++  export                                              ::  list lines->atom
+  =+  wan=(flop p.vat)
+  ?~  wan  [~ ~]
+  `mail`[i.wan (role t.wan)]
+
+::  automatically called when you kill the app. Here, it sends our `mail`.
+++  part                                                ::  called when killed
+  |=  ost=bone
+  =+  to=q.vat
+  ~&  [%part ost]
+  :_  ~                                                 ::  send `mail` msg
+  [ost %pass /rec/to %g %mess [q.vat /[app.hid]] our.hid [%mail !>(export)]]
+--
