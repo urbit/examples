@@ -4,7 +4,9 @@
   ::  better understand how to design apps and make system calls. 
   ::  you can find a correctly formatted of this in this repo.
   ::  use this app by typing ":write ~shipname" (use "our" to send a message to
-  ::  yourself), entering text into the subject line, pressing enter to move on to the ::  body. After you've entered as many body lines as you please, send the message by ::  killing the app with ctrl-d
+  ::  yourself), entering text into the subject line, pressing enter to move on to the
+  ::  body. After you've entered as many body lines as you please, send the message by
+  ::  killing the app with ctrl-d
 
 /?    314                                               ::  need v314 or below
 
