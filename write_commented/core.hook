@@ -10,7 +10,7 @@
 
 /?    314                                               ::  need v314 or below
 
-::  Tells %ford to load the specified marks (shared datatypes) from /main/sur/
+::  Tells %ford to load the specified marks (shared datatypes) from /main/sur
 /-    prompt, mail                                      ::  load marks
 !:                                                      ::  enable trace hints
 |%                                                      ::  cor w/types defined
@@ -36,23 +36,25 @@
 
 ++  hapt  ,[ship path]                                  ::  app instance
 
-::  ++gift defines the set of responses you give, which the caller recieves
-::  as a ++sign
+::  ++gift defines the set of responses you give, which the caller receives
+::  as a ++sign this app only gives two responses: a %nice, which is a positive
+::  acknowledgment, and a %rush (subscription update), which fulfills the
+::  shell's request for a prompt update.
 ++  gift  $%  [%nice ~]                                 
-              [%rush gilt]                              
-          ==
-++  gilt  $%  [%mail p=mail]
-              [%prompt p=prompt]
+              [%rush %prompt p=prompt]                              
           ==
 --
 !:
 ::  wraps the app in a core that contains both system and app-specific data,
-::  hide and vat respectively.
+::  hide and axle respectively. While axle (and the name vat) differ from app to
+::  app ++hide is defined in hoon.hoon.
 |_  [hid=hide vat=axle]
 
 ::  called when app is called from command line with
-:: 'APPNAME [args]'.
-::  the last argument in the initial gate receives the args.
+::  ':APPNAME [args]'.
+::  the first argument is the ++bone (explained below). The second is the ship
+::  of the "poker".
+::  Any further arguments are those passed to the app via the command line.
 ++  poke-write-args
   |=  [ost=bone you=ship [arg=ship ~]]
   ^-  [(list move) _+>]
@@ -63,7 +65,7 @@
   ::  is used in this case to adhere to the hoon convention of keeping heavier
   ::  lines below. '+>.$' refers to the context of the current core, which in
   ::  this case is the original application. So the application returns a list
-  ::  of ++moves along with it's unaltered self.
+  ::  of ++moves along with its unaltered self. 
 
   :_  +>.$
 
@@ -76,23 +78,26 @@
 
   ::  arvo layer
 
-  ::  60: The first element is a ++bone, 'ost'. Bones are similar to
-  ::  unix file descriptors. They keep track of where the ++move goes, providing
-  ::  return information. The first command, %pass, is handled at the arvo level.
-  ::  %pass denotes that the move is a request (whereas %give is used to send
-  ::  data/ make a response). The third item, '/in', is tacked onto the bone so
-  ::  that when it the response is received, that information is available to
-  ::  the receiving ++pour arm  as the 'pax' variable.
+  ::  60: The first element is a ++bone, 'ost'. Bones are similar to unix file
+  ::  descriptors in that they are opaque numbers that hide internal details.
+  ::  They keep track of the causal chain that led a request to the current app
+  ::  and uses that information to route the response back to the sender. The
+  ::  first command, %pass, is handled at the arvo level. %pass denotes that the
+  ::  move is a request (whereas %give is used to send data/ make a response).
+  ::  The third item, '/in', is tacked onto the bone so that when the response
+  ::  is received, that information is available to the receiving ++pour
+  ::  arm  as the 'pax' variable.
   
   ::  %gall layer
 
   ::  60: the '%g' argument tells arvo to send the request to %gall as a %show,
-  ::  which is a subscription request to the address given in the follow cell.
-  ::  73: our.hid is the address of our ship, and imp.hid alone is the path to
-  ::  the "current app instance", so +.imp.hid is the path to the parent of the
-  ::  current app instance, which in this case is the shell application of the
-  ::  ship receiving the request.
-
+  ::  which is a subscription request to the address given in the following cell.
+  ::  73: our.hid is our ship, and imp.hid is the path to the "current app
+  ::  instance". In the case of permanent "server" apps, this is just /app-name.
+  ::  For ephemeral apps such as this one, this is the imp.hid of the parent
+  ::  preceded by the name given by its parent, which in this case is a process
+  ::  id given by shell. so +.imp.hid is the path to the shell that %sire(d) it.
+  
   ::  app layer
 
   ::  75: The last cell contains information for the receiving application:
@@ -145,11 +150,12 @@
 ++  dillify
   |=(a=trip [%pass /di %d %flog %text a])
 
-::  handles subscription requests (%show) made from  through %gall
+::  handles subscription requests (%show) made from through %gall
+::  this is automatically called when shell subscribes to the app's output,
+::  even before it calls ++poke-write-args.
 ++  peer                                                ::  receive subscript
-  |=
-    *
-  `+>
+  |=  *
+  [~ +>]
 
 ::  handles responses to ++note(s) that we send out. In this case it either
 ::  receives confirmation of our subscription to shell, or stores data that
