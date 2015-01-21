@@ -30,7 +30,7 @@
 --
 !:
 |_  [hid=hide vat=axle]
-++  poke-mail-args                                      ::  poked from C.Line
+++  poke-mail-args                                      ::  poked from cmdline
   |=  [ost=bone you=ship [arg=ship ~]]
   ^-  [(list move) _+>]
   =.  q.vat  arg
@@ -41,7 +41,7 @@
       :-  [our.hid +.imp.hid]
       [you /in/[-.imp.hid]]  
   `(list move)`(spam 'Subject: ' %text '')
-
+::
 ++  spam
   |=  pom=prompt
   ^-  (list move)
@@ -51,7 +51,7 @@
     :^  ost  %give  %rush
     :-  %prompt
     pom
-
+::
 ++  poke-mail                                           ::  receive `mail`s
   |*  [ost=bone him=ship msg=*]
   ~!  +<
@@ -68,14 +68,12 @@
       [ost (dillify "Subject: {(trip sub.msg)}")]
       [ost %give %nice ~]
   ==
-
-++  dillify
-  |=(a=trip [%pass /di %d %flog %text a])
-
-++  peer                                                ::  receive subscript
+::
+++  dillify  |=(a=tape [%pass /di %d %flog %text a])    ::  move to print text
+++  peer                                                ::  receive subscription
   |=  *
   [~ +>]
-
+::
 ++  pour                                                ::  handle sbscr data
   |=  [ost=bone pax=path sih=*]
   =>  .(sih ;;(sign sih))
@@ -90,12 +88,12 @@
         [p.sih p.vat]
       +>.$
   ==
-
+::
 ++  export                                              ::  list lines->atom
   =+  wan=(flop p.vat)
   ?~  wan  [~ ~]
   `mail`[i.wan (role t.wan)]
-
+::
 ++  part                                                ::  called when killed
   |=  ost=bone
   =+  to=q.vat
