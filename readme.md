@@ -8,7 +8,7 @@ Pull requests are welcome and encouraged. Please try your best to adhere to the 
 
 Some day these will all exist on urbit, but for the time being clone this repo outside of your pier somewhere and copy the files in as explained below. Since it's possible to corrupt your pier while doing dev it can be a good idea to use a fake ship. Check out the `dev` guide in `urbit-doc` for instructions on running a fake ship.
 
-For the most part each folder in this repo contains folders indicating the path relative to the `/main` desk on your pier. For example, `todo/app/todo/core.hook` will end up as `/$URB_DIR/$PIER/$SHIP-NAME/main/app/todo/core.hook`.
+For the most part each folder in this repo contains folders indicating the path relative to the `/main` desk on your pier. For example, `todo/app/todo/core.hook` will end up as `/$URB_DIR/$PIER/$SHIP-NAME/main/app/todo/core.hook`. The exception to this is the `twit` app, whose folder should be placed directly in /main/app/twit, and can be accessed at `http://localhost:{port}/twit`.
 
 If an app is just meant to be run as a script it'll be named something descriptive like `euler.hoon` and can be copied directly into the `/try` desk. For example, you would copy `math/euler.hoon` into `try/euler.hoon` and execute it with `~zod/try=> ^/%/euler`.
 
