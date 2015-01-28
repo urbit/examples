@@ -12,6 +12,8 @@ For the most part each folder in this repo contains folders indicating the path 
 
 If an app is just meant to be run as a script it'll be named something descriptive like `euler.hoon` and can be copied directly into the `/try` desk. For example, you would copy `math/euler.hoon` into `try/euler.hoon` and execute it with `~zod/try=> ^/%/euler`.
 
+Some apps are accessed via %ford pages, which are hymn.hook files generally found in a /fab directory. To access a %ford page, go to `http://localhost:{port}/gen/desk/path/to/page`, where `port` is the port number shown upon booting into urbit. For example, `/=main=/pub/todo/fab/hymn.hook` would be served. For example, `/=main=/pub/todo/fab/hymn/hook` on an http 8.444 pier would serve `localhost:8444/gen/main/pub/todo/fab`.
+
 ## Feedback
 
 As you play around, please let me know if you find any part of the system particularly difficult to understand so that I can both help you out and look to improve documentation in those areas. You can contact me at henry@tlon.is, or on chat (usually ~sivtyv-barnel). Also, don't hesitate to ask questions on :chat.
