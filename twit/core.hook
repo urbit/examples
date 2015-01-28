@@ -1,0 +1,129 @@
+::    A simple Twitter servant.
+::
+::::  /hook/core/twit/app
+  ::
+/?    314                                               ::  need urbit 314
+/+    twitter                                           ::  use twitter library
+/=    front  /:/%%/front:/hymn/                         ::  load front page
+::
+::::  structures
+  ::
+|%                                                      ::  structures
+  ++  axle  ,[%0 axle-a]                                ::  application state
+  ++  axle-a                                            ::
+    %-  unit                                            ::
+    $:  las=@da                                         ::  update time
+        txt=@t                                          ::  timeline text
+        jon=json                                        ::  timeline json
+    ==                                                  ::
+  ++  axle-old                                          ::  any historic state
+    $%  [%0 axle-a]                                     ::
+    ==                                                  ::
+  ++  gilt                                              ::  subscription frame
+    $%  [%json p=json]                                  ::  json data
+        [%html p=@t]                                    ::  html text 
+        [%hymn p=manx]                                  ::  html tree
+    ==                                                  ::
+  ++  gift                                              ::  output action
+    $%  [%rust gilt]                                    ::  total update
+        [%mean p=ares]                                  ::  message failure
+        [%nice ~]                                       ::  succeed
+    ==                                                  ::
+  ++  move  ,[p=bone q=(mold note gift)]                ::  output operation
+  ++  sign                                              ::  system response
+    $%  $:  %e                                          ::  from %eyre
+    $%  [%thou p=httr]                                  ::  HTTP response
+    ==  ==  ==                                          ::
+  ++  note                                              ::  system request
+    $%  $:  %e                                          ::  through %eyre
+    $%  [%them p=(unit hiss)]                           ::  HTTP request
+    ==  ==  ==                                          ::
+--                                                      ::
+::
+::::  constants
+  ::
+|%
+++  hardcoded-key                                       ::  hardcoded keys!
+  :*  :-  'hDDOTPfGHGlsOUbhpy6qc6XbW'
+          'olCkea6wm3XG4pnVCHuPIozUF2ggH1sHjnBtuT4Ai6rCOeQGzO'
+      :-  '2485712317-R77Lpdu5rAJadRVxTXPpnxvcwS0IfNG7QEzLPty'
+          'a41d83XId0P7QQbodkPYv3zxoEL0Cq9EsN2eXZBZAwAWA'
+  ==
+--
+!:
+::::  program
+  ::
+|_  $:  hid=hide                                        ::  system state
+        vat=axle                                        ::  custom state
+    ==
+++  it                                                  ::  internals
+  |%  
+  ++  line                                              ::  get timeline
+    (~(stat-home twit hardcoded-key lat.hid `@`eny.hid) ~ ~)
+  ::
+  ++  lint                                              ::  publish timeline
+    ^-  (list move)                                     ::  cast to list moves
+    ?~  +.vat  ~                                        ::  ~ if tail vat empty
+    %+  turn                                            ::  else,
+  ::  send moves with the timeline as JSON to all subscribers on path /line
+      (skim (~(tap by sup.hid)) |=([* * pax=path] ?=([%line ~] pax)))
+    |=([ost=bone *] `move`[ost give/rust/json/[jon.u.vat]])
+  ::
+  ++  post                                              ::  post a tweet
+    |=  txt=cord
+    ^-  hiss                                            
+    (~(stat-upda twit hardcoded-key lat.hid `@`eny.hid) [%status txt]~ ~)
+  --
+::
+++  page  front                                         ::  build front page
+++  prep                                                ::  load old state
+  |=  old=(unit (unit axle-old))
+  [~ +>]
+:: 
+++  peer                                                ::  accept subscriber
+  |=  [ost=bone you=ship pax=path]
+  ^-  [(list move) _+>]                                 ::  cast to list moves
+  :_  +>.$                                              ::  [app-state moves]
+  ?~  pax  [ost %give %rust %hymn page]~                ::  no path,show html
+  ?>  ?=([%line ~] pax)                                 ::  assert path!=line
+  ?~  +.vat                                             ::  if tail vat empty, 
+    [ost %pass /line %e [%them (some line:it)]]~        ::  req hist via eyre
+  [ost %give %rust %json jon.u.vat]~                    ::  send JSON to page
+:: 
+++  poke-json                                           ::  tweets from browser
+  |=  [ost=bone his=ship jon=json]
+  ^-  [(list move) _+>]
+  :_  +>.$
+  =+  `txt=cord`(need ((ot [%tweet so] ~):jo jon))      ::??parse JSON to tweet
+  ~&  [%tweet txt]                                      ::  print txt
+  ::  send tweet to twitter via %eyre
+  :~  [ost %pass /tweet %e [%them (some (post:it txt))]]
+  ::  send positive acknowledgement to subscriber, in this case the webpage
+      [ost %give %nice ~]
+  ==
+::  Receive HTTP response from twitter via %eyre
+++  pour                                                
+  |=  [ost=bone pax=path sih=sign]  
+  ^-  [(list move) _+>]                       ::  cast to list moves and state 
+  :_  +>.$                                    ::  return [moves app-state]
+  ?+    -.pax  !!                             ::  switch on -.pax, w/!! default
+      %line                                   ::  if -.pax is a %line,
+::  ?. is a flipped if-then-else statement: in [p q r], Unless p=true, evaluate r.
+  ?.  =(200 p.p.sih)                          ::  unless http resp is 200
+      ~&  [%timeline-error p.p.sih]           ::  return error message and:            
+      ~                                       ::  empty list of moves
+    =+  txt=`@t`q:(need r.p.sih)              ::  push q of http message 
+    =+  jon=(rash txt apex:poja)              ::  parse txt to json or crash 
+::  produces a loobean of whether the tail of the state (+.vat)
+::  is a cell && if the jon received from twitter is equal to jon within q.vat 
+    =+  old=&(?=(^ +.vat) =(jon jon.u.vat))
+::  replace +.vat with the incoming tweet and time prepended to jon
+    =.  +.vat  `[lat.hid txt jon]
+::      
+    ?:(old ~ lint:it)                         ::  if old, then ~, else lint
+::  
+      %tweet                                  ::  if -.pax = %tweet,
+    ~?  !=(200 p.p.sih)  [%tweet-error p.p.sih]   ::  if req fails, print err   
+    [ost %pass /line %e [%them (some line:it)]]~  ::  request new timeline
+  ==
+--
