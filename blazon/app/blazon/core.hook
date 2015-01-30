@@ -4,7 +4,7 @@
 ++  poke-blazon-args
   |=  [ost=bone you=ship her=ship ~]
   =+  ^=  put
-      %+  turn  %-  flop  %-  lore  %-  crip
+      %+  turn  %-  lore  %-  crip
       (blazon-ship her)
       trip
   :_  +>.$
