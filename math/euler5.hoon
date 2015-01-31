@@ -8,28 +8,22 @@
 ::::  ~haptem-fopnys
   ::
 |%
-++  evdiv :: .y if a%b==0, else .n
-  |=  [a=@u b=@u]
-  ^-  @f
-  ?:  =((mod a b) 0)
-    .y
-  .n 
 
-++  sieve :: given a, check if a%b==0, incrementing b until it's lim or .y
+++  sieve :: given a, check if a%div==0, incrementing div until it's lim, or .y
   |=  [a=@u lim=@u]
-  =+  b=1
+  =+  div=1
   |-  ^-  @f
-  ?:  =(b lim)
+  ?:  =(div lim)
     .y
-  ?:  =((evdiv a b) .y)
-    $(b +(b))
+  ?:  =((mod a div) 0)
+    $(div +(div))
   .n
 
-++  lcm :: check if sieve returns .y, incrementing a number until it does
+++  lcm :: check if sieve returns .y, incrementing the number until it does
   |=  a=@u
-  =+  b=1
+  =+  b=a
   |-  ^-  @u
   ?:  =((sieve b a) .y)
     b
-  $(b (add b 20))
+  $(b (add b a))
 --
