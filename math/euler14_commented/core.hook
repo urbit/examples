@@ -63,7 +63,6 @@
   ?:  (lte len col) :: elseif len<=col 
     $(len col, num acc, acc +(acc)) :: recurse with len=col, num=acc, acc=acc+1
   $(acc +(acc)) :: else recurse with acc=acc+1
---
 
 ::  this arm is used to send the app's stdout (a %rush ++gift) to whatever
 ::  has subscribed to its /out.  
