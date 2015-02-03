@@ -40,7 +40,7 @@
 ++  longcol :: find the longest collatz sequence under a
   |=  [a=@u]
   =+  [len=0 num=0 acc=1]
-  |-  ^-  [@u @u]
+  |-  ^-  [@u @u]  ~+
     =+  col=(collatz acc)
   ?:  =(acc a)
     [num len]
