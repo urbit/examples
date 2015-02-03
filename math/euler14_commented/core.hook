@@ -1,71 +1,90 @@
-::    project euler 14
-::    https://projecteuler.net/problem=14
+::   project euler 14
+::   https://projecteuler.net/problem=14
+::   
+::  this is an intentionally overcommented application intended to help
+::  people better understand how to design apps and make system calls.
+::  you can find a correctly formatted of this in this repo. use this
+::  app by typing ":eulercomment [number]" into the command line. There is
+::  a less commented and properly formatted version of this app in this
+::  repo.
+::
+::  the reason this is a %gall app and not an executable hoon file is
+::  to allow tail call optimization (hoon files executed from the REPL
+::  have stack traces inserted automatically). Unfortunately, this code 
+::  still takes far too long with 1.000.000, for reasons that remain
+::  unknown. If anyone can figure out why, even with memoization from
+::  ~+, it takes far too long, please submit a pull request.
 ::
 ::::  /hook/core/euler14/app/main/
-  ::  Put this in main/app/ and invoke it with ":euler14 [number]"
-::
-::
-::::  ~haptem-fopnys, ~sivtyv-barnel
+  ::  
+  ::  ~haptem-fopnys, ~sivtyv-barnel
   ::
 |%
-::  ++gift defines the set of responses you give, which the caller receives
-::  as a ++sign. this app only gives two responses: a %nice, which is a
-::  positive acknowledgment, and a %rush (subscription update), which 
-::  fulfills the shell's request for this apps stdout (/out)
+::  ++gift defines the set of responses you give, which the caller 
+::  receives as a ++sign. this app only gives two responses: a %nice,
+::  which is a positive acknowledgment, and a %rush (subscription
+::  update), which fulfills the shell's request for this apps stdout
+::  (/out)
 ++  gift
   $%  [%nice ~]
       [%rush %tang p=tang]
   ==
 --
 |_  [hid=hide ~]
-::  ++peer handles subscription requests (%show) made from through %gall
+::  ++peer handles subscription requests (%show) made from through %gall.
 ::  this is automatically called when shell subscribes to the app's output,
-::  even before it calls ++poke-euler14-args. In this case, all ++peer
+::  even before it calls ++poke-eulercommented-args. Here, all ++peer
 ::  does is accept any noun (*), and return an empty list of moves (~) as
 ::  well as the context of the core, which in this case is the entire app
-::  with unaltered state. In other words, ++peer exists only
-::  to satisfy %gall's type system.  
+::  with unaltered state. In other words, ++peer exists only to satisfy
+::  %gall's type system.
 ++  peer                                
   |=  *
   [~ +>]
-
-::  called when app is called from command line with
+::  ++poke is called when app is called from command line with
 ::  ':APPNAME [args]'. The first argument is the ++bone (explained in the
 ::  arvo reference). The second is the ship of the "poker".
 ::  Any further arguments are those passed to the app via the command line
-::  as a list (hence the terminating ~).
-
-++  poke-euler14-args
+::  as a list (hence the terminating ~). Here poke does two things:
+::  1. it sends positive acknowledgement (a %nice) to the caller
+::  and 2. it uses the arm ++spam to send a %tang (a mark used for
+::  pretty printing) of the result to whatever is subscribed to this apps
+::  stdout (its /out), which in this case is the shell that called it.
+++  poke-eulercomment-args
   |=  [ost=bone you=ship args=@ud ~]
-    =+  result=(longcol args)
-    :_  +>.$
-    :-  [ost %give %nice ~]  (spam [%rush %tang `tang`[>result< ~]])
-
-
-++  collatz :: given a, returns the number of steps needed to reach 1
+  =+  result=(longcol args)
+  :_  +>.$
+  :-  [ost %give %nice ~]  (spam [%rush %tang `tang`[>result< ~]])
+:: given a, returns the number of steps needed to reach 1
+++  collatz
   |=  [a=@u]
-  ~+ :: enable memoization
-  =+  [curr=a len=1] :: initialize variables
-  |-  ^-  @u :: output a @u (uint) from the inner closure
-  ?:  =(curr 1) :: If curr==1
-    len :: return len
-  ?:  =((mod curr 2) 0) :: if curr%2==0
-    $(curr (div curr 2), len +(len)) :: recurse with curr=curr/2 and len=len+1
-  $(curr (add (mul curr 3) 1), len +(len)):: else recurse with curr=curr*3+1 and len=len=1
-
-++  longcol :: find the longest collatz sequence under a
-  |=  [a=@u]:: wet gate, a is an unsigned atom
-  =+  [len=0 num=0 acc=1] :: initialize variables
-  |-  ^-  [@u @u] :: output a [@u @u] tuple aka (uint, uint)
-    =+  col=(collatz acc) :: define closure local variable for collatz length
-  ?:  =(acc a) :: if acc==a
-    [num len] :: return (num, len) tuple
-  ?:  (lte len col) :: elseif len<=col 
-    $(len col, num acc, acc +(acc)) :: recurse with len=col, num=acc, acc=acc+1
-  $(acc +(acc)) :: else recurse with acc=acc+1
-
+  ~+                      :: enable memoization
+  =+  [curr=a len=1]      :: initialize variables
+  |-  ^-  @u              :: output a @u (uint) from the inner closure
+  ~+
+  ?:  =(curr 1)           :: If curr==1
+    len                   :: return len
+  ?:  =((mod curr 2) 0)   :: if curr%2==0
+:: recurse with curr=curr/2 and len=len+1
+    $(curr (div curr 2), len +(len))
+:: else recurse with curr=curr*3+1 and len=len=1
+  $(curr (add (mul curr 3) 1), len +(len))
+::
+++  longcol               :: find the longest collatz sequence under a
+  |=  [a=@u]              :: input a is an unsigned integer
+  =+  [len=0 num=0 acc=1] :: push variables on subject
+  |-  ^-  [@u @u]         :: cast output to [@u @u] tuple
+  ~+
+  =+  col=(collatz acc) :: define closure local variable for collatz length
+  ?:  =(acc a)            :: if acc==a
+    [num len]             :: return (num, len) tuple
+  ?:  (lte len col)       :: elseif len<=col 
+:: recurse with len=col, num=acc, acc=acc+1
+    $(len col, num acc, acc +(acc))
+  $(acc +(acc))           :: else recurse with acc=acc+1
 ::  this arm is used to send the app's stdout (a %rush ++gift) to whatever
-::  has subscribed to its /out.  
+::  has subscribed to its /out, which in this case is the shell %gall
+::  app
 ++  spam
   |=  git=gift
   %+  turn

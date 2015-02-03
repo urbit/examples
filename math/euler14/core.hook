@@ -1,6 +1,8 @@
 ::    project euler 14
 ::    https://projecteuler.net/problem=14
 ::
+::    This takes far too long with large numbers, see commented
+::    version for more details.
 ::::  /hook/core/euler14/app/main/
   ::
 ::
@@ -26,9 +28,9 @@
 ::
 ++  collatz :: given a, returns the number of steps needed to reach 1
   |=  [a=@u]
-  ~+
   =+  [curr=a len=1]
   |-  ^-  @u
+  ~+
   ?:  =(curr 1)
     len
   ?:  =((mod curr 2) 0)
