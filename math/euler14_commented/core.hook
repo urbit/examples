@@ -1,14 +1,14 @@
 ::   project euler 14
 ::   https://projecteuler.net/problem=14
 ::   
-::  this is an intentionally overcommented application intended to help
+::  This is an intentionally overcommented application intended to help
 ::  people better understand how to design apps and make system calls.
-::  you can find a correctly formatted of this in this repo. use this
-::  app by typing ":eulercomment [number]" into the command line. There is
+::  You can find a correctly formatted of this in this repo. use this
+::  app by typing ":euler14commented [number]" into the command line. There is
 ::  a less commented and properly formatted version of this app in this
 ::  repo.
 ::
-::  the reason this is a %gall app and not an executable hoon file is
+::  The reason this is a %gall app and not an executable hoon file is
 ::  to allow tail call optimization (hoon files executed from the REPL
 ::  have stack traces inserted automatically). Unfortunately, this code 
 ::  still takes far too long with 1.000.000, for reasons that remain
@@ -21,7 +21,7 @@
   ::
 |%
 ::  ++gift defines the set of responses you give, which the caller 
-::  receives as a ++sign. this app only gives two responses: a %nice,
+::  receives as a ++sign. This app only gives two responses: a %nice,
 ::  which is a positive acknowledgment, and a %rush (subscription
 ::  update), which fulfills the shell's request for this apps stdout
 ::  (/out)
@@ -31,13 +31,13 @@
   ==
 --
 |_  [hid=hide ~]
-::  ++peer handles subscription requests (%show) made from through %gall.
-::  this is automatically called when shell subscribes to the app's output,
-::  even before it calls ++poke-eulercommented-args. Here, all ++peer
+::  ++peer handles subscription requests (%show) made through %gall.
+::  This is automatically called when shell subscribes to the app's output,
+::  even before it calls ++poke-euler14commented-args. Here, all ++peer
 ::  does is accept any noun (*), and return an empty list of moves (~) as
 ::  well as the context of the core, which in this case is the entire app
 ::  with unaltered state. In other words, ++peer exists only to satisfy
-::  %gall's type system.
+::  %gall's type enforcement.
 ++  peer                                
   |=  *
   [~ +>]
