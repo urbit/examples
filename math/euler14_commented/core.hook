@@ -21,15 +21,19 @@
 ::  ++peer handles subscription requests (%show) made from through %gall
 ::  this is automatically called when shell subscribes to the app's output,
 ::  even before it calls ++poke-euler14-args. In this case, all ++peer
-::  does is accept any noun (*), and return an empty list of moves (~) as ::  well as the context of the core, which in this case is the entire app ::  with unaltered state. In other words, ++peer exists only
+::  does is accept any noun (*), and return an empty list of moves (~) as
+::  well as the context of the core, which in this case is the entire app
+::  with unaltered state. In other words, ++peer exists only
 ::  to satisfy %gall's type system.  
 ++  peer                                
   |=  *
   [~ +>]
 
 ::  called when app is called from command line with
-::  ':APPNAME [args]'. The first argument is the ++bone (explained in the ::  arvo reference). The second is the ship of the "poker".
-::  Any further arguments are those passed to the app via the command line ::  as a list (hence the terminating ~).
+::  ':APPNAME [args]'. The first argument is the ++bone (explained in the
+::  arvo reference). The second is the ship of the "poker".
+::  Any further arguments are those passed to the app via the command line
+::  as a list (hence the terminating ~).
 
 ++  poke-euler14-args
   |=  [ost=bone you=ship args=@ud ~]
@@ -61,7 +65,8 @@
   $(acc +(acc)) :: else recurse with acc=acc+1
 --
 
-::  this arm is used to send the app's stdout (a %rush ++gift) to whatever ::  has subscribed to its /out.  
+::  this arm is used to send the app's stdout (a %rush ++gift) to whatever
+::  has subscribed to its /out.  
 ++  spam
   |=  git=gift
   %+  turn
