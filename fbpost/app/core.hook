@@ -131,7 +131,7 @@
       =+  =>  paz=(parse p.sih)
           ?>  ?=(%json -.paz)
           photojson=p.paz
-      =+  reparser=(ot data/(ot url/so ~) ~):jo    ::IMPORTANT LINE REVISIT
+      =+  reparser=(ot data/(ot url/so ~) ~):jo
       =.  photo.vat  
         (reparser photojson)
       `+>.$
