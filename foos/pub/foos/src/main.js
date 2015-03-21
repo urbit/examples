@@ -17,11 +17,6 @@ Page = recl({
   )},
 })
 
-obj1 = {a:1, b:2}
-
-obj2 = {a:1}
-obj2.b = 2
-
 AddFixture = recl({
   _handleClick: function() { this.submit(); },
   _handleKey: function(e) { if(e.keyCode == 13) this.submit(); },
