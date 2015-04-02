@@ -1,0 +1,40 @@
+::
+::
+::::
+  ::
+/?    310
+::
+::
+::::
+  ::
+|%
+++  message  ,[to=@p subj=@t body=wain]
+--
+!:
+::::
+  ::
+|_  [hid=hide sent=(list message)]
+++  poke-json
+  |=  [ost=bone you=ship mez=json]
+  =+  ^-  $=  mez
+          message
+      (need ((ot to/(ci (slat %p) so) subj/so body/(cu lore so) ~):jo mez))
+  :-  ~[(send-message ost you mez) [ost %give %nice ~]]
+  +>.$
+::
+++  send-message
+  |=  [ost=bone you=ship mes=message]
+  =.  sent                          ::  store sent message
+    [mes sent] 
+  [ost %pass / %g %mess [to.mes /urbitapp] you [%mes !>(mes)]]
+::
+++  poke-mes 
+  |=  [ost=bone you=ship mez=message]
+  ~&  success/mez
+  :-(~[ost %give %nice ~] +>.$)
+::
+++  pour
+  |=  [ost=bone pax=path sih=*]
+  ~&  poured/sih
+  [~[ost %give %nice ~] +>.$]
+--
