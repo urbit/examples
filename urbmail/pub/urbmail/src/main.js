@@ -60,10 +60,22 @@ Body = recl({
 Inbox = recl({
   displayName: 'Inbox',
   render: function(){
-  return div({}, JSON.stringify(this.props.messages), div({}), div({}), div({}))
+   msgList = []
+   for (i in this.props.messages){
+     msgList.push(MessageDisp({message: this.props.messages[i]}))
+   }
+    return div({}, msgList)
   }
 })
 
+MessageDisp = recl({
+  render: function(){
+    return  div({},
+      div({}, this.props.message.to),
+      div({}, this.props.message.subj),
+      div({}, this.props.message.body))
+  }
+})
 
 
 $(document).ready(function(){
