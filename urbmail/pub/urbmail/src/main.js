@@ -4,19 +4,15 @@ input = React.DOM.input
 button = React.DOM.button
 textar = React.DOM.textarea
 
-$(document).ready(function(){
-  mounted = React.render(
-    Page({}), $("#container")[0]
-    )
-})
-
 Page = recl({
+  displayName: 'Page',
   render: function(){
-    return(div({}), MessForms({}))
+    return  div({}, MessForms({}), Inbox({messages:this.props.messages}))
   }
 })
 
 MessForms = recl({
+  displayName: 'Mess',
   render: function(){
     return(
       div({},
@@ -59,4 +55,23 @@ Body = recl({
   render: function(){
     return div({}, textar({className:"body",placeholder: "Body"}))
   }
+})
+
+Inbox = recl({
+  displayName: 'Inbox',
+  render: function(){
+  return div({}, JSON.stringify(this.props.messages), div({}), div({}), div({}))
+  }
+})
+
+
+
+$(document).ready(function(){
+  mounted = React.render(
+    Page({}), $("#container")[0]
+    )
+  urb.bind("/", {appl:'urbmail'}, function(e,d){
+    console.log(e,d.data)
+    mounted.setProps({messages:d.data})
+  })
 })
