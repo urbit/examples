@@ -1,0 +1,38 @@
+body,
+html,
+button {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 18px;
+}
+
+#container {
+  position: absolute;
+  width: 18rem;
+  left: 50%;
+  margin-left: -9rem;
+}
+
+.button {
+    width: 90px;
+    height: 40px;
+  }
+
+#board {
+  width: 18rem;
+}
+
+.box,
+.box button {
+  display: inline-block;
+}
+
+.box button {
+  float: left;
+  width: 6rem;
+  height: 6rem;
+  border: .6rem solid #333;
+  background-color: #ccc;
+  cursor: pointer;
+  outline: none;
+  font-size: 2rem;
+}

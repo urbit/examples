@@ -1,0 +1,25 @@
+::
+::::
+  ::
+/?    310
+/=    gas    /$    fuel
+::
+::::  sivtyv-barnel
+  ::
+  !:
+
+;html
+  ;head
+    ;script@"/~/at/main/lib/urb.js";
+    ;script: urb.appl = 'tic'
+    ;script@"https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js";  ::jquery
+    ;script@"https://cdnjs.cloudflare.com/ajax/libs/react/0.12.2/react.js";
+    ;script@"/main/pub/tic/src/main.js";
+    ;link/"/main/pub/tic/src/main.css"(rel "stylesheet");
+    ;title: Tic-Tac-Toe
+  ==
+  ;body
+    ;div#container;
+    ;button(onclick "urb.send(\{data:\{wipe:null}})"): Wipe
+  ==
+==
