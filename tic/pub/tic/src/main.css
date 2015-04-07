@@ -21,6 +21,24 @@ button {
   width: 18rem;
 }
 
+.turn {
+  text-align: center;
+  padding-top: 1rem;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 3rem;
+}
+
+.load-false {
+  opacity: 1;
+  transition: opacity .6s;
+}
+
+.load-true {
+  opacity: .6;
+  transition: opacity .6s;
+}
+
 .box,
 .box button {
   display: inline-block;
@@ -30,9 +48,33 @@ button {
   float: left;
   width: 6rem;
   height: 6rem;
-  border: .6rem solid #333;
-  background-color: #ccc;
+  border: .3rem solid #333;
+  background-color: #fff;
   cursor: pointer;
   outline: none;
   font-size: 2rem;
+}
+
+.box button.top-left,
+.box button.top-center,
+.box button.top-right {
+  border-top: 0;
+}
+
+.box button.bottom-left,
+.box button.bottom-center,
+.box button.bottom-right {
+  border-bottom: 0;
+}
+
+.box button.top-left,
+.box button.middle-left,
+.box button.bottom-left {
+  border-left: 0;
+}
+
+.box button.top-right,
+.box button.middle-right,
+.box button.bottom-right {
+  border-right: 0;
 }

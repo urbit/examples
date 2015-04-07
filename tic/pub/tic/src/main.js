@@ -1,25 +1,19 @@
-recl = React.createClass
-div = React.DOM.div
-ul = React.DOM.ul
-li = React.DOM.li
-input = React.DOM.input
-span = React.DOM.span
-button = React.DOM.button
+recl    = React.createClass
+div     = React.DOM.div
+ul      = React.DOM.ul
+li      = React.DOM.li
+input   = React.DOM.input
+span    = React.DOM.span
+button  = React.DOM.button
 //display turn must change
 
 
 Page = recl({
   render: function(){
-  
-    if (this.props.turn == 'X') 
-      var display = 'X\'s turn'
-    else
-      var display = 'O\'s turn'
-
     return (
-      div({},
+      div({className:"load-"+this.props.load},
         Board({board:this.props.board}),
-        span({}, display)
+        div({className:"turn"}, utf(this.props.turn))
       )
     )}
 })
@@ -36,7 +30,6 @@ Board = recl({
         if(p===0) { col = 'left' }
         if(p===1) { col = 'center' }
         if(p===2) { col = 'right' }
-/[xo]/.test(
         text = "  "
         if(this.props.board[i]) {
           if(this.props.board[i][p]) {
@@ -55,35 +48,33 @@ Board = recl({
 })
 
 Box = recl({
-  getInitialState: function(){return {text:this.props.text}},
-  
-  render: function(){ 
-    return(
-      div({className:"box",key:this.props.row+"-"+this.props.col}, //key for access later?
-        button({
-          onClick:this.handleClick,
-          className:this.props.row+"-"+this.props.col
-        }, this.props.text) 
-      )
-    )
+  getInitialState: function() { return {text:this.props.text}; },
+
+  componentWillReceiveProps: function(nextProps) {
+    if(mounted.props.load === false)
+      this.setState({text:nextProps.text})
   },
 
   handleClick: function(){
+    if(mounted.props.load == true)
+      return false
+
     if (this.isValid(this.state)){
       if(this.state.text.trim().length === 0){
         urb.send({
           appl:"tic",
           data:{
               row:this.props.row,
-              column:this.props.col,
+              col:this.props.col,
               space:mounted.props.turn.toLowerCase()},
           mark:"json"
         })
         this.setState({text:mounted.props.turn})
-        mounted.setProps(
-           mounted.props.turn == 'X'
-           ? {turn:'O'}
-           : {turn:'X'}
+        turn = mounted.props.turn == 'x' ? 'o' : 'x'
+        mounted.setProps({
+          turn:turn,
+          load:true
+        }
         )
       }
     }
@@ -93,9 +84,19 @@ Box = recl({
     var valid = true;
     if(state.text == 'X' || state.text == 'O'){
       valid = false;
-      alert("false")
     }
     return valid;
+  },
+
+  render: function() { 
+    return(
+      div({className:"box",key:this.props.row+"-"+this.props.col}, //key for access later?
+        button({
+          onClick:this.handleClick,
+          className:this.props.row+"-"+this.props.col
+        }, utf(this.state.text)) 
+      )
+    )
   }
 })
 
@@ -103,6 +104,20 @@ Box = recl({
 
 
 $(document).ready(function(){
-  mounted = React.render(Page({turn:'X',board:{}}), $("#container")[0])
-  urb.bind("/",{appl:"tic"}, function(err,d) { mounted.setProps({board:d.data}) })
+  utf = function(t) { 
+    _t = ""
+    if(t == "x")
+      _t = "✕"
+    if(t == "o")
+      _t = "◯"
+    return _t
+  }
+
+  mounted = React.render(Page({turn:'x',board:{}}), $("#container")[0])
+  urb.bind("/",{appl:"tic"}, function(err,d) { 
+    mounted.setProps({
+      load:false,
+      board:d.data
+    }) 
+  })
 })

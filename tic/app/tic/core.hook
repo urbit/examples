@@ -90,7 +90,7 @@
   ?^  %.(newmove (of [%wipe ul] ~):jo)
     [~ +>.$(vat *axle)]
   =+  ^-  mve=(unit ,[roe=@t col=@t spa=@t])
-      ((ot row/so column/so space/so ~):jo newmove)
+      ((ot row/so col/so space/so ~):jo newmove)
   ~&  [vat newmove]
   ::  must do these checks because we're parsing
   ?>  ?=(^ mve)
