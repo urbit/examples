@@ -10,12 +10,11 @@ button = React.DOM.button
 
 Page = recl({
   render: function(){
-    var display;
   
     if (this.props.turn == 'X') 
-      display = 'X\'s turn'
+      var display = 'X\'s turn'
     else
-      display = 'O\'s turn'
+      var display = 'O\'s turn'
 
     return (
       div({},
@@ -37,7 +36,7 @@ Board = recl({
         if(p===0) { col = 'left' }
         if(p===1) { col = 'center' }
         if(p===2) { col = 'right' }
-
+/[xo]/.test(
         text = "  "
         if(this.props.board[i]) {
           if(this.props.board[i][p]) {
@@ -56,15 +55,15 @@ Board = recl({
 })
 
 Box = recl({
-  getInitialState: function(){return {text:this.props.text}}, //hack
+  getInitialState: function(){return {text:this.props.text}},
   
   render: function(){ 
     return(
-      div({className:"box",key:this.props.row+"-"+this.props.col}, 
+      div({className:"box",key:this.props.row+"-"+this.props.col}, //key for access later?
         button({
-          onClick:this.handleClick, 
+          onClick:this.handleClick,
           className:this.props.row+"-"+this.props.col
-        }, this.state.text)
+        }, this.props.text) 
       )
     )
   },

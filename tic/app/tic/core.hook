@@ -47,9 +47,9 @@
 ++  peek                            ::  send state on every change
   |=(^ [%json (board-to-json current.vat)])
 ++  board-to-json
-  =+  sp=|=(a=space [%s ?~(a ~~~a0.~a0. a)])  ::  U+00A0 is a non-breaking space
-  =+  ro=|=(row (jobe left/(sp leftcol) center/(sp middlecol) right/(sp rightcol) ~))
-  |=(board (jobe top/(ro top) middle/(ro middle) bottom/(ro bottom) ~))
+  =+  sp=|=(a=space ?~(a ~ [%s a]))  ::  U+00A0 is a non-breaking space
+  =+  ro=|=(r=row ~[%a (sp &1.r) (sp &2.r) (sp &3.r)]) 
+  |=(b=board `json`~[%a (ro top.b) (ro middle.b) (ro bottom.b)])
 ::
 ++  check-board
   |=  cur=board
