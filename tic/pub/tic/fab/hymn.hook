@@ -20,6 +20,5 @@
   ==
   ;body
     ;div#container;
-    ;button(onclick "urb.send(\{data:\{wipe:null}})"): Wipe
   ==
 ==

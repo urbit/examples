@@ -1,24 +1,23 @@
-recl    = React.createClass
+recl    = React.createClass           //  alias names
 div     = React.DOM.div
 ul      = React.DOM.ul
 li      = React.DOM.li
 input   = React.DOM.input
 span    = React.DOM.span
 button  = React.DOM.button
-//display turn must change
 
 
-Page = recl({
+Page = recl({                         //  render page
   render: function(){
     return (
-      div({className:"load-"+this.props.load},
+      div({className:"load-"+this.props.load},          //  lock screen
         Board({board:this.props.board}),
         div({className:"turn"}, utf(this.props.turn))
       )
     )}
 })
 
-Board = recl({
+Board = recl({                        //  render board
   render: function(){
     var elems = []
     for(i=0;i<3;i++) {
@@ -36,7 +35,7 @@ Board = recl({
             text = this.props.board[i][p]
           }
         }
-        elems.push(Box({row:row,col:col,text:text}))
+        elems.push(Box({row:row,col:col,text:text}))    //  pass info to boxes
       }
     }
 
@@ -47,12 +46,12 @@ Board = recl({
   }
 })
 
-Box = recl({
+Box = recl({                                            //  render boxes
   getInitialState: function() { return {text:this.props.text}; },
 
   componentWillReceiveProps: function(nextProps) {
-    if(mounted.props.load === false)
-      this.setState({text:nextProps.text})
+    if(mounted.props.load === false)  //  only accept change if loading is complete
+      this.setState({text:nextProps.text}) 
   },
 
   handleClick: function(){
@@ -104,7 +103,7 @@ Box = recl({
 
 
 $(document).ready(function(){
-  utf = function(t) { 
+  utf = function(t) {
     _t = ""
     if(t == "x")
       _t = "✕"
