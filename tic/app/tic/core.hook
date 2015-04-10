@@ -68,8 +68,8 @@
 ++  winning                           ::  test if x or o wins
 |=  a=(list space)                    ::  accept list spaces
 |((levy a is-x) (levy a is-o))        ::  test if a contains just x or just o
+::
 --
-
 ::  main core containing our app. it has a "sample" that contains our state.
 ::  hid contains our system data. vat contains our app-specific state.
 ::  cores with sample are also called "doors".
@@ -77,12 +77,13 @@
 |_  [hid=hide vat=axle]               ::  door with sample of hid and vat  
 ++  prep  ,_`.                        ::  wipe state when app code is changed
 
+
 ::  peek is called every time our state changes. in this case it sends the
 ::  state of our current board to the client as typed json.
-++  peek
-  |=  ^                               ::  accept input with ++type of %cell
-  :-  %json                           ::  send data with "mark" of json
-  (board-to-json current.vat)         ::  send ++json board
+::++  peek
+::  |=  ^                               ::  accept input with ++type of %cell
+::  :-  %json                           ::  send data with "mark" of json
+::  (board-to-json current.vat)         ::  send ++json board
 ::
 ++  board-to-json                     ::  convert board to ++json            
   =+  sp=|=(a=space ?~(a ~ [%s a]))   ::  gate that converts ++space to ++json
@@ -169,11 +170,18 @@
       %tie  [~ %tie]                  ::  produce tie
     ==
   ?~  rez                             ::  if continue:
-
+  :_  +>.$
+  :~  
+        %+  turn  (~(tap by sup.hid))
+        |=  [ost=bone *]
+        :^  ost  %give  %rush  
+        :-  %json
+        (board-to-json current.vat)
+        [ost %give %nice ~]
+      ==
 ::  any arm that receives data from %gall must always produce a list of moves
 ::  as well as the context of the app. in this list of moves, there must also
 ::  be either postitive or negative acknowledgement.
-    [[ost %give %nice ~]~ +>.$]       ::  send postive ack and play on
   ~&  victory/u.rez                   ::  printf of victor
   =.  win.currentgame.vat  u.rez
   =.  record.vat                      ::  record history of game
@@ -181,5 +189,13 @@
   =:  currentgame.vat  *game          ::  reset the current game and board
       current.vat      *board
   ==
-  [[ost %give %nice ~]~ +>.$]
+  :_  +>.$
+  :~  
+        %+  turn  (~(tap by sup.hid))
+        |=  [ost=bone *]
+        :^  ost  %give  %rush  
+        :-  %json
+        (board-to-json current.vat)
+        [ost %give %nice ~]
+      ==
   --
