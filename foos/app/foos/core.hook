@@ -1,4 +1,4 @@
-::    store results of foosball games                   ::  short descripton
+::    store results of foosball games ::  short descripton
 ::
 ::::
   ::
@@ -25,36 +25,63 @@
 ++  poke-json                         ::  receive JSON
   |=  [ost=bone you=ship args=json]
   ?.  =(/[app.hid] imp.hid)           ::  send data to parent app
-    =+  cag=`cage`[%json !>(args)]    ::  XX will change
-    :_(+>.$ [ost %pass /from-child %g %mess [our.hid /[app.hid]] you cag]~)
+    =+  cag=`cage`[%json !>(args)]    ::  XX will chang
+    :_  +>.$  
+    [ost %pass /from-child %g %mess [our.hid /[app.hid]] you cag]~
   =+  ^-  parsedresult=result         ::  push on result of reparsing JSON
       ~|  bad-json/args               ::  produce p if q crashes
-      %-  need                        ::  crash if ~ (on parse-fail)
-      %-  =>  jo                      ::  from ++jo get "ot", obj-tuple parser
-      ::  XX explain reparsing  
-      (ot bcons/so bscore/ni ycons/so yscore/ni ~)
-      args                            ::  on "args"
-  =.  vat  [parsedresult vat]
+
+::  when %eyre receives JSON from the outside world, it parses it to
+::  a hoon representation of JSON, called ++json. however, to
+::  operate on this data, we must first "reparse" it from ++json
+::  to the proper hoon data type first. see ++jo in zuse 3Bd.
+::  here all we're doing is reparsing from a ++json object to a tuple.
+      %-  need 
+      =+  jo
+      %-  (ot bcons/so bscore/ni ycons/so yscore/ni ~)
+      args
+                                      ::  list key-to-parsers
+                                      ::  call this parser on "args"
+  =.  vat  [parsedresult vat]         ::  update state: [newresult oldresults]
 
 ::  any arm that receives information from %gall must return a list of system
 ::  calls, called moves, as well as the new app state.
 ::  we don't want to change the  state here, we just set it to +>.$.
-::  inside this core, +>.$ refers to the whole contents of this hook file.
+::  inside this core, +>.$ refers to the whole contents of this hook file,
 ::  the only move here--a %nice--informs %gall that we successfully received
 ::  its message. for more info on this, see the "making moves" section of the
 ::  arvo reference doc.
   [[ost %give %nice ~]~ +>.$]
-::
+
+::  turn our state into ++json which we can then send to the client via %eyre
 ++  result-to-json
-  |=  result
-  %-  jobe  :~
-    bcons/[%s bcons]
+  |=  result                          ::  accept a result
+  %-  jobe  :~                        ::  produce a ++json object
+    bcons/[%s bcons]                  ::  produce a ++json string
     ycons/[%s ycons]
-    bscore/(jone bscore)              ::  jone converts @u to json number
+    bscore/(jone bscore)              ::  produce a ++json number
     yscore/(jone yscore)
   ==
-++  peek
+
+
+::  ++peer is called when the app receives a subscription request on a particular
+::  path for the first time. it begins with a gate that accepts the ship of the
+::  subscriber along with the path to which they want to subscribe.
+::  with this information, ++peer does two things: it updates the list of subscribers & their paths
+::  in sup.hid. and it sends the subscriber some sort of typed data.
+::  generally, we use this feature to send our initial state. after our one-time ++peer,
+::  we update the client manually whenever our state changes. we do this above
+::  on line XX
+++  peer
   |=  [his=ship pax=path]
   [%json `json`[%a (turn vat result-to-json)]]
   ::  don't forget to send %json in front
+::
+++  spam
+  |=  ost=bone
+  :_  ~
+  :-  [ost %give %nice ~]
+  %+  turn  (~(tap by sup.hid))
+  |=  [bne=bone *]
+  [ost %give %rush %json `json`[%a (turn vat result-to-json)]]
 --
