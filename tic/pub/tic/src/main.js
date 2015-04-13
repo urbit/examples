@@ -68,7 +68,7 @@ Box = recl({                                                     //  box compone
   },
 
   isValid : function(state){                                     //  confirm that box isnt taken
-    return !(state.text.length > 0)
+    return (state.text.length > 0)
   },
 
   handleClick: function(){                                       //  box is clicked

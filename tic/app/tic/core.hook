@@ -29,14 +29,14 @@
 --
 
 ::  core with helper functions
-!:
+!:                                    ::  insert stack trace for this core
 |%
 ++  set-space                         ::  change state of space in row
   |=  $:  col=?(%left %center %right) ::  gate (function) that accepts column
       new=space                       ::  and ++space we set column to
       ==
   ::  the gate above produces another gate that accepts a row whose column we
-  ::  want to change. You can think of this like currying.
+  ::  want to change. you can think of this like currying.
   |=  a=row  ^-  row                  ::  accept, return row
   ?-  col                             ::  switch on column
     %left    a(leftcol new)           ::  change left-column of row
@@ -69,26 +69,24 @@
 |((levy a is-x) (levy a is-o))        ::  test if a contains just x or just o
 --
 
-!:                                    ::  insert stack trace for app
+!:                                    ::  insert stack trace for this core
 |_  [hid=hide vat=axle]               ::  door with sample of hid and vat  
 ++  prep  ,_`.                        ::  wipe state when app code is changed
 ::
-++  spam
+++  spam                              ::  send updates to subscribers
   |=  ost=bone
-  :_  +>.$
-  :-  [ost %give %nice ~]
-  %+  turn  (~(tap by sup.hid))       ::  turn list -> list
-  |=  [ost=bone *]
-  :^  ost  %give  %rush
-  :-  %json
-  (board-to-json current.vat)
+  :_  +>.$                            ::  new app state
+  :-  [ost %give %nice ~]             ::  positive acknowledgement
+  %+  turn  (~(tap by sup.hid))       ::  sup.hid from map to list of pairs
+  |=  [ost=bone *]                    ::  mapping func subscriber/path -> move 
+  :^  ost  %give  %rush               ::  move containing updates
+  :-  %json                           ::  mark of %json
+  (board-to-json current.vat)         ::  convery board to ++json
 ::
-::  XX comment
-++  peer
+++  peer                              ::  get 1st time subs. add them to sup
   |=  [ost=bone you=ship pax=path]    ::  accept input with ++type of %cell
-  ~&  %testing
-  :_  +>.$
-  [ost %give %rush %json (board-to-json current.vat)]~   ::  send data with "mark" of json
+  :_  +>.$                            ::  new app state
+  [ost %give %rush %json (board-to-json current.vat)]~   ::  send board state
 ::
 ++  board-to-json                     ::  convert board to ++json            
   =+  sp=|=(a=space ?~(a ~ [%s a]))   ::  gate that converts ++space to ++json
@@ -149,7 +147,7 @@
       ((ot row/so col/so space/so ~):jo newmove)
   ~&  [vat newmove]                   ::  printf of state and latest move
 
-::  these next four lines assert that the json has sucessfully parsed and that
+::  154-157 assert that the json has sucessfully parsed and that
 ::  all of its fields have valid values. if we did not do this, the strict
 ::  type system would not allow us to pass this to functions which only
 ::  handle inputs of a certain type.
@@ -171,7 +169,7 @@
       %tie  [~ %tie]                  ::  produce tie
     ==
   ?~  rez                             ::  if continue:
-    ~&  'spam continue game'
+    ~&  'spam continue game'          ::  send new state and play on
     (spam ost)                        ::  send postive ack and play on
   ~&  victory/u.rez                   ::  printf of victor
   =.  win.currentgame.vat  u.rez
@@ -181,5 +179,5 @@
       current.vat      *board
   ==
   ~&  'spam end of game'
-  (spam ost)
+  (spam ost)                          ::  send new state (a blank board)
   --
