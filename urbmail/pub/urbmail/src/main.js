@@ -4,7 +4,7 @@ input  = React.DOM.input
 button = React.DOM.button
 textar = React.DOM.textarea
 
-Page = recl({
+Page = recl({                                                         // top level component
   displayName: 'Page',
 
   render: function(){
@@ -12,10 +12,10 @@ Page = recl({
   }
 })
 
-Compose = recl({
+Compose = recl({                                                      // compose 
   displayName: 'Mess',
 
-  validate: function(to,subj,body){
+  validate: function(to,subj,body){                                   // validate outgoing
     valid = true
     if(to[0] !== "~" || to.length < 4)
       valid = "to"
@@ -27,16 +27,16 @@ Compose = recl({
   },
 
   handleClick: function(){
-    $to = $(this.getDOMNode()).find('.to')
+    $to = $(this.getDOMNode()).find('.to')                            // aliases
     $subj = $(this.getDOMNode()).find('.subj')
     $body = $(this.getDOMNode()).find('.body')
 
-    if(this.validate($to.val(),$subj.val(),$body.val()) !== true) {
-      $(this.getDOMNode()).find('.'+valid).focus()
+    if(this.validate($to.val(),$subj.val(),$body.val()) !== true) {   // validate
+      $(this.getDOMNode()).find('.'+valid).focus()                    // return if needed
       return false
     }
 
-    urb.send({
+    urb.send({                                                        // send to server
       appl:"urbmail",
       data: {
         to:   $to.val(),
@@ -44,7 +44,8 @@ Compose = recl({
         body: $body.val()
       }
     }),
-    $to.val('')
+
+    $to.val('')                                                       // reset
     $subj.val('')
     $body.val('')
   },
@@ -61,7 +62,17 @@ Compose = recl({
   }
 })
 
-Inbox = recl({
+
+Message = recl({                                                      // simple message
+  render: function(){
+    return  div({className:"Message"},
+      div({className:"to"}, this.props.message.to),
+      div({className:"subj"}, this.props.message.subj),
+      div({className:"body"}, this.props.message.body))
+  }
+})
+
+Inbox = recl({                                                        // list of received messages
   displayName: 'Inbox',
 
   render: function(){
@@ -73,19 +84,9 @@ Inbox = recl({
   }
 })
 
-Message = recl({
-  render: function(){
-    return  div({className:"Message"},
-      div({className:"to"}, this.props.message.to),
-      div({className:"subj"}, this.props.message.subj),
-      div({className:"body"}, this.props.message.body))
-  }
-})
-
-
-$(document).ready(function(){
+$(document).ready(function(){                                         // render when ready
   mounted = React.render(Page({}), $("#container")[0])
-  urb.bind("/", {appl:'urbmail'}, function(e,d){
+  urb.bind("/", {appl:'urbmail'}, function(e,d){                      // bind to backend
     mounted.setProps({messages:d.data})
   })
 })
