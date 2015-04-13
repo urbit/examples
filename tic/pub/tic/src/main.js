@@ -1,4 +1,4 @@
-recl    = React.createClass           //  alias names
+recl    = React.createClass                                      //  alias names
 div     = React.DOM.div
 ul      = React.DOM.ul
 li      = React.DOM.li
@@ -6,21 +6,35 @@ input   = React.DOM.input
 span    = React.DOM.span
 button  = React.DOM.button
 
+/*
 
-Page = recl({                         //  render page
+----------
+| page
+| ----------
+| | board
+| | ----------
+| | | box
+
+
+the page uses three components, which are nested inside one another. 
+
+*/
+
+
+Page = recl({                                                    //  page component
   render: function(){
     return (
-      div({className:"load-"+this.props.load},          //  lock screen
+      div({className:"load-"+this.props.load},                   //  lock screen
         Board({board:this.props.board}),
         div({className:"turn"}, utf(this.props.turn))
       )
     )}
 })
 
-Board = recl({                        //  render board
+Board = recl({                                                   //  board component
   render: function(){
     var elems = []
-    for(i=0;i<3;i++) {
+    for(i=0;i<3;i++) {                                           //  construct row / column
       if(i===0) { row = 'top' }
       if(i===1) { row = 'middle' }
       if(i===2) { row = 'bottom' }
@@ -35,61 +49,53 @@ Board = recl({                        //  render board
             text = this.props.board[i][p]
           }
         }
-        elems.push(Box({row:row,col:col,text:text}))    //  pass info to boxes
+        elems.push(Box({row:row,col:col,text:text}))             //  pass info to boxes
       }
     }
 
     return(
-      div({id:"board"},
-      elems)
+      div({id:"board"},elems)
     )
   }
 })
 
-Box = recl({                                            //  render boxes
-  getInitialState: function() { return {text:this.props.text}; },
+Box = recl({                                                     //  box component
+  getInitialState: function() { return {text:this.props.text}; },//  state is just 'x' or 'o'
 
   componentWillReceiveProps: function(nextProps) {
-    if(mounted.props.load === false)  //  only accept change if loading is complete
-      this.setState({text:nextProps.text}) 
+    if(mounted.props.load === false)                             //  only accept change when not loading
+      this.setState({text:nextProps.text})                       //  this prevents overwriting our state
   },
 
-  handleClick: function(){
+  isValid : function(state){                                     //  confirm that box isnt taken
+    return !(state.text.length > 0)
+  },
+
+  handleClick: function(){                                       //  box is clicked
     if(mounted.props.load == true)
       return false
 
     if (this.isValid(this.state)){
-      if(this.state.text.trim().length === 0){
-        urb.send({
-          appl:"tic",
-          data:{
-              row:this.props.row,
-              col:this.props.col,
-              space:mounted.props.turn.toLowerCase()},
-          mark:"json"
-        })
-        this.setState({text:mounted.props.turn})
-        turn = mounted.props.turn == 'x' ? 'o' : 'x'
-        mounted.setProps({
-          turn:turn,
-          load:true
-        }
-        )
-      }
+      urb.send({                                                 //  if valid, send an update
+        appl:"tic",
+        data:{
+            row:this.props.row,
+            col:this.props.col,
+            space:mounted.props.turn.toLowerCase()},
+        mark:"json"
+      })
+      this.setState({text:mounted.props.turn})                   //  update our state
+      turn = mounted.props.turn == 'x' ? 'o' : 'x'               //  change turns
+      mounted.setProps({                                         //  update turn in parent
+        turn:turn,
+        load:true
+      })
     }
-  },
-
-  isValid : function(state){
-    var valid = true;
-    if(state.text == 'X' || state.text == 'O'){
-      valid = false;
-    }
-    return valid;
   },
 
   render: function() { 
     return(
-      div({className:"box",key:this.props.row+"-"+this.props.col}, //key for access later?
+      div({className:"box",key:this.props.row+"-"+this.props.col},  //  react likes keys for uniqueness
         button({
           onClick:this.handleClick,
           className:this.props.row+"-"+this.props.col
@@ -102,8 +108,8 @@ Box = recl({                                            //  render boxes
 
 
 
-$(document).ready(function(){
-  utf = function(t) {
+$(document).ready(function(){                                    //  setup when ready
+  utf = function(t) {                                            //  utf-ify our xs and os
     _t = ""
     if(t == "x")
       _t = "✕"
@@ -112,10 +118,10 @@ $(document).ready(function(){
     return _t
   }
 
-  mounted = React.render(Page({turn:'x',board:{}}), $("#container")[0])
-  urb.bind("/",{appl:"tic"}, function(err,d) { 
-    mounted.setProps({
-      load:false,
+  mounted = React.render(Page({turn:'x',board:{}}), $("#container")[0])  //  render top level component
+  urb.bind("/",{appl:"tic"}, function(err,d) {                   //  bind to / for updates
+    mounted.setProps({                                           //  when we get an update
+      load:false,                                                //  set top level props
       board:d.data
     }) 
   })

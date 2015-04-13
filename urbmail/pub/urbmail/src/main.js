@@ -1,89 +1,92 @@
-recl = React.createClass
-div = React.DOM.div
-input = React.DOM.input
+recl   = React.createClass
+div    = React.DOM.div
+input  = React.DOM.input
 button = React.DOM.button
 textar = React.DOM.textarea
 
-Page = recl({
+Page = recl({                                                         // top level component
   displayName: 'Page',
+
   render: function(){
-    return  div({}, MessForms({}), Inbox({messages:this.props.messages}))
+    return  div({}, Compose({}), Inbox({messages:this.props.messages}))
   }
 })
 
-MessForms = recl({
+Compose = recl({                                                      // compose 
   displayName: 'Mess',
+
+  validate: function(to,subj,body){                                   // validate outgoing
+    valid = true
+    if(to[0] !== "~" || to.length < 4)
+      valid = "to"
+    if(subj.length < 1)
+      valid = "subj"
+    if(body.length < 1)
+      valid = "body"
+    return valid
+  },
+
+  handleClick: function(){
+    $to = $(this.getDOMNode()).find('.to')                            // aliases
+    $subj = $(this.getDOMNode()).find('.subj')
+    $body = $(this.getDOMNode()).find('.body')
+
+    if(this.validate($to.val(),$subj.val(),$body.val()) !== true) {   // validate
+      $(this.getDOMNode()).find('.'+valid).focus()                    // return if needed
+      return false
+    }
+
+    urb.send({                                                        // send to server
+      appl:"urbmail",
+      data: {
+        to:   $to.val(),
+        subj: $subj.val(),
+        body: $body.val()
+      }
+    }),
+
+    $to.val('')                                                       // reset
+    $subj.val('')
+    $body.val('')
+  },
+
   render: function(){
     return(
       div({},
-        To({}),
-        Subj({}),
-        Body({}),
+        div({}, input({className:"to", placeholder: "To"})),
+        div({}, input({className:"subj",placeholder: "Subject"})),
+        div({}, textar({className:"body",placeholder: "Body"})),
         button({onClick:this.handleClick}, "Send")
       )
     )
-  },
-  handleClick: function(){
-    //if all are valid
-    urb.send({
-      appl:"urbmail",
-      data: {
-        to:   $(this.getDOMNode()).find('.to').val(),
-        subj: $(this.getDOMNode()).find('.subj').val(),
-        body: $(this.getDOMNode()).find('.body').val()
-      }
-    }),
-    $(this.getDOMNode()).find('.to').val(''),
-    $(this.getDOMNode()).find('.subj').val(''),
-    $(this.getDOMNode()).find('.body').val('')
   }
 })
 
-To = recl({
+
+Message = recl({                                                      // simple message
   render: function(){
-    return div({}, input({className:"to", placeholder: "To"}))
+    return  div({className:"Message"},
+      div({className:"to"}, this.props.message.to),
+      div({className:"subj"}, this.props.message.subj),
+      div({className:"body"}, this.props.message.body))
   }
 })
 
-Subj = recl({
-  render: function(){
-    return div({}, input({className:"subj",placeholder: "Subject"}))
-  }
-})
-
-Body = recl({
-  render: function(){
-    return div({}, textar({className:"body",placeholder: "Body"}))
-  }
-})
-
-Inbox = recl({
+Inbox = recl({                                                        // list of received messages
   displayName: 'Inbox',
+
   render: function(){
-   msgList = []
+   messages = []
    for (i in this.props.messages){
-     msgList.push(MessageDisp({message: this.props.messages[i]}))
+     messages.push(Message({message:this.props.messages[i]}))
    }
-    return div({}, msgList)
+    return div({}, messages)
   }
 })
 
-MessageDisp = recl({
-  render: function(){
-    return  div({},
-      div({}, this.props.message.to),
-      div({}, this.props.message.subj),
-      div({}, this.props.message.body))
-  }
-})
-
-
-$(document).ready(function(){
-  mounted = React.render(
-    Page({}), $("#container")[0]
-    )
-  urb.bind("/", {appl:'urbmail'}, function(e,d){
-    console.log(e,d.data)
+$(document).ready(function(){                                         // render when ready
+  mounted = React.render(Page({}), $("#container")[0])
+  urb.bind("/", {appl:'urbmail'}, function(e,d){                      // bind to backend
     mounted.setProps({messages:d.data})
   })
 })

@@ -1,83 +1,39 @@
-div = React.DOM.div
-ul  = React.DOM.ul
-li  = React.DOM.li
+div    = React.DOM.div
+ul     = React.DOM.ul
+li     = React.DOM.li
 input  = React.DOM.input
 button = React.DOM.button
 
-recl = React.createClass
+recl   = React.createClass
 
-//Render Page
-Page = recl({
+Page = recl({                                                         // top level component
   render: function(){return (
     div({},
     AddFixture({fixtures:this.props.fixture}),
-    Fixtures({fixturesList:this.props.fixturesList}), // don't forget to include the key before the ':' here. 
+    Fixtures({fixturesList:this.props.fixturesList}),
     Standings({fixturesList:this.props.fixturesList})
     )
   )},
 })
 
-obj1 = {a:1, b:2}
+AddFixture = recl({                                                   // add component
+  _handleClick: function() { this.submit(); },                        // click and
+  _handleKey: function(e) { if(e.keyCode == 13) this.submit(); },     // enter go to the same place
 
-obj2 = {a:1}
-obj2.b = 2
+  validRange: function(score){                                        // foosball is  played to 10
+    if(score < 0 || score > 10) return false
+    return true
+  },
 
-AddFixture = recl({
-  _handleClick: function() { this.submit(); },
-  _handleKey: function(e) { if(e.keyCode == 13) this.submit(); },
-  submit: function() {
-    $el = $(this.getDOMNode())  //get div for "afix" from "mounted", allows us to search within it
-
-    bcons = $el.find('#bcons').val().trim()
-    bscore = parseInt($el.find('#bscore').val().trim())
-
-    ycons = $el.find('#ycons').val().trim()
-    yscore = parseInt($el.find('#yscore').val().trim())
-
-    var bscr = parseInt(bscore.value)
-    var yscr = parseInt(yscore.value)
-
+  isValid: function(bscore,yscore,bcons,ycons){                       // validate input
+    valid = true
     if(bcons.length === 0 || 
        ycons.length === 0 || 
        isNaN(bscore) || 
        isNaN(yscore)) { 
-      alert("Something isn't quite right with your input"); 
-      return; 
+      valid = "Something isn't quite right with your input"
+      return valid
     }
-    valid = this.isValid(bscore,yscore,bcons,ycons)
-    if(valid == true){      // check for valid scoreline
-      urb.send({
-        appl: "foos",
-        data: {
-          bcons:bcons, 
-          ycons:ycons, 
-          bscore:bscore, 
-          yscore:yscore
-        },
-        mark: "json"
-      }, function(){
-        $el.find('#bcons').val('');
-        $el.find('#bscore').val('');
-        $el.find('#ycons').val('');
-        $el.find('#yscore').val('');
-        return;
-      })
-      newFixturesList = mounted.props.fixturesList.slice();
-      newFixturesList.push({ // dont forget to send object
-        bcons:bcons,
-        ycons:ycons, 
-        bscore:bscore, 
-        yscore:yscore,
-        pending:true
-      })
-      mounted.setProps({fixturesList:newFixturesList})
-    } else { 
-      alert(valid); 
-    }
-  },
-
-  isValid: function(bscore,yscore,bcons,ycons){
-    valid = true
     if(this.validRange(bscore) && this.validRange(yscore)){
       if(bscore == 10 || yscore == 10){
         if(yscore == 10 && bscore == 10) valid = "Scores can't both be 10?"
@@ -88,9 +44,45 @@ AddFixture = recl({
     return valid
   },
 
-  validRange: function(score){
-    if(score < 0 || score > 10) return false
-    return true
+  submit: function() {
+    $el = $(this.getDOMNode())                                        // cache for jquery calls
+
+    bcons = $el.find('#bcons').val().trim()                           // get values for b and y
+    bscore = parseInt($el.find('#bscore').val().trim())
+
+    ycons = $el.find('#ycons').val().trim()
+    yscore = parseInt($el.find('#yscore').val().trim())
+
+    if(this.isValid(bscore,yscore,bcons,ycons) !== true) {            // validate 
+      alert(valid) 
+      return false
+    }
+
+    urb.send({                                                        // send to server                              
+      appl: "foos",
+      data: {
+        bcons:bcons, 
+        ycons:ycons, 
+        bscore:bscore, 
+        yscore:yscore
+      },
+      mark: "json"
+    }, function(){
+      newFixturesList = mounted.props.fixturesList.slice();           // copy the fixtures list
+      newFixturesList.push({                                          // add our new fixture
+        bcons:bcons,
+        ycons:ycons, 
+        bscore:bscore, 
+        yscore:yscore,
+        pending:true
+      })
+      mounted.setProps({fixturesList:newFixturesList})                // set props in the parent
+      $el.find('#bcons').val('');                                     // reset on callback
+      $el.find('#bscore').val('');
+      $el.find('#ycons').val('');
+      $el.find('#yscore').val('');
+      return;
+    })
   },
 
   render: function() {
@@ -123,13 +115,6 @@ AddFixture = recl({
   }
 })
 
-//List all played fixtures
-Fixtures = recl({
-  render: function(){
-    return (ul({className:'fixturesList'}, this.props.fixturesList.map(Fixture)))
-  }
-})
-
 Fixture = recl({
   render: function() {
     klass = 'fixture'
@@ -139,6 +124,22 @@ Fixture = recl({
              div({className:'score'}, this.props.bscore),
              div({className:'score'}, this.props.yscore),
              div({className:'contestant'}, this.props.ycons)])
+  }
+})
+
+//List all played fixtures
+Fixtures = recl({
+  render: function(){
+    return (ul({className:'fixturesList'}, this.props.fixturesList.map(Fixture)))
+  }
+})
+
+Standing = recl({
+  render: function(){
+    return li({},
+      [div({className:'standElem'},this.props.player), 
+       div({className:'standElem'},this.props.wins), 
+       div({className:'standElem'},this.props.losses)])
   }
 })
 
@@ -153,15 +154,6 @@ Standings = recl({
        div({className: 'standElem'},'Losses')
     ])
     return ul({className:"standings"},[heading, sortedRecords.map(Standing).reverse()]) //
-  }
-})
-
-Standing = recl({
-  render: function(){
-    return li({},
-      [div({className:'standElem'},this.props.player), 
-       div({className:'standElem'},this.props.wins), 
-       div({className:'standElem'},this.props.losses)])
   }
 })
 
