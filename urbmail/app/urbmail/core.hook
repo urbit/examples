@@ -1,0 +1,74 @@
+::
+::
+::::
+  ::
+/?    310
+::
+::
+::::
+  :::
+|%
+++  message  ,[to=@p subj=@t body=wain]
+++  sign     ,[%g [%nice ~]] 
+--
+!:
+::::
+  ::
+|_  [hid=hide sent=(map ,@da message) received=(map ,@da message)]
+::
+++  peek
+  |=  [subs=ship pax=path]
+  [%json (inbox-to-json received)]
+::
+++  inbox-to-json
+  |=  messes=(map ,@da message)
+  %-  jobe  ^-  (list ,[cord json])
+  %+  turn  (~(tap by messes))
+  |=  [tym=time mez=message]
+  :-  =>((jode tym) ?>(?=(%n -) p)) ::  must assert that tym is a number
+  (msg-to-json mez)
+::
+++  msg-to-json
+  |=  mez=message
+  (jobe to/s/(scot %p to.mez) subj/s/subj.mez body/s/(role body.mez) ~)
+  
+::
+++  poke-json
+  |=  [ost=bone you=ship mez=json]
+  =+  ^-  $=  mez
+          message
+      (need ((ot to/(ci (slat %p) so) subj/so body/(cu lore so) ~):jo mez))
+  =^  mez-move  +>.$
+    (send-message ost you mez)
+  [~[mez-move [ost %give %nice ~]] +>.$]
+:: 
+++  send-message
+  |=  [ost=bone you=ship mes=message]
+  =.  sent                          ::  store sent message
+  (~(put by sent) [lat.hid mes])   
+  :-  [ost %pass / %g %mess [to.mes /urbmail] you [%mes !>(mes)]]
+  +>.$
+::
+++  poke-mes 
+  |=  [ost=bone you=ship mez=message]
+  =.  received 
+  (~(put by received) [lat.hid mez])
+  :-([ost %give %nice ~]~ +>.$)
+::
+++  pour
+  |=  [ost=bone pax=path sih=sign]
+  ~&  poured/[received sent]
+  [[ost %give %nice ~]~ +>.$]
+--
+
+::=^ new  old  compute-thing
+::=*  oldsubj  .
+::=+  both=compute-thing
+::=.  old  +.compute-thing
+::=>  [new=-.compute-thing oldsubj]
+
+
+::  ++peek receives urb.bind on a specific path, and then returns whatever you tell it to return for that particular path. 
+::  when state changes, it returns whatever it returns for every single path. 
+
+::  ++peer tells you when you have a new subscriber. When you have a peer your peek doesn't work.

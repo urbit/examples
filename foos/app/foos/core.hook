@@ -1,29 +1,48 @@
-::
+::    store results of foosball games                   ::  short descripton
 ::
 ::::
   ::
-/?  310
+/?  310                               ::  require version 310 or lower
 ::
 ::
-::::  sivtyv-barnel
+::::  sivtyv-barnel                   ::  list author(s)
   ::
-|%
-++  axle  (list result)
+|%                                    ::  core with data structures
+++  axle  (list result)               ::  results of all past games
 ++  result  ,[bcons=@t bscore=@ud ycons=@t yscore=@ud]
 --
-!:
-|_  [hid=hide vat=axle]
-::
-++  poke-json
+!:                                    ::  insert stack trace
+
+::  main core containing our app. it has a "sample" that contains our state.
+::  hid contains our system data. vat contains our app-specific state.
+::  cores with sample are also called "doors".
+|_  [hid=hide vat=axle]               ::  system data, state
+
+::  poke-json is called whenever the app receives any data from %gall with the
+::  type ("mark") of json. as a rule, it accepts a bone, a ship of the ship
+::  that poked you, as well as an element of the type of data that poked you,
+::  which is in this case ++json
+++  poke-json                         ::  receive JSON
   |=  [ost=bone you=ship args=json]
   ?.  =(/[app.hid] imp.hid)           ::  send data to parent app
-    =+  cag=`cage`[%json !>(args)]
+    =+  cag=`cage`[%json !>(args)]    ::  XX will change
     :_(+>.$ [ost %pass /from-child %g %mess [our.hid /[app.hid]] you cag]~)
-  =+  ^-  parsedresult=result
-      ~|  bad-json/args
-      (need ((ot bcons/so bscore/ni ycons/so yscore/ni ~):jo args))
+  =+  ^-  parsedresult=result         ::  push on result of reparsing JSON
+      ~|  bad-json/args               ::  produce p if q crashes
+      %-  need                        ::  crash if ~ (on parse-fail)
+      %-  =>  jo                      ::  from ++jo get "ot", obj-tuple parser
+      ::  XX explain reparsing  
+      (ot bcons/so bscore/ni ycons/so yscore/ni ~)
+      args                            ::  on "args"
   =.  vat  [parsedresult vat]
-  :: ~&  rez
+
+::  any arm that receives information from %gall must return a list of system
+::  calls, called moves, as well as the new app state.
+::  we don't want to change the  state here, we just set it to +>.$.
+::  inside this core, +>.$ refers to the whole contents of this hook file.
+::  the only move here--a %nice--informs %gall that we successfully received
+::  its message. for more info on this, see the "making moves" section of the
+::  arvo reference doc.
   [[ost %give %nice ~]~ +>.$]
 ::
 ++  result-to-json

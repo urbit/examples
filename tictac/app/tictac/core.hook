@@ -1,0 +1,110 @@
+::
+::
+::::
+  ::
+/?  310
+::
+::
+::::  sivtyv-barnel .
+  ::
+!:
+|% 
+++  axle  ,[current=board currentgame=game record=(list game)]
+++  board  ,[top=row middle=row bottom=row ~]
+++  game  ,[win=space acts=(list action)]
+++  action  ,[?(%top %middle %bottom) ?(%left %center %right) ?(%x %o)]
+++  row  ,[leftcol=space middlecol=space rightcol=space ~]
+++  space  $?(~ %x %o)
+--
+!:
+|%
+++  set-space
+  |=  [col=?(%left %center %right) new=space]
+  |=  a=row  ^-  row
+  ?-  col
+    %left    a(leftcol new)
+    %center  a(middlecol new)
+    %right   a(rightcol new)
+  ==
+::
+++  change-in
+  |=  [roe=?(%top %middle %bottom) change=$+(row row)]
+  |=  a=board  ^-  board
+  ?-  roe
+    %top     a(top (change top.a))
+    %middle  a(middle (change middle.a))
+    %bottom  a(bottom (change bottom.a))
+  ==
+++  is-x  |=(a=space `?`?=(%x a))
+++  is-o  |=(a=space `?`?=(%o a))
+++  winning  |=(a=(list space) |((levy a is-x) (levy a is-o)))
+--
+!:
+|_  [hid=hide vat=axle]
+++  peek                            ::  send state on every change
+  |=(^ [%json (board-to-json current.vat)])
+++  board-to-json
+  =+  sp=|=(a=space [%s ?~(a ~~~a0.~a0. a)])  ::  U+00A0 is a non-breaking space
+  =+  ro=|=(row (jobe left/(sp leftcol) center/(sp middlecol) right/(sp rightcol) ~))
+  |=(board (jobe top/(ro top) middle/(ro middle) bottom/(ro bottom) ~))
+::
+++  check-board
+  |=  cur=board
+  ?:  ?|
+        (winning top.cur)
+        (winning middle.cur)
+        (winning bottom.cur)
+      ::
+        (winning (turn `(list row)`cur |=(a=row leftcol.a)))
+        (winning (turn `(list row)`cur |=(a=row middlecol.a)))
+        (winning (turn `(list row)`cur |=(a=row rightcol.a)))
+      ==
+    %.y
+  ?:  ?|
+        %-  winning  :~  
+          leftcol.top.cur 
+            middlecol.middle.cur 
+              rightcol.bottom.cur
+        ==
+      ::
+        %-  winning  :~  
+              rightcol.top.cur
+            middlecol.middle.cur
+          leftcol.bottom.cur
+        ==
+      ==
+    ~&  %diag-success
+    %.y
+  %.n
+::
+++  poke-json
+|=  [ost=bone you=ship newmove=json]
+=+  ^-  mve=(unit ,[roe=@t col=@t spa=@t])
+    ((ot row/so column/so space/so ~):jo newmove)
+~&  [vat newmove]
+::  must do these checks because we're parsing
+?>  ?=(^ mve)
+?>  ?=(?(%top %middle %bottom) roe.u.mve)
+?>  ?=(?(%left %center %right) col.u.mve)
+?>  ?=(?(%x %o) spa.u.mve)
+=:    current.vat  
+    %.(current.vat (change-in roe.u.mve (set-space col.u.mve spa.u.mve)))
+      acts.currentgame.vat  ::change this
+    [u.mve acts.currentgame.vat] :: to this
+  ==
+?:  (check-board current.vat)
+  ~&  [spa.u.mve 'wins!']
+  =.  win.currentgame.vat
+    spa.u.mve
+  =.  record.vat
+    [currentgame.vat record.vat]
+  =:  currentgame.vat  *game
+      current.vat      *board
+    ==
+  ~&  :-(currentgame.vat record.vat)
+  [[ost %give %nice ~]~ +>.$]
+[[ost %give %nice ~]~ +>.$]
+--
+
+::  the double gate
+::  the 

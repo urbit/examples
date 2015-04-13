@@ -1,0 +1,185 @@
+::  tic-tac-toe backend             ::  put short description
+::
+::::
+  ::
+/?  310                             ::  req hoon version 310 or below
+::
+::
+::::  sivtyv-barnel                 ::  name of author(s)
+  ::
+
+::  core with data structures
+!:                                  ::  insert stack trace
+|%
+++  axle  $:  current=board         ::  state of current game
+            currentgame=game
+          record=(list game)
+          ==
+++  board   ,[top=row middle=row bottom=row ~]          ::  grid of ++space
+++  game    ,[win=?(%x %o %tie) acts=(list action)]     ::  result w/playByPlay
+++  action  $:  ?(%top %middle %bottom)                 ::  record one move
+              ?(%left %center %right)
+            ?(%x %o)
+            ==
+++  row     $:  leftcol=space  middlecol=space          ::  row of three spaces
+             rightcol=space
+          ~
+          ==
+++  space   $?(~ %x %o)                                 ::  state of gridspace
+--
+
+::  core with helper functions
+!:
+|%
+++  set-space                         ::  change state of space in row
+  |=  $:  col=?(%left %center %right) ::  gate (function) that accepts column
+      new=space                       ::  and ++space we set column to
+      ==
+
+  ::  the gate above produces another gate that accepts a row whose column we
+  ::  want to change. You can think of this like currying.
+  |=  a=row  ^-  row                  ::  accept, return row
+  ?-  col                             ::  switch on column
+    %left    a(leftcol new)           ::  change left-column of row
+    %center  a(middlecol new)  
+    %right   a(rightcol new)
+  ==
+::
+++  change-in                         ::  change state of row
+  |=  $:  roe=?(%top %middle %bottom) ::  accepts which row to change
+      change=$+(row row)              ::  and gate to change it with
+      == 
+  |=  a=board  ^-  board              ::  accept, return row
+  ?-  roe                             ::  switch on row
+    %top     a(top (change top.a))    ::  change top row of board
+    %middle  a(middle (change middle.a))
+    %bottom  a(bottom (change bottom.a))
+  ==
+++  is-x  |=(a=space `?`?=(%x a))     ::  test if a space contains x
+::
+++  is-o  |=(a=space `?`?=(%o a))
+::
+++  space-full                        ::  test if a space is occupied
+  |=(a=space `?`?|(?=(%x a) ?=(%o a)))    
+::
+++  row-full                          ::  test if all spaces in row are filled  
+  |=(a=(list space) (levy a space-full))
+::
+++  winning                           ::  test if x or o wins
+|=  a=(list space)                    ::  accept list spaces
+|((levy a is-x) (levy a is-o))        ::  test if a contains just x or just o
+--
+
+::  main core containing our app. it has a "sample" that contains our state.
+::  hid contains our system data. vat contains our app-specific state.
+::  cores with sample are also called "doors".
+!:                                    ::  insert stack trace for app
+|_  [hid=hide vat=axle]               ::  door with sample of hid and vat  
+++  prep  ,_`.                        ::  wipe state when app code is changed
+
+::  peek is called every time our state changes. in this case it sends the
+::  state of our current board to the client as typed json.
+++  peek
+  |=  ^                               ::  accept input with ++type of %cell
+  :-  %json                           ::  send data with "mark" of json
+  (board-to-json current.vat)         ::  send ++json board
+::
+++  board-to-json                     ::  convert board to ++json            
+  =+  sp=|=(a=space ?~(a ~ [%s a]))   ::  gate that converts ++space to ++json
+  =+  ^=  ro                          ::  gate that converts ++row to ++json ar
+      |=  r=row
+      :~  %a  (sp &1.r)  (sp &2.r)    ::  produce ++json array of row
+      (sp &3.r)
+      ==
+  |=  b=board
+  ^-  json
+  :~  %a  (ro top.b)  (ro middle.b)   ::  produce ++json representation of board
+  (ro bottom.b)
+  ==
+::
+++  check-board                       ::  check for win or draw
+  |=  cur=board
+  ^-  ?(%win %tie %continue)          ::  cast to win, tie, or unfinished game 
+  ?:  ?|                              ::  test if any row has 3 in a row
+        (winning top.cur)              
+        (winning middle.cur)
+        (winning bottom.cur)
+      ::
+        %-  winning                   ::  test col for 3 in row
+        (turn `(list row)`cur |=(a=row leftcol.a))
+        %-  winning 
+        (turn `(list row)`cur |=(a=row middlecol.a))
+        %-  winning
+        (turn `(list row)`cur |=(a=row rightcol.a))
+      ==
+    %win                              ::  produce win
+  ?:  ?|                              ::  test diagonal
+        %-  winning  :~
+          leftcol.top.cur 
+            middlecol.middle.cur 
+              rightcol.bottom.cur
+        ==
+      ::
+        %-  winning  :~  
+              rightcol.top.cur
+            middlecol.middle.cur
+          leftcol.bottom.cur
+        ==
+      ==
+    %win
+  ?:  ?&  (row-full top.cur)          ::  check if board is full
+          (row-full middle.cur)
+          (row-full bottom.cur)
+      ==
+    %tie                              ::  produce tie
+  %continue                           ::  game is still in progress
+
+::  poke-json is called whenever the app receives any data from %gall with the
+::  type ("mark") of json. as a rule, it accepts a bone, a ship of the ship
+::  that poked you, as well as an element of the type of data that poked you,
+::  which is in this case ++json
+++  poke-json
+  |=  [ost=bone you=ship newmove=json]
+
+::  reparse ++json representation of incoming move to a tuple of row, column,
+::  and space type. give result a face of "mve".
+  =+  ^-  mve=(unit ,[roe=@t col=@t spa=@t])
+      ((ot row/so col/so space/so ~):jo newmove)
+  ~&  [vat newmove]                   ::  printf of state and latest move
+
+::  these next four lines assert that the json has sucessfully parsed and that
+::  all of its fields have valid values. if we did not do this, the strict
+::  type system would not allow us to pass this to functions which only
+::  handle inputs of a certain type.
+  ?>  ?=(^ mve)                       ::  assert move is cell (and thus parsed)
+  ?>  ?=(?(%top %middle %bottom) roe.u.mve)             ::  assert row is valid
+  ?>  ?=(?(%left %center %right) col.u.mve)
+  ?>  ?=(?(%x %o) spa.u.mve)          ::  assert space is either x or o
+
+::  =: makes a list of changes to our state, closed with a "==".
+  =:    current.vat                   ::  update board state to line below
+      %.(current.vat (change-in roe.u.mve (set-space col.u.mve spa.u.mve)))
+        acts.currentgame.vat          ::  update latest action into history..
+      [u.mve acts.currentgame.vat]    ::  to this line
+    ==
+  =+  ^-  rez=(unit ?(%tie %x %o))    ::  push on result of match
+    ?-  (check-board current.vat)     ::  switch on product of checkboard
+      %continue  ~                    ::  continue with game
+      %win  [~ spa.u.mve]             ::  produce winner
+      %tie  [~ %tie]                  ::  produce tie
+    ==
+  ?~  rez                             ::  if continue:
+
+::  any arm that receives data from %gall must always produce a list of moves
+::  as well as the context of the app. in this list of moves, there must also
+::  be either postitive or negative acknowledgement.
+    [[ost %give %nice ~]~ +>.$]       ::  send postive ack and play on
+  ~&  victory/u.rez                   ::  printf of victor
+  =.  win.currentgame.vat  u.rez
+  =.  record.vat                      ::  record history of game
+    [currentgame.vat record.vat]
+  =:  currentgame.vat  *game          ::  reset the current game and board
+      current.vat      *board
+  ==
+  [[ost %give %nice ~]~ +>.$]
+  --
