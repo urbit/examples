@@ -35,8 +35,8 @@
   |=  $:  col=?(%left %center %right) ::  gate (function) that accepts column
       new=space                       ::  and ++space we set column to
       ==
-  ::  the gate above produces another gate that accepts a row whose column we
-  ::  want to change. you can think of this like currying.
+::  the gate above produces another gate that accepts a row whose column we
+::  want to change. you can think of this like currying.
   |=  a=row  ^-  row                  ::  accept, return row
   ?-  col                             ::  switch on column
     %left    a(leftcol new)           ::  change left-column of row
@@ -156,9 +156,10 @@
   ?>  ?=(?(%left %center %right) col.u.mve)
   ?>  ?=(?(%x %o) spa.u.mve)          ::  assert space is either x or o
 
-::  =: makes a list of changes to our state, closed with a "==".
-  =:    current.vat                   ::  update board state to line below
-      %.(current.vat (change-in roe.u.mve (set-space col.u.mve spa.u.mve)))
+  =:    current.vat                   ::  update board state
+      %.  current.vat
+      %+  change-in  roe.u.mve
+      (set-space col.u.mve spa.u.mve)
         acts.currentgame.vat          ::  update latest action into history..
       [u.mve acts.currentgame.vat]    ::  to this line
     ==
