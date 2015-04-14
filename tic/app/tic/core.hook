@@ -17,7 +17,10 @@
           ==
 ++  board   ,[top=row middle=row bottom=row ~]          ::  grid of ++space
 ++  game    ,[win=?(%x %o %tie) acts=(list action)]     ::  result w/playByPlay
-++  action  ,[?(%top %middle %bottom) ?(%left %center %right) trn=?(%x %o)]
+++  action  $:  ?(%top %middle %bottom)
+              ?(%left %center %right)
+            ?(%x %o)
+            ==
 ++  row     $:  leftcol=space  middlecol=space          ::  row of three spaces
              rightcol=space
           ~
@@ -51,6 +54,7 @@
     %middle  a(middle (change middle.a))
     %bottom  a(bottom (change bottom.a))
   ==
+::
 ++  is-x  |=(a=space `?`?=(%x a))     ::  test if a space contains x
 ::
 ++  is-o  |=(a=space `?`?=(%o a))
@@ -71,24 +75,22 @@
 ++  prep  ,_`.                        ::  wipe state when app code is changed
 ::
 ++  spam                              ::  send updates to subscribers
-  |=  ost=bone 
+  |=  [ost=bone trn=?(%x %o)]
   :_  +>.$                            ::  new app state
   :-  [ost %give %nice ~]             ::  positive acknowledgement
   %+  turn  (~(tap by sup.hid))       ::  sup.hid from map to list of pairs
   |=  [ost=bone *]                    ::  mapping func subscriber/path -> move 
   :^  ost  %give  %rush               ::  move containing updates
- :: =+  ^=  tr
- ::     ?:  ?=(%x trn)
- ::       %o
- ::     %x
   :-  %json                           ::  mark of %json
- :: :-  turn/s/tr
-  (board-to-json current.vat)         ::  convery board to ++json
+  =+  brd=(board-to-json current.vat)
+  (jobe board/brd turn/s/trn ~)       ::  convert board to ++json
 ::
 ++  peer                              ::  get 1st time subs. add them to sup
   |=  [ost=bone you=ship pax=path]    ::  accept input with ++type of %cell
+  =+  brd=(board-to-json current.vat)
+  =+  trn=?~((mod (lent acts.currentgame.vat) 2) %x %o)
   :_  +>.$                            ::  new app state
-  [ost %give %rush %json (board-to-json current.vat)]~   ::  send board state
+  [ost %give %rush %json (jobe board/brd turn/s/trn ~)]~   ::  send board state
 ::
 ++  board-to-json                     ::  convert board to ++json            
   =+  sp=|=(a=space ?~(a ~ [%s a]))   ::  gate that converts ++space to ++json
@@ -171,9 +173,9 @@
       %win  [~ spa.u.mve]             ::  produce winner
       %tie  [~ %tie]                  ::  produce tie
     ==
+  =+  trn=?~((mod (lent acts.currentgame.vat) 2) %x %o)
   ?~  rez                             ::  if continue:
-                   ::  send new state and play on
-    (spam ost)     ::  send postive ack and play on
+    (spam ost trn)                    ::  send postive ack and play on
   ~&  victory/u.rez                   ::  printf of victor
   =.  win.currentgame.vat  u.rez
   =.  record.vat                      ::  record history of game
@@ -181,7 +183,5 @@
   =:  currentgame.vat  *game          ::  reset the current game and board
       current.vat      *board
   ==
-  ~&  'spam end of game'
-  ~&  trn.currentgame.vat
-  (spam ost)               ::  send new state (a blank board)
+  (spam ost %x)                      ::  send new state (a blank board)
   --
