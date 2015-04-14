@@ -122,7 +122,8 @@ $(document).ready(function(){                                    //  setup when 
   urb.bind("/",{appl:"tic"}, function(err,d) {                   //  bind to / for updates
     mounted.setProps({                                           //  when we get an update
       load:false,                                                //  set top level props
-      board:d.data
+      board:d.data.board,
+      turn:d.data.turn
     }) 
   })
 })
