@@ -15,20 +15,25 @@
             currentgame=game
           record=(list game)
           ==
+::
 ++  board   ,[top=row middle=row bottom=row ~]          ::  grid of ++space
+::
 ++  game    ,[win=?(%x %o %tie) acts=(list action)]     ::  result w/playByPlay
-++  action  $:  ?(%top %middle %bottom)
+::
+++  action  $:  ?(%top %middle %bottom)                 ::  record of 1 action
               ?(%left %center %right)
             ?(%x %o)
             ==
+::
 ++  row     $:  leftcol=space  middlecol=space          ::  row of three spaces
              rightcol=space
           ~
           ==
+::
 ++  space   $?(~ %x %o)                                 ::  state of gridspace
 --
 
-::  core with helper functions
+::  core with supporting methods
 !:                                    ::  insert stack trace for this core
 |%
 ++  set-space                         ::  change state of space in row
@@ -86,27 +91,27 @@
   (jobe board/brd turn/s/trn ~)       ::  convert board to ++json
 ::
 ++  peer                              ::  get 1st time subs. add them to sup
-  |=  [ost=bone you=ship pax=path]    ::  accept input with ++type of %cell
-  =+  brd=(board-to-json current.vat)
-  =+  trn=?~((mod (lent acts.currentgame.vat) 2) %x %o)
+  |=  [ost=bone you=ship pax=path]    ::  path and ship of subscriber
+  =+  brd=(board-to-json current.vat) ::  push on ++json copy of current board
+  =+  trn=?~((mod (lent acts.currentgame.vat) 2) %x %o) ::  whose turn it is
   :_  +>.$                            ::  new app state
   [ost %give %rush %json (jobe board/brd turn/s/trn ~)]~   ::  send board state
 ::
 ++  board-to-json                     ::  convert board to ++json            
-  =+  sp=|=(a=space ?~(a ~ [%s a]))   ::  gate that converts ++space to ++json
-  =+  ^=  ro                          ::  gate that converts ++row to ++json ar
+  =+  sp=|=(a=space ?~(a ~ [%s a]))   ::  converter from ++space to ++json
+  =+  ^=  ro                          ::  converter from ++row to ++json array
       |=  r=row
-      :~  %a  (sp &1.r)  (sp &2.r)    ::  produce ++json array of row
+      :~  %a  (sp &1.r)  (sp &2.r)
       (sp &3.r)
       ==
-  |=  b=board
-  ^-  json
+  |=  b=board                         ::  accept board
+  ^-  json                            ::  cast result to ++json
   :~  %a  (ro top.b)  (ro middle.b)   ::  produce ++json representation of board
   (ro bottom.b)
   ==
 ::
 ++  check-board                       ::  check for win or draw
-  |=  cur=board
+  |=  cur=board                       ::  accept board
   ^-  ?(%win %tie %continue)          ::  cast to win, tie, or unfinished game 
   ?:  ?|                              ::  test if any row has 3 in a row
         (winning top.cur)              
@@ -173,7 +178,7 @@
       %win  [~ spa.u.mve]             ::  produce winner
       %tie  [~ %tie]                  ::  produce tie
     ==
-  =+  trn=?~((mod (lent acts.currentgame.vat) 2) %x %o)
+  =+  trn=?~((mod (lent acts.currentgame.vat) 2) %x %o) ::  whose turn it is
   ?~  rez                             ::  if continue:
     (spam ost trn)                    ::  send postive ack and play on
   ~&  victory/u.rez                   ::  printf of victor
