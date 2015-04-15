@@ -3,72 +3,67 @@
 ::::
   ::
 /?    310
+/-    message
 ::
 ::
 ::::
   :::
-|%
-++  message  ,[to=@p subj=@t body=wain]
-++  sign     ,[%g [%nice ~]] 
---
-!:
+!:                                    ::  insert stack trace
 ::::
   ::
-|_  [hid=hide sent=(map ,@da message) received=(map ,@da message)]
+|_  $:  hid=hide                      ::  system data
+      sent=(map ,@da message)         ::  map of time to sent messages
+    received=(map ,@da message)       ::  map of time to received messages
+    ==
 ::
-++  peek
-  |=  [subs=ship pax=path]
-  [%json (inbox-to-json received)]
+++  peek                              ::  called any time state changes
+  |=  [subs=ship pax=path]            ::  update subscriber and path
+  [%json (inbox-to-json received)]    ::  send json conversion of inbox
 ::
-++  inbox-to-json
-  |=  messes=(map ,@da message)
-  %-  jobe  ^-  (list ,[cord json])
-  %+  turn  (~(tap by messes))
-  |=  [tym=time mez=message]
-  :-  =>((jode tym) ?>(?=(%n -) p)) ::  must assert that tym is a number
-  (msg-to-json mez)
+++  inbox-to-json                     ::  convert received messages to ++json
+  |=  messes=(map ,@da message)       ::  accept map of time to message
+  %-  jobe  ^-  (list ,[cord json])   ::  compose json object
+  %+  turn  (~(tap by messes))        ::  map over listified map of @da to msg
+  |=  [tym=time mez=message]          ::  accepts cell of time and message
+  :-  =>((jode tym) ?>(?=(%n -) p))   ::  must assert that tym is a number
+  (msg-to-json mez)                   ::  convert msgs to json
 ::
-++  msg-to-json
-  |=  mez=message
-  (jobe to/s/(scot %p to.mez) subj/s/subj.mez body/s/(role body.mez) ~)
-  
+++  msg-to-json                       ::  convert msgs to json
+  |=  mez=message                     ::  accept msg
+  ^+  jobe  to/s/(scot %p to.mez)     ::  compose json object of to:"shipname"
+     subj/s/subj.mez                  ::  sub:"subject"
+    body/s/(role body.mez)            ::  body:"body-of-msg"
+  ~                                   ::  jobe takes a list
 ::
 ++  poke-json
   |=  [ost=bone you=ship mez=json]
-  =+  ^-  $=  mez
+  =+  ^-  $=  mez                     ::  cast to a message; add face of mez
           message
       (need ((ot to/(ci (slat %p) so) subj/so body/(cu lore so) ~):jo mez))
-  =^  mez-move  +>.$
-    (send-message ost you mez)
-  [~[mez-move [ost %give %nice ~]] +>.$]
+::  =^ pushes on the head of the result of (send-message ost you mez)
+::  and calls it mez-move. it also changes +>.$ in the subject to the
+::  tail of the result of (send-message ost you mez). we have to do this
+::  because the context of ++send-message and ++poke-json are different--we
+::  would get a type fail if we tried to return +>.$ from ++send-message.
+  =^  mez-move  +>.$                  
+    (send-message ost our.hid mez)
+  [[mez-move [ost %give %nice ~] ~] +>.$]
 :: 
 ++  send-message
   |=  [ost=bone you=ship mes=message]
   =.  sent                          ::  store sent message
   (~(put by sent) [lat.hid mes])   
-  :-  [ost %pass / %g %mess [to.mes /urbmail] you [%mes !>(mes)]]
+  :-  [ost %pass / %g %mess [to.mes /urbmail] you [%message !>(mes)]]
   +>.$
 ::
-++  poke-mes 
+++  poke-message
   |=  [ost=bone you=ship mez=message]
   =.  received 
   (~(put by received) [lat.hid mez])
   :-([ost %give %nice ~]~ +>.$)
 ::
 ++  pour
-  |=  [ost=bone pax=path sih=sign]
+  |=  [ost=bone pax=path sih=*]
   ~&  poured/[received sent]
   [[ost %give %nice ~]~ +>.$]
 --
-
-::=^ new  old  compute-thing
-::=*  oldsubj  .
-::=+  both=compute-thing
-::=.  old  +.compute-thing
-::=>  [new=-.compute-thing oldsubj]
-
-
-::  ++peek receives urb.bind on a specific path, and then returns whatever you tell it to return for that particular path. 
-::  when state changes, it returns whatever it returns for every single path. 
-
-::  ++peer tells you when you have a new subscriber. When you have a peer your peek doesn't work.
