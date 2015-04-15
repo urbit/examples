@@ -1,4 +1,4 @@
-::    store results of foosball games ::  short descripton
+::    store results of foosball games ::  give short descripton
 ::
 ::::
   ::
@@ -7,7 +7,8 @@
 ::
 ::::  sivtyv-barnel                   ::  list author(s)
   ::
-|%                                    ::  core with data structures
+::  core with data structures
+|% 
 ++  axle  (list result)               ::  results of all past games
 ++  result  ,[bcons=@t bscore=@ud ycons=@t yscore=@ud]
 --
@@ -27,13 +28,13 @@
       ~|  bad-json/args               ::  produce p in stack trace if q crashes
       %-  need                        ::  crash if ~ (on parse-fail)
       %-  =>  jo                      ::  from ++jo get "ot", obj-tuple parser
-::  parse tuple from ++json object "args"
+::  parse tuple from ++json object "args".
       (ot bcons/so bscore/ni ycons/so yscore/ni ~)
       args
   =.  vat  [parsedresult vat]         ::  change state to [newresult oldstate]
-  [[ost %give %nice ~]~ +>.$]         ::  return positive ack and new (unchanged app-state)
+  [[ost %give %nice ~]~ +>.$]         ::  return positive ack and new (unchanged) app-state
 ::
-++  result-to-json                    ::  reassemble json to respond to client
+++  result-to-json                    ::  reassemble ++json to respond to client
   |=  result
   %-  jobe  :~                        ::  produce ++json object
     bcons/[%s bcons]                  ::  produce ++json string
@@ -42,11 +43,12 @@
     yscore/(jone yscore)
   ==
 
-::  called when app receives a subscriber on a new path. subscriber is then
-::  added to to sup.hid
+::  called when app receives a subscriber on a new path.
+::  subscriber is then added to to sup.hid.
 ++  peek
   |=  [his=ship pax=path]
-  [%json `json`[%a (turn vat result-to-json)]]          ::  send all results as ++json to client
+  :-  %json 
+  `json`[%a (turn vat result-to-json)]::  send all results as ++json to client
 
 ++  spam                              ::  send list of results to all subscribers
   |=  ost=bone                        ::  bone of who poked us
