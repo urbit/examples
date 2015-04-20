@@ -1,13 +1,12 @@
-::  tic-tac-toe backend             ::  put short description
+::  tic-tac-toe backend             ::  short description
 ::
 ::::
   ::
-/?  310                             ::  req hoon version 310 or below
+/?  310                             ::  req version 310 or lower
 ::
 ::
-::::  sivtyv-barnel                 ::  name of author(s)
+::::  sivtyv-barnel                 ::    list author(s)
   ::
-
 ::  core with data structures
 !:                                  ::  insert stack trace
 |%
@@ -15,21 +14,16 @@
             currentgame=game
           record=(list game)
           ==
-::
 ++  board   ,[top=row middle=row bottom=row ~]          ::  grid of ++space
-::
 ++  game    ,[win=?(%x %o %tie) acts=(list action)]     ::  result w/playByPlay
-::
 ++  action  $:  ?(%top %middle %bottom)                 ::  record of 1 action
               ?(%left %center %right)
             ?(%x %o)
             ==
-::
 ++  row     $:  leftcol=space  middlecol=space          ::  row of three spaces
              rightcol=space
           ~
           ==
-::
 ++  space   $?(~ %x %o)                                 ::  state of gridspace
 --
 
