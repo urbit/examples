@@ -2,28 +2,33 @@
 ::
 ::::
   ::
-/?  310                               ::  require version 310 or lower
+/?  310                               ::  require hoon version 310 or below
 ::
 ::
-::::  sivtyv-barnel                   ::  list author(s)
+::::  sivtyv-barnel                   ::  name(s) of author(s)
   ::
-::  core with data structures
-|% 
-++  axle  (list result)               ::  results of all past games
-++  result  ,[bcons=@t bscore=@ud ycons=@t yscore=@ud]
+!:                                    ::  insert stack trace for this core
+|%                                    ::  core with data structures
+++  axle  (list result)               ::  app state: results of all past games
+++  result  $:  bcons=@t  bscore=@ud  ::  record of result
+              ycons=@t
+            yscore=@ud
+            ==
 --
-!:                                    ::  insert stack trace
-
-::  main app core
-|_  [hid=hide vat=axle]               ::  system data, state
-
-::  called whenever  app receives any data from %gall with the
-::  type ("mark") of json. 
+::
+!:                                    ::  insert stack trace for this core
+|_  [hid=hide vat=axle]               ::  system data & app state data struct 
+++  prep  ,_`.                        ::  wipe state when app code is changed
+::
 ++  poke-json                         ::  receive JSON
   |=  [ost=bone you=ship args=json]
   ?.  =(/[app.hid] imp.hid)           ::  XX to be antequated
     =+  cag=`cage`[%json !>(args)]    ::  XX will change
-    :_(+>.$ [ost %pass /from-child %g %mess [our.hid /[app.hid]] you cag]~)
+    :_  +>.$
+    :_  ~
+    :^  ost  %pass  /from-child
+    :^  %g  %mess  [our.hid /[app.hid]]
+    :-  you  cag
   =+  ^-  parsedresult=result         ::  push on result of reparsing JSON
       ~|  bad-json/args               ::  produce p in stack trace if q crashes
       %-  need                        ::  crash if ~ (on parse-fail)
@@ -60,3 +65,5 @@
   :-  %json                           ::  mark is %json
   `json`[%a (turn vat result-to-json)]::  produce ++json array of all results
 --
+
+

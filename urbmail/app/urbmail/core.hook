@@ -1,35 +1,36 @@
-::
+::    send simple msgs between ships  ::  short description
 ::
 ::::
   ::
-/?    310                             ::  require version 310 or below
+/?    310                             ::  require hoon version 310 or below
 /-    message                         ::  import message structure
 ::
 ::
-::::
+::::  sivtyv-barnel                   ::  name(s) of author(s)
   ::
-!:                                    ::  insert stack trace
+!:                                    ::  insert stack trace for this core
 |%                                    ::  core with data-structures
 ++  move  (mold note gift)            ::  system calls
-++  note  $:  %g  %mess p=hapt
-          q=ship r=cage
+++  note  $:  %g  %mess  p=hapt       ::  requests we make
+          q=ship  r=cage
           ==
-++  gift
+++  gift                              ::  responses we give
   $:  %g
-  $%  [%nice ~]
-      [%rush %json json]
+  $%  [%nice ~]                       ::  positive acknowledgment
+      [%rush %json json]              ::  updates to subscribers
   ==  ==
 ++  hapt  ,[p=ship q=path]            ::  app instance
 --
 ::
-!:                                    ::  insert stack trace
+!:                                    ::  insert stack trace for this core
 |_  $:  hid=hide                      ::  system data
-      sent=(map ,@da message)         ::  app-specific data-structures
+      sent=(map ,@da message)         ::  app state data structures
     received=(map ,@da message)
     ==
+++  prep  ,_`.                        ::  wipe state when app code is changed
 ::
-++  peer                              ::  receive new subscriber on path
-  |=  [ost=bone subs=ship pax=path]
+++  peer                              ::  get 1st time subs. add them to sup
+  |=  [ost=bone subs=ship pax=path]   ::  path and ship of subscriber
   =+  ^=  ordered-messages            ::  push on ordered list of all messages
   %+  sort                            ::  map with quicksort
     (~(tap by received))              ::  over listified map
@@ -37,8 +38,8 @@
       b=(pair ,@da message)
       ==
   (gth p.a p.b)                       ::  compare by time
-  :_  +>.$                            ::  return current app state
-  ^-  (list move)
+  :_  +>.$                            ::  return unaltered app state
+  ::^-  (list move)
   :-  :^  ost  %give  %rush           ::  and send updated inbox
       :-  %json
       (inbox-to-json ordered-messages)
@@ -60,16 +61,16 @@
      subj/s/subj.mez                  ::  sub:subject
   :-  body/s/(role body.mez)          ::  body:body-of-msg
   ~                                   ::  jobe takes a list, needs ~ terminator
-++  poke-message
+++  poke-message                      ::  receive data with mark of "message"
   |=  [ost=bone you=ship mez=message]
   ?.  =(to.mez our.hid)               ::  unless we are receiving message:
     =.  sent                          ::  store sent message
     (~(put by sent) [lat.hid [you +.mez]])   
-    ^-  [(list move) _+>.$]
-    :_  +>.$
+::    ^-  [(list move) _+>.$]
+    :_  +>.$                          ::  return new app state
     :-  [ost %give %nice ~]
 ::  send message to other ship
-    [ost %pass / %g %mess [to.mez /urbmail] our.hid [%message !>(mez)]]~
+  [ost %pass / %g %mess `hapt`[to.mez /urbmail] `ship`our.hid `cage`[%message !>(mez)]]~
   =.  received                        ::  if we're receiving: update received
   (~(put by received) [lat.hid [you +.mez]])
   =+  ^=  ordered-msgs                ::  push on sorted list of messages
@@ -77,7 +78,7 @@
     (~(tap by received))              ::  listified map..
   |=  [a=(pair ,@da message) b=(pair ,@da message)]
   (gth p.a p.b)                       ::  and gate that compares by @da
-  :_  +>.$                            ::  tell %gall to maintain same app state
+  :_  +>.$                            ::  return new app state
   :-  [ost %give %nice ~]             ::  positive acknowledgement
   %+  turn  (~(tap by sup.hid))       ::  map over list of subscribers
   |=  [os=bone *]                     
@@ -87,5 +88,5 @@
  ::
 ++  pour                              ::  handle responses to requests we make
   |=  [ost=bone pax=path sih=*]
-  [[ost %give %nice ~]~ +>.$]         ::  confirmation and unaltered state
+  [[ost %give %nice ~]~ +>.$]         ::  confirm and return unaltered state
 --

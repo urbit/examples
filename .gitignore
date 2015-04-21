@@ -6,3 +6,4 @@ streams/*css
 bundle.js
 *.swp
 *.swo
+*.swn
