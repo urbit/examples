@@ -3,14 +3,26 @@
 ::::
   ::
 /?    310                             ::  require version 310 or below
-/-    message                         ::  import structures
+/-    message                         ::  import message structure
 ::
 ::
-::::
-  :::
-!:                                    ::  insert stack trace
 ::::
   ::
+!:                                    ::  insert stack trace
+|%                                    ::  core with data-structures
+++  move  (mold note gift)            ::  system calls
+++  note  $:  %g  %mess p=hapt
+          q=ship r=cage
+          ==
+++  gift
+  $:  %g
+  $%  [%nice ~]
+      [%rush %json json]
+  ==  ==
+++  hapt  ,[p=ship q=path]            ::  app instance
+--
+::
+!:                                    ::  insert stack trace
 |_  $:  hid=hide                      ::  system data
       sent=(map ,@da message)         ::  app-specific data-structures
     received=(map ,@da message)
@@ -21,9 +33,12 @@
   =+  ^=  ordered-messages            ::  push on ordered list of all messages
   %+  sort                            ::  map with quicksort
     (~(tap by received))              ::  over listified map
-  |=  [a=(pair ,@da message) b=(pair ,@da message)]
+  |=  $:  a=(pair ,@da message)
+      b=(pair ,@da message)
+      ==
   (gth p.a p.b)                       ::  compare by time
   :_  +>.$                            ::  return current app state
+  ^-  (list move)
   :-  :^  ost  %give  %rush           ::  and send updated inbox
       :-  %json
       (inbox-to-json ordered-messages)
@@ -50,6 +65,7 @@
   ?.  =(to.mez our.hid)               ::  unless we are receiving message:
     =.  sent                          ::  store sent message
     (~(put by sent) [lat.hid [you +.mez]])   
+    ^-  [(list move) _+>.$]
     :_  +>.$
     :-  [ost %give %nice ~]
 ::  send message to other ship
