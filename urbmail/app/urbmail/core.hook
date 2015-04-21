@@ -2,8 +2,8 @@
 ::
 ::::
   ::
-/?    310
-/-    message
+/?    310                             ::  require version 310 or below
+/-    message                         ::  import structures
 ::
 ::
 ::::
@@ -12,58 +12,64 @@
 ::::
   ::
 |_  $:  hid=hide                      ::  system data
-      sent=(map ,@da message)         ::  map of time to sent messages
-    received=(map ,@da message)       ::  map of time to received messages
+      sent=(map ,@da message)         ::  app-specific data-structures
+    received=(map ,@da message)
     ==
 ::
-++  peek                              ::  called any time state changes
-  |=  [subs=ship pax=path]            ::  update subscriber and path
-  [%json (inbox-to-json received)]    ::  send json conversion of inbox
+++  peer                              ::  receive new subscriber on path
+  |=  [ost=bone subs=ship pax=path]
+  =+  ^=  ordered-messages            ::  push on ordered list of all messages
+  %+  sort                            ::  map with quicksort
+    (~(tap by received))              ::  over listified map
+  |=  [a=(pair ,@da message) b=(pair ,@da message)]
+  (gth p.a p.b)                       ::  compare by time
+  :_  +>.$                            ::  return current app state
+  :-  :^  ost  %give  %rush           ::  and send updated inbox
+      :-  %json
+      (inbox-to-json ordered-messages)
+  ~
 ::
 ++  inbox-to-json                     ::  convert received messages to ++json
-  |=  messes=(map ,@da message)       ::  accept map of time to message
-  %-  jobe  ^-  (list ,[cord json])   ::  compose json object
-  %+  turn  (~(tap by messes))        ::  map over listified map of @da to msg
+  |=  messes=(list ,[@da message])    ::  accept map of time to message
+  :-  %a  ^-  (list json)             ::  compose json object
+  %+  turn  messes                    ::  map over listified map of @da to msg
   |=  [tym=time mez=message]          ::  accepts cell of time and message
-  :-  =>((jode tym) ?>(?=(%n -) p))   ::  must assert that tym is a number
-  (msg-to-json mez)                   ::  convert msgs to json
+  %^  jobe                            ::  compose ++json object
+    tym/(jode tym)                    ::  k-v pair of tym:time
+    mez/(msg-to-json mez)             ::  k-v pair of mez:++json msg
+  ~
 ::
 ++  msg-to-json                       ::  convert msgs to json
   |=  mez=message                     ::  accept msg
-  ^+  jobe  to/s/(scot %p to.mez)     ::  compose json object of to:"shipname"
-     subj/s/subj.mez                  ::  sub:"subject"
-    body/s/(role body.mez)            ::  body:"body-of-msg"
-  ~                                   ::  jobe takes a list
-::
-++  poke-json
-  |=  [ost=bone you=ship mez=json]
-  =+  ^-  $=  mez                     ::  cast to a message; add face of mez
-          message
-      (need ((ot to/(ci (slat %p) so) subj/so body/(cu lore so) ~):jo mez))
-::  =^ pushes on the head of the result of (send-message ost you mez)
-::  and calls it mez-move. it also changes +>.$ in the subject to the
-::  tail of the result of (send-message ost you mez). we have to do this
-::  because the context of ++send-message and ++poke-json are different--we
-::  would get a type fail if we tried to return +>.$ from ++send-message.
-  =^  mez-move  +>.$                  
-    (send-message ost our.hid mez)
-  [[mez-move [ost %give %nice ~] ~] +>.$]
-:: 
-++  send-message
-  |=  [ost=bone you=ship mes=message]
-  =.  sent                          ::  store sent message
-  (~(put by sent) [lat.hid mes])   
-  :-  [ost %pass / %g %mess [to.mes /urbmail] you [%message !>(mes)]]
-  +>.$
-::
+  %^  jobe  to/s/(scot %p to.mez)     ::  compose ++json object of to:shipname
+     subj/s/subj.mez                  ::  sub:subject
+  :-  body/s/(role body.mez)          ::  body:body-of-msg
+  ~                                   ::  jobe takes a list, needs ~ terminator
 ++  poke-message
   |=  [ost=bone you=ship mez=message]
-  =.  received 
-  (~(put by received) [lat.hid mez])
-  :-([ost %give %nice ~]~ +>.$)
-::
-++  pour
+  ?.  =(to.mez our.hid)               ::  unless we are receiving message:
+    =.  sent                          ::  store sent message
+    (~(put by sent) [lat.hid [you +.mez]])   
+    :_  +>.$
+    :-  [ost %give %nice ~]
+::  send message to other ship
+    [ost %pass / %g %mess [to.mez /urbmail] our.hid [%message !>(mez)]]~
+  =.  received                        ::  if we're receiving: update received
+  (~(put by received) [lat.hid [you +.mez]])
+  =+  ^=  ordered-msgs                ::  push on sorted list of messages
+  %+  sort                            ::  call sort on
+    (~(tap by received))              ::  listified map..
+  |=  [a=(pair ,@da message) b=(pair ,@da message)]
+  (gth p.a p.b)                       ::  and gate that compares by @da
+  :_  +>.$                            ::  tell %gall to maintain same app state
+  :-  [ost %give %nice ~]             ::  positive acknowledgement
+  %+  turn  (~(tap by sup.hid))       ::  map over list of subscribers
+  |=  [os=bone *]                     
+  :^  os  %give                       ::  sending them an update
+    %rush
+  :-(%json `json`(inbox-to-json ordered-msgs))          ::  of new inbox
+ ::
+++  pour                              ::  handle responses to requests we make
   |=  [ost=bone pax=path sih=*]
-  ~&  poured/[received sent]
-  [[ost %give %nice ~]~ +>.$]
+  [[ost %give %nice ~]~ +>.$]         ::  confirmation and unaltered state
 --

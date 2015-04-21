@@ -38,6 +38,7 @@ Compose = recl({                                                      // compose
 
     urb.send({                                                        // send to server
       appl:"urbmail",
+      mark:"message",
       data: {
         to:   $to.val(),
         subj: $subj.val(),
@@ -66,9 +67,9 @@ Compose = recl({                                                      // compose
 Message = recl({                                                      // simple message
   render: function(){
     return  div({className:"Message"},
-      div({className:"to"}, this.props.message.to),
-      div({className:"subj"}, this.props.message.subj),
-      div({className:"body"}, this.props.message.body))
+      div({className:"to"}, this.props.message.mez.to),
+      div({className:"subj"}, this.props.message.mez.subj),
+      div({className:"body"}, this.props.message.mez.body))
   }
 })
 
