@@ -9,7 +9,7 @@ recl   = React.createClass
 Page = recl({                                                         // top level component
   render: function(){return (
     div({},
-    AddFixture({fixtures:this.props.fixture}),
+    AddFixture({load:this.props.load,fixtures:this.props.fixture}),
     Fixtures({fixturesList:this.props.fixturesList}),
     Standings({fixturesList:this.props.fixturesList})
     )
@@ -45,6 +45,9 @@ AddFixture = recl({                                                   // add com
   },
 
   submit: function() {
+    if(this.props.load === true)
+      return false
+
     $el = $(this.getDOMNode())                                        // cache for jquery calls
 
     bcons = $el.find('#bcons').val().trim()                           // get values for b and y
@@ -57,6 +60,8 @@ AddFixture = recl({                                                   // add com
       alert(valid) 
       return false
     }
+
+    mounted.setProps({load:true})
 
     urb.send({                                                        // send to server                              
       appl: "foos",
@@ -198,6 +203,9 @@ $(document).ready(function() {
     path: "/"
   }, function(err,d){
     if(d.data.ok) return;
-    mounted.setProps({fixturesList:d.data})
+    mounted.setProps({
+      load:false,
+      fixturesList:d.data
+    })
   })
 })

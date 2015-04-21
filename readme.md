@@ -1,57 +1,34 @@
 # urbit sample apps
 
-This is a repo for the open source community to share simple apps and programs that are designed primarily to familiarize people with the different aspects of the system. 
-
-Pull requests are welcome and encouraged. Please try your best to adhere to the stylistic conventions used in the apps already here. 
+This repo contains simple applications meant to familiarize you with the different aspects of the system. Each app has its own readme that will explain what each app is intended to highlight.
 
 ## How to use the repo
 
-Some day these will all exist on urbit, but for the time being clone this repo outside of your pier somewhere and copy the files in as explained below. Since it's possible to corrupt your pier while doing dev it can be a good idea to use a fake ship. Check out the `dev` guide in `urbit-doc` for instructions on running a fake ship.
+Some day these will all exist on urbit, but for the time being clone this repo outside of your pier somewhere and copy the files in as explained below. Since it's possible to corrupt your pier while doing dev it can be a good idea to use a fake ship. You can start a fake zod by typing `bin/vere -c -FI ~zod PIERNAME` while in your urbit folder. Check out the `dev` guide in `doc` for more detailed instructions on running a fake ship. 
 
-For the most part each folder in this repo contains folders indicating the path relative to the `/main` desk on your pier. For example, `todo/app/todo/core.hook` will end up as `/$URB_DIR/$PIER/$SHIP-NAME/main/app/todo/core.hook`. The exception to this is the `twit` app, whose folder should be placed directly in /main/app/twit, and can be accessed at `http://localhost:{port}/twit`. You also must add your own hard keys to the core.hook at the designated location.
+For the most part each folder in this repo contains folders indicating the path relative to the `/main` desk on your pier. For example, `foos/app/foos/core.hook` will end up as `/$URB_DIR/$PIER/$SHIP-NAME/main/app/foos/core.hook`.
 
-If an app is just meant to be run as a script it'll be named something descriptive like `euler.hoon` and can be copied directly into the `/try` desk. For example, you would copy `math/euler.hoon` into `try/euler.hoon` and execute it with `~zod/try=> ^/%/euler`.
+All of the apps currently in this repo are accessed via their %ford pages, which are hymn.hook files generally found in a /fab directory. To access a %ford page, go to `http://localhost:{port}/main/path/to/page`, where `port` is the port number shown upon booting into urbit. For example, `/=main=/pub/todo/fab/hymn.hook` would be served. For example, `/=main=/pub/foos/fab/hymn/hook` on an http 8444 pier would serve `localhost:8444/main/pub/foos/fab`.
 
-Some apps are accessed via %ford pages, which are hymn.hook files generally found in a /fab directory. To access a %ford page, go to `http://localhost:{port}/gen/desk/path/to/page`, where `port` is the port number shown upon booting into urbit. For example, `/=main=/pub/todo/fab/hymn.hook` would be served. For example, `/=main=/pub/todo/fab/hymn/hook` on an http 8.444 pier would serve `localhost:8444/gen/main/pub/todo/fab`.
+## Feedback/Contributions
 
-## Feedback
-
-As you play around, please let me know if you find any part of the system particularly difficult to understand so that I can both help you out and look to improve documentation in those areas. You can contact me at henry@tlon.is, or on chat (usually ~sivtyv-barnel). Also, don't hesitate to ask questions on :chat.
+As you play around, please let me know if you have any questions and/or comments. You can contact me at henry@tlon.io, or on chat (usually ~sivtyv-barnel). Furthemore, we have an idea of what we want this repo to look like when finished. If interested in contributing by building a similar app that showcases a different part of the system, please get in touch!
 
 ## Contents
 
-`blazon`
-`%gall` app that displays the profile information of a neighbor ship.
+`foos`: keeps track of foosball fixtures and standings.
+most basic app in the repo. clearly displays the framework that all %gall apps must follow. also shows the type of react frontend that we recommend.
 
-`blog`
-simple blogging platform served by `%ford`.
+covers: json parsing & reparsing, talking to subscribers in an elementary way using ++peek, how to store data using our single-level store.
 
-`count`
-`%gall` app that keeps track of the number of times it has been `++peer`ed (loaded).
+`tic-tac-toe`: allows two users to play tic-tac-toe on one screen. records play-by-play of each game in state.
+similar to foos, but more complex.
 
-`lead`
-`%gall` app that keeps track of a leaderboard.
+covers: talking to subscribers in a more sophisticated way using ++peer, more complex backend logic
 
-`helo`
-`%gall` app that allows you to send a single message to another ship on the network.
+`mail`:allows ships to send simple email-like messages to each other. 
 
-`math`
-Contains a few scripts that each solve one of the project euler problems.
-
-`stat`
-`%gall` app that allows you to post statuses.
-
-`strings`
-Scripts that perform string manipulations.
-
-`timer`
-`%gall` app that uses the `%time` vane to "ding" the terminal after a specified amount of time.
-
-`todo`
-`%gall` app that keeps track of a todo list.
-
-`write`
-`%gall` app that allows you to save multiple line input from the shell to a file in `%clay` upon exit.
+covers: sending typed data over the network
 
 
 

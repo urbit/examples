@@ -48,8 +48,8 @@
     yscore/(jone yscore)
   ==
 
-::  called when app receives a subscriber on a new path.
-::  subscriber is then added to to sup.hid.
+::  called whenever ther is a change in state.
+::  sends the result to all subscribers.
 ++  peek
   |=  [his=ship pax=path]
   :-  %json 

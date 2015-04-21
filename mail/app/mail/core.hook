@@ -31,15 +31,15 @@
 ::
 ++  peer                              ::  get 1st time subs. add them to sup
   |=  [ost=bone subs=ship pax=path]   ::  path and ship of subscriber
+  ^-  [(list move) _+>.$]             ::  cast result to list moves, context
   =+  ^=  ordered-messages            ::  push on ordered list of all messages
-  %+  sort                            ::  map with quicksort
-    (~(tap by received))              ::  over listified map
-  |=  $:  a=(pair ,@da message)
+  %+  sort                            ::  map with quicksort..
+    (~(tap by received))              ::  ..over listified map
+  |=  $:  a=(pair ,@da message)       ::  comparing by time
       b=(pair ,@da message)
       ==
-  (gth p.a p.b)                       ::  compare by time
+  (gth p.a p.b)
   :_  +>.$                            ::  return unaltered app state
-  ::^-  (list move)
   :-  :^  ost  %give  %rush           ::  and send updated inbox
       :-  %json
       (inbox-to-json ordered-messages)
@@ -47,9 +47,9 @@
 ::
 ++  inbox-to-json                     ::  convert received messages to ++json
   |=  messes=(list ,[@da message])    ::  accept map of time to message
-  :-  %a  ^-  (list json)             ::  compose json object
+  :-  %a  ^-  (list json)             ::  compose json array of msgs
   %+  turn  messes                    ::  map over listified map of @da to msg
-  |=  [tym=time mez=message]          ::  accepts cell of time and message
+  |=  [tym=time mez=message]          ::  func that makes json msgs
   %^  jobe                            ::  compose ++json object
     tym/(jode tym)                    ::  k-v pair of tym:time
     mez/(msg-to-json mez)             ::  k-v pair of mez:++json msg
@@ -63,14 +63,18 @@
   ~                                   ::  jobe takes a list, needs ~ terminator
 ++  poke-message                      ::  receive data with mark of "message"
   |=  [ost=bone you=ship mez=message]
+  ^-  [(list move) _+>.$]
   ?.  =(to.mez our.hid)               ::  unless we are receiving message:
     =.  sent                          ::  store sent message
     (~(put by sent) [lat.hid [you +.mez]])   
-::    ^-  [(list move) _+>.$]
-    :_  +>.$                          ::  return new app state
+    ^-  [(list move) _+>.$]
+    :_  +>.$                          ::  return new app stat
     :-  [ost %give %nice ~]
 ::  send message to other ship
-  [ost %pass / %g %mess `hapt`[to.mez /urbmail] `ship`our.hid `cage`[%message !>(mez)]]~
+  :_  ~
+  :^  ost  %pass  /
+  :^  %g  %mess  `hapt`[to.mez /urbmail]
+  :-  `ship`our.hid  `cage`[%message !>(mez)]
   =.  received                        ::  if we're receiving: update received
   (~(put by received) [lat.hid [you +.mez]])
   =+  ^=  ordered-msgs                ::  push on sorted list of messages
@@ -88,5 +92,6 @@
  ::
 ++  pour                              ::  handle responses to requests we make
   |=  [ost=bone pax=path sih=*]
+  ^-  [(list move) _+>.$]
   [[ost %give %nice ~]~ +>.$]         ::  confirm and return unaltered state
 --

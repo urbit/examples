@@ -119,9 +119,7 @@
               rightcol.bottom.cur
         ==
       ::
-        %-  winning  :~  
-              rightcol.top.cur
-            middlecol.middle.cur
+        %-  winning  :~  rightcol.top.cur middlecol.middle.cur
           leftcol.bottom.cur
         ==
       ==
@@ -174,7 +172,7 @@
   =:  currentgame.vat  *game          ::  reset the current game and board
       current.vat      *board
   ==
-  (spam ost %x)                      ::  send new state (a blank board)
+   (spam ost %x)                      ::  send new state (a blank board)
   --
 
 
