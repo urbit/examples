@@ -73,7 +73,7 @@
 ::  send message to other ship
   :_  ~
   :^  ost  %pass  /
-  :^  %g  %mess  `hapt`[to.mez /urbmail]
+  :^  %g  %mess  `hapt`[to.mez /mail]
   :-  `ship`our.hid  `cage`[%message !>(mez)]
   =.  received                        ::  if we're receiving: update received
   (~(put by received) [lat.hid [you +.mez]])
