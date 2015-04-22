@@ -1,6 +1,6 @@
 # urbit sample apps
 
-This repo contains simple applications meant to familiarize you with the different aspects of the system. Each app has its own readme that will explain what each app is intended to highlight.
+This repo contains simple applications meant to familiarize you with the different aspects of the system. Each app has its own readme that will explain what each app is intended to highlight. As each app builds in some way on the previous one, it is recommended that you read them in order. While it is by no means essential to do this, the readmes are written under the assumption that you are doing so.
 
 ## How to use the repo
 
@@ -8,11 +8,11 @@ Some day these will all exist on urbit, but for the time being clone this repo o
 
 For the most part each folder in this repo contains folders indicating the path relative to the `/main` desk on your pier. For example, `foos/app/foos/core.hook` will end up as `/$URB_DIR/$PIER/$SHIP-NAME/main/app/foos/core.hook`.
 
-All of the apps currently in this repo are accessed via their %ford pages, which are hymn.hook files generally found in a /fab directory. To access a %ford page, go to `http://localhost:{port}/main/path/to/page`, where `port` is the port number shown upon booting into urbit. For example, `/=main=/pub/todo/fab/hymn.hook` would be served. For example, `/=main=/pub/foos/fab/hymn/hook` on an http 8444 pier would serve `localhost:8444/main/pub/foos/fab`.
+All of the apps currently in this repo are accessed via their %ford pages, which are hymn.hook files generally found in a /fab directory. To access a %ford page, go to `http://localhost:{port}/main/path/to/page`, where `port` is the port number shown upon booting into urbit. For example, `/=main=/pub/foos/fab/hymn/hook` on an http 8444 pier would serve `localhost:8444/main/pub/foos/fab`.
 
 ## Feedback/Contributions
 
-As you play around, please let me know if you have any questions and/or comments. You can contact me at henry@tlon.io, or on chat (usually ~sivtyv-barnel). Furthemore, we have an idea of what we want this repo to look like when finished. If interested in contributing by building a similar app that showcases a different part of the system, please get in touch!
+As you play around, please let me know if you have any questions and/or comments. You can contact me at henry@tlon.io, or on chat (usually ~sivtyv-barnel). If interested in contributing by building a similar app that showcases a different part of the system, please get in touch!
 
 ## Contents
 

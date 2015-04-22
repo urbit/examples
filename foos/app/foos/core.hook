@@ -54,16 +54,5 @@
   |=  [his=ship pax=path]
   :-  %json 
   `json`[%a (turn vat result-to-json)]::  send all results as ++json to client
-
-++  spam                              ::  send list of results to all subscribers
-  |=  ost=bone                        ::  bone of who poked us
-  :-  [ost %give %nice ~]             ::  positive ack to whomever poked us
-  %+  turn                            ::  map
-    (~(tap by sup.hid))               ::  over list of bone-to-path & ship
-  |=  [ost=bone *]                    ::  with function that sends each a %rush
-  :^  ost  %give  %rush               ::  %rush with updated state
-  :-  %json                           ::  mark is %json
-  `json`[%a (turn vat result-to-json)]::  produce ++json array of all results
 --
-
 
