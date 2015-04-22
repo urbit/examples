@@ -1,13 +1,12 @@
-# foos
+# `/foos`
+This app records foosball scores (one wins by scoring 10) into its state and then uses them to calculate standings on the frontend. 
 
-This app records foosball scores (one wins by scoring 10) into its state and then uses them to calculate standings. It is very simple, which makes it easy to familiarize yourself with the anatomy of %gall apps.
+## Overview
 
-##how it works and what to pay attention to
-We submit a score on the client which uses urb.js to send JSON to our app with a *mark* of JSON. Our JSON mark in `mar` parses the JSON we received to `++json`, hoon's JSON data structure. When apps receive data from %gall, they receive it on a `++poke` arm of the corresponding mark.  Since we are receiving data with a mark of json, it activates our `++poke-json` arm.
+Follow the instructions in the root `readme.md` to get the app up and running in a fake pier. Submit a few results through the frontend. Try opening another tab and watch multiple clients stay in sync.
 
-Although `++json` is a hoon data type, it is not one that we can easily manipulate. Thus, we have to *reparse* it to other types that are convenient to use. This is can be confusing, so pay special attention to it in lines 35-38. You can checkout all of the JSON reparsers in 3bD in `zuse.hoon`.
+All of our frontend code lives in `/pub/foos/`. The logic is mostly in `/pub/foos/src/main.js`, which is a simple [react](https://facebook.github.io/react/) app. We recommend using react when building webpages on top of urbit. You'll see why as you get familiar with how transacting data works. 
 
-Once we successfully reparse the result of a game, we store it in state. Notice how there are no calls to a database--all we do to change the state is use a `=.` to alter our subject. The reason that we are able to do this is that urbit provides single-level store, which eliminates the headache of having to deal with databases. 
+Let's briefly trace a request as it goes from your browser to our backend:
 
-Every time our state changes, our `++peek` arm is activated. `++peek` sends its result to all of the app's subscribers. In this case it sends our entire state everytime.
-
+In `main.js`, when you click 'submit' we end up in the `AddFixture.submit` method. If everything validates properly we call `urb.send` with the data from the form. This is received in our `core.hook` file by the `++poke-json` arm. Here we reparse the json into a `++result` that we store in our state. Since we update our state, `++peek` is called automatically (this is a feature of `%gall`), which generates a list of moves to send to our subscribed clients with an updated state. On the frontend this is received by the connection we setup with `urb.subscribe`. The callback there passes the udpated state to react where our DOM diff is calculated automatically.
