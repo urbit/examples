@@ -1,8 +1,9 @@
 ;html
   ;head
-    ;link(type "text/css", rel "stylesheet", href "/gen/main/pub/lead/src/main.css");
-    ;script(type "text/javascript", src "/gop/hart.js");
-    ;title: urbit example apps - leaderboard
+    ;link(type "text/css", rel "stylesheet", href "/home/pub/lead/src/main.css");
+    ;script(type "text/javascript", src "//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js");
+    ;script(type "text/javascript", src "/~~/~/at/home/lib/urb.js");
+    ;title: Leaderboard Example - Urbit
   ==
   ;body
     ;div#cont
@@ -19,8 +20,6 @@
         ==
       ==
     ==
-    ;script(type "text/javascript", src "//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js");
-    ;script(type "text/javascript", src "/gen/main/lib/urb.js");
-    ;script(type "text/javascript", src "/gen/main/pub/lead/src/main.js");
+    ;script(type "text/javascript", src "/home/pub/lead/src/main.js");
   ==
 ==

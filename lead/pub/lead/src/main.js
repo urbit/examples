@@ -77,7 +77,7 @@ $(function() {
   )
   
   window.urb.appl = "lead"
-  window.urb.subscribe({
+  window.urb.bind({
     path:"/data"
   },function(err,res) {
     if(!err) {

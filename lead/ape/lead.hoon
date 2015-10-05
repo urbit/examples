@@ -28,7 +28,7 @@
   ++  move  ,[p=bone q=[%give gift]]                    ::  output operation
 --
 !:
-|_  $:  hid=hide
+|_  $:  hid=bowl
         vat=axle
     ==
 ::
@@ -37,17 +37,17 @@
   [~ +>.$]
 ::
 ++  peer
-  |=  [ost=bone you=ship pax=path]
+  |=  [pax=path]
   ^-  [(list move) _+>]
   ?~  pax
-    [[ost %give %rust %json vat-json]~ +>.$]
+    [[ost.hid %give %rust %json vat-json]~ +>.$]
   :_  +>.$
   :_  ~
   ?+  -.pax
-    =-  [ost %give %mean -]
+    =-  [ost.hid %give %mean -]
     `[%not-found [%leaf "you need to specify a path"]~]
     %data
-      =-  [ost %give %rush %json -]
+      =-  [ost.hid %give %rush %json -]
       (joba %conn %b &)
   ==
 ::
@@ -68,7 +68,7 @@
   (joba pkg)
 ::
 ++  poke-json
-  |=  [ost=bone you=ship jon=json]
+  |=  [jon=json]
   ^-  [(list move) _+>]
   =+  ^=  jop
       ^-  kiss
@@ -84,19 +84,19 @@
         =.  p.vat
           (~(put by p.vat) newl)
         :_  +>.$
-        :*  [ost %give %nice ~]
+        :*  [ost.hid %give %nice ~]
             (deliver %upd-lead (joba -.newl [%n (scot %ud +.newl)]))
         ==
       :_  +>.$
         :_  ~
-      =-  [ost %give %mean -]
+      =-  [ost.hid %give %mean -]
         `[%not-new [%leaf "That name is already in the leaderboard."]~]
     %add-lead
       =+  ledr=(~(get by p.vat) +.jop)
       ?~  ledr
         :_  +>.$
           :_  ~
-        =-  [ost %give %mean -]
+        =-  [ost.hid %give %mean -]
           `[%not-new [%leaf "That name is not in the leaderboard."]~]
       =+  scor=(need ledr)
       =.  p.vat
@@ -104,7 +104,7 @@
         |=  [k=@t v=@ud]
           ?:(=(k +.jop) (add v 1) v)
       :_  +>.$
-      :*  [ost %give %nice ~]
+      :*  [ost.hid %give %nice ~]
           (deliver %upd-lead (joba +.jop [%n (scot %ud (add scor 1))]))
       ==
   ==
