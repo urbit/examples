@@ -17,27 +17,21 @@
 --
 ::
 !:                                    ::  insert stack trace for this core
-|_  [hid=hide vat=axle]               ::  system data & app state data struct 
+|_  [hid=bowl vat=axle]               ::  system data & app state data struct 
 ++  prep  ,_`.                        ::  wipe state when app code is changed
 ::
 ++  poke-json                         ::  receive JSON
-  |=  [ost=bone you=ship args=json]
-  ?.  =(/[app.hid] imp.hid)           ::  XX to be antequated
-    =+  cag=`cage`[%json !>(args)]    ::  XX will change
-    :_  +>.$
-    :_  ~
-    :^  ost  %pass  /from-child
-    :^  %g  %mess  [our.hid /[app.hid]]
-    :-  you  cag
+  |=  jon=json
   =+  ^-  parsedresult=result         ::  push on result of reparsing JSON
-      ~|  bad-json/args               ::  produce p in stack trace if q crashes
+      ~|  bad-json/jon                ::  produce p in stack trace if q crashes
       %-  need                        ::  crash if ~ (on parse-fail)
       %-  =>  jo                      ::  from ++jo get "ot", obj-tuple parser
-::  parse tuple from ++json object "args".
+                                      ::  parse tuple from ++json object "jon".
       (ot bcons/so bscore/ni ycons/so yscore/ni ~)
-      args
+      jon
   =.  vat  [parsedresult vat]         ::  change state to [newresult oldstate]
-  [[ost %give %nice ~]~ +>.$]         ::  return positive ack and new (unchanged) app-state
+  :_  +>.$                            ::  return (changed) app core
+  spam                                ::  and update subscribers
 ::
 ++  result-to-json                    ::  reassemble ++json to respond to client
   |=  result
@@ -47,12 +41,23 @@
     bscore/(jone bscore)              ::  produce ++json number from @u
     yscore/(jone yscore)
   ==
-
+::
+++  spam                              ::  update subscribers
+  %+  murn  (~(tap by sup.hid))       ::  ∀
+  |=  [ost=bone his=ship pax=path]
+  ?^  pax  ~  %-  some                ::  empty paths
+  [ost %diff ~+((peek his pax))]      ::  update state
+::
 ::  called whenever ther is a change in state.
 ::  sends the result to all subscribers.
 ++  peek
   |=  [his=ship pax=path]
   :-  %json 
   `json`[%a (turn vat result-to-json)]::  send all results as ++json to client
+::
+++  peer                              ::  subscription shim
+  |=  pax=path
+  ?^  pax  `+>
+  [[ost.hid %diff (peek src.hid pax)]~ +>]
 --
 

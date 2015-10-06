@@ -63,15 +63,11 @@ AddFixture = recl({                                                   // add com
 
     mounted.setProps({load:true})
 
-    urb.send({                                                        // send to server                              
-      appl: "foos",
-      data: {
+    urb.send({                                                        // send to server
         bcons:bcons, 
         ycons:ycons, 
         bscore:bscore, 
         yscore:yscore
-      },
-      mark: "json"
     }, function(){
       newFixturesList = mounted.props.fixturesList.slice();           // copy the fixtures list
       newFixturesList.push({                                          // add our new fixture
@@ -198,11 +194,8 @@ fixturesToStandings = function (fixtures) {
 
 $(document).ready(function() {
   mounted = React.render(Page({players:[], fixturesList:[]}), $("#container")[0])
-  urb.subscribe({
-    appl: "foos",
-    path: "/"
-  }, function(err,d){
-    if(d.data.ok) return;
+  urb.appl = "foos"
+  urb.bind("/", function(err,d){
     mounted.setProps({
       load:false,
       fixturesList:d.data
