@@ -33,9 +33,9 @@ $(function() {
   }
   
   add = function() {
-    window.urb.send({
-      data:{"new-lead":$add.val()}
-    },function(err,res) {
+    window.urb.send(
+      {"new-lead":$add.val()}
+    ,function(err,res) {
       if(err)
         return $err.removeClass('disabled').text("There was a communication error. Sorry!")
       if(res.data !== undefined && 
@@ -62,24 +62,22 @@ $(function() {
   $board.on('click', '.bump', function(e) {
     $t = $(e.target).closest('li')
     $t.addClass('disabled')
-    window.urb.send({
-      data:{"add-lead":$t.attr('data-id')}
-    },function(err,res) {
+    window.urb.send(
+      {"add-lead":$t.attr('data-id')}
+    ,function(err,res) {
       $t.removeClass('disabled')
     })
   })
 
-  $.getJSON('/lead',
-    function(data) {
-      vat = data
+  
+  window.urb.appl = "lead"
+  window.urb.bind('/',
+    function(err,dat) {
+      vat = dat.data
       render()
     } 
   )
-  
-  window.urb.appl = "lead"
-  window.urb.bind({
-    path:"/data"
-  },function(err,res) {
+  window.urb.bind("/data",function(err,res) {
     if(!err) {
       if(res.data && res.data['upd-lead']) {
         name = Object.keys(res.data['upd-lead'])[0]

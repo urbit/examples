@@ -1,5 +1,5 @@
 ::  simple leaderboard
-::  accessible at http://localhost:8080/gen/main/pub/lead/fab/
+::  accessible at http://localhost:8080/home/pub/lead/fab/
 ::
 ::::  /hook/core/lead/app
   ::
@@ -12,20 +12,13 @@
     $%  [%0 p=(map ,@t ,@ud)]   
     ==
   ++  gilt                                              ::  subscription frame
-    $%  [%hymn p=manx]                                  ::  html tree
-        [%json p=json]                                  ::  json
-    ==                                                  ::
-  ++  gift                                              ::  output action
-    $%  [%rust gilt]                                    ::  total update
-        [%rush gilt]                                    ::  partial update
-        [%mean (unit (pair term (list tank)))]          ::  Error, maybe w/ msg
-        [%nice ~]                                       ::  Response message
+    $%  [%json p=json]                                  ::  json
     ==                                                  ::
   ++  kiss
     $%  [%new-lead name=cord]                           ::  new leader
         [%add-lead name=cord]                           ::  add to leader
     ==
-  ++  move  ,[p=bone q=[%give gift]]                    ::  output operation
+  ++  move  ,[p=bone q=[%diff gilt]]                    ::  output operation
 --
 !:
 |_  $:  hid=bowl
@@ -40,15 +33,12 @@
   |=  [pax=path]
   ^-  [(list move) _+>]
   ?~  pax
-    [[ost.hid %give %rust %json vat-json]~ +>.$]
+    [[ost.hid %diff %json vat-json]~ +>.$]
   :_  +>.$
   :_  ~
-  ?+  -.pax
-    =-  [ost.hid %give %mean -]
-    `[%not-found [%leaf "you need to specify a path"]~]
-    %data
-      =-  [ost.hid %give %rush %json -]
-      (joba %conn %b &)
+  ?+    -.pax
+      ~_(leaf/"you need to specify a path" ~|(%not-found !!))
+    %data  [ost.hid %diff %json (joba %conn %b &)]
   ==
 ::
 ++  vat-json
@@ -59,13 +49,9 @@
 ::
 ++  deliver
   |=  pkg=[@tas json]
-  %+  turn
-    %+  skim  (~(tap by sup.hid)) 
-    |=  [ost=bone his=ship pax=path]
-    ?=([%data ~] pax)
+  %+  turn  (prey /data hid)
   |=  [ost=bone his=ship pax=path]
-  =-  [ost %give %rush %json -]
-  (joba pkg)
+  [ost %diff %json (joba pkg)]
 ::
 ++  poke-json
   |=  [jon=json]
@@ -79,34 +65,25 @@
       ==
   ?-  -.jop
     %new-lead
-      ?~  (~(get by p.vat) +.jop)
-        =+  newl=[+.jop 0]
-        =.  p.vat
-          (~(put by p.vat) newl)
-        :_  +>.$
-        :*  [ost.hid %give %nice ~]
-            (deliver %upd-lead (joba -.newl [%n (scot %ud +.newl)]))
-        ==
+      ?:  (~(has by p.vat) +.jop)
+        ~_  [%leaf "That name is already in the leaderboard."]
+        ~|(%not-new !!)
+      =.  p.vat
+        (~(put by p.vat) name.jop 0)
       :_  +>.$
-        :_  ~
-      =-  [ost.hid %give %mean -]
-        `[%not-new [%leaf "That name is already in the leaderboard."]~]
+      (deliver %upd-lead (joba name.jop [%n (scot %ud 0)]))
     %add-lead
-      =+  ledr=(~(get by p.vat) +.jop)
+      =+  ledr=(~(get by p.vat) name.jop)
       ?~  ledr
-        :_  +>.$
-          :_  ~
-        =-  [ost.hid %give %mean -]
-          `[%not-new [%leaf "That name is not in the leaderboard."]~]
+        ~_  [%leaf "That name is not in the leaderboard."]
+        ~|(%not-new !!)
       =+  scor=(need ledr)
       =.  p.vat
         %-  ~(urn by p.vat)
         |=  [k=@t v=@ud]
-          ?:(=(k +.jop) (add v 1) v)
+          ?:(=(k name.jop) +(v) v)
       :_  +>.$
-      :*  [ost.hid %give %nice ~]
-          (deliver %upd-lead (joba +.jop [%n (scot %ud (add scor 1))]))
-      ==
+      (deliver %upd-lead (joba name.jop [%n (scot %ud (add scor 1))]))
   ==
 ::
 --
