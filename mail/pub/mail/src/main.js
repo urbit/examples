@@ -37,13 +37,12 @@ Compose = recl({                                                      // compose
     }
 
     urb.send({                                                        // send to server
-      appl:"mail",
-      mark:"message",
-      data: {
         to:   $to.val(),
         subj: $subj.val(),
         body: $body.val()
-      }
+      }, {
+      appl:"mail",
+      mark:"message",
     }),
 
     $to.val('')                                                       // reset

@@ -9,39 +9,23 @@
 ::::  sivtyv-barnel                   ::  name(s) of author(s)
   ::
 !:                                    ::  insert stack trace for this core
-|%                                    ::  core with data-structures
-++  move  (mold note gift)            ::  system calls
-++  note  $:  %g  %mess  p=hapt       ::  requests we make
-          q=ship  r=cage
-          ==
-++  gift                              ::  responses we give
-  $:  %g
-  $%  [%nice ~]                       ::  positive acknowledgment
-      [%rush %json json]              ::  updates to subscribers
-  ==  ==
-++  hapt  ,[p=ship q=path]            ::  app instance
---
-::
-!:                                    ::  insert stack trace for this core
-|_  $:  hid=hide                      ::  system data
+|_  $:  hid=bowl                      ::  system data
       sent=(map ,@da message)         ::  app state data structures
     received=(map ,@da message)
     ==
 ++  prep  ,_`.                        ::  wipe state when app code is changed
 ::
 ++  peer                              ::  get 1st time subs. add them to sup
-  |=  [ost=bone subs=ship pax=path]   ::  path and ship of subscriber
-  ^-  [(list move) _+>.$]             ::  cast result to list moves, context
+  |=  [pax=path]                      ::  path subscribed
   =+  ^=  ordered-messages            ::  push on ordered list of all messages
-  %+  sort                            ::  map with quicksort..
-    (~(tap by received))              ::  ..over listified map
-  |=  $:  a=(pair ,@da message)       ::  comparing by time
-      b=(pair ,@da message)
-      ==
-  (gth p.a p.b)
+      %+  sort                            ::  map with quicksort..
+        (~(tap by received))              ::  ..over listified map
+      |=  $:  a=(pair ,@da message)       ::  comparing by time
+          b=(pair ,@da message)
+          ==
+      (gth p.a p.b)
   :_  +>.$                            ::  return unaltered app state
-  :-  :^  ost  %give  %rush           ::  and send updated inbox
-      :-  %json
+  :-  :^  ost.hid  %diff  %json       ::  and send updated inbox
       (inbox-to-json ordered-messages)
   ~
 ::
@@ -62,36 +46,28 @@
   :-  body/s/(role body.mez)          ::  body:body-of-msg
   ~                                   ::  jobe takes a list, needs ~ terminator
 ++  poke-message                      ::  receive data with mark of "message"
-  |=  [ost=bone you=ship mez=message]
-  ^-  [(list move) _+>.$]
+  |=  [mez=message]
   ?.  =(to.mez our.hid)               ::  unless we are receiving message:
     =.  sent                          ::  store sent message
-    (~(put by sent) [lat.hid [you +.mez]])   
-    ^-  [(list move) _+>.$]
+      (~(put by sent) [now.hid [src.hid +.mez]])   
     :_  +>.$                          ::  return new app stat
-    :-  [ost %give %nice ~]
-::  send message to other ship
-  :_  ~
-  :^  ost  %pass  /
-  :^  %g  %mess  `hapt`[to.mez /mail]
-  :-  `ship`our.hid  `cage`[%message !>(mez)]
+    :_  ~
+    :^  ost.hid  %poke  /
+    [`dock`[to.mez %mail] %message mez]
   =.  received                        ::  if we're receiving: update received
-  (~(put by received) [lat.hid [you +.mez]])
+    (~(put by received) [now.hid [src.hid +.mez]])
   =+  ^=  ordered-msgs                ::  push on sorted list of messages
-  %+  sort                            ::  call sort on
-    (~(tap by received))              ::  listified map..
-  |=  [a=(pair ,@da message) b=(pair ,@da message)]
-  (gth p.a p.b)                       ::  and gate that compares by @da
+      %+  sort                        ::  call sort on
+        (~(tap by received))          ::  listified map..
+      |=  [a=(pair ,@da message) b=(pair ,@da message)]
+      (gth p.a p.b)                   ::  and gate that compares by @da
   :_  +>.$                            ::  return new app state
-  :-  [ost %give %nice ~]             ::  positive acknowledgement
   %+  turn  (~(tap by sup.hid))       ::  map over list of subscribers
   |=  [os=bone *]                     
-  :^  os  %give                       ::  sending them an update
-    %rush
-  :-(%json `json`(inbox-to-json ordered-msgs))          ::  of new inbox
+  :+  os  %diff
+  :-(%json `json`(inbox-to-json ordered-msgs))       ::  update of new inbox
  ::
-++  pour                              ::  handle responses to requests we make
-  |=  [ost=bone pax=path sih=*]
-  ^-  [(list move) _+>.$]
-  [[ost %give %nice ~]~ +>.$]         ::  confirm and return unaltered state
+++  coup                              ::  handle responses to requests we make
+  |=  [sih=*]
+  [~ +>]                              ::  ignore and return unaltered core
 --
