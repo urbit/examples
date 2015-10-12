@@ -1,0 +1,89 @@
+::  simple leaderboard
+::  accessible at http://localhost:8080/home/pub/lead/fab/
+::
+::::  /hook/core/lead/app
+  ::
+/?    314                                               ::  need urbit 314
+::
+::::  ~talsur-todres, ~fyr
+  ::
+|%
+  ++  axle
+    $%  [%0 p=(map ,@t ,@ud)]   
+    ==
+  ++  gilt                                              ::  subscription frame
+    $%  [%json p=json]                                  ::  json
+    ==                                                  ::
+  ++  kiss
+    $%  [%new-lead name=cord]                           ::  new leader
+        [%add-lead name=cord]                           ::  add to leader
+    ==
+  ++  move  ,[p=bone q=[%diff gilt]]                    ::  output operation
+--
+!:
+|_  $:  hid=bowl
+        vat=axle
+    ==
+::
+++  prep
+  |=  old=(unit)
+  [~ +>.$]
+::
+++  peer
+  |=  [pax=path]
+  ^-  [(list move) _+>]
+  ?~  pax
+    [[ost.hid %diff %json vat-json]~ +>.$]
+  :_  +>.$
+  :_  ~
+  ?+    -.pax
+      ~_(leaf/"you need to specify a path" ~|(%not-found !!))
+    %data  [ost.hid %diff %json (joba %conn %b &)]
+  ==
+::
+++  vat-json
+  :-  %o
+  %-  ~(urn by p.vat)
+    |=  [k=@t v=@ud]
+  [%n (scot %ud v)]
+::
+++  deliver
+  |=  pkg=[@tas json]
+  %+  turn  (prey /data hid)
+  |=  [ost=bone his=ship pax=path]
+  [ost %diff %json (joba pkg)]
+::
+++  poke-json
+  |=  [jon=json]
+  ^-  [(list move) _+>]
+  =+  ^=  jop
+      ^-  kiss
+      %-  need  %.  jon
+      =>  jo  %-  of
+      :~  [%new-lead so]
+          [%add-lead so]
+      ==
+  ?-  -.jop
+    %new-lead
+      ?:  (~(has by p.vat) +.jop)
+        ~_  [%leaf "That name is already in the leaderboard."]
+        ~|(%not-new !!)
+      =.  p.vat
+        (~(put by p.vat) name.jop 0)
+      :_  +>.$
+      (deliver %upd-lead (joba name.jop [%n (scot %ud 0)]))
+    %add-lead
+      =+  ledr=(~(get by p.vat) name.jop)
+      ?~  ledr
+        ~_  [%leaf "That name is not in the leaderboard."]
+        ~|(%not-new !!)
+      =+  scor=(need ledr)
+      =.  p.vat
+        %-  ~(urn by p.vat)
+        |=  [k=@t v=@ud]
+          ?:(=(k name.jop) +(v) v)
+      :_  +>.$
+      (deliver %upd-lead (joba name.jop [%n (scot %ud (add scor 1))]))
+  ==
+::
+--
