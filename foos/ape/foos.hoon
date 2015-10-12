@@ -1,6 +1,7 @@
 ::    store results of foosball games ::  short descripton
+::    accessible at http://localhost:8080/home/pub/foos/fab/
 ::
-::::
+::::  /hoon/foos/ape
   ::
 /?  310                               ::  require hoon version 310 or below
 ::

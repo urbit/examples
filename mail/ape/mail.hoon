@@ -1,6 +1,7 @@
 ::    send simple msgs between ships  ::  short description
+::    accessible at http://localhost:8080/home/pub/mail/fab/
 ::
-::::
+::::  /hoon/mail/ape
   ::
 /?    310                             ::  require hoon version 310 or below
 /-    message                         ::  import message structure

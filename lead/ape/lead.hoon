@@ -1,7 +1,7 @@
 ::  simple leaderboard
 ::  accessible at http://localhost:8080/home/pub/lead/fab/
 ::
-::::  /hook/core/lead/app
+::::  /hook/core/lead/ape
   ::
 /?    314                                               ::  need urbit 314
 ::
