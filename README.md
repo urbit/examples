@@ -10,14 +10,18 @@ environement(%gall)](http://doznec.urbit.org/home/pub/doc/arvo/gall).
 
 # Environemnets
 
-A directory __samp__ is usually(XX?) one of three types of examples:
+A directory __samp__ is usually(XX?) one of four types of examples:
+
 1. dojo: entry point inside __samp__ is gen/__samp__.hoon, runnable as +__samp__. 
 
-2. ford: entry point inside __samp__ is pub/__samp__/, accesible through
+2. libs: entry point inside __samp__ is lib/__samp__.hoon, usable by 
+adding it to your dojo context with /+  __samp__, then pulling arm:__samp__. test:__samp__ will demonstrate library functionality.
+
+3. ford: entry point inside __samp__ is pub/__samp__/, accesible through
 http://yourship.urbit.org/examples/pub/samp and/or
 http://localhost:8080/examples/pub/samp
 
-3. gall: entry point inside __samp__ is ape/__samp__.hoon, executable as |start
+4. gall: entry point inside __samp__ is ape/__samp__.hoon, executable as |start
 __samp__. These may also have a web front-end(a ford page, see previous type),
 or generators gen/__samp__/__cmd__.hoon runnable with :__samp__+__cmd__
 
