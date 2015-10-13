@@ -66,3 +66,7 @@ sync succeeded from %examples on ~sampel-someship to %examples
 > +hello
 %hello-world
 ```
+
+## Feedback and contributions
+
+We're really curious to hear about your experience using this stuff. All questions and comments are more than welcome. You can contact me at henry@tlon.io, or on `:talk` as `~sivtyv-barnel`.
