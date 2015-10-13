@@ -1,13 +1,19 @@
 ::    Knuth-Morris-Pratt string search
-::    /hoon/kmp/try
+::    arms accessible in dojo after /+  strings-kmp
+::    try test:strings-kmp
 ::
-::::  ~nodpet-rinned
+::::    /hoon/kmp/strings/lib
   ::
-=+  a==+([a="a" b=15] |-(?~(b (weld a "b") $(a (weld a a), b (dec b)))))
-=+  b="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ipsum, ipsum ipsum."
-=<  [(kmp "aaaaaaab" a) (kmp "ipsum" b)]
-::
+/?    314
+!:
+::::    ~nodpet-rinned
+  ::
 |%
+++  test
+  =+  a==+([a="a" b=15] |-(?~(b (weld a "b") $(a (weld a a), b (dec b)))))
+  =+  b="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ipsum, ipsum ipsum."
+  [(kmp "aaaaaaab" a) (kmp "ipsum" b)]
+::
 ++  kmp
   |=  [ptn=tape txt=tape]
   (skm ptn (gnx ptn) txt)

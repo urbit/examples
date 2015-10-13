@@ -1,14 +1,17 @@
 ::    simple string manipulation
-::    ++pigl turns a single string to piglatin
-::    ++plur pluralizes a word
+::    arms accessible in dojo after /+  strings-piglatin
+::    try test:strings-piglatin
+::      ++pigl turns a single string to piglatin
+::      ++plur pluralizes a word
 ::
-::::  /hoon/piglatin/try/
+::::  /hoon/piglatin/strings/lib
   ::
-=<  (pigl (plur "what"))                                ::  input(chnge sample)
-::
+/?    314
+!:
 ::::  ~sivtyv-barnel
   ::
 |%                                                      ::  core
+++  test  (pigl (plur "what"))                          ::  test:strin
 ++  pigl                                                ::  pig latin ++arm
 |=  wrd=(list ,@t)                                      ::  gate, str sample
   ^-  tape                                              ::  check rslt is tape

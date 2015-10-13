@@ -1,5 +1,15 @@
 ::  Novel syntax usage: mathematics
+::    arms accessible in dojo after /+  infix
+::    try test:infix
+::
+::::  /hoon/infix/lib
+  ::
+/?    314
+!:
+::::  ~pittyp-pittyp
+  ::
 |%
+++  test  (iffy [[a / 3] + [a / 2] - 4]:[(wrap a=10 sub) add])
 ::
 ++  arit  $|(_/ $+([@ @] @))          ::  arithmetic gate, / representing div
 ++  expr  $|(@ [l=expr n=arit r=expr])                  :: arithmetic expression

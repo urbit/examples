@@ -1,10 +1,14 @@
+::    arms accessible in dojo after /+  sorts
+::    try test:sorts
 ::
+::::    /hoon/kmp/sorts/lib
+  ::
+/?    314
+!:
 ::::  ~sivtyv-barnel
   ::
-  !:
-
-=<  [(merge-sort [10 5 4 6 ~]) (bubble-sort [10 5 4 6 ~])]
 |%
+++  test  [(merge-sort [10 5 4 6 ~]) (bubble-sort [10 5 4 6 ~])]
 ::
 ++  sort
   |=  [liz=(list ,@ud)]
