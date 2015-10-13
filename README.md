@@ -1,29 +1,9 @@
 # Introduction
 
 This repository consists of a list of directories, each intended to be copied on
-top of the standard contents of a /=base= desk. These examples demonstrate three
-different ways of executing code within urbit: generating values for [the
-console(:dojo)](http://doznec.urbit.org/home/pub/doc/tools/dojo), [functionally
-building(%ford)](http://doznec.urbit.org/home/pub/doc/arvo/ford) web pages, and
-[application
-environement(%gall)](http://doznec.urbit.org/home/pub/doc/arvo/gall).
-
-# Environemnets
-
-A directory __samp__ is usually(XX?) one of four types of examples:
-
-1. dojo: entry point inside __samp__ is gen/__samp__.hoon, runnable as +__samp__. 
-
-2. libs: entry point inside __samp__ is lib/__samp__.hoon, usable by 
-adding it to your dojo context with /+  __samp__, then pulling arm:__samp__. test:__samp__ will demonstrate library functionality.
-
-3. ford: entry point inside __samp__ is pub/__samp__/, accesible through
-http://yourship.urbit.org/examples/pub/samp and/or
-http://localhost:8080/examples/pub/samp
-
-4. gall: entry point inside __samp__ is ape/__samp__.hoon, executable as |start
-__samp__. These may also have a web front-end(a ford page, see previous type),
-or generators gen/__samp__/__cmd__.hoon runnable with :__samp__+__cmd__
+top of the standard contents of a /=base= desk. These examples are divided
+between [dojo generators](dojo), [libraries](libs), [ford pages](ford), and
+[applications](gall). See local readmes for more information.
 
 # Trying an example
 
@@ -32,7 +12,7 @@ An individual example can be copied to your ship.
 > |merge /=examples= /=base=
 > /=examples=
 > |mount %
-$ cp -r examples/$samp/ $pier/examples/
+$ cp -r $example-type/$samp/ $pier/examples/
 ```
 
 The dojo commands above initialize a `/=examples=` desk from your
@@ -52,7 +32,7 @@ form of `=dir /=examples=`, it sets the working `dir` to the `%example` desk
 (`=`en interpolate the current ship and time).
 
 (the ~sampel-someship mirror is maintained by running
-`$ cp -r examples/*/ pier/examples/` as a commit hook; doing so locally will
+`$ cp -r examples/*/*/ pier/examples/` as a commit hook; doing so locally will
 produce equivalent results at any given version.)
 
 # "Hello world" example
