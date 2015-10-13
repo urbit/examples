@@ -1,10 +1,13 @@
 ::    project euler 14
 ::    https://projecteuler.net/problem=14
+::  run in dojo with +euler14
 ::
-::::  /hoon/euler14/try/
+::::  /hoon/euler14/gen
   ::
+:-  %say  |=  *  
+:-  %noun
 =<  (longcol 1.000.000) :: With a manual cache, many times faster 
-::
+!.
 ::::  ~haptem-fopnys
   ::
 |%

@@ -1,8 +1,11 @@
 ::    project euler 6
 ::    https://projecteuler.net/problem=6
+::  run in dojo with +euler6
 ::
-::::  /hoon/euler6/try/
+::::  /hoon/euler6/gen
   ::
+:-  %say  |=  *  
+:-  %noun
 =<  (diff 100)
 ::
 ::::  ~racleb-fitwyt

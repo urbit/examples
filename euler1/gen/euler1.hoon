@@ -1,8 +1,11 @@
 ::    project euler 1
 ::    https://projecteuler.net/problem=1
+::  run in dojo with +euler1
 ::
-::::  /hoon/euler1/try/
+::::  /hoon/euler1/gen
   ::
+:-  %say  |=  *  
+:-  %noun
 =<  (sum 1.000)
 ::
 ::::  ~sivtyv-barnel

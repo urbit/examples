@@ -1,10 +1,13 @@
 ::    project euler 5
 ::    https://projecteuler.net/problem=5
+::  run in dojo with +euler5
 ::
-::::  /hoon/euler5/try/
+::::  /hoon/euler5/gen
   ::
+:-  %say  |=  *  
+:-  %noun
 =<  (lcm 20)
-::
+!.
 ::::  ~haptem-fopnys
   ::
 |%

@@ -1,8 +1,11 @@
 ::    project euler 7
 ::    https://projecteuler.net/problem=7
+::  run in dojo with +euler7
 ::
-::::  /hoon/euler7/try/
+::::  /hoon/euler7/gen
   ::
+:-  %say  |=  *  
+:-  %noun
 =<  (nth 10.001)
 ::
 ::::  ~racbes-solmun
