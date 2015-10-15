@@ -22,8 +22,8 @@ contents are added to the base files.
 
 # Sync over `%clay`
 
-A live copy of all everything is also maintained at ~sampel-someship(XX). By
-running `|sync /=examples= /~sampel-somehip/examples=`, a local copy of the
+A live copy of all everything is also maintained at ~wactex-ribmex. By
+running `|sync /=examples= /~wactex-ribmex/examples=`, a local copy of the
 `%examples` desk will be created and automatically updated with any
 changes/additions.
 
@@ -31,8 +31,8 @@ As above, `/=examples=` will allow app/generator examples to be run: a short
 form of `=dir /=examples=`, it sets the working `dir` to the `%example` desk 
 (`=`en interpolate the current ship and time).
 
-(the ~sampel-someship mirror is maintained by running
-`$ cp -r examples/*/*/ pier/examples/` as a commit hook; doing so locally will
+(the ~wactex-ribmex mirror is maintained by running
+`$ cp -r ~/examples/*/*/ wactex-ribmex/examples/` as a commit hook; doing so locally will
 produce equivalent results at any given version.)
 
 # "Hello world" example
@@ -42,9 +42,9 @@ The [hello](tree/master/hello) example is a simple generator that returns
 
 In the `:dojo>` prompt(accessible by pressing `^X` repeatedly if you happen to have found yourself in e.g. talk)
 ```hoon
-> |sync /=examples= /~sampel-someship/examples=
-activated sync from %examples on ~sampel-someship to %examples
-sync succeeded from %examples on ~sampel-someship to %examples
+> |sync /=examples= /~wactex-ribmex/examples=
+activated sync from %examples on ~wactex-ribmex to %examples
+sync succeeded from %examples on ~wactex-ribmex to %examples
 > /=examples=
 =% /~pittyp-pittyp/examples/~2015.10.10..00.30.03..da73/
 > +hello
