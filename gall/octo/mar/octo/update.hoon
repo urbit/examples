@@ -1,21 +1,21 @@
 ::                                                      ::  ::
-::::  /hoon/oct3-update/mar                        ::::::  dependencies
+::::  /hoon/octo-update/mar                        ::::::  dependencies
   ::                                                    ::  ::
 /?    310                                               ::  arvo
-/-    oct3                                             ::  structures
-/+    oct3                                              ::  libraries
-[. oct3 ^oct3]
+/-    octo                                             ::  structures
+/+    octo                                              ::  libraries
+[. octo ^octo]
 !:                                                      ::  ::
 ::::                                                    ::  ::  protocol
   ::                                                    ::  ::
-|_  play                                                ::  game 
+|_  play                                                ::  game
 ++  grab                                                ::  convert from
   |%
   ++  noun  play                                        ::  from %noun
   --
 ++  grow                                                ::  convert to
   |%
-  ++  json  ^-  ^json                                   ::  to %json  
+  ++  json  ^-  ^json                                   ::  to %json
     ~!  +>-<
     ?:  ?=(| +>-<)
       ~!  +>-<
@@ -24,7 +24,7 @@
     =+  she=|=(ship s/(scot %p +<))
     =+  hes=|=([ship *] (she +<-))
     %-  jobe
-    :~  who/s/?:(who.p %x %o) 
+    :~  who/s/?:(who.p %x %o)
         plx/?~(p.sag.p ~ (she u.p.sag.p))
         plo/?~(q.sag.p ~ (she u.q.sag.p))
         aud/a/(turn (~(tap by aud.p)) hes)

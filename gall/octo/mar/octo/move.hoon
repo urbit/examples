@@ -1,5 +1,5 @@
 ::
-::::  /hoon/oct3-move/mar
+::::  /hoon/octo-move/mar
   ::
 /?    314
 !:

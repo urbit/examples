@@ -1,11 +1,11 @@
-::  accessible at http://localhost:8080/home/pub/oct3/fab/
+::  accessible at http://localhost:8080/home/pub/octo/fab/
 ::                                                      ::  ::
-::::  /hoon/oct3/ape                                    ::::::  dependencies
+::::  /hoon/octo/ape                                    ::::::  dependencies
   ::                                                    ::  ::
 /?  310                                                 ::  arvo version
-/-  sole, oct3                                          ::  structures
-/+  sole, oct3                                          ::  libraries
-[. sole oct3]                                           ::  ::
+/-  sole, octo                                          ::  structures
+/+  sole, octo                                          ::  libraries
+[. sole octo]                                           ::  ::
 ::                                                      ::  ::
 ::::                                                    ::::::  interfaces
   !:                                                    ::  ::
@@ -16,14 +16,14 @@
               ==                                        ::
     ++  face  (map bone sole-share)                     ::  console state
     ++  lime  $%  [%sole-effect sole-effect]            ::  :sole update
-                  [%oct3-update play]                   ::  :oct3 update
+                  [%octo-update play]                   ::  :octo update
               ==                                        ::
     ++  move  (pair bone card)                          ::  cause and action
     --                                                  ::
 ::                                                      ::  ::
 ::::                                                    ::::::  past state
   ::                                                    ::  ::
-=>  |%                                                  ::  
+=>  |%                                                  ::
     ++  axon     $%([%1 axle] [%0 axle-0])              ::  all states
     ++  axle-0  ,[eye=face gam=game-0]                  ::  old axle
     ++  game-0  ,[who=? box=board boo=board]            ::  old game
@@ -56,7 +56,7 @@
           =>  .(ost p.i.all, src q.i.all)               ::
           $(all t.all, +>.^$ (fun +>.^$))               ::
 ++  eels  (~(tap by sup))                               ::  all clients
-++  elfs  (prey /oct3 +<-)                              ::  network clients
+++  elfs  (prey /octo +<-)                              ::  network clients
 ++  elks  (prey /sole +<-)                              ::  console clients
 ++  flap  |=  [net=bike con=bike]                       ::  update all clients
           (echo:(echo elks con) elfs net)               ::
@@ -66,7 +66,7 @@
   ::                                                    ::  ::
 ++  fail  ?:(soul (fect %bel ~) ~|(%invalid-move !!))   ::  user error
 ++  fect  |=(sole-effect (dish %diff %sole-effect +<))  ::  update console
-++  fact  |=(play (dish %diff %oct3-update +<))         ::  update partner
+++  fact  |=(play (dish %diff %octo-update +<))         ::  update partner
 ++  hail  |=(? tame(gam (hey:here +<)))                 ::  toggle subscriber
 ++  heal  |=  old=axon  =.  +>+<+>  (wake old)          ::  complete update
           =-  +>.$(gam -)  ?.  !=(1 +<-)  gam           ::
@@ -74,7 +74,7 @@
 ++  kick  |=  point  =^  dud  gam  ~(m at:here +<)      ::
           ?.(dud fail wild:kind)                        ::
 ++  kind  =+(res:here ?~(- + (word(gam new:here) ->)))  ::  move result
-++  prom  (fect %pro %& %oct3 voy:here)                 ::  update prompt
+++  prom  (fect %pro %& %octo voy:here)                 ::  update prompt
 ++  rend  (turn `wall`tab:here |=(tape txt/+<))         ::  table print
 ++  sawn  (hail(eye (~(del by eye) ost)) |)             ::  console unsubscribe
 ++  seen  (hail(eye (~(put by eye) ost *sole-share)) &) ::  console subscribe
@@ -89,7 +89,7 @@
 ::::                                                    ::::::  console UI
   ::                                                    ::  ::
 ++  work                                                ::  console action
-  |=  act=sole-action                                   ::  
+  |=  act=sole-action                                   ::
   =+  say=(~(got by eye) ost)                           ::
   |^  ?+(-.act abet %det (delt +.act), %ret dive)       ::
   ++  abet  ..work(eye (~(put by eye) ost say))         ::  resolve
@@ -106,12 +106,12 @@
 ::                                                      ::  ::
 ::::                                                    ::::::  arvo handlers
   ::                                                    ::  ::
-++  peer-oct3  |=(* abet:tame:(hail &))                 ::  urbit subscribe
+++  peer-octo  |=(* abet:tame:(hail &))                 ::  urbit subscribe
 ++  peer-sole  |=(* abet:show:seen)                     ::  console subscribe
 ++  poke-sole-action  |=(sole-action abet:(work +<))    ::  console input
-++  poke-oct3-move  |=(point abet:wild:(kick +<))       ::  urbit move
+++  poke-octo-move  |=(point abet:wild:(kick +<))       ::  urbit move
 ++  prep  |=  (unit (pair (list move) axon))            ::  update self
           abet:?~(+< +> wild:(heal +<+>))               ::
-++  pull-oct3  |=(* abet:(hail |))                      ::  urbit unsubscribe
+++  pull-octo  |=(* abet:(hail |))                      ::  urbit unsubscribe
 ++  pull-sole  |=(* abet:sawn)                          ::  console unsubscribe
 --
