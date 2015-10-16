@@ -1,12 +1,33 @@
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+::                                                                            ::
+::  The lib/ directory is meant for library cores. Libraries in lib/ can be   ::
+::  loaded with /+, a %ford rune.                                             ::
+::                                                                            ::
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::                                                      ::  ::
 ::::  /hoon/octo/lib                                    ::::::  dependencies
   ::                                                    ::  ::
 /?    310                                               ::  arvo version
-/-    octo                                             ::  structures
+/-    octo                                              ::  structures
 ::                                                      ::  ::
 ::::                                                    ::::::  semantics
   !:                                                    ::  ::
 [. ^octo]
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+::                                                                            ::
+::  Below is the library core. The top-level core only has three arms, and    ::
+::  the first, ++icon, is a simple utility function from true/false to X/O.   ::
+::                                                                            ::
+::  ++bo contains gates that operate with a board in their context, and ++go  ::
+::  contains gates that operate with a game state update (paired with the     ::
+::  source ship) in their context. These contexts are passed in the sample to ::
+::  the ++bo and ++go cores themselves, in a standard Hoon idiom that is      ::
+::  somewhat similar to the OOP concept of methods. For example, ++bit would  ::
+::  be used like this:                                                        ::
+::                                                                            ::
+::  (~(bit bo board-here) location-here)                                      ::
+::                                                                            ::
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 |%                                                      ::
 ++  icon   |=(? ?:(+< 'X' 'O'))                         ::  display at
 ++  bo                                                  ::  per board
