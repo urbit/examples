@@ -1,4 +1,11 @@
-::  accessible at http://localhost:8080/home/pub/octo/fab/
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+::                                                                            ::
+::  ape/ is the directory for %gall applications. %gall applications are      ::
+::  timeless and entirely reactive, though they do currently require manual   ::
+::  startup. This source file contains both the backend game logic and the    ::
+::  console frontend. The web frontend is spread across pub/ and mar/.        ::
+::                                                                            ::
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::                                                      ::  ::
 ::::  /hoon/octo/ape                                    ::::::  dependencies
   ::                                                    ::  ::
@@ -9,6 +16,14 @@
 ::                                                      ::  ::
 ::::                                                    ::::::  interfaces
   !:                                                    ::  ::
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+::                                                                            ::
+::  The first core here contains data structure definitions. sur/octo has     ::
+::  already been loaded above by %ford. Our overall state, called ++axle per  ::
+::  standard convention, is mostly a ++game from sur/octo, along with the     ::
+::  console frontend state.                                                   ::
+::                                                                            ::
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 =>  |%                                                  ::
     ++  axle  ,[eye=face gam=game]                      ::  agent state
     ++  card  $%  [%diff lime]                          ::  update
@@ -20,6 +35,17 @@
               ==                                        ::
     ++  move  (pair bone card)                          ::  cause and action
     --                                                  ::
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+::                                                                            ::
+::  The timelessness of %gall applications has one obvious problem: the type  ::
+::  of the state might change with a new version. This has already happened   ::
+::  with octo - an older version of ++game is defined below as ++game-0.      ::
+::  If a new version of an app tries to use old state, the correct behavior   ::
+::  is to simply upgrade the old state to the new state. The core below has   ::
+::  the necessary arms to make that happen (except for ++heal in a later      ::
+::  core), which will be invoked when gall calls ++prep.                      ::
+::                                                                            ::
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::                                                      ::  ::
 ::::                                                    ::::::  past state
   ::                                                    ::  ::
@@ -103,6 +129,16 @@
   ++  wipe  =^  cal  say  (~(transmit sole say) set/~)  ::  clear line
             (fect:abet %det cal)                        ::
   --                                                    ::
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+::                                                                            ::
+::  The following arms are the %gall interface. ++peer-%app and ++pull-%app   ::
+::  handle subscriptions and unsubscriptions, respectively. ++poke-%mark      ::
+::  arms are the event handlers. This app handles two marks, octo-move from   ::
+::  the web frontend, or sole-action from the console. An octo-move is just   ::
+::  a point on the board, but a sole-action is more complex and is processed  ::
+::  by ++work above.                                                          ::
+::                                                                            ::
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::                                                      ::  ::
 ::::                                                    ::::::  arvo handlers
   ::                                                    ::  ::
