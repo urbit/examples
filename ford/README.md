@@ -1,3 +1,3 @@
-Examples __samp__ in this directory are pages, with entry points inside __samp__/ of pub/__samp__/.
-This code is accesible through http://yourship.urbit.org/examples/pub/samp and/or
-http://localhost:8080/examples/pub/samp
+This directory contains example `%ford` pages. They can be reached at
+http://localhost:8080/[desk]/pub/fordn where `desk` is the desk the
+examples are on, like `examples`, and `n` is the number of an example.

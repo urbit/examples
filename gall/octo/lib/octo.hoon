@@ -1,19 +1,40 @@
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+::                                                                            ::
+::  The lib/ directory is meant for library cores. Libraries in lib/ can be   ::
+::  loaded with /+, a %ford rune.                                             ::
+::                                                                            ::
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::                                                      ::  ::
-::::  /hoon/oct3/lib                                    ::::::  dependencies
+::::  /hoon/octo/lib                                    ::::::  dependencies
   ::                                                    ::  ::
 /?    310                                               ::  arvo version
-/-    oct3                                             ::  structures
+/-    octo                                              ::  structures
 ::                                                      ::  ::
 ::::                                                    ::::::  semantics
   !:                                                    ::  ::
-[. ^oct3]
+[. ^octo]
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+::                                                                            ::
+::  Below is the library core. The top-level core only has three arms, and    ::
+::  the first, ++icon, is a simple utility function from true/false to X/O.   ::
+::                                                                            ::
+::  ++bo contains gates that operate with a board in their context, and ++go  ::
+::  contains gates that operate with a game state update (paired with the     ::
+::  source ship) in their context. These contexts are passed in the sample to ::
+::  the ++bo and ++go cores themselves, in a standard Hoon idiom that is      ::
+::  somewhat similar to the OOP concept of methods. For example, ++bit would  ::
+::  be used like this:                                                        ::
+::                                                                            ::
+::  (~(bit bo board-here) location-here)                                      ::
+::                                                                            ::
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 |%                                                      ::
 ++  icon   |=(? ?:(+< 'X' 'O'))                         ::  display at
 ++  bo                                                  ::  per board
   |_  bud=board                                         ::
   ++  bit  |=(@ =(1 (cut 0 [+< 1] bud)))                ::  moved at address
   ++  get  |=(point (bit (off +<)))                     ::  get point
-  ++  jon  a/(turn (gulf 0 9) |=(@ b/(bit +<)))         ::  to json
+  ++  jon  a/(turn (gulf 0 8) |=(@ b/(bit +<)))         ::  to json
   ++  off  |=(point (add x (mul 3 y)))                  ::  bitfield address
   ++  set  |=(point (con bud (bex (off +<))))           ::  set point
   ++  win  %-  lien  :_  |=(a=@ =(a (dis a bud)))       ::  test for win
@@ -46,7 +67,7 @@
            ?:  =(511 (con boo box))                     ::
            `"tie :-("  ~  `"{<nam>} wins"               ::
   ++  row  |=  y=@  :-  (add y '1')  %-  zing           ::  print row
-           (turn (gulf 0 3) |=(@ ~[' ' ~(v at y +<)]))  ::
+           (turn (gulf 0 2) |=(@ ~[' ' ~(v at y +<)]))  ::
   ++  str  =+  [own ~[(icon who)]]  ^-  tape            ::  print player
             ?~(-< -> (scow %p u.-<))                    ::
   ++  tab  ~["+ 1 2 3" (row 0) (row 1) (row 2)]         ::  print table

@@ -1,2 +1,3 @@
-Examples __samp__ in this directory are generators, with entry points inside __samp__/ of gen/__samp__.hoon.
-This code is runnable as +__samp__. 
+This directory contains example generators for `dojo`. Generators live
+under `gen/` in a `%clay` desk, and are invoked with `+name` at the dojo
+prompt.
