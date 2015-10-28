@@ -42,7 +42,7 @@ or a library:
 
 Navigate to example `%ford` pages at
 http://your-ship.urbit.org/examples/fordn (with the appropriate number
-for `n`), or http://localhost:8080/examples/fordn if you're not routed
+for `n`), or http://localhost:8080/examples/pub/fordn if you're not routed
 through `~doznec`. To start example `%gall` apps, use `|start %examples
 %name`.
 
