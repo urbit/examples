@@ -38,6 +38,8 @@ or a library:
 [~[4 5 6 10] ~[4 5 6 10]]
 ```
 
+(note that there are two spaces between '/+' and 'sorts' in the first line)
+
 Navigate to example `%ford` pages at
 http://your-ship.urbit.org/examples/fordn (with the appropriate number
 for `n`), or http://localhost:8080/examples/fordn if you're not routed
