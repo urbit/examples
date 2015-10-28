@@ -21,7 +21,7 @@
     ;title: %ford Example 5
   ==
   ;body
-    ;h1: %ford Example 5 — Computing With Parameters  
+    ;h1: %ford Example 5 — Computing With Parameters (and Libraries)
     ;div: {<(fib arg)>}
   ==
 ==
