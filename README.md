@@ -46,6 +46,11 @@ for `n`), or http://localhost:8080/examples/pub/fordn if you're not routed
 through `~doznec`. To start example `%gall` apps, use `|start %examples
 %name`.
 
+Many of the %gall apps have front ends that can also be found at 
+http://YOUR-SHIP.urbit.org/examples/pub/APP-NAME/fab if you're routed
+through `~doznec`, or http://localhost:8080/examples/pub/APP-NAME/fab if 
+you're not.
+
 # Feedback
 
 We'd love to hear about your experience with these examples. Join us on
