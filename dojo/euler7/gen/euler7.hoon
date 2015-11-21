@@ -1,35 +1,34 @@
 ::    project euler 7
 ::    https://projecteuler.net/problem=7
-::  run in dojo with +euler7
+::  run in dojo with +euler7 10.001
 ::
 ::::  /hoon/euler7/gen
   ::
-:-  %say  |=  *  
+:-  %say  |=  [^ [[a=@ ~] ~]]
 :-  %noun
-=<  (nth 10.001)
+=<  (ith a)
 ::
 ::::  ~racbes-solmun
   ::
 |%
-++  iip                     :: is it prime
-  |=  a=@
-  =+  b=2
+++  iip
+  |=  [n=@ primes=(list ,@)]
+  =+  [c=0 lim=p:(sqt n)]
   |-  ^-  @f
-  ?:  =((mod a b) 0)
-    .n
-  ?:  (lth a (mul b 2))
-    .y
-  $(b +(b))
-
-++  nth                     :: find the nth prime
-  |=  a=@
-  =+  [i=2 n=3]
-  |-  ^-  @
-  ?:  (iip n)
-    ?:  =(i a)
-      n
-    ~&  [%i i]
-    ~&  [%n n]
-    $(i +(i), n (add 2 n))
-  $(i i, n (add 2 n))
+  =+  p=(snag c primes)
+  ?:  =(0 (mod n p))
+    %.n
+  ?:  (gth p lim)
+    %.y
+  $(c +(c))
+::
+++  ith
+  |=  i=@
+  =+  [n=3 primes=`(list ,@)`[2 ~]]
+  |-  ^-  @u
+  ?.  (iip n primes)
+    $(n (add 2 n))
+  ?:  =((lent primes) (dec i))
+    n
+  $(n (add 2 n), primes (weld primes (limo [n ~])))
 --
