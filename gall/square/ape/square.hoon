@@ -1,13 +1,10 @@
 /?    314
-|%
-  ++  move  ,*
---
 !:
 |_  [bowl state=~]
 ::
 ++  poke-atom
   |=  arg=@
-  ^-  [(list move) _+>.$]
+  ^-  [(list) _+>.$]
   ~&  [%square (mul arg arg)]
   [~ +>.$]
 --
