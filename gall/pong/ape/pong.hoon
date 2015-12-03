@@ -1,6 +1,6 @@
 /?    314
 |%
-  ++  move  ,[bone term path *]
+  ++  move  ,[bone term wire *]
 --
 !:
 |_  [bowl state=~]
