@@ -4,16 +4,18 @@
 ::::  /hook/hymn/ford12/pub
   ::
 /=    posts  /:  /%%/lib
-             /;  |=  a/(list (pair @ manx))
-                    ~&  a
-                    %+  turn
-                      a
-                    |=  {* b/manx}
-                      b
-             /@
+             /;  |=(a/(list {@ud manx}) (turn (sort a lor) tail))
+             /;  |=  a/(map @ manx)
+                 ~&  a               
+                 %+  murn
+                   (~(tap by a))
+                 |=  {a/@ b/manx}  ^-  (unit {@ud manx})
+                 =+  c=(slaw %ud a)
+                 ?~  c  ~
+                 `[u.c b]
+             /_
              /elem/
-::
-~&  posta
+!:
 ^-  manx
 ;html
   ;head
