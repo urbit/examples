@@ -1,0 +1,29 @@
+::    Ford example 12
+::    accessible at http://localhost:8080/home/pub/ford12
+::
+::::  /hook/hymn/ford12/pub
+  ::
+/=    posts  /:  /%%/lib
+             /;  |=  a/(list (pair @ manx))
+                    ~&  a
+                    %+  turn
+                      a
+                    |=  {* b/manx}
+                      b
+             /@
+             /elem/
+::
+~&  posta
+^-  manx
+;html
+  ;head
+    ;meta(charset "utf-8");
+    ;title: %ford Example 6
+  ==
+  ;body
+    ;div
+      ;h1: %ford Example 6 — Loading Resources by Number
+      ;*  posts
+    ==
+  ==
+==
