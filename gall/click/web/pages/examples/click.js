@@ -9,7 +9,7 @@ $(function() {
   $go.on("click",
     function() {
       window.urb.send(
-        "click", {mark: "click"}
+        "click", {mark: "examples-click"}
       ,function(err,res) {
         if(err)
           return $err.text("There was an error. Sorry!")
@@ -22,7 +22,7 @@ $(function() {
       })
   })
 
-  window.urb.appl = "click"
+  window.urb.appl = "examples-click"
   window.urb.bind('/the-path',
     function(err,dat) {
       clicks = dat.data.clicks

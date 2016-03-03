@@ -1,4 +1,4 @@
-|_  clicks=@
+|_  clicks/@
 ++  grow
   |%
   ++  json
