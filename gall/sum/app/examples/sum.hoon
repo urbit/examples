@@ -1,9 +1,9 @@
 /?    314
 !:
-|_  [bowl state=@]
+|_  {bowl state/@}
 ++  poke-atom
-  |=  arg=@
-  ^-  [(list) _+>.$]
+  |=  arg/@
+  ^-  {(list) _+>.$}
   ~&  [%so-far (add state arg)]
   [~ +>.$(state (add state arg))]
 --
