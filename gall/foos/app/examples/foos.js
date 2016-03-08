@@ -194,7 +194,7 @@ fixturesToStandings = function (fixtures) {
 
 $(document).ready(function() {
   mounted = React.render(Page({players:[], fixturesList:[]}), $("#container")[0])
-  urb.appl = "foos"
+  urb.appl = "examples-foos"
   urb.bind("/", function(err,d){
     mounted.setProps({
       load:false,
