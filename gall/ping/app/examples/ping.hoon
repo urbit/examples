@@ -1,20 +1,25 @@
 /?    314
 |%
-  ++  move  ,[bone term wire *]
+  ++  move  {bone term wire *}
 --
 !:
-|_  [bowl state=~]
+|_  {bowl state/$~}
 ::
 ++  poke-ping-message
-  |=  [to=@p message=@t]
-  ^-  [(list move) _+>.$]
-  [[[ost %poke /sending [to dap] %atom message] ~] +>.$]
+  |=  {to/@p message/@t}
+  ^-  {(list move) _+>.$}
+  :-  ^-  (list move)
+      :~  `move`[ost %poke /sending [to dap] %atom message]
+      ==
+  +>.$
 ::
 ++  poke-atom
-  |=  arg=@
-  ^-  [(list move) _+>.$]
-  ~&  [%receiving (,@t arg)]
+  |=  arg/@
+  ^-  {(list move) _+>.$}
+  ::
+  ~&  [%receiving (@t arg)]
   [~ +>.$]
 ::
 ++  coup  |=(* `+>)
 --
+
