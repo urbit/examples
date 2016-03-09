@@ -1,3 +1,17 @@
-This directory contains `%gall` applications. To start one, use `|start
-%desk %name` in `dojo`. `%gall` applications may have web, console, or
-`dojo` frontends.
+`%gall examples`
+
+`%gall` is the urbit application driver.  `%gall` apps hold state, respond to subscription requests and stuff like that.  
+
+Assuming you have these files inside a running urbit pier, you'll need to `|start` each app:
+
+    |start %desk %name
+
+Each of our examples lives inside of the `examples/` directory.  So, if you want to start the `%click` app from your `%home` desk you'll run this:
+
+    |start %examples-click
+
+In the case that the app has a web interface its url will look something like:
+
+    http://localhost:8080/~~/pages/examples/click
+
+Each individual app has its own set of instructions.

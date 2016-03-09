@@ -1,12 +1,8 @@
 `%ford examples`
 
-This directory contains example `%ford` pages.
+`%ford` is the urbit build system.  These examples show how to use `%ford` to render data to the web.
 
-Copy them into your pier with (something like):
-
-    cp -r ./web/*/ /path/to/your/ship/desk
-
-You can then access them through the web:
+Assuming you have the files inside a running urbit pier, you can then access them through the web:
     
     http://localhost:8080/pages/[n]
 

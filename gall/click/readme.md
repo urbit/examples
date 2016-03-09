@@ -2,8 +2,19 @@
 
 This app demonstrates how to send data from the browser to an urbit app.
 
-Follow the instructions in the root readme to set up a fake galaxy and start the app. Then just click the button in the browser.
+To run [in dojo]:
 
-Let's briefly walk through what we just did. Clicking the 'poke' button triggered the 'on click' function in click.js, which sends typed data of the `examples-click` mark--specifically the text 'click'--to our `/click` app. `/click` receives this data on its `++poke-examples-click` arm, incrementing the number of `clicks` in our state. When we have a state change, `++peer-the-path` is called, sending the updated number of clicks to the client for display.
+    |start %examples-click
 
+Then, in the browser:
+
+    http://localhost:8080/~~/pages/examples/click
+
+Click the button to increment the number stored in our state.  Even better: open another tab and watch the increments stay in sync.
+
+Let's walk through what happens on each click:
+
+- `/web/pages/click.js` catches the click event and uses `urb.send` to send JSON to your urbit.
+- Our data is sent as an `examples-click-clique` mark, which is parsed by `/mar/examples/click/clique.hoon`.
+- Our parsed JSON is received in the `++poke-examples-click-clique` arm of `/app/examples/click.hoon` which increments our state and then sends the updated state to all connected clients.
 
