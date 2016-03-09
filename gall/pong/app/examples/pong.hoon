@@ -1,20 +1,20 @@
 /?    314
 |%
-  ++  move  ,[bone term wire *]
+  ++  move  {bone term wire *}
 --
 !:
-|_  [bowl state=~]
+|_  {bowl state/$~}
 ::
 ++  poke-urbit
-  |=  to=@p
-  ^-  [(list move) _+>.$]
+  |=  to/@p
+  ^-  {(list move) _+>.$}
   [[[ost %poke /sending [to dap] %atom 'howdy'] ~] +>.$]
 ::
 ++  poke-atom
-  |=  arg=@
-  ^-  [(list move) _+>.$]
-  ~&  [%receiving (,@t arg)]
+  |=  arg/@
+  ^-  {(list move) _+>.$}
+  ~&  [%receiving (@t arg)]
   [~ +>.$]
 ::
-++  coup  |=(* [~ +>.$])
+++  coup  |=(* ~&(%poke-resolved [~ +>.$]))
 --

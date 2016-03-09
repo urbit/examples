@@ -5,8 +5,9 @@
 !:
 |_  {bowl state/$~}
 ::
-++  poke-ping-message
+++  poke-examples-ping-message
   |=  {to/@p message/@t}
+  ~&  'sent'
   ^-  {(list move) _+>.$}
   :-  ^-  (list move)
       :~  `move`[ost %poke /sending [to dap] %atom message]
@@ -15,6 +16,7 @@
 ::
 ++  poke-atom
   |=  arg/@
+  ~&  'received'
   ^-  {(list move) _+>.$}
   ::
   ~&  [%receiving (@t arg)]
