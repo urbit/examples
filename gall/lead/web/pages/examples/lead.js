@@ -70,7 +70,7 @@ $(function() {
   })
 
   
-  window.urb.appl = "lead"
+  window.urb.appl = "examples-lead"
   window.urb.bind('/',
     function(err,dat) {
       vat = dat.data

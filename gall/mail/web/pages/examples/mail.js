@@ -42,7 +42,7 @@ Compose = recl({                                                      // compose
         body: $body.val()
       }, {
       appl:"examples-mail",
-      mark:"examples-message",
+      mark:"examples-mail-message",
     }),
 
     $to.val('')                                                       // reset

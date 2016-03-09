@@ -4,10 +4,12 @@
   ::
 /?    314
 !:
-|_  [bowl state=~]
+|_  {bowl state/$~}
 ++  poke-noun
-  |=  arg=*
-  ^-  [(list) _+>.$]
+  |=  arg/*
+  ^-  {(list) _+>.$}
   ~&  [%argument arg]
   [~ +>.$]
+
+++  prep  ~&  'prep'  _`.  ::
 --

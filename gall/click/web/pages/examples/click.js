@@ -9,7 +9,7 @@ $(function() {
   $go.on("click",
     function() {
       window.urb.send(
-        "click", {mark: "examples-click"}
+        "click", {mark: "examples-click-clique"}
       ,function(err,res) {
         if(err)
           return $err.text("There was an error. Sorry!")

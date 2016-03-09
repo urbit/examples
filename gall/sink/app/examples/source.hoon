@@ -8,7 +8,6 @@
   |=  arg/*
   ^-  {(list move) _+>.$}
   :_  +>.$
-  ~&  (prey /the-path hid)
   %+  turn  (prey /the-path hid)
   |=({o/bone *} [o %diff %noun arg])
 ++  peer
