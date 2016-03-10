@@ -16,13 +16,13 @@
 ::::  ~sivtyv-barnel, ~fyr
   ::
 :-  %ask
-|=  [^ ~ ~]
-^-  (sole-result ,[%txt wain])
-=|  txt=wain
+|=  {^ $~ $~}
+^-  (sole-result [%txt wain])
+=|  txt/wain
 |-
 %+  sole-lo  [%& %write ""]
 %+  sole-go  (star prn)
-|=  tay=tape
+|=  tay/tape
 ?~  tay  (sole-so %txt (flop txt))
-%+  sole-yo  `tank`leaf/tay
+%+  sole-yo  `tank`leaf+tay
 ^$(txt [(crip tay) txt])
