@@ -12,7 +12,7 @@
   ::
 |%
 ++  fib
-  |=  lim=@
+  |=  lim/@
   =+  [fst=1 scd=2]
   |-
   ?.  (lte scd lim)

@@ -12,7 +12,7 @@
   ::
 |%
 ++  iip
-  |=  [n=@ primes=(list ,@)]
+  |=  [n/@ primes/(list @)]
   =+  [c=0 lim=p:(sqt n)]
   |-  ^-  @f
   =+  p=(snag c primes)
@@ -23,8 +23,8 @@
   $(c +(c))
 ::
 ++  ith
-  |=  i=@
-  =+  [n=3 primes=`(list ,@)`[2 ~]]
+  |=  i/@
+  =+  [n/3 primes/`(list @)`[2 ~]]
   |-  ^-  @u
   ?.  (iip n primes)
     $(n (add 2 n))

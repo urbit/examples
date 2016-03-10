@@ -13,7 +13,7 @@
 |%
 
 ++  sieve :: given a, check if a%div==0, incrementing div until it's lim, or .y
-  |=  [a=@u lim=@u]
+  |=  {a/@u lim/@u}
   =+  div=1
   |-  ^-  @f
   ?:  =(div lim)
@@ -23,7 +23,7 @@
   .n
 
 ++  lcm :: check if sieve returns .y, incrementing the number until it does
-  |=  a=@u
+  |=  a/@u
   =+  b=a
   |-  ^-  @u
   ?:  =((sieve b a) .y)
