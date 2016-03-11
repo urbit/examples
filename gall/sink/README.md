@@ -1,29 +1,31 @@
 #`/sink` & `/source`
 
-These two apps demonstrate how to set up a description between two different running applications.
+These two apps demonstrate how to set up a subscription from one app to another.
 
-#Overview 
+To run [in dojo]:
 
-Follow the instructions in the root `readme.md` to get the app up and running in a fake pier.
+    |start %examples-sink
 
-Subscribe `/sink` to `/source` by poking it with the noun `%on` (note, this syntax is specific to this app--it is not the generic way to set up subscriptions):
+    |start %examples-source
 
-`:examples-sink %on`
+Then, turn the subscription on (note this is not a general syntax for starting a subscription):
 
-You should receive this output:
+    :examples-sink %on
 
-`%subscribed`
+Finally, submit some input to `examples-sink` on the path where `sink` is subscribed:
 
-In short, poking `/sink` with `%on` sends a `%pull` message to `/source`, which sets up a subscription on the `/subscription` path.
+    :examples-source {insert any noun}
 
-Then:
+You should see a printf from `sink.hoon` confirming it received the subscription update.
 
-`:examples-source {insert any noun}`
+Let's walk through what we did:
 
-You receive:
+- when we poked `sink.hoon`, it received the noun `%on` with the `++poke-noun` arm, setting our state to 'available'. `++poke-noun` then sends out a subcription request to `source.hoon` on the path `/the-path`.
 
-`[%argument 4]`
+- `source.hoon` receives the subscription request with `++peer`. `%gall` then sends confirmation to `++reap` in `sink.hoon`
 
-When we poke `/source` with any noun, it sends a `diff-noun` update to its subscriber, which naturally receives the updated on `++diff noun`, which prints out the update.
+- then when we poked `source.hoon` with a noun, it is parsed by the mark `mar/noun.hoon`, and is then received by `source.hoon` on the `++poke-noun` arm. 
 
+- `++poke-noun` (in `source.hoon`) maps over the list of all clients subscribed to the path `/the-path`, sending a `%diff %noun` to all of them.
 
+- `sink.hoon` receives the update on the `++diff-noun`, and printfs the noun we submitted.

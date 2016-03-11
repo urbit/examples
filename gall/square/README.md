@@ -1,13 +1,19 @@
 `/square`
 
-Follow the instructions in the root readme to boot a fake galaxy and to start the app.
+This app prints out the square of an atom.
 
-Then, poke the app with a number, more specifically data with the mark of 'atom':
+To run [in dojo]:
+
+`|start %examples-click`
 
 `:examples-square 5`
 
 You should see:
 
-`[%square 9]`
+`[%square 25]`
 
-In short, the `/square` app received our number on the `++poke-atom` arm, which simply prints out the square of that number.
+Here's what happened:
+
+- the `square.hoon` app received our number
+
+- The atom was parsed by `mar/atom.hoon`, and then passed to `++poke-atom`, which printed out the square of the given number'.

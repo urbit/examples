@@ -1,12 +1,8 @@
-`/pong`
+# `/pong`
 
-This app demonstrates how to send an atom of text between two ships.
+This app demonstrates how to poke an app with an urbit (planet/star/galaxy etc) name. 
 
-##Overview
-
-Follow the instructions in the root `readme.md` to get the app running in two fake galaxies--for example, `~lec` and `~zod`.
-
-Then, from `~zod`:
+From `~zod`'s dojo:
 
 `:examples-pong &urbit ~lec`
 
@@ -14,6 +10,13 @@ Then, from `~zod`:
 
 `[%receiving 'howdy']`
 
-Let's briefly walk through what we just did: we sent typed data of the `urbit` (address) mark to `~zod`'s `/pong` app, which sends a move with data of the atom mark to `~lec`. `~lec` receives this data on the `++poke-atom` arm, which simply prints it out.
+Let's briefly walk through what we just did:
+
+- We sent typed data of the `urbit` (address) mark to `~zod`'s `/pong.hoon`, which sends a move with the message 'howdy'to `~lec`.
+
+- `~lec` receives this data on the `++poke-atom` arm, which simply prints the message out.
+
+
+
 
 

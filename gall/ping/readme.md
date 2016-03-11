@@ -1,12 +1,8 @@
 `/ping`
 
-This application demonstrates how to send typed information to an app by poking it with a 'mark.'
+This application demonstrates how to send typed information to an app on another ship by poking it with a 'mark.'
 
-## Overview
-
-Follow the instructions in the root `readme.md` to get the app up and running on two fake piers, for example `~zod` and `~rex`.
-
-From `~zod`:
+From `~zod`'s dojo:
 
 `:ping &examples-ping-message [~lec 'message-here']`
 
@@ -14,4 +10,13 @@ From `~zod`:
 
 `[%receiving 'message here']`
 
-Let's briefly walk through the flow of what we did. We poked the `/ping` app with data of the `examples-ping-message` mark, which is simply a ship address and a text `@t` atom. This arm then sends a move containing the text atom--of mark atom--we submitted to the specified ship, `~lec`, which receives the data with the `++poke-atom`, which prints out the output above.
+Let's briefly step through what we just did:
+
+- We poked `ping.hoon` with data of the `examples-ping-message` mark, which is simply a ship address and a text `@t` atom. 
+
+- `mar/examples/ping/message.hoon` parses the data to native hoon data structures, and then passes it along to `++poke-examples-ping-message`.
+
+- `++poke-examples-ping-message` then sends a move containing the text atom we submitted to the corresponding `/ping` app on the urbit we specified (`~lec`).
+
+- `~lec`'s `mar/examples/atom.hoon` parses the atom, and passes it along to`++poke-atom`, which prints out the output above.
+
