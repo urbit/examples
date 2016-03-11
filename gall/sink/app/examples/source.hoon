@@ -1,3 +1,7 @@
+::  Sends subscription updates to sink.hoon
+::
+::::  /hoon/source/examples/app
+  ::
 /?    314
 !:
 |%

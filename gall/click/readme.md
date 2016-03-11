@@ -15,6 +15,8 @@ Click the button to increment the number stored in our state.  Even better: open
 Let's walk through what happens on each click:
 
 - `/web/pages/examples/click.js` catches the click event and uses `urb.send` to send JSON to your urbit.
+
 - Our data is sent as an `examples-click-clique` mark, which is parsed by `/mar/examples/click/clique.hoon`.
+
 - Our parsed JSON is received in the `++poke-examples-click-clique` arm of `/app/examples/click.hoon` which increments our state and then sends the updated state to all connected clients.
 

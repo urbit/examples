@@ -1,5 +1,5 @@
 ::    send simple msgs between ships  ::  short description
-::    accessible at http://localhost:8080/home/pub/mail/fab/
+::
 ::
 ::::  /hoon/mail/ape fds
   ::

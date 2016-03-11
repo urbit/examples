@@ -1,6 +1,6 @@
-::  There is no love that is not an echo
+::  Accepts any noun from dojo and prints it out
 ::
-::::  /hoon/echo/ape
+::::  /hoon/echo/examples/app
   ::
 /?    314
 !:

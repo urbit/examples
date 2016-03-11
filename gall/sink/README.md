@@ -24,7 +24,7 @@ Let's walk through what we did:
 
 - `source.hoon` receives the subscription request with `++peer`. `%gall` then sends confirmation to `++reap` in `sink.hoon`
 
-- then when we poked `source.hoon` with a noun, it is parsed by the mark `mar/noun.hoon`, and is then received by `source.hoon` on the `++poke-noun` arm. 
+- Then we poked `source.hoon` with a noun, which `source.hoon` parses with `mar/noun.hoon`. `source.hoon` then receives this parsed data on its `++poke-noun` arm. 
 
 - `++poke-noun` (in `source.hoon`) maps over the list of all clients subscribed to the path `/the-path`, sending a `%diff %noun` to all of them.
 

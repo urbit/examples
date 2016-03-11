@@ -1,3 +1,7 @@
+::  Allows one ship to ping another with a string of text
+::
+::::  /hoon/ping/examples/app
+  ::
 /?    314
 |%
   ++  move  {bone term wire *}

@@ -1,4 +1,4 @@
-# `/lead`
+`/lead`
 
 This app is a basic leaderboard that allows you to add contestantsand increment their scores.
 
@@ -14,7 +14,7 @@ Let's briefly trace what happens on each click:
 
 - When you click 'Add', or when you increment a contestants score, `web/pages/examples/lead.hoon` catches the event and sends that json information--more specifically data with the mark of `json`--to `lead.hoon`. 
 
-- The `json` data is parsed by `/mar/json.hoon`, and is then passed to `++poke-json` (in `lead.hoon`).
+- The `json` data is parsed by `mar/json.hoon`, and is then passed to `++poke-json` (in `lead.hoon`).
 
 - `++poke-json` reparses the `++json` to hoon data structures, and updates the app's state to include the latest result.
 

@@ -1,6 +1,6 @@
 `/sum`
 
-To run [from dojo]():
+To run [from dojo]:
 
 `|start %examples-sum`
 

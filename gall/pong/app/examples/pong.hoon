@@ -1,3 +1,7 @@
+::  Allows one urbit to send the string 'howdy' to another urbit.
+::
+::::  /hoon/pong/examples/app
+  ::
 /?    314
 |%
   ++  move  {bone term wire *}

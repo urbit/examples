@@ -1,3 +1,7 @@
+::  Counts the number of clicks received on the 'Poke!' button on the frontend.
+::
+::::  /hoon/click/examples/app
+  ::
 /?    314
 !:
 |%

@@ -3,7 +3,9 @@
 This app demonstrates how to enter input from the command line and print it out in the dojo.
 
 
-To run, poke the app with any noun:
+To run, start the app [from dojo], and then poke the app with any noun:
+
+`|start %examples-echo`
 
 `:examples-echo {insert any noun}`
 

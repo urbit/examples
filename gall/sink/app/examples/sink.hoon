@@ -1,3 +1,7 @@
+::  Sets up a simple subscription to source.hoon
+::
+::::  /hoon/up/examples/app
+  ::
 /?    314
 |%
 ++  move  {bone card}
