@@ -1,31 +1,29 @@
-# `/up`
+`/up`
 
 This app continually pings a server at the 'target' URL, returning `[%all-is-well 200]` or  `[%we-have-a-problem {code}]`
 
-# Overview
+To run [from dojo]:
 
-Refer to the root readme to set up a fake galaxy and start the app.
+`|start %examples-up`
 
-To set a target url, poke the app with a text atom (technically data of the atom mark) specifying a url: 
-
-`www.example.com`
-
-You should see:
-
-`>=`, communicating success.
-
-Then, turn the 'pinger' on:
+`:examples-up &atom http://www.example.com`
 
 `:examples-up &atom 'on'`
 
-This data of the atom mark is received on the `++poke-atom` arm, which calls the `++wake-timer` arm, telling it to send a basic http request to the submitted url after 10 seconds:
+You should receive one of the two outputs listed above.
 
-`[%all-is-well 200]`
+Then, to turn the 'pinger' off:
 
-The `++sigh-httr` then receives the http response--data of the `httr` mark--parses it, and then calls the `++wake-timer` arm and tells it to wait 10 seconds before repinging the same url.
+`:examples-up &atom 'off'`
 
-To turn off the 'pinger':
+Let's walk through what happened, step by step:
 
-`:examples-up &atom 'on'`
+- We poked `up.hoon` with a text atom (data with a mark of atom)
 
+- `mar/atom.hoon` parsed the atom and passed it to `++poke-atom` in `up.hoon`
 
+- `++poke-atom` saves the text url as `target` in its state.
+
+- We poked `up.hoon` again, this time with the text `on`, which pings the target url with an http request.
+
+- `++sigh-httr` receives the http response and displays the result. It then calls `++wake-timer`, telling it to wait 10 seconds before pinging the target url again. This process repeats until you poke the app again with `off`

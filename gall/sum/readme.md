@@ -1,8 +1,10 @@
 `/sum`
 
-Follow the instructions in the root readme to boot a fake galaxy and to start the app.
+To run [from dojo]():
 
-Then, poke the app with a number, more specifically data with the mark of 'atom':
+`|start %examples-sum`
+
+Then:
 
 `:examples-sum &atom 3`
 
@@ -10,8 +12,15 @@ You should see:
 
 `[%so-far 3]`
 
+Then:
+
 `:examples-sum &atom 666`
 
 `[%so-far 669]`
 
-In short, `/sum` received our number on the `++poke-atom` arm, which simply adds that number to the current state (defaults/begins with `0`) and prints out the result.
+Here's what happened:
+
+- We poked `sum.hoon` with an unsigned decimal atom (`@ud`)
+
+- `mar/atom.hoon` parsed the atom and passed it to `sum.hoon`'s `++poke-atom` arm, which adds the given number to the number stored in its state; the new result is then printed out and then replaces the previous number in the app state.
+
