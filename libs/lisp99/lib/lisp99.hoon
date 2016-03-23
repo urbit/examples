@@ -21,7 +21,7 @@
 ::
 ++  p02  but-last-cell
 ++  but-last-cell  :: broken for the moment
-  |=(a/s-expr a) ::~!(+>.a ?~(+>.a a $(a +.a))))
+  |=(a/s-expr =+(|2.a ?~(- a $(a +.a))))
 ::
 ++  p03  element-at
 ++  element-at
