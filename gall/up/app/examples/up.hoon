@@ -30,18 +30,7 @@
           [ost.hid %hiss /request ~ %httr %purl (need (epur target))]~
       +>.$(on &, in-progress &)
   ==
-::
 
-::  ~&  'i get here'
-::  ^-  {(list move) _+>.$}
-::  ?:  =('off' url)
-::    [~ +>.$(on |)]
-::  ?:  =('on' url)
-::    :_  +>.$(on &, in-progress &)
-::    ?:  |(on in-progress)
-::      ~
-::    [ost.hid %them /request ~ (need (epur target)) %get ~ ~]~
-::  [~ +>.$(target url)]
 ++  sigh-httr
   |=  {wir/wire code/@ud headers/mess body/(unit octs)}
   ~&  'arrive here'
