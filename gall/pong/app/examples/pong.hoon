@@ -20,5 +20,5 @@
   ~&  [%receiving (@t arg)]
   [~ +>.$]
 ::
-++  coup  |=(* ~&(%poke-resolved [~ +>.$]))
+++  coup  |=(* [~ +>.$])
 --
