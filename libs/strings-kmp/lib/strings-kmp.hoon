@@ -15,15 +15,15 @@
   [(kmp "aaaaaaab" a) (kmp "ipsum" b)]
 ::
 ++  kmp
-  |=  [ptn=tape txt=tape]
+  |=  {ptn/tape txt/tape}
   (skm ptn (gnx ptn) txt)
 ::
 ++  skm
-  |=  [ptn=tape nxt=(list ,@sd) txt=tape]
-  =|  [i=@sd j=@ud]
-  =|  [fnd=(list ,@ud)]                     ::  indices of pattern in text
-  =+  [len=(lent txt)]
-  ^-  (list ,@ud)  |-
+  |=  {ptn/tape nxt/(list @sd) txt/tape}
+  =|  {i/@sd j/@ud}
+  =|  fnd/(list @ud)                        ::  indices of pattern in text
+  =+  len=(lent txt)
+  ^-  (list @ud)  |-
   ?~  txt  (flop fnd)
   =+  ^=  k
   |-  ?.  |(=(i -1) =((snag (abs:si i) ptn) -.txt))
@@ -34,10 +34,10 @@
   $(i (sun:si k), j +(j), txt +.txt)
 ::
 ++  gnx                                     ::  generate next table
-  |=  ptn=tape
-  =+  nxt=`(list ,@sd)`[-1 ~]
+  |=  ptn/tape
+  =+  nxt=`(list @sd)`[-1 ~]
   =+  [i=-1 j=0]
-  ^-  (list ,@sd)  |-
+  ^-  (list @sd)  |-
   ?.  (lth j (lent ptn))  nxt
   =+  ^=  k
   |-  ?.  |(=(i -1) =((snag j ptn) (snag (abs:si i) ptn)))
