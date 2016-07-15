@@ -1,3 +1,12 @@
+::  SKI calculus to nock compiler
+::    try test:ski
+::
+::::    /hoon/ski/lib
+  ::
+/?    314
+!:
+::::  ~sivtyv-barnel
+  ::
 =<  apex
 |%
 ++  apex  |=(a/tape (compile (scan a ski-rule)))
@@ -32,7 +41,9 @@
   ?~  t.a  tal
   [%2 [%0 1] %2 [%1 tal] [%1 $(a t.a)]]
 --
-
+|%
+++  test  .*([1 42] .*(7 (ski "S (K(SI)) K")))  :: (\x.\y. yx) 7 (\x.42)
+--
 :: i  [0 1]
 :: k  [[1 1] [0 1]]
 :: s  [[1 1 2] [1 0 1] [[1 1] [0 1]]]
