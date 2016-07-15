@@ -2,16 +2,19 @@
 |%
 ++  apex  |=(a/tape (compile (scan a ski-rule)))
 ++  skis  (list ?($s $k $i skis))
+++  whit  (star ;~(pose ace (just '\0a')))
 ++  ski-rule
   %+  knee  *skis  |.  ~+
-  %-  star  ;~  pose
-    (cold %s (just 's'))
-    (cold %k (just 'k'))
-    (cold %i (just 'i'))
+  %+  ifix  [whit whit]
+  %+  more  whit
+  ;~  pose
+    (cold %s (mask "sS"))
+    (cold %k (mask "kK"))
+    (cold %i (mask "iI"))
     (ifix pel^per ski-rule)
   ::
-    %+  cook  |=(a/skis k+[a]~)
-    (ifix sel^ser ski-rule)
+  ::  %+  cook  |=(a/skis k+[a]~)
+  ::  (ifix sel^ser ski-rule)
   ==
 ::
 ++  compile
