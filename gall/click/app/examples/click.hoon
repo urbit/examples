@@ -1,7 +1,3 @@
-::  Counts the number of clicks received on the 'Poke!' button on the frontend.
-::
-::::  /hoon/click/examples/app
-  ::
 /?    314
 !:
 |%
@@ -9,13 +5,13 @@
 --
 !:
 |_  {hid/bowl clicks/@}
-++  poke-examples-click-clique
-  |=  {click/$examples-click}
+++  poke-click
+  |=  click/$click
   ~&  [%poked +(clicks)]
   :_  +>.$(clicks +(clicks))
   %+  turn  (prey /the-path hid)
-  |=({o/bone *} [o %diff %examples-click-cliques +(clicks)])
+  |=({o/bone *} [o %diff %clicks +(clicks)])
 ++  peer-the-path
-  |=  {pax/path}
-  [[[ost.hid %diff %examples-click-cliques clicks] ~] +>.$]
+  |=  pax/path
+  [[[ost.hid %diff %clicks clicks] ~] +>.$]
 --
