@@ -5,13 +5,13 @@
 --
 !:
 |_  {hid/bowl clicks/@}
-++  poke-click
+++  poke-examples-click-click
   |=  click/$click
   ~&  [%poked +(clicks)]
   :_  +>.$(clicks +(clicks))
   %+  turn  (prey /the-path hid)
-  |=({o/bone *} [o %diff %clicks +(clicks)])
+  |=({o/bone *} [o %diff %examples-click-clicks +(clicks)])
 ++  peer-the-path
   |=  pax/path
-  [[[ost.hid %diff %clicks clicks] ~] +>.$]
+  [[[ost.hid %diff %examples-click-clicks clicks] ~] +>.$]
 --

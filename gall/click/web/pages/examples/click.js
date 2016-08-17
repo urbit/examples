@@ -1,4 +1,3 @@
-// XXX  trailing fas breaks stuff?
 $(function() {
   var clicks, $go, $clicks, $err
 
@@ -9,7 +8,7 @@ $(function() {
   $go.on("click",
     function() {
       window.urb.send(
-        "click", {mark: "examples-click-clique"}
+        "click", {mark: "examples-click-click"}
       ,function(err,res) {
         if(err)
           return $err.text("There was an error. Sorry!")
