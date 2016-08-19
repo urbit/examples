@@ -12,9 +12,9 @@
   |=  arg/*
   ^-  {(list move) _+>.$}
   :_  +>.$
-  %+  turn  (prey /the-path hid)
+  %+  turn  (prey /example-path hid)
   |=({o/bone *} [o %diff %noun arg])
-++  peer
+++  peer-example-path
   |=  pax/path
   ^-  {(list move) _+>.$}
   ~&  [%subscribed-to pax=pax]
