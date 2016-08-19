@@ -16,7 +16,7 @@
   |=  arg/*
   ^-  {(list move) _+>.$}
   ?:  &(=(%on arg) available)
-    [[[ost %peer /subscribe [our %examples-source] /the-path] ~] +>.$(available |)]
+    [[[ost %peer /subscribe [our %examples-source] /example-path] ~] +>.$(available |)]
   ?:  &(=(%off arg) !available)
     [[[ost %pull /subscribe [our %examples-source] ~] ~] +>.$(available &)]
   ~&  ?:(available %not-subscribed %subscribed)
