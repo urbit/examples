@@ -10,7 +10,7 @@
 ++  toplevel
   ::  Recursive parser, output should fit our mold.
   %+  knee  *s-expr
-  ::  Cache computations made within the recursion.
+  ::  Caches parser to prevent recreation during recursion.
   |.  ~+
   ::  Parse elements, separated by whitespace, surrounded by ( and ).
   %+  ifix  [pel per]
