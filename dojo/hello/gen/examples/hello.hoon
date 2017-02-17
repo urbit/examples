@@ -1,7 +1,7 @@
 ::  Hello world example
-::  run in dojo with +hello
+::  run in dojo with +examples/hello
 ::
-::::  /hoon/hello/gen
+::::  /gen/examples/hello
   ::
 /?  314
 !:

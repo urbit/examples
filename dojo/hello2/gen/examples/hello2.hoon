@@ -1,7 +1,7 @@
-::  Argumented hello world example
-::  run in dojo with +hel2o %world
+::  Keyword argumented hello world example
+::  run in dojo with +examples/hello2 %world
 ::
-::::  /hoon/hel2o/gen
+::::  /gen/examples/hello2
   ::
 /?  314
 ::
