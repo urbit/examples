@@ -13,6 +13,6 @@
 ::::
   !:
 :-  %say
-|=  {^ {$~ txt=_`@t`%mars}}
+|=  {^ {$~ txt/_`@t`%mars}}
 :-  %noun
 (crip (weld "hello, " (trip txt)))
