@@ -73,5 +73,5 @@ Run the test:
 # Contributing / Feedback
 
 PRs, comments and issues are more than welcome. If you need help the
-best channel is to `:join ~dozbud/urbit-meta` on Urbit, but you can also
+best channel is to `:join ~marzod/urbit-meta` on Urbit, but you can also
 email `urbit@urbit.org` or tweet at `@urbit_`.
