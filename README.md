@@ -57,7 +57,7 @@ Start the `%click` app:
 
 To copy in all the libraries:
 
-    cp -r /examples/path/libs/* /urbit/path/your-urbit/sandbox/
+    cp -r /examples/path/libs/*/* /urbit/path/your-urbit/sandbox/
 
 Load the [99 Lisp
 Problems](http://www.ic.unicamp.br/~meidanis/courses/mc336/2006s2/funcional/L-99_Ninety-Nine_Lisp_Problems.html):
