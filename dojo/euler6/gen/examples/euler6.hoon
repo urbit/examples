@@ -4,7 +4,7 @@
 ::
 ::::  /hoon/euler6/gen
   ::
-:-  %say  |=  *  
+:-  %say  |=  *
 :-  %noun
 =<  (diff 100)
 ::
@@ -21,7 +21,7 @@
   ?:  (lth a b)
     0
   (add b $(b +(b)))
-  
+::
 ++  sumsq
   |=  a/@u
   =+  b=1
@@ -29,7 +29,7 @@
   ?:  (lth a b)
     0
   (add (sq b) $(b +(b)))
-
+::
 ++  diff
   |=  a/@u
   (sub (sq (sum a)) (sumsq a))
