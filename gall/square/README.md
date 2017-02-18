@@ -4,9 +4,9 @@ This app prints out the square of an atom.
 
 To run [in dojo]:
 
-`|start %examples-click`
+`|start %examples-square`
 
-`:examples-square 5`
+`:examples-square &atom 5`
 
 You should see:
 
