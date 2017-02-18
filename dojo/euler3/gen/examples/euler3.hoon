@@ -4,6 +4,8 @@
 ::
 ::::  /gen/examples/euler3
 ::
+/?  310
+::
 !:
 ::
 :-  %say  |=  *
