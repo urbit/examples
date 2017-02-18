@@ -4,6 +4,8 @@
 ::
 ::::  /gen/examples/euler14
 ::
+!:
+::
 :-  %say  |=  *
 :-  %noun
 =<  (longcol 1.000.000) :: With a manual cache, many times faster

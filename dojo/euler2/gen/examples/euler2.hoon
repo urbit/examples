@@ -4,6 +4,8 @@
 ::
 ::  /gen/examples/euler2
 ::
+!:
+::
 :-  %say  |=  *
 :-  %noun
 =<  (fib 4.000.000)

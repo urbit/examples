@@ -4,6 +4,8 @@
 ::
 ::  /gen/examples/euler7
 ::
+!:
+::
 :-  %say  |=  [^ [[a=@ ~] ~]]
 :-  %noun
 =<  (ith a)

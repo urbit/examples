@@ -4,6 +4,8 @@
 ::
 ::  /gen/examples/euler5
 ::
+!:
+::
 :-  %say  |=  *
 :-  %noun
 =<  (lcm 20)

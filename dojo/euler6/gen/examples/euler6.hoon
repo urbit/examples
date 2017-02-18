@@ -4,6 +4,8 @@
 ::
 ::::  /gen/examples/euler6
 ::
+!:
+::
 :-  %say  |=  *
 :-  %noun
 =<  (diff 100)
