@@ -2,7 +2,9 @@
 ::
 ::::  /hoon/up/examples/app
   ::
-/?    314
+/?    310
+!:
+::
 |%
 ++  move  {bone card}
 ++  card

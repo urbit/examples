@@ -1,4 +1,4 @@
-/?    314
+/?    310
 !:
 |%
 ++  move  {bone $diff $mark *}

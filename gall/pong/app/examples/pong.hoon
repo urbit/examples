@@ -2,7 +2,9 @@
 ::
 ::::  /hoon/pong/examples/app
   ::
-/?    314
+/?    310
+!:
+::
 |%
   ++  move  {bone term wire *}
 --

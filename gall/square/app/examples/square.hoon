@@ -2,8 +2,9 @@
 ::
 ::::  /hoon/square/examples/app
   ::
-/?    314
+/?    310
 !:
+::
 |_  {bowl state/$~}
 ::
 ++  poke-atom
@@ -12,4 +13,3 @@
   ~&  [%square (mul arg arg)]
   [~ +>.$]
 --
-
