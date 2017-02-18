@@ -6,12 +6,11 @@
 ::    +examples/hello3, =txt %stars
 ::    +examples/hello3
 ::
-::::  /gen/examples/hello3
-  ::
+::  /gen/examples/hello3
+::
 /?  310
 ::
-::::
-  !:
+::
 :-  %say
 |=  {^ {$~ txt/_`@t`%mars}}
 :-  %noun

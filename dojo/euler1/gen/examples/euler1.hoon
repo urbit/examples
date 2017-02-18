@@ -1,15 +1,17 @@
-::    project euler 1
-::    https://projecteuler.net/problem=1
-::  run in dojo with +euler1
+::  Project Euler 1
+::  https://projecteuler.net/problem=1
+::  run in dojo with +examples/euler1
 ::
-::::  /hoon/euler1/gen
-  ::
+::  /gen/examples/euler1
+::
+!:
+::
 :-  %say  |=  *
 :-  %noun
 =<  (sum 1.000)
 ::
 ::::  ~sivtyv-barnel
-  ::
+::
 |%
 ++  three
   |=  a/@

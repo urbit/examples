@@ -1,17 +1,18 @@
-::    project euler 14
-::    https://projecteuler.net/problem=14
-::  run in dojo with +euler14
+::  Project Euler 14
+::  https://projecteuler.net/problem=14
+::  run in dojo with +examples/euler14
 ::
-::::  /hoon/euler14/gen
-  ::
+::::  /gen/examples/euler14
+::
 :-  %say  |=  *
 :-  %noun
 =<  (longcol 1.000.000) :: With a manual cache, many times faster
-!.
-::::  ~haptem-fopnys
-  ::
-|%
 ::
+!.
+::
+::::  ~haptem-fopnys
+::
+|%
 ++  collatz :: given a, returns the number of steps needed to reach 1
   |=  {a/@u cache/(map @u @u)}
   =+  [curr=a len=1]

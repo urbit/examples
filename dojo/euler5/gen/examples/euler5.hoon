@@ -1,17 +1,18 @@
-::    project euler 5
-::    https://projecteuler.net/problem=5
-::  run in dojo with +euler5
+::  Project Euler 5
+::  https://projecteuler.net/problem=5
+::  run in dojo with +examples/euler5
 ::
-::::  /hoon/euler5/gen
-  ::
+::  /gen/examples/euler5
+::
 :-  %say  |=  *
 :-  %noun
 =<  (lcm 20)
-!.
-::::  ~haptem-fopnys
-  ::
-|%
 ::
+!.
+::
+::::  ~haptem-fopnys
+::
+|%
 ++  sieve :: given a, check if a%div==0, incrementing div until it's lim, or .y
   |=  {a/@u lim/@u}
   =+  div=1
