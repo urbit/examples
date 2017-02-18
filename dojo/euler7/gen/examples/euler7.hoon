@@ -10,8 +10,6 @@
 :-  %noun
 =<  (ith a)
 ::
-::::  ~racbes-solmun
-::
 |%
 ++  iip
   |=  [n/@ primes/(list @)]

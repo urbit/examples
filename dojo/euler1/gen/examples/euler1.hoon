@@ -10,8 +10,6 @@
 :-  %noun
 =<  (sum 1.000)
 ::
-::::  ~sivtyv-barnel
-::
 |%
 ++  three
   |=  a/@

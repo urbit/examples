@@ -10,8 +10,6 @@
 :-  %noun
 =<  (fib 4.000.000)
 ::
-::::  ~sivtyv-barnel
-::
 |%
 ++  fib
   |=  lim/@

@@ -12,8 +12,6 @@
 ::
 !.
 ::
-::::  ~haptem-fopnys
-::
 |%
 ++  sieve :: given a, check if a%div==0, incrementing div until it's lim, or .y
   |=  {a/@u lim/@u}

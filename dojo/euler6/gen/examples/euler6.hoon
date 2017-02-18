@@ -10,8 +10,6 @@
 :-  %noun
 =<  (diff 100)
 ::
-::::  ~racleb-fitwyt
-::
 |%
 ++  sq
   |=  a/@u

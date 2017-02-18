@@ -12,8 +12,6 @@
 ::
 !.
 ::
-::::  ~haptem-fopnys
-::
 |%
 ++  collatz :: given a, returns the number of steps needed to reach 1
   |=  {a/@u cache/(map @u @u)}
