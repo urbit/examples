@@ -1,13 +1,13 @@
-::    Knuth-Morris-Pratt string search
-::    arms accessible in dojo after /+  strings-kmp
-::    try test:strings-kmp
+::  Knuth-Morris-Pratt string search
+::  arms accessible in dojo after `/+  strings-kmp`  (two spaces (`gap`) in between)
+::  try `test:strings-kmp`
 ::
-::::    /hoon/kmp/strings/lib
-  ::
+::  /libs/strings-kmp
+::
 /?    314
+::
 !:
-::::    ~nodpet-rinned
-  ::
+::
 |%
 ++  test
   =+  a==+([a="a" b=15] |-(?~(b (weld a "b") $(a (weld a a), b (dec b)))))
