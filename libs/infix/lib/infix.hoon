@@ -1,13 +1,13 @@
 ::  Novel syntax usage: mathematics
-::    arms accessible in dojo after /+  infix
-::    try test:infix
+::  arms accessible in dojo after `/+  infix` (two spaces (`gap`) in between)
+::  try `test:infix`
 ::
-::::  /hoon/infix/lib
-  ::
+::  /libs/infix
+::
 /?    314
+::
 !:
-::::  ~pittyp-pittyp
-  ::
+::
 |%
 ++  test  (iffy [[a / 3] + [a / 2] - 4]:[(wrap a=10 sub) add])
 ::

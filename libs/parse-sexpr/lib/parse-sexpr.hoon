@@ -1,3 +1,12 @@
+::  arms accessible in dojo after `/+  parse-sexpr` (two spaces (`gap`) in between)
+::  try `test:parse-sexpr`
+::
+::  /libs/parse-sexpr
+::
+/?    314
+::
+!:
+::
 |%
 ::  A symbolic expression is either a symbol or more s-exprs.
 ::  Symbols are stored as terms, Hoon constants.

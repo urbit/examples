@@ -1,17 +1,20 @@
-::    project euler 14
-::    https://projecteuler.net/problem=14
-::  run in dojo with +euler14
+::  Project Euler 14
+::  https://projecteuler.net/problem=14
+::  run in dojo with +examples/euler14
 ::
-::::  /hoon/euler14/gen
-  ::
-:-  %say  |=  *  
+::::  /gen/examples/euler14
+::
+/?  310
+::
+!:
+::
+:-  %say  |=  *
 :-  %noun
-=<  (longcol 1.000.000) :: With a manual cache, many times faster 
+=<  (longcol 1.000.000) :: With a manual cache, many times faster
+::
 !.
-::::  ~haptem-fopnys
-  ::
+::
 |%
- 
 ++  collatz :: given a, returns the number of steps needed to reach 1
   |=  {a/@u cache/(map @u @u)}
   =+  [curr=a len=1]
@@ -23,7 +26,7 @@
   ?:  =((mod curr 2) 0)
     $(curr (div curr 2), len +(len))
   $(curr (add (mul curr 3) 1), len +(len))
-
+::
 ++  longcol :: find the longest collatz sequence under a
   |=  {a/@u}
   =+  [len=0 num=0 acc=1 cache=(molt `(list (pair @ @))`[[2 1] [4 2] ~])]
@@ -32,6 +35,6 @@
   ?:  =(acc a)
     [num len]
   ?:  (lte len col)
-    $(len col, num acc, acc +(acc), cache (~(put by cache) acc col)) 
+    $(len col, num acc, acc +(acc), cache (~(put by cache) acc col))
   $(acc +(acc), cache (~(put by cache) acc col))
 --

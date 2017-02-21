@@ -1,15 +1,17 @@
-::    project euler 6
-::    https://projecteuler.net/problem=6
-::  run in dojo with +euler6
+::  Project Euler 6
+::  https://projecteuler.net/problem=6
+::  run in dojo with +examples/euler6
 ::
-::::  /hoon/euler6/gen
-  ::
-:-  %say  |=  *  
+::::  /gen/examples/euler6
+::
+/?  310
+::
+!:
+::
+:-  %say  |=  *
 :-  %noun
 =<  (diff 100)
 ::
-::::  ~racleb-fitwyt
-  ::
 |%
 ++  sq
   |=  a/@u
@@ -21,7 +23,7 @@
   ?:  (lth a b)
     0
   (add b $(b +(b)))
-  
+::
 ++  sumsq
   |=  a/@u
   =+  b=1
@@ -29,7 +31,7 @@
   ?:  (lth a b)
     0
   (add (sq b) $(b +(b)))
-
+::
 ++  diff
   |=  a/@u
   (sub (sq (sum a)) (sumsq a))

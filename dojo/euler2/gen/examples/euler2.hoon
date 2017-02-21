@@ -1,15 +1,17 @@
-::    project euler 2
-::    https://projecteuler.net/problem=2
-::  run in dojo with +euler2
+::  Project Euler 2
+::  https://projecteuler.net/problem=2
+::  run in dojo with +examples/euler2
 ::
-::::  /hoon/euler2/gen
-  ::
-:-  %say  |=  *  
+::  /gen/examples/euler2
+::
+/?  310
+::
+!:
+::
+:-  %say  |=  *
 :-  %noun
 =<  (fib 4.000.000)
 ::
-::::  ~sivtyv-barnel
-  ::
 |%
 ++  fib
   |=  lim/@
@@ -20,5 +22,4 @@
   ?:  =((mod scd 2) 0)
     (add scd $(fst scd, scd (add fst scd)))
   $(fst scd, scd (add fst scd))
-  :: ;:(add fst scd $(fst scd, scd (add fst scd)))   ::  ;: folds
 --

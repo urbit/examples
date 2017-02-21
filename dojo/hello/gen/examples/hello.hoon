@@ -1,12 +1,12 @@
 ::  Hello world example
-::  run in dojo with +hello
+::  run in dojo with +examples/hello
 ::
-::::  /hoon/hello/gen
-  ::
-/?  314
+::  /gen/examples/hello
+::
+/?  310
+::
 !:
-::::
-  ::
+::
 :-  %say  |=  *
 :-  %noun
 "hello, world."

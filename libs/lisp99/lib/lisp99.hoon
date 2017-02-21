@@ -1,12 +1,13 @@
-::    "99 lisp problems" http://www.ic.unicamp.br/~meidanis/courses/mc336/2006s2/funcional/L-99_Ninety-Nine_Lisp_Problems.html
-::    try test:sorts
+::  "99 lisp problems" http://www.ic.unicamp.br/~meidanis/courses/mc336/2006s2/funcional/L-99_Ninety-Nine_Lisp_Problems.html
+::  arms accessible in dojo after `/+  lisp99` (two spaces (`gap`) in between)
+::  try `test:lisp99`
 ::
-::::    /hoon/lisp99/lib
-  ::
+::  /libs/lisp99
+::
 /?    314
+::
 !:
-::::  ~fyr
-  ::
+::
 |%  ++  s-expr  (list ?(s-expr term))
 --
 |%
@@ -50,7 +51,7 @@
 ++  p08  compress
 ++  compress
   |=  a/s-expr
-  ?~  a  ~ 
+  ?~  a  ~
   |-  ^-  s-expr
   ?~  t.a  a
   ?:  =(i.a i.t.a)

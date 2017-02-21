@@ -2,7 +2,7 @@
 ::
 ::::  /hoon/echo/examples/app
   ::
-/?    314
+/?    310
 !:
 |_  {bowl state/$~}
 ++  poke-noun

@@ -1,15 +1,15 @@
-::    simple string manipulation
-::    arms accessible in dojo after /+  strings-piglatin
-::    try test:strings-piglatin
-::      ++pigl turns a single string to piglatin
-::      ++plur pluralizes a word
+::  simple string manipulation
+::  arms accessible in dojo after `/+  strings-piglatin`  (two spaces (`gap`) in between)
+::  try `test:strings-piglatin`
+::    ++pigl turns a single string to piglatin
+::    ++plur pluralizes a word
 ::
-::::  /hoon/piglatin/strings/lib
-  ::
+::  /libs/strings-piglatin
+::
 /?    314
+::
 !:
-::::  ~sivtyv-barnel
-  ::
+::
 |%                                                      ::  core
 ++  test  (pigl (plur "what"))                          ::  test:strin
 ++  pigl                                                ::  pig latin ++arm
@@ -23,7 +23,7 @@
   ==                                                    ::  close tuple
   ?:  ?|(=(fst 'a') =(fst 'e') =(fst 'i') =(fst 'o') =(fst 'u'))
     (weld wrd end)
-  (welp snd [fst end])                                  
+  (welp snd [fst end])
 
 ++  plur                                                ::  pluralize
 |=  wrd=tape                                            ::  gate, tape sample
@@ -34,9 +34,9 @@
     %s  ?:  =((snag slast wrd) 'u')
       (welp (scag slast wrd) "i")
     (welp wrd "es")
-    %e  (welp wrd "s")  
+    %e  (welp wrd "s")
     %x  (welp wrd "es")
     %y  (welp (scag idx wrd) "ies")
-    @   (welp wrd "s")                                          
+    @   (welp wrd "s")
   ==
 --

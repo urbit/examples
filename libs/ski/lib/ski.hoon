@@ -1,12 +1,13 @@
 ::  SKI calculus to nock compiler
-::    try test:ski
+::  arms accessible in dojo after `/+  ski` (two spaces (`gap`) in between)
+::  try `test:ski`
 ::
-::::    /hoon/ski/lib
-  ::
-/?    314
+::  /libs/ski
+::
+/?   314
+::
 !:
-::::  ~fyr
-  ::
+::
 =<  apex
 |%
 ++  apex  |=(a/tape (compile (scan a ski-rule)))
@@ -63,7 +64,7 @@
 :: \x. [\y [2 y X]]
 ::   [\y [2 y X]]
 ::   [[1 2] [0 1] [1 X]]
-  
+
 :: [[1 1 2] [1 0 1] [[1 1] [0 1]]]
 :: [\x [\y [2 y x]]]
 

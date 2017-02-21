@@ -2,8 +2,9 @@
 ::
 ::::  /hoon/source/examples/app
   ::
-/?    314
+/?    310
 !:
+::
 |%
 ++  move  {bone $diff mark *}
 --

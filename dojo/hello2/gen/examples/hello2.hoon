@@ -1,13 +1,13 @@
-::  Argumented hello world example
-::  run in dojo with +hel2o %world
+::  Keyword argumented hello world example
+::  run in dojo with +examples/hello2 %world
 ::
-::::  /hoon/hel2o/gen
-  ::
-/?  314
+::  /gen/examples/hello2
 ::
-::::
-  !:
+/?  310
+::
+!:
+::
 :-  %say
-|=  {^ [[txt/@tas $~} $~]]
+|=  {^ {{txt/@tas $~} $~}}
 :-  %noun
 (crip (weld "hello, " (trip txt)))

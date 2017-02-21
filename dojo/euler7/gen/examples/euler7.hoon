@@ -1,15 +1,17 @@
-::    project euler 7
-::    https://projecteuler.net/problem=7
+::  Project Euler 7
+::  https://projecteuler.net/problem=7
 ::  run in dojo with +euler7 10.001
 ::
-::::  /hoon/euler7/gen
-  ::
+::  /gen/examples/euler7
+::
+/?  310
+::
+!:
+::
 :-  %say  |=  [^ [[a=@ ~] ~]]
 :-  %noun
 =<  (ith a)
 ::
-::::  ~racbes-solmun
-  ::
 |%
 ++  iip
   |=  [n/@ primes/(list @)]

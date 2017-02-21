@@ -1,12 +1,12 @@
-::    arms accessible in dojo after /+  sorts
-::    try test:sorts
+::  arms accessible in dojo after `/+  sorts` (two spaces (`gap`) in between)
+::  try `test:sorts`
 ::
-::::    /hoon/kmp/sorts/lib
-  ::
+::  /libs/sorts
+::
 /?    314
+::
 !:
-::::  ~sivtyv-barnel
-  ::
+::
 |%
 ++  test  [(merge-sort [10 5 4 6 ~]) (bubble-sort [10 5 4 6 ~])]
 ::
@@ -22,7 +22,7 @@
   ?:  (gth bubble.state i.rightside.state)
     $(state [[i.rightside.state leftside.state] [bubble.state] [t.rightside.state]])  ::  have to prepend
   $(state [[bubble.state leftside.state] [i.rightside.state] [t.rightside.state]])    ::  the new bubble
-::   
+::
 ++  bubble-sort
   |=  [a=(list ,@ud)]
   (flop (sort a))
