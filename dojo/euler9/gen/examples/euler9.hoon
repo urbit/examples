@@ -18,19 +18,19 @@
 ::
 |%
 ++  find-pythagorean-triplet-abc-sum-eq-one-thousand
-  |=  {a/@u b/@u c/@u}                                  :: gate, takes 3 numbers
+  |=  {a/@u b/@u c/@u}                                  :: gate takes 3-num cell
   |-  ^-  @u                                            :: loop, prod is 1 num.
   ?:  ?!  =((add (add a b) c) 1.000)                    :: if a+b+c not= 1000,
     a                                                   :: produce a.
-  %=  $                                                 :: else, call loop.
+  %=  $                                                 :: else, call loop:
     a  |-  ^-  @u                                       :: a -> inner loop prod:
        ?:  =((add (mul a a) (mul b b)) (mul c c))       :: if abc are pyth. trip
-         ~&  [a b c]                                    :: prints cell [a b c].
-         (mul (mul a b) c)                              :: produce abc.
+         ~&  [a b c]                                    :: println cell [a b c].
+         (mul (mul a b) c)                              :: & produce abc.
        ?:  (lth c b)                                    :: else, if no combos =,
          +(a)                                           :: increment a (reloop).
-       $(b +(b), c (dec c))                             :: else, this loop +b -c
-    c  (dec c)                                          :: c -> decrement c.
+       $(b +(b), c (dec c))                             :: else, loop w b+1 c-1.
+    c  (dec c)                                          :: c -> decrement c, c=1
   ==
 --
 

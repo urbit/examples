@@ -19,21 +19,21 @@
 ::
 |%
 ++  largest-palindrome
-  |=  {a/@u b/@u}
-  =|  p/@u                                              :: palindrome.
-  |-  ^-  @u
-  ?>  &((lth a 1.000) (lth b 1.000))                    :: three-digit
-  ?>  &((gte a 100) (gth b 100))                        :: numbers.
-  ?:  (lth (mul a b) p)
-    p
-  %=  $
-    p  |-  ^-  @u
-       ?:  (lth (mul a b) p)
-         p
+  |=  {a/@u b/@u}                                       :: gate, takes cell nums
+  =|  p/@u                                              :: palindr. var, set l8r
+  |-  ^-  @u                                            :: loop, produce a num:
+  ?>  &((lth a 1.000) (lth b 1.000))                    :: assert (sure) a&b are
+  ?>  &((gte a 100) (gth b 100))                        ::  three-digit numbers.
+  ?:  (lth (mul a b) p)                                 :: if a*b < p,
+    p                                                   :: produce p
+  %=  $                                                 :: otherwise, call loop:
+    p  |-  ^-  @u                                       :: p -> prod. loop. num:
+       ?:  (lth (mul a b) p)                            :: if a*b < p
+         p                                              :: produce p.
        ?:  =(<(mul a b)> (flop <(mul a b)>))            :: <foo> = list of chars
-         (mul a b)
-       $(b (dec b))
-    a  (dec a)
+         (mul a b)                                      :: ^if palinr., prod a*b
+       $(b (dec b))                                     :: else, call loop w b-1
+    a  (dec a)                                          :: a ->  a - 1.
   ==
 --
 
