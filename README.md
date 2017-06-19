@@ -23,7 +23,7 @@ If your Urbit was installed at `/urbit/path` now you can find your
 
 To copy in all the generators:
 
-    cp -r /examples/path/dojo/*/* /urbit/path/your-urbit/sandbox/
+    cp -r /examples/path/dojo/* /urbit/path/your-urbit/sandbox/
 
 To run your first generator:
 
@@ -33,7 +33,7 @@ To run your first generator:
 
 To copy in all the web pages:
 
-    cp -r /examples/path/web/*/* /urbit/path/your-urbit/sandbox/
+    cp -r /examples/path/web/* /urbit/path/your-urbit/sandbox/
 
 You should be able to find them at
 `http://localhost:8080/pages/examples/1` or similar.
@@ -44,7 +44,7 @@ Have your Urbit serve from the `%examples` desk:
 
 To copy in all the apps:
 
-    cp -r /examples/path/gall/*/* /urbit/path/your-urbit/sandbox/
+    cp -r /examples/path/gall/* /urbit/path/your-urbit/sandbox/
 
 Apps are also inside `examples/` directories, but we use `-`.
 
@@ -57,7 +57,7 @@ Start the `%click` app:
 
 To copy in all the libraries:
 
-    cp -r /examples/path/libs/*/* /urbit/path/your-urbit/sandbox/
+    cp -r /examples/path/libs/* /urbit/path/your-urbit/sandbox/
 
 Load the [99 Lisp
 Problems](http://www.ic.unicamp.br/~meidanis/courses/mc336/2006s2/funcional/L-99_Ninety-Nine_Lisp_Problems.html):
