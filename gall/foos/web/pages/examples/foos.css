@@ -28,7 +28,7 @@ input.black {
   color: #fff;
 }
 
-input.yellow { 
+input.yellow {
   background-color: rgb(249, 255, 0);
   color: #000;
 }
@@ -54,7 +54,7 @@ ul.standings li:first-child div{
 font-weight: 600;
 }
 
-ul, 
+ul,
 li {
   list-style-type: none;
 }
@@ -66,6 +66,10 @@ ul {
 #afix div,
 ul li > div {
   display: inline-block;
+}
+
+.pending {
+  opacity: .5;
 }
 
 .contestant {
@@ -86,5 +90,3 @@ ul li > div {
 .standElem {
   width: 6rem;
 }
-
-

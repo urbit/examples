@@ -2,7 +2,6 @@
 ::::
   ::
 /?    310
-!:
 /=    gas    /$    fuel
 ::
 ::::  sivtyv-barnel

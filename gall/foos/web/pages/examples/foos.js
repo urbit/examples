@@ -4,9 +4,7 @@ li     = React.DOM.li
 input  = React.DOM.input
 button = React.DOM.button
 
-recl   = React.createClass
-
-Page = recl({                                                         // top level component
+Page = React.createClass({                                                         // top level component
   render: function(){return (
     div({},
     AddFixture({load:this.props.load,fixtures:this.props.fixture}),
@@ -16,7 +14,7 @@ Page = recl({                                                         // top lev
   )},
 })
 
-AddFixture = recl({                                                   // add component
+AddFixture = React.createClass({                                                   // add component
   _handleClick: function() { this.submit(); },                        // click and
   _handleKey: function(e) { if(e.keyCode == 13) this.submit(); },     // enter go to the same place
 
@@ -27,18 +25,18 @@ AddFixture = recl({                                                   // add com
 
   isValid: function(bscore,yscore,bcons,ycons){                       // validate input
     valid = true
-    if(bcons.length === 0 || 
-       ycons.length === 0 || 
-       isNaN(bscore) || 
-       isNaN(yscore)) { 
+    if(bcons.length === 0 ||
+       ycons.length === 0 ||
+       isNaN(bscore) ||
+       isNaN(yscore)) {
       valid = "Something isn't quite right with your input"
       return valid
     }
     if(this.validRange(bscore) && this.validRange(yscore)){
       if(bscore == 10 || yscore == 10){
         if(yscore == 10 && bscore == 10) valid = "Scores can't both be 10?"
-      } else valid = "Scores aren't quite right"
-    } else valid = "Scores aren't quite right"
+      } else valid = "One score must be 10"
+    } else valid = "One score must be 10"
     if(bcons.toLowerCase() == ycons.toLowerCase())
       valid = "Two players can't be the same!"
     return valid
@@ -56,28 +54,27 @@ AddFixture = recl({                                                   // add com
     ycons = $el.find('#ycons').val().trim()
     yscore = parseInt($el.find('#yscore').val().trim())
 
-    if(this.isValid(bscore,yscore,bcons,ycons) !== true) {            // validate 
-      alert(valid) 
+    if(this.isValid(bscore,yscore,bcons,ycons) !== true) {            // validate
+      alert(valid)
       return false
     }
 
-    mounted.setProps({load:true})
+    fixtures = data.slice();                                          // copy the fixtures list
+    fixtures.unshift({                                                // add our new fixture
+      bcons:bcons,
+      ycons:ycons,
+      bscore:bscore,
+      yscore:yscore,
+      pending:true
+    })
+    React.render(Page({fixturesList:fixtures}), $("#container")[0])
 
     urb.send({                                                        // send to server
-        bcons:bcons, 
-        ycons:ycons, 
-        bscore:bscore, 
+        bcons:bcons,
+        ycons:ycons,
+        bscore:bscore,
         yscore:yscore
     }, function(){
-      newFixturesList = mounted.props.fixturesList.slice();           // copy the fixtures list
-      newFixturesList.push({                                          // add our new fixture
-        bcons:bcons,
-        ycons:ycons, 
-        bscore:bscore, 
-        yscore:yscore,
-        pending:true
-      })
-      mounted.setProps({fixturesList:newFixturesList})                // set props in the parent
       $el.find('#bcons').val('');                                     // reset on callback
       $el.find('#bscore').val('');
       $el.find('#ycons').val('');
@@ -93,34 +90,34 @@ AddFixture = recl({                                                   // add com
        div({className:'score'},'Score'),
        div({className:'contestant'},'Contestant'),
        input({
-        className:'contestant black', 
-        id:'bcons', 
+        className:'contestant black',
+        id:'bcons',
         onKeyDown:this._handleKey}),
        input({
-        className:'score black', 
-        id:'bscore', 
+        className:'score black',
+        id:'bscore',
         onKeyDown:this._handleKey}),
        input({
-        className:'score yellow', 
-        id:'yscore', 
+        className:'score yellow',
+        id:'yscore',
         onKeyDown:this._handleKey}),
        input({
-        className:'contestant yellow', 
-        id:'ycons', 
+        className:'contestant yellow',
+        id:'ycons',
         onKeyDown:this._handleKey}),
        button({
-        id:'entrees', 
-        onClick:this._handleClick}, 
+        id:'entrees',
+        onClick:this._handleClick},
         'Submit')
     ])
   }
 })
 
-Fixture = recl({
+Fixture = React.createClass({
   render: function() {
     klass = 'fixture'
     if(this.props.pending) klass += ' pending'
-    return li({className:klass}, 
+    return li({className:klass},
             [div({className:'contestant'}, this.props.bcons),
              div({className:'score'}, this.props.bscore),
              div({className:'score'}, this.props.yscore),
@@ -129,29 +126,29 @@ Fixture = recl({
 })
 
 //List all played fixtures
-Fixtures = recl({
+Fixtures = React.createClass({
   render: function(){
     return (ul({className:'fixturesList'}, this.props.fixturesList.map(Fixture)))
   }
 })
 
-Standing = recl({
+Standing = React.createClass({
   render: function(){
     return li({},
-      [div({className:'standElem'},this.props.player), 
-       div({className:'standElem'},this.props.wins), 
+      [div({className:'standElem'},this.props.player),
+       div({className:'standElem'},this.props.wins),
        div({className:'standElem'},this.props.losses)])
   }
 })
 
 //update standings
-Standings = recl({
+Standings = React.createClass({
   render: function(){
     var updatedRecords = fixturesToStandings(this.props.fixturesList)
     var sortedRecords = updatedRecords.sort(standingSort)
     heading = li({},
-      [div({className: 'standElem'},'Player'), 
-       div({className: 'standElem'},'Wins'), 
+      [div({className: 'standElem'},'Player'),
+       div({className: 'standElem'},'Wins'),
        div({className: 'standElem'},'Losses')
     ])
     return ul({className:"standings"},[heading, sortedRecords.map(Standing).reverse()]) //
@@ -159,7 +156,7 @@ Standings = recl({
 })
 
 //sort players by record
-standingSort = function (a,b){                
+standingSort = function (a,b){
   switch(true){
     case a.wins  > b.wins: return 1;
     case a.wins  < b.wins: return -1;
@@ -193,12 +190,11 @@ fixturesToStandings = function (fixtures) {
 }
 
 $(document).ready(function() {
-  mounted = React.render(Page({players:[], fixturesList:[]}), $("#container")[0])
+  data = []
+  React.render(Page({fixturesList:data}), $("#container")[0])
   urb.appl = "examples-foos"
   urb.bind("/", function(err,d){
-    mounted.setProps({
-      load:false,
-      fixturesList:d.data
-    })
+    data = d.data
+    React.render(Page({fixturesList:data}), $("#container")[0])
   })
 })
