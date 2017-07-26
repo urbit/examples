@@ -1,0 +1,56 @@
+@font-face {
+  font-family: "scp";
+  src: url("//media.urbit.org/fonts/scp-regular.woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
+line {
+  /*stroke: #999;*/
+  /*stroke-opacity: 0.6;*/
+}
+
+input.color {
+  -webkit-appearance: none;
+  border-radius: 50%;
+  radius: 5px;
+}
+.nodes circle {
+  /*stroke: #fff;*/
+  stroke-width: 1.5px;
+}
+
+h1 {
+  font-family: scp
+}
+
+text {
+  font-family: scp, monospace;
+}
+
+input {
+  padding: 10px;
+  font-size: 16px;
+  text-align: center;
+  line-height: 18px;
+}
+
+
+input.subscribe {
+  border: 3px solid #000;
+  border-radius: 10em;
+  width: 80%;
+}
+
+.colors {
+  display: block;
+  margin: auto;
+  padding: auto;
+  width: 33%;
+}
+
+.inputs {
+  display: block;
+  margin: auto;
+  width: 33%;
+ }
