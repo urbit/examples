@@ -1,9 +1,10 @@
-/?    310
+/-  click
+[. click]
 !:
-|_  clicks/@
+|_  cis/clicks
 ++  grow
   |%
   ++  json
-    (joba %clicks (jone clicks))
+    (joba %clicks (jone cis))
   --
 --

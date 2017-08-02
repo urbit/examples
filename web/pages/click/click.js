@@ -8,12 +8,12 @@ $(function() {
   $go.on("click",
     function() {
       window.urb.send(
-        "click", {mark: "examples-click-click"}
+        "click", {mark: "click-click"}
       ,function(err,res) {
         if(err)
           return $err.text("There was an error. Sorry!")
-        if(res.data !== undefined && 
-           res.data.ok !== undefined && 
+        if(res.data !== undefined &&
+           res.data.ok !== undefined &&
            res.data.ok !== true)
           $err.text(res.data.res)
         else
@@ -21,8 +21,8 @@ $(function() {
       })
   })
 
-  window.urb.appl = "examples-click"
-  window.urb.bind('/the-path',
+  window.urb.appl = "click"
+  window.urb.bind('/click',
     function(err,dat) {
       clicks = dat.data.clicks
       $clicks.text(clicks)

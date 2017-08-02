@@ -1,6 +1,7 @@
-/?    310
+/-  click
+[. click]
 !:
-|_  click/$click
+|_  cik/^click
 ++  grab
   |%
   ++  noun  |=(* %click)
