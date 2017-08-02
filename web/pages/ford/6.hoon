@@ -4,7 +4,7 @@
 ::::  /hook/hymn/ford6/pub
   ::
 |%
-++  fib  
+++  fib
   |=  x/@
     ?:  (lth x 2)
       1
@@ -15,11 +15,13 @@
 ;html
   ;head
     ;meta(charset "utf-8");
-    ;title: Exercise 5
+    ;title: Examples - Ford 6
+    ;link(rel "stylesheet", type "text/css", href "/~~/pages/ford/ford.css");
   ==
   ;body
+    ;h1#title: %ford: 6
     ;div
-      ;h1: Exercise 5 — Loops
+      ;h1: Loops
       ;p: {<(fib 1)>}, {<(fib 2)>}, {<(fib 3)>}, {<(fib 4)>}
     ==
   ==
