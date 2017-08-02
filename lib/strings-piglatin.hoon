@@ -13,7 +13,7 @@
 |%                                                      ::  core
 ++  test  (pigl (plur "what"))                          ::  test:strin
 ++  pigl                                                ::  pig latin ++arm
-|=  wrd=(list ,@t)                                      ::  gate, str sample
+|=  wrd/(list @t)                                      ::  gate, str sample
   ^-  tape                                              ::  check rslt is tape
   ?~  wrd                                               ::  if null
     ~&('please enter an input' ~)                       ::  then
@@ -26,17 +26,17 @@
   (welp snd [fst end])
 
 ++  plur                                                ::  pluralize
-|=  wrd=tape                                            ::  gate, tape sample
+|=  wrd/tape                                            ::  gate, tape sample
   =+  idx=(dec (lent wrd))
   =+  lst=`char`(snag idx wrd)
   =+  slast=(dec idx)
   ?-  lst                                               ::  switch (on tile)
-    %s  ?:  =((snag slast wrd) 'u')
+    $s  ?:  =((snag slast wrd) 'u')
       (welp (scag slast wrd) "i")
     (welp wrd "es")
-    %e  (welp wrd "s")
-    %x  (welp wrd "es")
-    %y  (welp (scag idx wrd) "ies")
+    $e  (welp wrd "s")
+    $x  (welp wrd "es")
+    $y  (welp (scag idx wrd) "ies")
     @   (welp wrd "s")
   ==
 --
