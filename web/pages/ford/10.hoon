@@ -1,21 +1,23 @@
-::    Ford example 10
-::    accessible at http://localhost:8080/home/pub/ford10
+::  Ford example 10
+::  accessible at http://localhost:8080/home/pub/ford10
 ::
-::::  /hook/hymn/ford10/pub
-  ::
-/?    314
-/=    gas  /$  fuel
+::  /hook/hymn/ford10/pub
 ::
-//    /%%/lib
+/=  gas
+/$  fuel
+::
+//  /%%/10/lib
 ^-  manx
 ;html
   ;head
     ;meta(charset "utf-8");
-    ;title: %ford Example 4
+    ;title: Examples - Ford 10
+    ;link(rel "stylesheet", type "text/css", href "/~~/pages/ford/ford.css");
   ==
   ;body
+    ;h1#title: %ford: 10
     ;div
-      ;h1: %ford Example 4 — Breaking Code Into Parts
+      ;h1: Breaking Code Into Parts
       ;div: {<(fib 70)>}
     ==
   ==
