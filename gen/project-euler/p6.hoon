@@ -1,10 +1,8 @@
 ::  Project Euler 6
 ::  https://projecteuler.net/problem=6
-::  run in dojo with +examples/euler6
+::  run in dojo with +examples/project-euler/p006
 ::
-::::  /gen/examples/euler6
-::
-/?  310
+::  p006/project-euler/gen
 ::
 !:
 ::
