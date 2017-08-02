@@ -1,10 +1,8 @@
 ::  Project Euler 5
 ::  https://projecteuler.net/problem=5
-::  run in dojo with +examples/euler5
+::  run in dojo with +examples/project-euler/p005
 ::
-::  /gen/examples/euler5
-::
-/?  310
+::  p005/project-euler/gen
 ::
 !:
 ::
