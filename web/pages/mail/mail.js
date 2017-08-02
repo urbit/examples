@@ -12,50 +12,50 @@ Page = recl({                                                         // top lev
   }
 })
 
-Compose = recl({                                                      // compose 
+Compose = recl({                                                      // compose
   displayName: 'Mess',
 
-  validate: function(to,subj,body){                                   // validate outgoing
+  validate: function(to,sub,bod){                                   // validate outgoing
     valid = true
     if(to[0] !== "~" || to.length < 4)
       valid = "to"
-    if(subj.length < 1)
-      valid = "subj"
-    if(body.length < 1)
-      valid = "body"
+    if(sub.length < 1)
+      valid = "sub"
+    if(bod.length < 1)
+      valid = "bod"
     return valid
   },
 
   handleClick: function(){
     $to = $(this.getDOMNode()).find('.to')                            // aliases
-    $subj = $(this.getDOMNode()).find('.subj')
-    $body = $(this.getDOMNode()).find('.body')
+    $sub = $(this.getDOMNode()).find('.sub')
+    $bod = $(this.getDOMNode()).find('.bod')
 
-    if(this.validate($to.val(),$subj.val(),$body.val()) !== true) {   // validate
+    if(this.validate($to.val(),$sub.val(),$bod.val()) !== true) {   // validate
       $(this.getDOMNode()).find('.'+valid).focus()                    // return if needed
       return false
     }
 
     urb.send({                                                        // send to server
         to:   $to.val(),
-        subj: $subj.val(),
-        body: $body.val()
+        sub: $sub.val(),
+        bod: $bod.val()
       }, {
-      appl:"examples-mail",
-      mark:"examples-mail-message",
+      appl:"mail",
+      mark:"mail-send",
     }),
 
     $to.val('')                                                       // reset
-    $subj.val('')
-    $body.val('')
+    $sub.val('')
+    $bod.val('')
   },
 
   render: function(){
     return(
       div({},
         div({}, input({className:"to", placeholder: "To"})),
-        div({}, input({className:"subj",placeholder: "Subject"})),
-        div({}, textar({className:"body",placeholder: "Body"})),
+        div({}, input({className:"sub",placeholder: "Subject"})),
+        div({}, textar({className:"bod",placeholder: "Body"})),
         button({onClick:this.handleClick}, "Send")
       )
     )
@@ -66,9 +66,9 @@ Compose = recl({                                                      // compose
 Message = recl({                                                      // simple message
   render: function(){
     return  div({className:"Message"},
-      div({className:"to"}, this.props.message.mez.to),
-      div({className:"subj"}, this.props.message.mez.subj),
-      div({className:"body"}, this.props.message.mez.body))
+      div({className:"fom"}, this.props.message.fom),
+      div({className:"sub"}, this.props.message.sub),
+      div({className:"bod"}, this.props.message.bod))
   }
 })
 
@@ -86,7 +86,7 @@ Inbox = recl({                                                        // list of
 
 $(document).ready(function(){                                         // render when ready
   mounted = React.render(Page({}), $("#container")[0])
-  urb.bind("/", {appl:'examples-mail'}, function(e,d){                      // bind to backend
+  urb.bind("/", {appl:'mail'}, function(e,d){                      // bind to backend
     mounted.setProps({messages:d.data})
   })
 })

@@ -1,74 +1,95 @@
-::    send simple msgs between ships  ::  short description
+::  Send simple msgs between ships  ::  short description
 ::
+::  /hoon/mail/app
 ::
-::::  /hoon/mail/ape fds
-  ::
-/?    310                             ::  require hoon version 310 or below
-/-    examples-mail-message                         ::  import message structure
+/-  mail-message, mail-send
+[. mail-message mail-send]
 ::
-::
-::::  sivtyv-barnel                   ::  name(s) of author(s)
-  ::
-!:                                    ::  insert stack trace for this core
-|_  $:  hid/bowl                      ::  system data
-      sent/(map @da examples-mail-message)         ::  app state data structures
-    received/(map @da examples-mail-message)
-    ==
-++  prep  _`.                        ::  wipe state when app code is changed
-::
-++  peer                              ::  get 1st time subs. add them to sup
-  |=  {pax/path}                      ::  path subscribed
-  =+  ^=  ordered-messages            ::  push on ordered list of all messages
-      %+  sort                            ::  map with quicksort..
-        (~(tap by received))              ::  ..over listified map
-      |=  $:  a/(pair @da examples-mail-message)       ::  comparing by time
-          b/(pair @da examples-mail-message)
+!:
+|%
+++  move  {bone card}
+++  card  $%  {$poke path dock mark *}
+              {$diff mark *}
           ==
-      (gth p.a p.b)
-  :_  +>.$                            ::  return unaltered app state
-  :-  :^  ost.hid  %diff  %json       ::  and send updated inbox
-      (inbox-to-json ordered-messages)
-  ~
+--
 ::
-++  inbox-to-json                     ::  convert received messages to ++json
-  |=  messes/(list {@da examples-mail-message})    ::  accept map of time to message
-  :-  %a  ^-  (list json)             ::  compose json array of msgs
-  %+  turn  messes                    ::  map over listified map of @da to msg
-  |=  {tym/time mez/examples-mail-message}          ::  func that makes json msgs
-  %^  jobe                            ::  compose ++json object
-    tym+(jode tym)                    ::  k-v pair of tym:time
-    mez+(msg-to-json mez)             ::  k-v pair of mez:++json msg
-  ~ ::
+|_  $:  bow/bowl
+        sen/(list mail-message)                         ::<  sent messages
+        rec/(list mail-message)                         ::<  received messages
+    ==
 ::
-++  msg-to-json                       ::  convert msgs to json
-  |=  mez/examples-mail-message                     ::  accept msg
-  %^  jobe  to+s+(scot %p to.mez)     ::  compose ++json object of to:shipname
-     subj+s+subj.mez                  ::  sub:subject
-  :-  body+s+(role body.mez)          ::  body:body-of-msg
-  ~                                   ::  jobe takes a list, needs ~ terminator
-++  poke-examples-mail-message                      ::  receive data with mark of "message"
-  |=  {mez/examples-mail-message}
-  ?.  =(to.mez our.hid)               ::  unless we are receiving message:
-    =.  sent                          ::  store sent message
-      (~(put by sent) now.hid src.hid +.mez)   
-    :_  +>.$                          ::  return new app stat
-    :_  ~
-    :^  ost.hid  %poke  /
-    [`dock`[to.mez %examples-mail] %examples-mail-message mez]
-  =.  received                        ::  if we're receiving: update received
-    (~(put by received) now.hid src.hid +.mez) ::
-  =+  ^=  ordered-msgs                ::  push on sorted list of messages
-      %+  sort                        ::  call sort on
-        (~(tap by received))          ::  listified map..
-      |=  {a/(pair @da examples-mail-message) b/(pair @da examples-mail-message)} ::
-      (gth p.a p.b)                   ::  and gate that compares by @da
-  :_  +>.$                            ::  return new app state
-  %+  turn  (~(tap by sup.hid))       ::  map over list of subscribers
-  |=  {os/bone *}                     
-  :+  os  %diff
-  :-(%json `json`(inbox-to-json ordered-msgs))       ::  update of new inbox
+++  prep  _`.
+::
+++  peer
+  |=  pax/path
+  ^-  (quip move +>.$)
+  =/  ordered-messages/(list mail-message)
+    %+  sort
+      rec
+    |=  {a/mail-message b/mail-message}
+    (gth tim.a tim.b)
+  :_  +>.$
+  :_  ~
+  :^  ost.bow  %diff  %json
+  (inbox-to-json ordered-messages)
+::
+++  inbox-to-json
+  |=  box/(list mail-message)
+  ^-  json
+  :-  %a
+  %+  turn  box
+  |=  a/mail-message
+  %-  jobe
+  :~  tim+(jode tim.a)
+      fom+s+(scot %p fom.a)
+      to+s+(scot %p to.a)
+      sub+s+sub.a
+      bod+s+(role bod.a)
+  ==
+++  poke-mail-send
+  |=  sen/mail-send                                     ::<  to, subject, body
+  ^-  (quip move +>.$)
+  =/  out/mail-message
+    [now.bow our.bow to.sen sub.sen bod.sen]
+  =.  ^sen
+    [out ^sen]
+  ~&  mail+sending+'Sending message!'
+  :_  +>.$
+  :~  :*  ost.bow
+          %poke
+          /
+          [[to.out %mail] %mail-message out]
+      ==
+  ==
+++  poke-mail-message
+  |=  mes/mail-message
+  ?>  =(to.mes our.bow)
+  ~&  mail+received+'New message!'
+  ~&  mail+time+tim.mes
+  ~&  mail+from+fom.mes
+  ~&  mail+to+to.mes
+  ~&  mail+sub+sub.mes
+  ~&  mail+bod+bod.mes
+  =.  rec
+    [mes rec]
+  =/  ord/(list mail-message)                           ::<  ordered messages
+    %+  sort
+      rec
+    |=  {a/mail-message b/mail-message}
+    (gth tim.a tim.b)
+  :_  +>.$
+  %+  turn  (~(tap by sup.bow))
+  |=  {o/bone *}
+  [o %diff %json `json`(inbox-to-json ord)]
  ::
-++  coup                              ::  handle responses to requests we make
-  |=  [sih/*]
-  [~ +>]                              ::  ignore and return unaltered core
+++  coup
+  |=  {wir/wire err/(unit tang)}
+  ^-  (quip move +>.$)
+  ?~  err
+    ~&  mail+success+'Message sent!'
+    [~ +>.$]
+  ~&  mail+error+'Message failed to send. Error:'
+  ~&  mail+error+err
+  [~ +>.$]
+::
 --
