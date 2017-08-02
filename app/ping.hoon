@@ -1,31 +1,28 @@
 ::  Allows one ship to ping another with a string of text
 ::
-::::  /hoon/ping/examples/app
-  ::
-/?    310
-!:
+::  /hoon/ping/app
 ::
+/-  ping-message
+::
+!:
 |%
-  ++  move  {bone term wire *}
+++  move  {bone $poke wire *}
 --
-!:
-|_  {bowl state/$~}
+|_  {bow/bowl $~}                                       ::<  stateless
 ::
-++  poke-examples-ping-message
-  |=  {to/@p message/@t}
-  ~&  'sent'
-  ^-  {(list move) _+>.$}
-  :-  ^-  (list move)
-      :~  `move`[ost %poke /sending [to dap] %atom message]
-      ==
-  +>.$
+++  poke-ping-message
+  |=  ping-message
+  ~&  ping+'Message sent!'
+  ^-  (quip move +>.$)
+  :_  +>.$
+  :_  ~
+  [ost.bow %poke /sending [to dap.bow] %atom message]
 ::
 ++  poke-atom
   |=  arg/@
-  ~&  'received'
-  ^-  {(list move) _+>.$}
-  ::
-  ~&  [%receiving (@t arg)]
+  ~&  ping+'Message received!'
+  ^-  (quip move +>.$)
+  ~&  ping+message+(@t arg)
   [~ +>.$]
 ::
 ++  coup  |=(* `+>)

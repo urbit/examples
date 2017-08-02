@@ -1,9 +1,9 @@
-/?    310
+/-  ping-message
 !:
-::
-|_  {to/@p message/@t}
+|_  ping-message
 ++  grab
   |%
-  ++  noun  {@p @t}
+  ++  noun
+    ping-message
   --
 --
