@@ -1,13 +1,8 @@
 ::  simple leaderboard
 ::
+::  /hoon/lead/app
 ::
-::::  /hoonlead/examples/app
-  ::
-/?    310                                               ::  need urbit 310
 !:
-::
-::::  ~talsur-todres, ~fyr
-  ::
 |%
   ++  axle
     $%  {$0 p/(map @t @ud)}
@@ -21,10 +16,8 @@
     ==
   ++  move  {p/bone q/{$diff gilt}}                    ::  output operation
 --
-!:
-|_  $:  hid/bowl
-        vat/axle
-    ==
+::
+|_  {bow/bowl vat/axle}
 ::
 ++  prep
   |=  old/(unit)
@@ -34,12 +27,12 @@
   |=  {pax/path}
   ^-  {(list move) _+>}
   ?~  pax
-    [`(list move)`[[ost.hid %diff %json vat-json] ~] +>.$]
+    [`(list move)`[[ost.bow %diff %json vat-json] ~] +>.$]
   :_  +>.$
   :_  ~
   ?+    -.pax
       ~_(leaf+"you need to specify a path" ~|(%not-found !!))
-    $data  [ost.hid %diff %json (joba %conn %b &)]
+    $data  [ost.bow %diff %json (joba %conn %b &)]
   ==
 ::
 ++  vat-json
@@ -51,7 +44,7 @@
 ::
 ++  deliver
   |=  pkg/{@tas json}
-  %+  turn  (prey /data hid)
+  %+  turn  (prey /data bow)
   |=  {ost/bone his/ship pax/path}
   [ost %diff %json (joba pkg)]
 ::
