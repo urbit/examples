@@ -1,12 +1,13 @@
 ::  Hello world example
-::  run in dojo with +examples/hello
+::  Run in :dojo with:
 ::
-::  /gen/examples/hello
+::    ~your-urbit:dojo/examples> +hello/h1
+::    'Hello, world!'
 ::
-/?  310
+::  /hoon/h1/hello/gen
 ::
 !:
 ::
 :-  %say  |=  *
 :-  %noun
-"hello, world."
+'Hello, world!'
