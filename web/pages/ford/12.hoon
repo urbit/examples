@@ -1,12 +1,12 @@
-::    Ford example 12
-::    accessible at http://localhost:8080/home/pub/ford12
+::  Ford example 12
+::  accessible at http://localhost:8080/home/pub/ford12
 ::
-::::  /hook/hymn/ford12/pub
-  ::
-/=    posts  /:  /%%/lib
+::  /hook/hymn/ford12/pub
+::
+/=    posts  /:  /%%/12/lib
              /;  |=(a/(list {@ud manx}) (turn (sort a lor) tail))
              /;  |=  a/(map @ manx)
-                 ~&  a               
+                 ~&  a
                  %+  murn
                    (~(tap by a))
                  |=  {a/@ b/manx}  ^-  (unit {@ud manx})
@@ -15,16 +15,19 @@
                  `[u.c b]
              /_
              /elem/
+::
 !:
 ^-  manx
 ;html
   ;head
     ;meta(charset "utf-8");
-    ;title: %ford Example 6
+    ;title: Examples - Ford 12
+    ;link(rel "stylesheet", type "text/css", href "/~~/pages/ford/ford.css");
   ==
   ;body
+    ;h1#title: %ford: 12
     ;div
-      ;h1: %ford Example 6 — Loading Resources by Number
+      ;h1: Loading Resources by Number
       ;*  posts
     ==
   ==
