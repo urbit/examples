@@ -1,11 +1,12 @@
-::    Ford example 11
-::    accessible at http://localhost:8080/home/pub/ford11
+::  Ford example 11
+::  accessible at http://localhost:8080/home/pub/ford11
 ::
-::::  /hook/hymn/ford11/pub
-  ::
-/?    314
-/=    gas  /$  fuel
-//    /%%/lib
+::  /hook/hymn/ford11/pub
+::
+/=  gas
+/$  fuel
+//  /%%/11/lib
+::
 !:
 =+  ^=  arg
   %+  slav
@@ -18,10 +19,12 @@
 ;html
   ;head
     ;meta(charset "utf-8");
-    ;title: %ford Example 5
+    ;title: Examples - Ford 11
+    ;link(rel "stylesheet", type "text/css", href "/~~/pages/ford/ford.css");
   ==
   ;body
-    ;h1: %ford Example 5 — Computing With Parameters (and Libraries)
+    ;h1#title: %ford: 11
+    ;h1: Computing With Parameters (and Libraries)
     ;div: {<(fib arg)>}
   ==
 ==
