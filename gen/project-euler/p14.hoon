@@ -1,10 +1,8 @@
 ::  Project Euler 14
 ::  https://projecteuler.net/problem=14
-::  run in dojo with +examples/euler14
+::  run in dojo with +examples/project-euler/p014
 ::
-::::  /gen/examples/euler14
-::
-/?  310
+::  p014/project-euler/gen
 ::
 !:
 ::
