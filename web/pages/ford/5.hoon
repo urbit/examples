@@ -15,11 +15,13 @@
 ;html
   ;head
     ;meta(charset "utf-8");
-    ;title: Exercise 5
+    ;title: Examples - Ford 5
+    ;link(rel "stylesheet", type "text/css", href "/~~/pages/ford/ford.css");
   ==
   ;body
+    ;h1#title: %ford: 5
     ;div
-      ;h1: Exercise 5 — Cores
+      ;h1: Cores 2
       ;p: How long does it take to get from 2 to 20? {<(length 2 20)>}
     ==
   ==
