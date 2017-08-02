@@ -1,10 +1,8 @@
 ::  Project Euler 3
 ::  https://projecteuler.net/problem=3
-::  run in dojo with +examples/euler3
+::  run in dojo with +examples/project-euler/p003
 ::
-::::  /gen/examples/euler3
-::
-/?  310
+::  p003/project-euler/gen
 ::
 !:
 ::
