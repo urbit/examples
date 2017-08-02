@@ -4,8 +4,6 @@
 ::
 ::  /libs/lisp99
 ::
-/?    314
-::
 !:
 ::
 |%  ++  s-expr  (list ?(s-expr term))
