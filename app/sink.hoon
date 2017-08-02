@@ -1,10 +1,8 @@
 ::  Sets up a simple subscription to source.hoon
 ::
-::::  /hoon/up/examples/app
-  ::
-/?    310
-!:
+::  /hoon/sink/app
 ::
+!:
 |%
 ++  move  {bone card}
 ++  card
@@ -12,28 +10,54 @@
       {$pull wire {@p term} $~}
   ==
 --
-!:
-|_  {bowl available/?}
+::
+|_  {bow/bowl val/?}                                    ::<  available? (y or n)
+::
 ++  poke-noun
-  |=  arg/*
-  ^-  {(list move) _+>.$}
-  ?:  &(=(%on arg) available)
-    [[[ost %peer /subscribe [our %examples-source] /example-path] ~] +>.$(available |)]
-  ?:  &(=(%off arg) !available)
-    [[[ost %pull /subscribe [our %examples-source] ~] ~] +>.$(available &)]
-  ~&  ?:(available %not-subscribed %subscribed)
+  |=  non/*
+  ^-  (quip move +>.$)
+  ?:  &(=(%on non) val)
+    :_  +>.$(val |)
+    :~  :*  ost.bow
+            %peer
+            /subscribe
+            [our.bow %source]
+            /example-path
+        ==
+    ==
+  ?:  &(=(%off non) !val)
+    :_  +>.$(val &)
+    ~[[ost.bow %pull /subscribe [our.bow %source] ~]]
+  ~&  ?:  val
+        sink+unsubscribed+'You are now unsubscribed!'
+      sink+subscribed+'You are now subscribed!'
   [~ +>.$]
+::
 ++  diff-noun
-  |=  {wir/wire arg/*}
-  ^-  {(list move) _+>.$}
-  ~&  [%recieved-data arg]
+  |=  {wir/wire non/*}
+  ^-  (quip move +>.$)
+  ~&  sink+received-data+' You got something!'
+  ~&  sink+data+non
   [~ +>.$]
-++  reap
-  |=  {wir/wire error/(unit tang)}
-  ^-  {(list move) _+>.$}
-  ?~  error
-    ~&  %successfully-subscribed
+::
+++  coup
+  |=  {wir/wire err/(unit tang)}
+  ^-  (quip move +>.$)
+  ?~  err
+    ~&  sink+success+'Poke succeeded!'
     [~ +>.$]
-  ~&  [%subscription-failed error]
+  ~&  sink+error+'Poke failed. Error:'
+  ~&  sink+error+err
   [~ +>.$]
+::
+++  reap
+  |=  {wir/wire err/(unit tang)}
+  ^-  (quip move +>.$)
+  ?~  err
+    ~&  sink+success+'Peer succeeded!'
+    [~ +>.$]
+  ~&  sink+error+'Peer failed. Error:'
+  ~&  sink+error+err
+  [~ +>.$]
+::
 --
