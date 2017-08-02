@@ -16,11 +16,13 @@
 ;html
   ;head
     ;meta(charset "utf-8");
-    ;title: Exercise 4
+    ;title: Examples - Ford 4
+    ;link(rel "stylesheet", type "text/css", href "/~~/pages/ford/ford.css");
   ==
   ;body
+    ;h1#title: %ford: 4
     ;div
-      ;h1: Exercise 4 — Cores
+      ;h1: Cores 1
       ;p: We'll be starting at {<start>}
       ;p: And ending at {<end>}
       ;p: Looks like a length of {<(length start end)>}
