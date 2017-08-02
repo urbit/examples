@@ -1,9 +1,4 @@
 .DS*
-.bundle.js
-config.json
-node_modules/
-streams/*css
-bundle.js
 *.swp
 *.swo
 *.swn
