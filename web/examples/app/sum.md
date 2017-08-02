@@ -1,28 +1,34 @@
-`/sum`
+# `:sum`
 
-To run from `:dojo`:
+Source:
 
-`|start %examples-sum`
+* `/app/sum.hoon`
 
-Then:
+`:dojo`:
 
-`:examples-sum &atom 3`
+    ~your-urbit:dojo/examples> |start %sum
 
-You should see:
+    ~your-urbit:dojo/examples> :sum &atom 40
 
-`[%so-far 3]`
+    ~your-urbit:dojo/examples> :sum &atom 2
 
-Then:
+<br />    
 
-`:examples-sum &atom 666`
+This app prints out an accumulating sum of numbers stored in `:sum`'s app state.
 
-`[%so-far 669]`
+Start the app from `:dojo` and poke it with an atom. You should see:
+
+    [%sum 40]
+
+Then, once more. The sum should now be:
+
+    [%sum 42]
 
 Here's what happened:
 
-- We poked `sum.hoon` with an unsigned decimal atom (`@ud`)
+* The `:dojo` nouns were type-checked by `mar/atom.hoon` and converted into an atom
 
-- `mar/atom.hoon` parsed the atom and passed it to `sum.hoon`'s `++poke-atom`
-arm, which adds the given number to the number stored in its state; the new
+* The validated atoms were then passed to the `++poke-atom` arm in the `sum.hoon` app,
+which added the given numbers to the number stored in its state; the new
 result is then printed out and then replaces the previous number in the app
 state.
