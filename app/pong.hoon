@@ -1,26 +1,29 @@
-::  Allows one urbit to send the string 'howdy' to another urbit.
+::  Allows one urbit to send the string 'Pong' to another urbit.
 ::
-::::  /hoon/pong/examples/app
-  ::
-/?    310
+::  /hoon/pong/app
+::
 !:
-::
 |%
-  ++  move  {bone term wire *}
+++  move  {bone card}
+++  card  $%  {$poke wire *}
+          ==
 --
-!:
-|_  {bowl state/$~}
+|_  {bow/bowl $~}                                       ::<  stateless
 ::
 ++  poke-urbit
-  |=  to/@p
-  ^-  {(list move) _+>.$}
-  [[[ost %poke /sending [to dap] %atom 'howdy'] ~] +>.$]
+  |=  to/ship
+  ^-  (quip move +>.$)
+  ~&  pong+'Outgoing pong!'
+  :_  +>.$
+  ~[[ost.bow %poke /sending [to dap.bow] %atom 'Pong']]
 ::
 ++  poke-atom
-  |=  arg/@
-  ^-  {(list move) _+>.$}
-  ~&  [%receiving (@t arg)]
+  |=  tom/@
+  ^-  (quip move +>.$)
+  ~&  pong+'Incoming pong!'
+  ~&  pong+received+`@t`tom
   [~ +>.$]
 ::
 ++  coup  |=(* [~ +>.$])
+::
 --
