@@ -1,10 +1,8 @@
 ::  Project Euler 1
 ::  https://projecteuler.net/problem=1
-::  run in dojo with +examples/euler1
+::  run in dojo with +examples/project-euler/p001
 ::
-::  /gen/examples/euler1
-::
-/?  310
+::  p001/project-euler/gen
 ::
 !:
 ::
