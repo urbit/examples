@@ -1,8 +1,7 @@
 ::  Up-ness monitor. Accepts atom url, 'on', or 'off'
 ::
-::::  /hoon/up/examples/app
-  ::
-/?    310
+::  /hoon/up/app
+::
 !:
 ::
 |%
@@ -17,9 +16,11 @@
       {$target p/cord}    ::  set poll target('http://...')
   ==
 --
-|_  {hid/bowl on/_| in-progress/_| target/@t}
+|_  {bow/bowl on/_| in-progress/_| target/@t}
+::
 ++  poke-atom
-  |=  url-or-command/@t  ^-  (quip move +>)
+  |=  url-or-command/@t
+  ^-  (quip move +>)
   =+  ^-  act/action
       ?:  ?=($on url-or-command)  [%on ~]
       ?:  ?=($off url-or-command)  [%off ~]
@@ -29,7 +30,7 @@
     $off  [~ +>.$(on |)]
     $on
       :-  ?:  |(on in-progress)  ~
-          [ost.hid %hiss /request ~ %httr %purl (need (epur target))]~
+          [ost.bow %hiss /request ~ %httr %purl (need (epur target))]~
       +>.$(on &, in-progress &)
   ==
 
@@ -40,18 +41,19 @@
   ?:  &((gte code 200) (lth code 300))
     ~&  [%all-is-well code]
     :_  +>.$
-    [ost.hid %wait /timer (add ~s10 now.hid)]~
+    [ost.bow %wait /timer (add ~s10 now.bow)]~
   ~&  [%we-have-a-problem code]
   ~&  [%headers headers]
   ~&  [%body body]
   :_  +>.$
-  [ost.hid %wait /timer (add ~s10 now.hid)]~
+  [ost.bow %wait /timer (add ~s10 now.bow)]~
 ++  wake-timer
   |=  {wir/wire $~}  ^-  (quip move +>)
   ?:  on
     :_  +>.$
-    [ost.hid %hiss /request ~ %httr %purl (need (epur target))]~
+    [ost.bow %hiss /request ~ %httr %purl (need (epur target))]~
   [~ +>.$(in-progress |)]
 ::
-++  prep  ~&  target  _`.  ::
+++  prep  ~&  target  _`.
+::
 --
