@@ -1,25 +1,23 @@
+/=  gas
+/$  fuel
 ::
-::::
-  ::
-/?    310
-/=    gas    /$    fuel
-::
-::::  sivtyv-barnel
-  ::
-  !:
-
+!:
 ^-  manx
-
 ;html
   ;head
-    ;title: Foosball Standings and Statistics
-    ;script@"/~~/~/at/lib/js/urb.js"; :: urb js lib
-    ;script@"https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js";  ::jquery
+    ;meta(charset "UTF-8");
+    ;meta
+      =name     "viewport"
+      =content  "width=device-width, initial-scale=1.0";
+    ;title: Examples - Foos
+    ;link(rel "stylesheet", type "text/css", href "/~~/pages/foos/foos.css");
+    ;script@"https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js";
     ;script@"https://cdnjs.cloudflare.com/ajax/libs/react/0.12.2/react.js";
-    ;link(rel "stylesheet", type "text/css", href "foos.css");
+    ;script@"/~~/~/at/lib/js/urb.js";
   ==
   ;body
+    ;h1: :foos
     ;div#container;
-    ;script@"foos.js";
+    ;script@"/~~/pages/foos/foos.js";
   ==
 ==

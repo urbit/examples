@@ -1,12 +1,7 @@
-::    store results of foosball games
+::  store results of foosball games
 ::
-::::  /hoon/foos/app
-  ::
-/?  310                               ::  require hoon version 310 or below
+::  /hoon/foos/app
 ::
-::
-::::  sivtyv-barnel                   ::  name(s) of author(s)
-  ::
 !:                                    ::  insert stack trace for this core
 |%                                    ::  core with data structures
 ++  axle  (list result)               ::  app state: results of all past games
@@ -16,8 +11,9 @@
             ==
 --
 ::
-!:                                    ::  insert stack trace for this core
-|_  {hid/bowl vat/axle}               ::  system data & app state data struct 
+::
+|_  {bow/bowl vat/axle}               ::  system data & app state data struct
+::
 ++  prep  _`.                        ::  wipe state when app code is changed
 ::
 ++  poke-json                         ::  receive JSON
@@ -44,7 +40,7 @@
   ==
 ::
 ++  spam                              ::  update subscribers
-  %+  murn  (~(tap by sup.hid))       ::  ∀
+  %+  murn  (~(tap by sup.bow))       ::  ∀
   |=  {ost/bone his/ship pax/path}
   ?^  pax  ~  %-  some                ::  empty paths
   [ost %diff ~+((peek his pax))]      ::  update state
@@ -53,12 +49,12 @@
 ::  sends the result to all subscribers.
 ++  peek
   |=  {his/ship pax/path}
-  :-  %json 
+  :-  %json
   `json`[%a (turn vat result-to-json)]::  send all results as ++json to client
 ::
 ++  peer                              ::  subscription shim
   |=  pax/path
   ?^  pax  `+>
-  [[ost.hid %diff (peek src.hid pax)]~ +>]
+  [[ost.bow %diff (peek src.bow pax)]~ +>]
+::
 --
-

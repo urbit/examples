@@ -192,7 +192,7 @@ fixturesToStandings = function (fixtures) {
 $(document).ready(function() {
   data = []
   React.render(Page({fixturesList:data}), $("#container")[0])
-  urb.appl = "examples-foos"
+  urb.appl = "foos"
   urb.bind("/", function(err,d){
     data = d.data
     React.render(Page({fixturesList:data}), $("#container")[0])

@@ -1,7 +1,18 @@
+@font-face {
+  font-family: "scp";
+  src: url("//media.urbit.org/fonts/scp-regular.woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
 body,
 html {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 18px;
+}
+
+h1 {
+  font-family: scp, monospace;
 }
 
 #container {
