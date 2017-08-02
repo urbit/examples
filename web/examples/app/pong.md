@@ -1,31 +1,35 @@
-`/pong`
+# `:pong`
 
-This app demonstrates how to poke an app with an urbit (planet/star/galaxy etc)
-name.
+Source:
 
-To run from `:dojo`, start the app on both ships:
+* `/app/pong.hoon`
 
-    |start examples-pong
+`:dojo` (you will need two running urbits to send and receive a message):
 
-    |start examples-pong
+    ~your-urbit-1:dojo/examples> |start %pong
 
-Then, from `~zod`'s `:dojo`:
+    ~your-urbit-2:dojo/examples> |start %pong
 
-`:examples-pong &urbit ~lec`
+    ~your-urbit-1:dojo/examples> :pong &urbit ~your-urbit-2
 
-`~lec` should display:
+<br />    
 
-`[%receiving 'howdy']`
+This app demonstrates how to poke an app with an urbit name.
+
+Start the app on two urbits in `:dojo` and send a pong to your second urbit from your first urbit using the command above. Your second urbit should receive:
+
+    [%pong 'Incoming pong!']
+    [%pong %received 'Pong']
 
 Let's briefly walk through what we just did:
 
-- We sent data of the `urbit` mark from dojo to the sender `~zod`'s `pong.hoon`
+* We sent data of the `urbit` mark from dojo to the sender (your first urbit)'s `pong.hoon`
 app.
 
-- `mar/urbit` parses the data, and passes it to `++poke-urbit`
+* `mar/urbit` parses the data, and passes it to `++poke-urbit`
 
-- `++poke-urbit` then sends a move with the message 'howdy'to `~lec`.
+* `++poke-urbit` then sends a move with the message 'Pong' to your second urbit.
 
-- `~lec` receives this data with its own `pong.hoon` app. `pong.hoon` parses it
+* Your second urbit received this data with its own `pong.hoon` app. `pong.hoon` parses it
 with `mar/atom`, and then receives it on the `++poke-atom` arm, which simply
 prints the message out.
