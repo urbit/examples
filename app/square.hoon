@@ -1,15 +1,30 @@
 ::  Accepts an atom from the dojo and squares it.
 ::
-::::  /hoon/square/examples/app
-  ::
-/?    310
-!:
+::  /hoon/square/app
 ::
-|_  {bowl state/$~}
+!:
+|%                                                      ::>  no moves in :square
+++  move  {bone card}                                   ::>  no cards in :square
+++  card  $%  $~
+          ==
+--
+::
+|_  {bow/bowl $~}                                       ::<  stateless
 ::
 ++  poke-atom
-  |=  arg/@
-  ^-  {(list) _+>.$}
-  ~&  [%square (mul arg arg)]
+  |=  tom/@
+  ^-  (quip move +>.$)
+  ~&  square+(mul tom tom)
   [~ +>.$]
+::
+++  coup
+  |=  {wir/wire err/(unit tang)}
+  ^-  (quip move +>.$)
+  ?~  err
+    ~&  square+success+'Poke succeeded!'
+    [~ +>.$]
+  ~&  square+error+'Poke failed. Error:'
+  ~&  square+error+err
+  [~ +>.$]
+::
 --
