@@ -1,20 +1,34 @@
-`%gall examples`
+---
+title: Applications
+---
 
-`%gall` is the urbit application driver.  `%gall` apps hold state, respond to
-subscription requests and stuff like that.  
+# Applications
 
-Assuming you have these files inside a running urbit pier, you'll need to
-`|start` each app:
+`%gall` is the Urbit application driver.
 
-    |start %desk %app
+Apps live under `/app` in a `%clay` desk. `%gall` apps hold state, respond to subscription requests and synchronizes state across ships.  
 
-Each of our examples lives inside of the `examples/` directory.  So, if you
-want to start the `%click` app from your `%home` desk you'll run this:
+First apps need to be started, then you can "poke" their arms from either the `:dojo` or from the web.
 
-    |start %examples-click
+Start an example app from your `:dojo` like this:
 
-In the case that the app has a web interface its url will look something like:
+    ~your-urbit:dojo/examples> |start %name
 
-    http://localhost:8443/~~/pages/examples/click
+and poke its `++poke-mark-name` arm like this:
 
-Each individual app has its own set of instructions.
+    ~your-urbit:dojo/examples> :name &mark-name {insert noun of mark &mark-name}
+
+where the mark is pointing to a mark source file in `/mar`. Some of these example apps use *structures* too, or shared molds stored in files in `/sur`. To understand how these work better, check out their pages:
+
+* [Marks](/~~/examples/mar)
+* [Structures](/~~/examples/sur)
+
+In the case that the app has a web interface, its web UI will be served at the URL:
+
+    http://localhost:8443/~~/pages/name
+
+Visiting that page will subscribe, or `peer`, to the `%gall` app at the specified web path (in the arm `++peer-web-path-name`). Then, using the interface will send typed pokes or peers of the specified mark types through our `urb.js` web API.
+
+Each individual app has its own set of instructions in `/examples/app/{app name}`. Click one below to get started!
+
+<list>
