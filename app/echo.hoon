@@ -1,15 +1,14 @@
 ::  Accepts any noun from dojo and prints it out
 ::
-::::  /hoon/echo/examples/app
-  ::
-/?    310
+::  /hoon/echo/app
+::
 !:
-|_  {bowl state/$~}
+|_  {bow/bowl $~}                                       ::<  stateless
+::
 ++  poke-noun
-  |=  arg/*
-  ^-  {(list) _+>.$}
-  ~&  [%argument arg]
+  |=  non/*
+  ^-  (quip $~ +>.$)
+  ~&  echo+noun+non
   [~ +>.$]
-
-++  prep  ~&  'prep'  _`.  ::
+::
 --
