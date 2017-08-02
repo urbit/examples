@@ -1,18 +1,17 @@
 ::  Keyword argumented hello world example. Defaults if no sample given.
-::  run in dojo with
+::  Run in :dojo with:
 ::
-::    +examples/hello3, =txt %earth
-::    +examples/hello3, =txt %moon
-::    +examples/hello3, =txt %stars
-::    +examples/hello3
+::    ~your-urbit:dojo/examples> +hello/h3, =txt 'Mars'
+::    'Hello, Mars!'
 ::
-::  /gen/examples/hello3
-::
-/?  310
+::    ~your-urbit:dojo/examples> +hello/h3
+::    'Hello, universe'
+
+::  /hoon/h3/hello/gen
 ::
 !:
 ::
 :-  %say
-|=  {^ {$~ txt/_`@t`%mars}}
+|=  {^ {$~ txt/_'universe'}}
 :-  %noun
-(crip (weld "hello, " (trip txt)))
+(crip (weld (weld "Hello, " (trip txt)) "!"))
