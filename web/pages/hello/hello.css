@@ -1,0 +1,47 @@
+@font-face {
+  font-family: "scp";
+  src: url("//media.urbit.org/fonts/scp-regular.woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "bau";
+  src: url("//media.urbit.org/fonts/bau.woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "bau";
+  src: url("//media.urbit.org/fonts/bau-medium.woff");
+  font-weight: 500;
+  font-style: normal;
+}
+
+h1#title {
+  font-family: scp, monospace;
+}
+
+body {
+  font-family: bau, sans-serif;
+}
+
+h1 {
+  font-family: bau, sans-serif;
+  font-weight: 500;
+}
+
+code {
+  font-family: scp, monospace;
+}
+
+button {
+  border: 3px solid #000;
+  padding: 10px;
+  font-size: 18px;
+  background-color: #fff;
+  font-weight: 500;
+  display: block;
+  margin-top: 12px;
+}
