@@ -1,20 +1,25 @@
-`/square`
+# `:square`
+
+Source:
+
+* `/app/square.hoon`
+
+`:dojo`:
+    ~your-urbit:dojo/examples> |start %square
+
+    ~your-urbit:dojo/examples> :square &atom 10
+
+<br />    
 
 This app prints out the square of an atom.
 
-To run in `:dojo`:
+Start the app from `:dojo` and poke it with an atom. You should see:
 
-`|start %examples-square`
-
-`:examples-square &atom 5`
-
-You should see:
-
-`[%square 25]`
+    [%square 100]
 
 Here's what happened:
 
-- the `square.hoon` app received our number
+* The `:dojo` noun was type-checked by `mar/atom.hoon` and converted into an atom
 
-- The atom was parsed by `mar/atom.hoon`, and then passed to `++poke-atom`,
+* The validated atom was then passed to `++poke-atom` in the `square.hoon` app,
 which printed out the square of the given number'.
