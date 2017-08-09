@@ -2,7 +2,6 @@
 ::  produces, so please check Tumblr's documentation for
 ::  details.
 ::
-::
 |%
 ::  there has to be a better way to get just the response out
 ++  blog-posts-r  response/blog-posts
@@ -46,11 +45,13 @@
     primary/?
     followers/@u
   ==
+++  photo-size
+  {width/@u height/@u url/@t}
 ++  photo
   $:
     caption/@t
-    original-size/{width/@u height/@u url/@t}
-    alt-sizes/(list {width/@u height/@u url/@t})
+    original-size/photo-size
+    alt-sizes/(list photo-size)
   ==
 ++  quote-post
   $:
@@ -123,5 +124,5 @@
     caption/@t
     photos/(list photo)
   ==
-:: insert audio, chat, answer posts?
+:: other posts without support right now: question, chat
 --
