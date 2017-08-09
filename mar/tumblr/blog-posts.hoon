@@ -4,7 +4,7 @@
 ::
 /?    310
 /-  tumblr
-/+  tumblr-parse
+/+  tumblr-parse, jumblr
 !:
 |_  bp/(list post:tumblr)
 ++  grab
@@ -14,6 +14,11 @@
     ^-  (list post:tumblr)
     %-  need
     (blog-posts-r:tumblr-parse jon)
-  ++  noun  bp
+  ++  noun  (list post:tumblr)
+  --
+++  grow
+  |%
+  ++  json
+    [%a (turn bp jost:jumblr)]
   --
 --
