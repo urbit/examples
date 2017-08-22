@@ -2,7 +2,7 @@
 
 Source:
 
-* `/app/sum.hoon`
+-   `/app/sum.hoon`
 
 `:dojo`:
 
@@ -12,7 +12,7 @@ Source:
 
     ~your-urbit:dojo/examples> :sum &atom 2
 
-<br />    
+<br />
 
 This app prints out an accumulating sum of numbers stored in `:sum`'s app state.
 
@@ -26,9 +26,10 @@ Then, once more. The sum should now be:
 
 Here's what happened:
 
-* The `:dojo` nouns were type-checked by `mar/atom.hoon` and converted into an atom
+-   The `:dojo` nouns were type-checked by `mar/atom.hoon` and converted into an
+    atom
 
-* The validated atoms were then passed to the `++poke-atom` arm in the `sum.hoon` app,
-which added the given numbers to the number stored in its state; the new
-result is then printed out and then replaces the previous number in the app
-state.
+-   The validated atoms were then passed to the `++poke-atom` arm in the
+    `sum.hoon` app, which added the given numbers to the number stored in its
+    state; the new result is then printed out and then replaces the previous
+    number in the app state.
