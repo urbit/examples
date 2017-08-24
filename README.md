@@ -43,8 +43,8 @@ In which case, next run the commands:
     ~your-urbit:dojo/examples> |serve %/web
     ~your-urbit:dojo/examples> |mount %
 
-If your sync doesn't succeed after a few minutes, follow the manual install
-below instead.
+If your sync isn't succeeding after a few minutes for whatever reason, run
+`|cancel %examples` in your `:dojo` and follow the manual install below instead.
 
 ### Manual install
 
