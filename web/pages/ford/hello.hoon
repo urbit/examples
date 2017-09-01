@@ -2,7 +2,7 @@
 |%
 ++  hello
   |=  *
-  (weld "Hello, " (weld (trip (world %hello)) "!"))
+  (weld "Hello, " (weld (trip (world ~)) "!"))
 --
 ^-  manx
 ;html
@@ -14,7 +14,7 @@
   ;body
     ;h1#title: %ford: hello
     ;div
-      ;h1: {(hello %world)}
+      ;h1: {(hello ~)}
     ==
   ==
 ==
