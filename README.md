@@ -19,13 +19,13 @@ First, you'll need a running urbit. Follow our `urbit.org` [install
 instructions](https://urbit.org/docs/using/install), then
 [setup](https://urbit.org/docs/using/setup) an urbit.
 
-Follow the *Live install* below if your urbit is running on the live network
-(comets are usually best for development). Follow the *Manual install* instead
-if you're on a [fake
+Follow the *Network install* below if your urbit is running on the live network
+(comets are usually best for development). Follow the *Local install* instead if
+you're on a [fake
 ship](https://urbit.org/fora/posts/~2017.1.5..21.31.04..20f3~/) or otherwise
-experiencing problems with the live install.
+experiencing problems with the network install.
 
-### Live install
+### Network install
 
 In your urbit's `:dojo`, run the command:
 
@@ -44,9 +44,9 @@ In which case, next run the commands:
     ~your-urbit:dojo/examples> |mount %
 
 If your sync isn't succeeding after a few minutes for whatever reason, run
-`|cancel %examples` in your `:dojo` and follow the manual install below instead.
+`|cancel %examples` in your `:dojo` and follow the local install below instead.
 
-### Manual install
+### Local install
 
 In your urbit's `:dojo`:
 
@@ -78,15 +78,15 @@ The `/~~/` in the URL will direct you to `Log In` via your web interface so you
 can authenticate yourself and run your first examples smoothly.
 
 We've found it also helps to have a clone of the docs on hand in case
-`urbit.org` experiences high traffic. If you did the live install, you're now
+`urbit.org` experiences high traffic. If you did the network install, you're now
 serving them automatically from your new `%examples` desk. You can view them
 locally in your browser at:
 
     http://localhost:8443/~~/docs
 
-If you did the manual install, head over to our [docs
-repo](https://github.com/urbit/docs) to clone the docs manually and copy them in
-via Unix like you did with these examples.
+If you did the local install, head over to our [docs
+repo](https://github.com/urbit/docs) to clone the docs locally and copy them in
+manually via Unix like you did with these examples.
 
 > If you're running multiple ships locally, your port number will be `8444`,
 > `8445`, et cetera. Check your `:dojo` output for the correct local port of
