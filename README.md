@@ -63,7 +63,7 @@ your urbit's new mounted `%examples` desk. You can run the following shell
 commands (*replacing your urbit's examples desk path as necessary*):
 
     $ git clone https://github.com/urbit/examples
-    $ for dir in {app,gen,lib,mar,sur,web}; do cp -r ./examples/$dir* /urbit/path/your-urbit/examples; done
+    $ for dir in {app,gen,lib,mar,sec,sur,web}; do cp -r ./examples/$dir* /urbit/path/your-urbit/examples; done
 
 Your `%clay` filesystem should acknowledge the newly added files.
 
