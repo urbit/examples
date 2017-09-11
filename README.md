@@ -9,7 +9,7 @@ There are generators (short `:dojo` commands), libraries (to be loaded into
 and structures that these example `%gall` apps use.
 
 The code is both here on Github and now on a desk on an Urbit ship
-(`~dirbet-botweb`). Now you can just merge the desk over the live network to get
+(`~ropmev-pocseb`). Now you can just merge the desk over the live network to get
 our examples and docs onto any of your live urbits. Give these a try by
 following the installation instructions below.
 
@@ -29,13 +29,13 @@ experiencing problems with the network install.
 
 In your urbit's `:dojo`, run the command:
 
-    ~your-urbit:dojo> |sync %examples ~dirbet-botweb %examples
+    ~your-urbit:dojo> |sync %examples ~ropmev-pocseb %examples
 
 Depending on network traffic, this initial merge and sync could take anywhere
 between thirty seconds to several minutes. Upon a successful sync you'll see the
 output:
 
-    sync succeeded from %examples on ~dirbet-botweb to %examples
+    sync succeeded from %examples on ~ropmev-pocseb to %examples
 
 In which case, next run the commands:
 
