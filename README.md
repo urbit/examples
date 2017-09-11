@@ -15,14 +15,14 @@ following the installation instructions below.
 
 ## Installation
 
-First, you'll need a running urbit. Follow our `urbit.org` [install
+First, you'll need a running urbit. Follow our urbit.org [install
 instructions](https://urbit.org/docs/using/install), then
 [setup](https://urbit.org/docs/using/setup) an urbit.
 
 Follow the *Network install* below if your urbit is running on the live network
 (comets are usually best for development). Follow the *Local install* instead if
 you're on a [fake
-ship](https://urbit.org/fora/posts/~2017.1.5..21.31.04..20f3~/) or otherwise
+ship](https://urbit.org/fora/posts/~2017.1.5..21.31.04..20f3~/) or are otherwise
 experiencing problems with the network install.
 
 ### Network install
@@ -89,7 +89,7 @@ repo](https://github.com/urbit/docs) to clone the docs locally and copy them in
 manually via Unix like you did with these examples.
 
 > If you're running multiple ships locally, your port number will be `8444`,
-> `8445`, et cetera. Check your `:dojo` output for the correct local port of
+> `8445`, and so on. Check your `:dojo` output for the correct local port of
 > your examples urbit, or view these at `https://your-urbit.urbit.org` over DNS
 > instead for live-network ships.
 
