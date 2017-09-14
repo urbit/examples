@@ -1,5 +1,5 @@
 ::    Ford example 2
-::    accessible at http://localhost:8080/home/pub/ford2
+::    accessible at http://localhost:8080/pages/ford/2
 ::
 ::::  /hook/hymn/ford2/pub
   ::
