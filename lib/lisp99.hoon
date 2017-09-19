@@ -2,7 +2,7 @@
 ::  arms accessible in dojo after `/+  lisp99` (two spaces (`gap`) in between)
 ::  try `test:lisp99`
 ::
-::::  /hoon/lisp99/lib
+::::  /===/lib/lisp99/hoon
   ::
 !:
 ::

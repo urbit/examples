@@ -1,7 +1,7 @@
 ::  Send simple msgs between ships  ::  short description
 ::
-::  /hoon/mail/app
-::
+::::  /===/app/mail/hoon
+  ::
 /-  mail-message, mail-send
 [. mail-message mail-send]
 ::

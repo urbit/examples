@@ -1,5 +1,5 @@
 ::
-::::  /hoon/tumblr/com/sec
+::::  /===/sec/com/tumblr/hoon
   ::
 /+    oauth1
 !:

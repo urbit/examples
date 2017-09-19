@@ -4,8 +4,8 @@
 ::    ~your-urbit:dojo/examples> +hello/h1
 ::    'Hello, world!'
 ::
-::  /hoon/h1/hello/gen
-::
+::::  /===/gen/hello/h1/hoon
+  ::
 !:
 ::
 :-  %say  |=  *

@@ -1,7 +1,7 @@
 ::  Up-ness monitor. Accepts atom url, 'on', or 'off'
 ::
-::  /hoon/up/app
-::
+::::  /===/app/up/hoon
+  ::
 !:
 ::
 |%

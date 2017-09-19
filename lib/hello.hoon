@@ -1,5 +1,5 @@
 ::
-:::: /hoon/hello/lib
+:::: /===/lib/hello/hoon
   ::
 !:
 |%

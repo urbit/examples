@@ -3,8 +3,8 @@
 ::
 ::    +fun/bf 42
 ::
-::  /hoon/bf/fun/gen
-::
+::::  /===/gen/fun/bf/hoon
+  ::
 !:
 ::
 :-  %say

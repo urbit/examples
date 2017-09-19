@@ -1,7 +1,7 @@
 ::  Allows one ship to ping another with a string of text
 ::
-::  /hoon/ping/app
-::
+::::  /===/app/ping/hoon
+  ::
 /-  ping-message
 ::
 !:

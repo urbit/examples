@@ -1,7 +1,7 @@
 ::    Ford example 3
 ::    accessible at http://localhost:8443/~~/pages/ford/3
 ::
-::::  /hoon/3/ford/pages/web
+::::  /===/web/pages/ford/3/hoon
   ::
 =+  ^=  a  1
 =+  b=2

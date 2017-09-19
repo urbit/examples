@@ -1,6 +1,6 @@
 :: Convert Tumblr sur to json
 ::
-::::  /hoon/jumblr/lib
+::::  /===/lib/jumblr/hoon
   ::
 /-  tumblr
 |%

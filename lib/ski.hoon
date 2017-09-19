@@ -2,7 +2,7 @@
 ::  arms accessible in dojo after `/+  ski` (two spaces (`gap`) in between)
 ::  try `test:ski`
 ::
-::::  /hoon/ski/lib
+::::  /===/lib/ski/hoon
   ::
 !:
 ::

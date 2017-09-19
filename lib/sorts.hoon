@@ -1,7 +1,7 @@
 ::  arms accessible in dojo after `/+  sorts` (two spaces (`gap`) in between)
 ::  try `test:sorts`
 ::
-::::  /hoon/sorts/lib
+::::  /===/lib/sorts/hoon
   ::
 !:
 ::

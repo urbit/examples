@@ -1,7 +1,7 @@
 ::  store results of foosball games
 ::
-::  /hoon/foos/app
-::
+::::  /===/app/foos/hoon
+  ::
 !:                                    ::  insert stack trace for this core
 |%                                    ::  core with data structures
 ++  axle  (list result)               ::  app state: results of all past games

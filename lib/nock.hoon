@@ -3,7 +3,7 @@
 ::
 ::    > test:nock
 ::
-::::  /hoon/nock/lib
+::::  /===/lib/nock/hoon
   ::
 !:
 |%

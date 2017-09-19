@@ -1,7 +1,7 @@
 ::    Ford example 6
 ::    accessible at http://localhost:8443/~~/pages/ford/6
 ::
-::::  /hoon/6/ford/pages/web
+::::  /===/web/pages/ford/6/hoon
   ::
 |%
 ++  fib

@@ -1,7 +1,7 @@
 ::  Ford example 12
 ::  accessible at http://localhost:8443/~~/pages/ford/12
 ::
-::::  /hoon/12/ford/pages/web
+::::  /===/web/pages/ford/12/hoon
   ::
 /=    posts  /:  /%%/12/lib
              /;  |=(a/(list {@ud manx}) (turn (sort a lor) tail))

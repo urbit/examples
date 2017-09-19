@@ -6,9 +6,9 @@
 ::
 ::    ~your-urbit:dojo/examples> +hello/h3
 ::    'Hello, universe'
-
-::  /hoon/h3/hello/gen
 ::
+::::  /===/gen/hello/h3/hoon
+  ::
 !:
 ::
 :-  %say

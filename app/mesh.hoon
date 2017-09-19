@@ -1,7 +1,7 @@
 ::  Simple social network
 ::
-::  hoon/mesh/app
-::
+::::  /===/app/mesh/hoon
+  ::
 /-  mesh
 [. mesh]
 !:

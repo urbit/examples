@@ -1,7 +1,7 @@
 ::  simple leaderboard
 ::
-::  /hoon/lead/app
-::
+::::  /===/app/lead/hoon
+  ::
 !:
 |%
   ++  axle

@@ -9,7 +9,7 @@
 ::  You can also use the generator to see your dashboard or a blog
 ::  +tumblr/feed <identifier|'dashboard'>
 ::
-:::: /hoon/tumblr/app
+:::: /===/app/tumblr/hoon
   ::
 /?  314
 /-  tumblr

@@ -1,6 +1,6 @@
 ::  Format issue to yaml
 ::
-::::  /hoon/yaml/taskk/gen
+::::  /===/gen/taskk/yaml/hoon
   ::
 /?    310
 :-  %say
