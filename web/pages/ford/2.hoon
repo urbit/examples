@@ -1,7 +1,7 @@
 ::    Ford example 2
 ::    accessible at http://localhost:8443/~~/pages/ford/2
 ::
-::::  /hook/hymn/ford2/pub
+::::  /hoon/2/ford/pages/web
   ::
 ;html
   ;head

@@ -2,8 +2,8 @@
 ::  arms accessible in dojo after `/+  ski` (two spaces (`gap`) in between)
 ::  try `test:ski`
 ::
-::  /libs/ski
-::
+::::  /hoon/ski/lib
+  ::
 !:
 ::
 =<  apex

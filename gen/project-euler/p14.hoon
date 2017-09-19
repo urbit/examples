@@ -1,9 +1,11 @@
 ::  Project Euler 14
 ::  https://projecteuler.net/problem=14
-::  run in dojo with +examples/project-euler/p014
 ::
-::  p014/project-euler/gen
+::  run in dojo with:
+::    ~your-urbit:dojo/examples> +project-euler/p14
 ::
+::::  /hoon/p14/project-euler/gen
+  ::
 !:
 ::
 :-  %say  |=  *

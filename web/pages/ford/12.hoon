@@ -1,8 +1,8 @@
 ::  Ford example 12
 ::  accessible at http://localhost:8443/~~/pages/ford/12
 ::
-::  /hook/hymn/ford12/pub
-::
+::::  /hoon/12/ford/pages/web
+  ::
 /=    posts  /:  /%%/12/lib
              /;  |=(a/(list {@ud manx}) (turn (sort a lor) tail))
              /;  |=  a/(map @ manx)

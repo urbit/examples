@@ -5,10 +5,11 @@
 ::  > from the product of two 2-digit numbers is 9009 = 91 × 99.
 ::  > Find the largest palindrome made from the product of two 3-digit numbers.
 ::
-::  Run in :dojo with `+project-euler/p4`.
+::  run in dojo with:
+::    ~your-urbit:dojo/examples> +project-euler/p4
 ::
-::  /hoon/p4/project-euler/gen
-::
+::::  /hoon/p4/project-euler/gen
+  ::
 !:
 ::
 :-  %say  |=  *
