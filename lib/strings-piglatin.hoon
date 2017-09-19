@@ -4,8 +4,8 @@
 ::    ++pigl turns a single string to piglatin
 ::    ++plur pluralizes a word
 ::
-::  /libs/strings-piglatin
-::
+::::  /hoon/strings-piglatin/lib
+  ::
 /?    314
 ::
 !:

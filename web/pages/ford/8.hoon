@@ -1,8 +1,8 @@
 ::  Ford example 8
 ::  accessible at http://localhost:8443/~~/pages/ford/8
 ::
-::  /hook/hymn/ford8/pub
-::
+::::  /hoon/8/ford/pages/web
+  ::
 /=  gas
 /$  fuel
 ::

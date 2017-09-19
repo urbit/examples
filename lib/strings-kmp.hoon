@@ -2,8 +2,8 @@
 ::  arms accessible in dojo after `/+  strings-kmp`  (two spaces (`gap`) in between)
 ::  try `test:strings-kmp`
 ::
-::  /libs/strings-kmp
-::
+::::  /hoon/strings-kmp/lib
+  ::
 !:
 ::
 |%

@@ -1,8 +1,8 @@
 ::  arms accessible in dojo after `/+  parse-sexpr` (two spaces (`gap`) in between)
 ::  try `test:parse-sexpr`
 ::
-::  /libs/parse-sexpr
-::
+::::  /hoon/parse-sexpr/lib
+  ::
 !:
 ::
 |%

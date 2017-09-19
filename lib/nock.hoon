@@ -3,8 +3,8 @@
 ::
 ::    > test:nock
 ::
-::  /libs/nock
-::
+::::  /hoon/nock/lib
+  ::
 !:
 |%
 ++  test

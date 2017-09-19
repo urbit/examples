@@ -1,7 +1,7 @@
 ::    Ford example 4
 ::    accessible at http://localhost:8443/~~/pages/ford/4
 ::
-::::  /hook/hymn/ford4/pub
+::::  /hoon/4/ford/pages/web
   ::
 |%
   ++  start  1

@@ -9,7 +9,8 @@
 ::  You can also use the generator to see your dashboard or a blog
 ::  +tumblr/feed <identifier|'dashboard'>
 ::
-::
+:::: /hoon/tumblr/app
+  ::
 /?  314
 /-  tumblr
 /+  tumblr-parse, connector
