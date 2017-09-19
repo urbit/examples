@@ -1,7 +1,7 @@
 ::  Accepts any noun from dojo and prints it out
 ::
-::  /hoon/echo/app
-::
+::::  /===/app/echo/hoon
+  ::
 !:
 |_  {bow/bowl $~}                                       ::<  stateless
 ::

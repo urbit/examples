@@ -4,8 +4,8 @@
 ::    ~your-urbit:dojo/examples> +hello/h2 'Mars'
 ::    'Hello, Mars!'
 ::
-::  /hoon/h2/hello/gen
-::
+::::  /===/gen/hello/h2/hoon
+  ::
 !:
 ::
 :-  %say

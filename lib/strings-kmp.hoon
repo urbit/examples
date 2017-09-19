@@ -2,7 +2,7 @@
 ::  arms accessible in dojo after `/+  strings-kmp`  (two spaces (`gap`) in between)
 ::  try `test:strings-kmp`
 ::
-::::  /hoon/strings-kmp/lib
+::::  /===/lib/strings-kmp/hoon
   ::
 !:
 ::

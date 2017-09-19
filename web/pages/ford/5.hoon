@@ -1,7 +1,7 @@
 ::    Ford example 5
 ::    accessible at http://localhost:8443/~~/pages/ford/5
 ::
-::::  /hoon/5/ford/pages/web
+::::  /===/web/pages/ford/5/hoon
   ::
 |%
   ++  dist  {start/@ud end/@ud}

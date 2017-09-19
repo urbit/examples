@@ -1,6 +1,6 @@
 :: Parser for Tumblr types
 ::
-::::  /hoon/tumblr-parse/lib
+::::  /===/lib/tumblr-parse/hoon
   ::
 /-  tumblr
 |%

@@ -11,7 +11,7 @@
 ::  run in dojo with:
 ::    ~your-urbit:dojo/examples> +project-euler/p9
 ::
-::::  /hoon/p9/project-euler/gen
+::::  /===/gen/project-euler/p9/hoon
   ::
 !:
 ::

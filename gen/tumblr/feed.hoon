@@ -1,6 +1,6 @@
 ::  Display tumblr feed
 ::
-::::  /hoon/feed/tumblr/gen
+::::  /===/gen/tumblr/feed/hoon
   ::
 /-    tumblr
 !:

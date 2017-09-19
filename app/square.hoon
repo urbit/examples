@@ -1,7 +1,7 @@
 ::  Accepts an atom from the dojo and squares it.
 ::
-::  /hoon/square/app
-::
+::::  /===/app/square/hoon
+  ::
 !:
 |%                                                      ::>  no moves in :square
 ++  move  {bone card}                                   ::>  no cards in :square

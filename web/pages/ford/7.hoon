@@ -1,7 +1,7 @@
 ::  Ford example 7
 ::  accessible at http://localhost:8443/~~/pages/ford/7
 ::
-:::: /hoon/7/ford/pages/web
+:::: /===/web/pages/ford/7/hoon
   ::
 /=  gas
 /$  fuel

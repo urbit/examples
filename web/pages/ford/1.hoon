@@ -1,7 +1,7 @@
 ::    Ford example 1
 ::    accessible at http://localhost:8443/~~/pages/ford/1
 ::
-::::  /hoon/1/ford/pages/web
+::::  /===/web/pages/ford/1/hoon
   ::
 ;html
   ;head

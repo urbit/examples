@@ -4,7 +4,7 @@
 ::  run in dojo with:
 ::    ~your-urbit:dojo/examples> +project-euler/p14
 ::
-::::  /hoon/p14/project-euler/gen
+::::  /===/gen/project-euler/p14/hoon
   ::
 !:
 ::

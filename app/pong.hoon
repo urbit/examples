@@ -1,7 +1,7 @@
 ::  Allows one urbit to send the string 'Pong' to another urbit.
 ::
-::  /hoon/pong/app
-::
+::::  /===/app/pong/hoon
+  ::
 !:
 |%
 ++  move  {bone card}

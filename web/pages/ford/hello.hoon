@@ -1,5 +1,5 @@
 ::
-::::  /hoon/hello/ford/pages/web
+::::  /===/web/pages/ford/hello/hoon
   ::
 //  /%%/hello/lib
 |%

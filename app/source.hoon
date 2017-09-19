@@ -1,7 +1,7 @@
 ::  Sends subscription updates to sink.hoon
 ::
-::  /hoon/source/app
-::
+::::  /===/app/source/hoon
+  ::
 !:
 ::
 |%

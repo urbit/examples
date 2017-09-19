@@ -1,7 +1,7 @@
 ::  Sets up a simple subscription to source.hoon
 ::
-::  /hoon/sink/app
-::
+::::  /===/app/sink/hoon
+  ::
 !:
 |%
 ++  move  {bone card}
