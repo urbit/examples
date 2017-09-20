@@ -1,4 +1,5 @@
 ::  Knuth-Morris-Pratt string search
+::
 ::  arms accessible in dojo after `/+  strings-kmp`  (two spaces (`gap`) in between)
 ::  try `test:strings-kmp`
 ::

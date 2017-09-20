@@ -1,4 +1,5 @@
-::  simple string manipulation
+::  Simple library for string manipulation to Pig Latin
+::
 ::  arms accessible in dojo after `/+  strings-piglatin`  (two spaces (`gap`) in between)
 ::  try `test:strings-piglatin`
 ::    ++pigl turns a single string to piglatin

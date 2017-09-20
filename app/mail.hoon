@@ -1,4 +1,4 @@
-::  Send simple msgs between ships  ::  short description
+::  Send simple messages between urbits
 ::
 ::::  /===/app/mail/hoon
   ::

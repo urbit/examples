@@ -1,3 +1,7 @@
+::  Poke your urbit from the web
+::
+::::  /===/app/click/hoon
+  ::
 /-  click
 [. click]
 !:

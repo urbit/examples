@@ -1,3 +1,7 @@
+::  A friend
+::
+::::  /===/mar/mesh/friend/hoon
+  ::
 /-  mesh
 [. mesh]
 ::

@@ -1,4 +1,5 @@
-::  Allows one urbit to send the string 'Pong' to another urbit.
+::  Allows one urbit to send the string 'Pong' to 
+::  another urbit.
 ::
 ::::  /===/app/pong/hoon
   ::

@@ -1,3 +1,5 @@
+::  Basic algorithms implemented in Nock by hand
+::
 ::  Arms accessible in :dojo after `/+  parse-sexpr` (two spaces (`gap`) in between)
 ::  Try in :dojo:
 ::

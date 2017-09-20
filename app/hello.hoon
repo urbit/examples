@@ -1,3 +1,8 @@
+::  Get a hello from your urbit on the web and say 
+::  hello back
+::
+::::  /===/app/hello/hoon
+  ::
 /-  hello                                               ::<  import /sur/hello
 [. hello]                                               ::<  add core to subject
 !:
