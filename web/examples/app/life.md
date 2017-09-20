@@ -4,7 +4,6 @@ Source:
 
 -   `/app/life.hoon`
 
-
 `:dojo`:
 
     ~your-urbit:dojo/examples> |start %life
@@ -16,4 +15,3 @@ Source:
 <br />
 
 See: [Game of life in Hoon](https://github.com/jalehman/hoon-life)
-
