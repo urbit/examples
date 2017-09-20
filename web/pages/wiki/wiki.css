@@ -1,0 +1,32 @@
+/* style to apply to html tables inside markdown rendered container */
+.rendered table {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 1rem;
+  background-color: transparent;
+}
+
+.rendered table th,
+.rendered table td {
+  padding: 0.75rem;
+  vertical-align: top;
+  border-top: 1px solid #e9ecef;
+}
+
+.rendered table thead th {
+  vertical-align: bottom;
+  border-bottom: 2px solid #e9ecef;
+}
+
+.rendered table tbody + tbody {
+  border-top: 2px solid #e9ecef;
+}
+
+.rendered table table {
+  background-color: #fff;
+}
+
+/* striped */
+.rendered table tbody tr:nth-of-type(odd) {
+  background-color: rgba(0, 0, 0, 0.05);
+}
