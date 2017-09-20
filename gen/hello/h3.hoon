@@ -1,4 +1,6 @@
-::  Keyword argumented hello world example. Defaults if no sample given.
+::  Keyword argumented hello world example. Defaults if
+::  no sample given.
+:: 
 ::  Run in :dojo with:
 ::
 ::    ~your-urbit:dojo/examples> +hello/h3, =txt 'Mars'

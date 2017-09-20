@@ -1,3 +1,5 @@
+::  Simple library for parsing s-expressions
+::
 ::  arms accessible in dojo after `/+  parse-sexpr` (two spaces (`gap`) in between)
 ::  try `test:parse-sexpr`
 ::

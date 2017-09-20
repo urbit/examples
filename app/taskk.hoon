@@ -1,6 +1,6 @@
+::  A simple task-tracking app
 ::
-::
-:::: /===/app/taskk/hoon
+::::  /===/app/taskk/hoon
   ::
 /?    310
 /-  taskk

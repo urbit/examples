@@ -1,4 +1,5 @@
-::  SKI calculus to nock compiler
+::  SKI calculus to Nock compiler
+::
 ::  arms accessible in dojo after `/+  ski` (two spaces (`gap`) in between)
 ::  try `test:ski`
 ::

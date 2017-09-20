@@ -1,3 +1,7 @@
+::  Total number of clicks
+::
+::::  /===/mar/click/clicks/hoon
+  ::
 /-  click
 [. click]
 !:

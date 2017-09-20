@@ -1,4 +1,5 @@
-::  Keeps track of the sum of all the atoms it has been poked with.
+::  Keeps track of the sum of all the atoms it has been
+::  poked with and prints the sum out 
 ::
 ::::  /===/app/sum/hoon
   ::

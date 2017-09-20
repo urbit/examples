@@ -1,3 +1,4 @@
+::  Hello world example library
 ::
 :::: /===/lib/hello/hoon
   ::

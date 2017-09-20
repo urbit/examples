@@ -1,3 +1,7 @@
+::  Your network of friends and friends-of-friends
+::
+::::  /===/mar/mesh/network/hoon
+  ::
 /-  mesh
 [. mesh]
 ::

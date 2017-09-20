@@ -1,3 +1,7 @@
+::  Your list of friends
+::
+::::  /===/mar/mesh/friends/hoon
+  ::
 /-  mesh
 [. mesh]
 ::

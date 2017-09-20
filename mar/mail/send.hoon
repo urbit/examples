@@ -1,3 +1,7 @@
+::  Required sample needed to send a mail-message
+::
+::::  /===/mar/mail/send/hoon
+  ::
 /-  mail-send
 !:
 |_  mail-send
