@@ -72,6 +72,16 @@ Try them all!
 
 **Source**:\\ `/lib/sorts.hoon`
 
+#### String processing library
+
+**Command:**\\ `~your-urbit:dojo/examples> |start %string-tester`\\
+`~your-urbit:dojo/examples> :string-tester %test`
+
+**Source**:\\ `/lib/string.hoon`
+
+**See**:\\ [String processing library for
+Urbit](https://github.com/Fang-/urbit-string)
+
 #### Knuth-Morris-Pratt String Search
 
 **Command:**\\ `~your-urbit:dojo/examples> /+  strings-kmp`\\
