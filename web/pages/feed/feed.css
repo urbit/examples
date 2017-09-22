@@ -46,7 +46,14 @@ input {
 
 button {
   background-color: #fff;
+  color: #000;
   font-weight: 500;
   display: block;
   margin-top: 12px;
+}
+
+button:hover {
+  background-color: #000;
+  color: #fff;
+  cursor: pointer;
 }
