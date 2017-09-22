@@ -1,4 +1,42 @@
-# TASKK APP
+# `:taskk`
+
+Source:
+
+-   `/app/taskk.hoon`
+-   `/gen/taskk/yaml.hoon`
+-   `/mar/taskk/change-phase.hoon`
+-   `/mar/taskk/create-issue.hoon`
+-   `/mar/taskk/delete-issue.hoon`
+-   `/mar/taskk/issue.hoon`
+-   `/mar/taskk/request-board.hoon`
+-   `/sur/taskk.hoon`
+-   `/web/pages/taskk.html`
+-   `/web/pages/mail.css`
+-   `/web/pages/mail.js`
+
+`:dojo`:
+
+    ~your-urbit:dojo/examples> |start %taskk
+
+Web:
+
+    http://localhost:8443/~~/pages/taskk.html
+
+Usage:
+1. Each column has its own "create new" button.
+2. Issues are extremely simple, having a title, an assignee, a description
+3. Double click tile to expand.
+4. Drag a tile to change phase.
+5. These boards are stored as a directory of markdown files on your ship, 
+at `%/app/taskk/HOST/BOARD/PHASE/ISSUE`. If you'd like to sync boards or 
+collaborate, see the instructions in the docs on syncing desks.
+
+`:dojo` (poke directly):
+
+    ~your-urbit:dojo/examples> :taskk %taskk-create-issue <phase>/tape <id>/tape <description>/tape
+    ~your-urbit:dojo/examples> :taskk %taskk-delete-issue <phase>/tape <id>/tape
+    ~your-urbit:dojo/examples> :taskk %taskk-change-phase <current-phase>/tape <desired-phase>/tape <id>/tape
+    ~your-urbit:dojo/examples> :taskk %taskk-request-board <host>/tape <board>/tape
 
 *Manage issues on Urbit*
 
@@ -13,22 +51,3 @@ around clay to enforce rules, etc.
 Any large-scale edits can be done in vim or a similar editor by simply editing
 the markdown file associated with an issue.
 
-## Install
-
-1.  Copy /app/taskk.hoon to `%/app/taskk.hoon` on your ship
-2.  Run `|start %taskk`. *Note* This only needs to be done once.
-3.  Install taskk-ui, which is included as a git submodule. Make sure that the
-    submodule has been properly dl-ed by running
-    `git submodule update --init --recursive`
-4.  Follow [instructions](https://github.com/vvisigoth/taskk-ui) to install and
-    run the front-end on your ship.
-
-## Instructions
-
-You can also interact with the taskk app from the `:dojo` by poking the app with
-the appropriate marks. The following marks are available.
-
--   `:taskk %taskk-create-issue <phase>/tape <id>/tape <description>/tape`
--   `:taskk %taskk-delete-issue <phase>/tape <id>/tape`
--   `:taskk %taskk-change-phase <current-phase>/tape <desired-phase>/tape <id>/tape`
--   `:taskk %taskk-request-board <host>/tape <board>/tape`
