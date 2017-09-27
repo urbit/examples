@@ -9,11 +9,11 @@
 ++  move  {bone card}
 ++  card  $%  {$peer wire dock path}
               {$pull wire dock $~}
-              {$diff diff}
+              {$diff  diff-contents}
           ==
-++  diff  $%  {$mesh-friends color friends}
-              {$mesh-network color network}
-          ==
+++  diff-contents  $%  {$mesh-friends color friends}
+                       {$mesh-network color network}
+                   ==
 --
 ::
 |_  {bow/bowl {col/color net/network}}                  ::<  color, social net.

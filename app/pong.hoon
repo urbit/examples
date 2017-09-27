@@ -6,8 +6,10 @@
 !:
 |%
 ++  move  {bone card}
-++  card  $%  {$poke wire *}
+++  card  $%  {$poke wire dock poke-contents}
           ==
+++  poke-contents  $%  {$atom @}
+                   ==
 --
 |_  {bow/bowl $~}                                       ::<  stateless
 ::

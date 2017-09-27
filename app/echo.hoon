@@ -3,11 +3,17 @@
 ::::  /===/app/echo/hoon
   ::
 !:
+|%
+++  move  {bone card}
+++  card  $%  $~
+          ==
+--
+::
 |_  {bow/bowl $~}                                       ::<  stateless
 ::
 ++  poke-noun
   |=  non/*
-  ^-  (quip $~ +>.$)
+  ^-  (quip move +>.$)
   ~&  echo+noun+non
   [~ +>.$]
 ::

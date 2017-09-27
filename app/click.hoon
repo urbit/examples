@@ -6,7 +6,11 @@
 [. click]
 !:
 |%
-++  move  {bone $diff $click-clicks clicks}
+++  move  {bone card}
+++  card  $%  {$diff diff-content}
+          ==
+++  diff-content  $%  {$click-clicks clicks}
+                  ==
 --
 ::
 |_  {bow/bowl cis/clicks}

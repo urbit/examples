@@ -8,9 +8,13 @@
 !:
 |%
 ++  move  {bone card}
-++  card  $%  {$poke path dock mark *}
-              {$diff mark *}
+++  card  $%  {$poke path dock poke-contents}
+              {$diff diff-contents}
           ==
+++  poke-contents  $%  {$mail-message mail-message}
+                   ==
+++  diff-contents  $%  {$json json}
+                   ==
 --
 ::
 |_  $:  bow/bowl

@@ -5,7 +5,11 @@
 !:
 ::
 |%
-++  move  {bone $diff mark *}
+++  move  {bone card}
+++  card  $%  {$diff diff-contents}
+          ==
+++  diff-contents  $%  {$noun *}
+                   ==
 --
 ::
 |_  {bow/bowl $~}                                       ::<  stateless

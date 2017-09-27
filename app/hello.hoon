@@ -8,8 +8,10 @@
 !:
 |%
 ++  move  {bone card}                                   ::<  arvo event
-++  card  $%  {$diff $hello-world hello-world}          ::<  arvo packet
+++  card  $%  {$diff diff-contents}
           ==
+++  diff-contents  $%  {$hello-world hello-world}       ::<  arvo packet
+                   ==
 --
 ::
 |_  {bow/bowl elo/hello-world}                          ::<  app state

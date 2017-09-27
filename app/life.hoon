@@ -4,6 +4,9 @@
 !:
 ::
 |%
+++  move  {bone card}
+++  card  $%  $~
+          ==
 ++  action
   $%  {$start size/(unit @)}                            :: reset game state
       {$toggle s/(list spot)}

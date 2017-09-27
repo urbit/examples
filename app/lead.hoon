@@ -7,14 +7,16 @@
   ++  axle
     $%  {$0 p/(map @t @ud)}
     ==
-  ++  gilt                                              ::  subscription frame
+  ++  diff-contents                                     ::  subscription frame
     $%  {$json p/json}                                  ::  json
     ==                                                  ::
   ++  kiss
     $%  {$new-lead name/cord}                           ::  new leader
         {$add-lead name/cord}                           ::  add to leader
     ==
-  ++  move  {p/bone q/{$diff gilt}}                    ::  output operation
+  ++  move  {bone card}                                 ::  output operation
+  ++  card  $%  {$diff diff-contents}                     
+            ==
 --
 ::
 |_  {bow/bowl vat/axle}

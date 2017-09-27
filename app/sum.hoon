@@ -4,11 +4,16 @@
 ::::  /===/app/sum/hoon
   ::
 !:
+|%
+++  move  {bone card}
+++  card  $%  $~
+          ==
+--
 |_  {bow/bowl sum/@}                                    ::<  sum is our app state
 ::
 ++  poke-atom
   |=  tom/@
-  ^-  (quip list +>.$)
+  ^-  (quip move +>.$)
   ~&  sum+(add sum tom)
   [~ +>.$(sum (add sum tom))]
 ::

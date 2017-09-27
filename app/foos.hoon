@@ -4,6 +4,11 @@
   ::
 !:                                    ::  insert stack trace for this core
 |%                                    ::  core with data structures
+++  move  {bone card}
+++  card  $%  {$diff diff-content}
+          ==
+++  diff-content  $%  {$json json}
+                  ==
 ++  axle  (list result)               ::  app state: results of all past games
 ++  result  $:  bcons/@t  bscore/@ud  ::  record of result
               ycons/@t
@@ -14,7 +19,7 @@
 ::
 |_  {bow/bowl vat/axle}               ::  system data & app state data struct
 ::
-++  prep  _`.                        ::  wipe state when app code is changed
+++  prep  _`.                         ::  wipe state when app code is changed
 ::
 ++  poke-json                         ::  receive JSON
   |=  jon/json

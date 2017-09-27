@@ -5,10 +5,9 @@
 !:
 |%
 ++  move  {bone card}
-++  card
-  $%  {$peer wire {@p term} path}
-      {$pull wire {@p term} $~}
-  ==
+++  card  $%  {$peer wire dock path}
+              {$pull wire dock $~}
+          ==
 --
 ::
 |_  {bow/bowl val/?}                                    ::<  available? (y or n)
