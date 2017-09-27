@@ -13,7 +13,7 @@
 ::
 ++  poke-noun
   |=  non/*
-  ^-  (quip move +>.$)
+  ^-  {(list move) _+>.$}
   ~&  echo+noun+non
   [~ +>.$]
 ::

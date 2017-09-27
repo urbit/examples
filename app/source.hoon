@@ -16,21 +16,21 @@
 ::
 ++  poke-noun
   |=  non/*
-  ^-  (quip move +>.$)
+  ^-  {(list move) _+>.$}
   :_  +>.$
   %+  turn  (prey /example-path bow)
   |=({o/bone *} [o %diff %noun non])
 ::
 ++  peer-example-path
   |=  pax/path
-  ^-  (quip move +>.$)
+  ^-  {(list move) _+>.$}
   ~&  source+peer-notify+'Someone subscribed to you!'
   ~&  source+[ship+src.bow path+pax]
   [~ +>.$]
 ::
 ++  coup
   |=  {wir/wire err/(unit tang)}
-  ^-  (quip move +>.$)
+  ^-  {(list move) _+>.$}
   ?~  err
     ~&  source+success+'Poke succeeded!'
     [~ +>.$]
@@ -40,7 +40,7 @@
 ::
 ++  reap
   |=  {wir/wire err/(unit tang)}
-  ^-  (quip move +>.$)
+  ^-  {(list move) _+>.$}
   ?~  err
     ~&  source+success+'Peer succeeded!'
     [~ +>.$]

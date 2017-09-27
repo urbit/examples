@@ -26,7 +26,7 @@
 ::
 ++  peer
   |=  pax/path
-  ^-  (quip move +>.$)
+  ^-  {(list move) _+>.$}
   =/  ordered-messages/(list mail-message)
     %+  sort
       rec
@@ -52,7 +52,7 @@
   ==
 ++  poke-mail-send
   |=  sen/mail-send                                     ::<  to, subject, body
-  ^-  (quip move +>.$)
+  ^-  {(list move) _+>.$}
   =/  out/mail-message
     [now.bow our.bow to.sen sub.sen bod.sen]
   =.  ^sen
@@ -88,7 +88,7 @@
  ::
 ++  coup
   |=  {wir/wire err/(unit tang)}
-  ^-  (quip move +>.$)
+  ^-  {(list move) _+>.$}
   ?~  err
     ~&  mail+success+'Message sent!'
     [~ +>.$]

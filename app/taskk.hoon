@@ -19,7 +19,7 @@
 ::
 ++  poke-taskk-create-issue
   |=  iss/issue
-  ^-  (quip move +>.$)
+  ^-  {(list move) _+>.$}
   :_  +>.$
   %+  welp                                              
     %+  turn                                            :: notify all subscribers
@@ -46,7 +46,7 @@
 ++  poke-taskk-delete-issue
   |=  iss/issue-ref
   ~&  %delete-issue-called
-  ^-  (quip move +>.$)
+  ^-  {(list move) _+>.$}
   :_  +>.$
   :~  :-  ost.hid
       :^    %info
@@ -65,7 +65,7 @@
 ++  poke-taskk-change-phase
   |=  iss/change-ref
   ~&  %change-phase-called
-  ^-  (quip move +>.$)
+  ^-  {(list move) _+>.$}
   =/  inp/path
   %+  welp
     wpat.state
@@ -93,7 +93,7 @@
 ::  request a board
 ++  poke-taskk-request-board
   |=  board/{ho/tape bo/tape}
-  ^-  (quip move +>.$)
+  ^-  {(list move) _+>.$}
   :_  +>.$ 
   %+  turn  
     (prey subp.state hid)

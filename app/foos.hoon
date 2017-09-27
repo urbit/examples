@@ -23,6 +23,7 @@
 ::
 ++  poke-json                         ::  receive JSON
   |=  jon/json
+  ^-  {(list move) _+>.$}
   ~&  poked+jon
   =+  ^-  parsedresult/result         ::  push on result of reparsing JSON
       ~|  bad-json+jon                ::  produce p in stack trace if q crashes
@@ -37,6 +38,7 @@
 ::
 ++  result-to-json                    ::  reassemble ++json to respond to client
   |=  result
+  ^-  json
   %-  jobe  :~                        ::  produce ++json object
     bcons+[%s bcons]                  ::  produce ++json string
     ycons+[%s ycons]
@@ -45,6 +47,7 @@
   ==
 ::
 ++  spam                              ::  update subscribers
+  ^-  (list move)
   %+  murn  (~(tap by sup.bow))       ::  ∀
   |=  {ost/bone his/ship pax/path}
   ?^  pax  ~  %-  some                ::  empty paths
@@ -54,11 +57,13 @@
 ::  sends the result to all subscribers.
 ++  peek
   |=  {his/ship pax/path}
+  ^-  diff-content
   :-  %json
   `json`[%a (turn vat result-to-json)]::  send all results as ++json to client
 ::
 ++  peer                              ::  subscription shim
   |=  pax/path
+  ^-  {(list move) _+>.$}
   ?^  pax  `+>
   [[ost.bow %diff (peek src.bow pax)]~ +>]
 ::

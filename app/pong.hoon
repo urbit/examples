@@ -15,14 +15,14 @@
 ::
 ++  poke-urbit
   |=  to/ship
-  ^-  (quip move +>.$)
+  ^-  {(list move) _+>.$}
   ~&  pong+'Outgoing pong!'
   :_  +>.$
   ~[[ost.bow %poke /sending [to dap.bow] %atom 'Pong']]
 ::
 ++  poke-atom
   |=  tom/@
-  ^-  (quip move +>.$)
+  ^-  {(list move) _+>.$}
   ~&  pong+'Incoming pong!'
   ~&  pong+received+`@t`tom
   [~ +>.$]

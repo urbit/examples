@@ -17,7 +17,7 @@
 ::
 ++  poke-click-click
   |=  cik/^click                                        ::<  the sur not the core
-  ^-  (quip move +>.$)
+  ^-  {(list move) _+>.$}
   ~&  click+clicked++(cis)
   :_  +>.$(cis +(cis))
   %+  turn  (prey /click bow)
@@ -26,12 +26,12 @@
 ::
 ++  peer-click
   |=  pax/path
-  ^-  (quip move +>.$)
+  ^-  {(list move) _+>.$}
   [~[[ost.bow %diff %click-clicks cis]] +>.$]
 ::
 ++  coup
   |=  {wir/wire err/(unit tang)}
-  ^-  (quip move +>.$)
+  ^-  {(list move) _+>.$}
   ?~  err
     ~&  click+success+'Poke succeeded!'
     [~ +>.$]
@@ -41,7 +41,7 @@
 ::
 ++  reap
   |=  {wir/wire err/(unit tang)}
-  ^-  (quip move +>.$)
+  ^-  {(list move) _+>.$}
   ?~  err
     ~&  click+success+'Peer succeeded!'
     [~ +>.$]

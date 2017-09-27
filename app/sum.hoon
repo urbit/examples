@@ -13,13 +13,13 @@
 ::
 ++  poke-atom
   |=  tom/@
-  ^-  (quip move +>.$)
+  ^-  {(list move) _+>.$}
   ~&  sum+(add sum tom)
   [~ +>.$(sum (add sum tom))]
 ::
 ++  coup
   |=  {wir/wire err/(unit tang)}
-  ^-  (quip move +>.$)
+  ^-  {(list move) _+>.$}
   ?~  err
     ~&  sum+success+'Poke succeeded!'
     [~ +>.$]

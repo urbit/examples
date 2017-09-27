@@ -14,7 +14,7 @@
 ::
 ++  poke-noun
   |=  non/*
-  ^-  (quip move +>.$)
+  ^-  {(list move) _+>.$}
   ?:  &(=(%on non) val)
     :_  +>.$(val |)
     :~  :*  ost.bow
@@ -34,14 +34,14 @@
 ::
 ++  diff-noun
   |=  {wir/wire non/*}
-  ^-  (quip move +>.$)
+  ^-  {(list move) _+>.$}
   ~&  sink+received-data+' You got something!'
   ~&  sink+data+non
   [~ +>.$]
 ::
 ++  coup
   |=  {wir/wire err/(unit tang)}
-  ^-  (quip move +>.$)
+  ^-  {(list move) _+>.$}
   ?~  err
     ~&  sink+success+'Poke succeeded!'
     [~ +>.$]
@@ -51,7 +51,7 @@
 ::
 ++  reap
   |=  {wir/wire err/(unit tang)}
-  ^-  (quip move +>.$)
+  ^-  {(list move) _+>.$}
   ?~  err
     ~&  sink+success+'Peer succeeded!'
     [~ +>.$]

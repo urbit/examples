@@ -21,6 +21,7 @@
 ::++  prep  _`.
 ++  poke-mesh-color
   |=  col/color
+  ^-  {(list move) _+>.$}
   =.  ^col  col
   ~&  mesh+'Color set! Notifying subscribers:'
   ~&  mesh+color+col
@@ -28,7 +29,7 @@
 ::
 ++  poke-mesh-friend
   |=  fen/friend
-  ^-  (quip move +>.$)
+  ^-  {(list move) _+>.$}
   ~&  :-  %mesh
     (crip (weld (weld "Friending " (scow %p fen)) "!"))
   :_  +>.$
@@ -42,6 +43,7 @@
 ::
 ++  reap
   |=  {wire err/(unit tang)}
+  ^-  {(list move) _+>.$}
   ?^  err  (mean u.err)
   ~!  +<.reap
   =.  net
@@ -56,12 +58,13 @@
 ::
 ++  coup
   |=  {wire err/(unit tang)}
+  ^-  {(list move) _+>.$}
   ?^  err  (mean u.err)
   [~ +>.$]
 ::
 ++  diff-mesh-friends
   |=  {wir/wire col/color fes/friends}
-  ^-  (quip move +>.$)
+  ^-  {(list move) _+>.$}
   ~&  mesh+diff+'Network update!'
   ~&  mesh+diff+[source+src.bow color+col friends+fes]
   =+  old-net=net
@@ -75,6 +78,7 @@
   [spam +>.$]
 ::
 ++  spam
+  ^-  (list move)
   %+  murn  (~(tap by sup.bow))
   |=  {ost/bone shp/ship pax/path}
   %+  bind  ~+((peek shp pax))
@@ -101,12 +105,13 @@
 ::
 ++  peer-web
   |=  pax/path
+  ^-  {(list move) _+>.$}
   ~&  pax
   [[ost.bow %diff (peek-web src.bow pax)]~ +>.$]
 ::
 ++  peer-mesh-friends
   |=  pax/path
-  ^-  (quip move +>.$)
+  ^-  {(list move) _+>.$}
   ~&  mesh+'Someone friended you!'
   ~&  mesh+ship+src.bow
   :_  +>.$

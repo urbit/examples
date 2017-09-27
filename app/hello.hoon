@@ -18,25 +18,25 @@
 ::
 ++  prep                                                ::<  called on |start
   |=  *
-  ^-  (quip move +>.$)
+  ^-  {(list move) _+>.$}
   [~ +>.$(elo 'Hello, world!')]                         ::<  set the app state
 ::
 ++  peer-web
   |=  pax/path
-  ^-  (quip move +>.$)
+  ^-  {(list move) _+>.$}
   ~&  hello+peered+'Peered from the web!'
   [~[[ost.bow %diff %hello-world elo]] +>.$]
 ::
 ++  poke-hello-world
   |=  elo/hello-world
-  ^-  (quip move +>.$)
+  ^-  {(list move) _+>.$}
   ?>  =(elo 'Hello, world!')
   ~&  hello+poked+elo
   [~ +>.$]
 ::
 ++  reap
   |=  {wir/wire err/(unit tang)}
-  ^-  (quip move +>.$)
+  ^-  {(list move) _+>.$}
   ?~  err
     ~&  hello+success+'Peer succeeded!'
     [~ +>.$]
@@ -46,7 +46,7 @@
 ::
 ++  coup
   |=  {wir/wire err/(unit tang)}
-  ^-  (quip move +>.$)
+  ^-  {(list move) _+>.$}
   ?~  err
     ~&  hello+success+'Poke succeeded!'
     [~ +>.$]

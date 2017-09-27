@@ -17,7 +17,7 @@
 ++  poke-ping-message
   |=  ping-message
   ~&  ping+'Message sent!'
-  ^-  (quip move +>.$)
+  ^-  {(list move) _+>.$}
   :_  +>.$
   :_  ~
   [ost.bow %poke /sending [to dap.bow] %atom message]
@@ -25,7 +25,7 @@
 ++  poke-atom
   |=  arg/@
   ~&  ping+'Message received!'
-  ^-  (quip move +>.$)
+  ^-  {(list move) _+>.$}
   ~&  ping+message+(@t arg)
   [~ +>.$]
 ::
