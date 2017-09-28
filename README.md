@@ -1,4 +1,4 @@
-# Urbit examples
+![Urbit examples](https://storage.googleapis.com/media.urbit.org/site/examples-screen.png)
 
 ## Introduction
 
