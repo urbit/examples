@@ -9,7 +9,7 @@
 ++  move  {bone card}
 ++  card  $%  {$peer wire dock path}
               {$pull wire dock $~}
-              {$diff  diff-contents}
+              {$diff diff-contents}
           ==
 ++  diff-contents  $%  {$mesh-friends color friends}
                        {$mesh-network color network}
@@ -82,11 +82,11 @@
   %+  murn  (~(tap by sup.bow))
   |=  {ost/bone shp/ship pax/path}
   %+  bind  ~+((peek shp pax))
-  |=(dif/diff [ost %diff dif])
+  |=(dif/diff-contents [ost %diff dif])
 ::
 ++  peek
   |=  {src/ship pax/path}
-  ^-  (unit diff)
+  ^-  (unit diff-contents)
   ?~  pax   ~
   ?+  i.pax  ~
     $web
