@@ -14,16 +14,16 @@
 ::
 |%
 ++  three
-  |=  a/@
-  =|  b/@
+  |=  a=@
+  =|  b=@
   |-  ^-  @u
   ?:  (lth a b)
     0
   (add b $(b (add 3 b)))
 ::
 ++  five
-  |=  a/@
-  =|  b/@
+  |=  a=@
+  =|  b=@
   |-  ^-  @
   ?:  (lte a b)
     0
@@ -32,6 +32,6 @@
   (add b $(b (add b 5)))
 ::
 ++  sum
-  |=  a/@u
+  |=  a=@u
   (add (five a) (three a))
 --
