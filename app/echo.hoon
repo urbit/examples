@@ -4,16 +4,16 @@
   ::
 !:
 |%
-++  move  {bone card}
-++  card  $%  $~
++=  move  [bone card]
++=  card  $%  $~
           ==
 --
 ::
-|_  {bow/bowl $~}                                       ::<  stateless
+|_  [bow=bowl:gall $~]                                  ::<  stateless
 ::
 ++  poke-noun
-  |=  non/*
-  ^-  {(list move) _+>.$}
+  |=  non=*
+  ^-  [(list move) _+>.$]
   ~&  echo+noun+non
   [~ +>.$]
 ::
