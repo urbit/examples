@@ -6,32 +6,34 @@
 [. click]
 !:
 |%
-++  move  {bone card}
-++  card  $%  {$diff diff-content}
++=  move  [bone card]
++=  card  $%  [$diff diff-content]
           ==
-++  diff-content  $%  {$click-clicks clicks}
++=  diff-content  $%  [$click-clicks clicks]
                   ==
 --
 ::
-|_  {bow/bowl cis/clicks}
+|_  [bow=bowl:gall cis=clicks]
+::
+++  prep  _`.
 ::
 ++  poke-click-click
-  |=  cik/^click                                        ::<  the sur not the core
-  ^-  {(list move) _+>.$}
+  |=  cik=^click                                        ::<  the sur not the core
+  ^-  [(list move) _+>.$]
   ~&  click+clicked++(cis)
   :_  +>.$(cis +(cis))
-  %+  turn  (prey /click bow)
-  |=  {o/bone *}
+  %+  turn  (prey:pubsub:userlib /click bow)
+  |=  [o=bone *]
   [o %diff %click-clicks +(cis)]
 ::
 ++  peer-click
-  |=  pax/path
-  ^-  {(list move) _+>.$}
+  |=  pax=path
+  ^-  [(list move) _+>.$]
   [~[[ost.bow %diff %click-clicks cis]] +>.$]
 ::
 ++  coup
-  |=  {wir/wire err/(unit tang)}
-  ^-  {(list move) _+>.$}
+  |=  [wir=wire err=(unit tang)]
+  ^-  [(list move) _+>.$]
   ?~  err
     ~&  click+success+'Poke succeeded!'
     [~ +>.$]
@@ -40,8 +42,8 @@
   [~ +>.$]
 ::
 ++  reap
-  |=  {wir/wire err/(unit tang)}
-  ^-  {(list move) _+>.$}
+  |=  [wir=wire err=(unit tang)]
+  ^-  [(list move) _+>.$]
   ?~  err
     ~&  click+success+'Peer succeeded!'
     [~ +>.$]

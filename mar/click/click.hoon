@@ -5,13 +5,13 @@
 /-  click
 [. click]
 !:
-|_  cik/^click
+|_  cik=^click
 ++  grab
   |%
   ++  noun  |=(* %click)
   ++  json
-    |=  jon/^json
-    ?>  =('click' (need (so:jo jon)))
+    |=  jon=^json
+    ?>  =('click' (need (so:dejs-soft:format jon)))
     %click
   --
 --

@@ -5,10 +5,10 @@
 /-  click
 [. click]
 !:
-|_  cis/clicks
+|_  cis=clicks
 ++  grow
   |%
   ++  json
-    (joba %clicks (jone cis))
+    (frond:enjs:format %clicks (numb:enjs:format cis))
   --
 --

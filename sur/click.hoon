@@ -1,5 +1,5 @@
 !:
 |%
-++  click  $click
-++  clicks  @ud
++=  click  $click
++=  clicks  @ud
 --
