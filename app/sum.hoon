@@ -5,21 +5,21 @@
   ::
 !:
 |%
-++  move  {bone card}
-++  card  $%  $~
++=  move  [bone card]
++=  card  $%  $~
           ==
 --
-|_  {bow/bowl sum/@}                                    ::<  sum is our app state
+|_  [bow=bowl:gall sum=@]                               ::<  sum is our app state
 ::
 ++  poke-atom
-  |=  tom/@
-  ^-  {(list move) _+>.$}
+  |=  tom=@
+  ^-  [(list move) _+>.$]
   ~&  sum+(add sum tom)
   [~ +>.$(sum (add sum tom))]
 ::
 ++  coup
-  |=  {wir/wire err/(unit tang)}
-  ^-  {(list move) _+>.$}
+  |=  [wir=wire err=(unit tang)]
+  ^-  [(list move) _+>.$]
   ?~  err
     ~&  sum+success+'Poke succeeded!'
     [~ +>.$]
