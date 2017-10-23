@@ -5,32 +5,32 @@
 !:
 ::
 |%
-++  move  {bone card}
-++  card  $%  {$diff diff-contents}
++=  move  [bone card]
++=  card  $%  [$diff diff-contents]
           ==
-++  diff-contents  $%  {$noun *}
++=  diff-contents  $%  [$noun *]
                    ==
 --
 ::
-|_  {bow/bowl $~}                                       ::<  stateless
+|_  [bow=bowl:gall $~]                                  ::<  stateless
 ::
 ++  poke-noun
-  |=  non/*
-  ^-  {(list move) _+>.$}
+  |=  non=*
+  ^-  [(list move) _+>.$]
   :_  +>.$
-  %+  turn  (prey /example-path bow)
-  |=({o/bone *} [o %diff %noun non])
+  %+  turn  (prey:pubsub:userlib /example-path bow)
+  |=([o=bone *] [o %diff %noun non])
 ::
 ++  peer-example-path
-  |=  pax/path
-  ^-  {(list move) _+>.$}
+  |=  pax=path
+  ^-  [(list move) _+>.$]
   ~&  source+peer-notify+'Someone subscribed to you!'
   ~&  source+[ship+src.bow path+pax]
   [~ +>.$]
 ::
 ++  coup
-  |=  {wir/wire err/(unit tang)}
-  ^-  {(list move) _+>.$}
+  |=  [wir=wire err=(unit tang)]
+  ^-  [(list move) _+>.$]
   ?~  err
     ~&  source+success+'Poke succeeded!'
     [~ +>.$]
@@ -39,8 +39,8 @@
   [~ +>.$]
 ::
 ++  reap
-  |=  {wir/wire err/(unit tang)}
-  ^-  {(list move) _+>.$}
+  |=  [wir=wire err=(unit tang)]
+  ^-  [(list move) _+>.$]
   ?~  err
     ~&  source+success+'Peer succeeded!'
     [~ +>.$]

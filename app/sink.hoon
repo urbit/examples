@@ -4,17 +4,17 @@
   ::
 !:
 |%
-++  move  {bone card}
-++  card  $%  {$peer wire dock path}
-              {$pull wire dock $~}
++=  move  [bone card]
++=  card  $%  [$peer wire dock path]
+              [$pull wire dock $~]
           ==
 --
 ::
-|_  {bow/bowl val/?}                                    ::<  available? (y or n)
+|_  [bow=bowl:gall val=?]                                    ::<  available? (y or n)
 ::
 ++  poke-noun
-  |=  non/*
-  ^-  {(list move) _+>.$}
+  |=  non=*
+  ^-  [(list move) _+>.$]
   ?:  &(=(%on non) val)
     :_  +>.$(val |)
     :~  :*  ost.bow
@@ -33,15 +33,15 @@
   [~ +>.$]
 ::
 ++  diff-noun
-  |=  {wir/wire non/*}
-  ^-  {(list move) _+>.$}
+  |=  [wir=wire non=*]
+  ^-  [(list move) _+>.$]
   ~&  sink+received-data+' You got something!'
   ~&  sink+data+non
   [~ +>.$]
 ::
 ++  coup
-  |=  {wir/wire err/(unit tang)}
-  ^-  {(list move) _+>.$}
+  |=  [wir=wire err=(unit tang)]
+  ^-  [(list move) _+>.$]
   ?~  err
     ~&  sink+success+'Poke succeeded!'
     [~ +>.$]
@@ -50,8 +50,8 @@
   [~ +>.$]
 ::
 ++  reap
-  |=  {wir/wire err/(unit tang)}
-  ^-  {(list move) _+>.$}
+  |=  [wir=wire err=(unit tang)]
+  ^-  [(list move) _+>.$]
   ?~  err
     ~&  sink+success+'Peer succeeded!'
     [~ +>.$]
