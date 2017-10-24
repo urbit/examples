@@ -1,35 +1,34 @@
 :: Game of life as app
-/?  314
 ::
 !:
 ::
 |%
-++  move  {bone card}
-++  card  $%  $~
++=  move  [bone card]
++=  card  $%  $~
           ==
-++  action
-  $%  {$start size/(unit @)}                            :: reset game state
-      {$toggle s/(list spot)}
-      {$step n/(unit @)}
-      {$debug $~}
++=  action
+  $%  [$start size=(unit @)]                            :: reset game state
+      [$toggle s=(list spot)]
+      [$step n=(unit @)]
+      [$debug $~]
   ==
 ::
-++  game   $:  size/@
-               steps/@
-               b/board
++=  game   $:  size=@
+               steps=@
+               b=board
            ==
-++  board  (list (list ?))
-++  spot   {r/@ c/@}
++=  board  (list (list ?))
++=  spot   [r=@ c=@]
 --
 ::
 ::
-|_  {bowl g/game}
+|_  [bowl:gall g=game]
 ::
 ::  ++  prep  ~&  'prep life'  _`.
 ::
 ++  poke-noun
-  |=  a/action
-  ^-  {(list move) _+>.$}
+  |=  a=action
+  ^-  [(list move) _+>.$]
   ?-  -.a
     $start
       =+  size=?~(size.a 10 u.size.a)
@@ -51,11 +50,11 @@
 :::: game operations
 ::
 ++  go
-  |_  mag/game
-  ++  new  |=(size/@ `game`[size 0 (empty:bo size)])    ::
+  |_  mag=game
+  ++  new  |=(size=@ `game`[size 0 (empty:bo size)])    ::
   ::
   ++  step
-    |=  n/@
+    |=  n=@
     |-  ^-  game
     ?:  =(0 n)
       mag
@@ -68,13 +67,13 @@
     ~+                                                  :: cache
     %-  zing                                            :: flatten
     %+  turn  (range size.mag)                          :: (list (list spot))
-    |=  r/@
+    |=  r=@
     %+  turn  (range size.mag)
-    |=  c/@
+    |=  c=@
     `spot`[r c]
   ::
   ++  toggle                                            :: new game w/ spots toggled
-    |=  spots/(list spot)
+    |=  spots=(list spot)
     |-  ^-  game
     ?~  spots
       mag
@@ -84,19 +83,19 @@
   ::
   ++  bo
     |%
-    ++  empty  |=(size/@ (reap size (reap size |)))     :: empty board
-    ++  get    |=(s/spot (snag c.s (snag r.s b.mag)))   :: val at spot
-    ++  swap   |=(s/spot !=(~(next so s) (get s)))      :: needs to be toggled?
+    ++  empty  |=(size=@ (reap size (reap size |)))     :: empty board
+    ++  get    |=(s=spot (snag c.s (snag r.s b.mag)))   :: val at spot
+    ++  swap   |=(s=spot !=(~(next so s) (get s)))      :: needs to be toggled?
     ::
     :: spot operations
     ::
     ++  so
-      |_  s/spot
+      |_  s=spot
       ++  toggle
         ^-  board
         (weld (weld head (limo ~[trow])) tail)
       ++  next                                          :: should be alive?
-        =+  l=(skid adj |=(a/? a))
+        =+  l=(skid adj |=(a=? a))
         ?.  (get s)                                     :: if not alive (if dead)
           =(3 (lent p.l))                               :: dead -> alive
         |(=(3 (lent p.l)) =(2 (lent p.l)))              :: alive -> still alive
@@ -138,7 +137,7 @@
       ++  tail  (slag +(r.s) b.mag)
       ::
       ++  trow                                          :: toggled row
-        =|  i/@
+        =|  i=@
         =+  r=(snag r.s b.mag)
         |-  ^-  (list ?)
         ?~  r
@@ -150,8 +149,8 @@
   --
 ::
 ++  range                                                :: range exclusive
-  |=  n/@
-  =|  i/@
+  |=  n=@
+  =|  i=@
   |-  ^-  (list @)
   ?:  (gte i n)
     ~
