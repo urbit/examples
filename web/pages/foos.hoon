@@ -1,5 +1,5 @@
 /=  gas
-/$  fuel
+/$  fuel:html
 ::
 !:
 ^-  manx
