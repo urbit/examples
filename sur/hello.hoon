@@ -1,4 +1,4 @@
 !:
 |%
-++  hello-world  cord
++=  hello-world  cord
 --

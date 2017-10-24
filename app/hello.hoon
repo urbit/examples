@@ -7,36 +7,36 @@
 [. hello]                                               ::<  add core to subject
 !:
 |%
-++  move  {bone card}                                   ::<  arvo event
-++  card  $%  {$diff diff-contents}
++=  move  [bone card]                                   ::<  arvo event
++=  card  $%  [$diff diff-contents]
           ==
-++  diff-contents  $%  {$hello-world hello-world}       ::<  arvo packet
++=  diff-contents  $%  [$hello-world hello-world]       ::<  arvo packet
                    ==
 --
 ::
-|_  {bow/bowl elo/hello-world}                          ::<  app state
+|_  [bow=bowl:gall elo=hello-world]                     ::<  app state
 ::
 ++  prep                                                ::<  called on |start
   |=  *
-  ^-  {(list move) _+>.$}
+  ^-  [(list move) _+>.$]
   [~ +>.$(elo 'Hello, world!')]                         ::<  set the app state
 ::
 ++  peer-web
-  |=  pax/path
-  ^-  {(list move) _+>.$}
+  |=  pax=path
+  ^-  [(list move) _+>.$]
   ~&  hello+peered+'Peered from the web!'
   [~[[ost.bow %diff %hello-world elo]] +>.$]
 ::
 ++  poke-hello-world
-  |=  elo/hello-world
-  ^-  {(list move) _+>.$}
+  |=  elo=hello-world
+  ^-  [(list move) _+>.$]
   ?>  =(elo 'Hello, world!')
   ~&  hello+poked+elo
   [~ +>.$]
 ::
 ++  reap
-  |=  {wir/wire err/(unit tang)}
-  ^-  {(list move) _+>.$}
+  |=  [wir=wire err=(unit tang)]
+  ^-  [(list move) _+>.$]
   ?~  err
     ~&  hello+success+'Peer succeeded!'
     [~ +>.$]
@@ -45,8 +45,8 @@
   [~ +>.$]
 ::
 ++  coup
-  |=  {wir/wire err/(unit tang)}
-  ^-  {(list move) _+>.$}
+  |=  [wir=wire err=(unit tang)]
+  ^-  [(list move) _+>.$]
   ?~  err
     ~&  hello+success+'Poke succeeded!'
     [~ +>.$]

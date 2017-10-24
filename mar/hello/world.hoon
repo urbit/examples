@@ -5,17 +5,17 @@
 /-  hello
 [. hello]
 !:
-|_  elo/hello-world
+|_  elo=hello-world
 ++  grab
   |%
   ++  noun  cord
   ++  json
-    |=  jon/^json
-    (need (so:jo jon))
+    |=  jon=^json
+    (need (so:dejs-soft:format jon))
   --
 ++  grow
   |%
   ++  json
-    (jape (trip elo))
+    (tape:enjs:format (trip elo))
   --
 --
