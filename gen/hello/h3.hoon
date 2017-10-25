@@ -14,6 +14,6 @@
 !:
 ::
 :-  %say
-|=  {^ {$~ txt/_'universe'}}
+|=  [^ [~ txt=_'universe']]
 :-  %noun
 (crip (weld (weld "Hello, " (trip txt)) "!"))

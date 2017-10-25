@@ -9,6 +9,6 @@
 !:
 ::
 :-  %say
-|=  {^ {{txt/@t $~} $~}}
+|=  [^ [[txt=@t ~] ~]]
 :-  %noun
 (crip (weld (weld "Hello, " (trip txt)) "!"))
