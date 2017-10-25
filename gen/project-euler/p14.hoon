@@ -16,7 +16,7 @@
 ::
 |%
 ++  collatz :: given a, returns the number of steps needed to reach 1
-  |=  {a/@u cache/(map @u @u)}
+  |=  [a=@u cache=(map @u @u)]
   =+  [curr=a len=1]
   |-  ^-  @u
   ?:  =(curr 1)
@@ -28,9 +28,9 @@
   $(curr (add (mul curr 3) 1), len +(len))
 ::
 ++  longcol :: find the longest collatz sequence under a
-  |=  {a/@u}
+  |=  [a=@u]
   =+  [len=0 num=0 acc=1 cache=(molt `(list (pair @ @))`[[2 1] [4 2] ~])]
-  |-  ^-  {@u @u}
+  |-  ^-  [@u @u]
     =+  col=(collatz acc cache)
   ?:  =(acc a)
     [num len]

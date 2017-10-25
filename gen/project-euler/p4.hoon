@@ -18,8 +18,8 @@
 ::
 |%
 ++  largest-palindrome
-  |=  {a/@u b/@u}                                       :: gate, takes cell nums
-  =|  p/@u                                              :: palindr. var, set l8r
+  |=  [a=@u b=@u]                                       :: gate, takes cell nums
+  =|  p=@u                                              :: palindr. var, set l8r
   |-  ^-  @u                                            :: loop, produce a num:
   ?>  &((lth a 1.000) (lth b 1.000))                    :: assert (sure) a&b are
   ?>  &((gte a 100) (gth b 100))                        ::  three-digit numbers.

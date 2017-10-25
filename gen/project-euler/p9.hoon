@@ -21,7 +21,7 @@
 ::
 |%
 ++  find-pythagorean-triplet-abc-sum-eq-one-thousand
-  |=  {a/@u b/@u c/@u}                                  :: gate takes 3-num cell
+  |=  [a=@u b=@u c=@u]                                  :: gate takes 3-num cell
   |-  ^-  @u                                            :: loop, prod is 1 num.
   ?:  ?!  =((add (add a b) c) 1.000)                    :: if a+b+c not= 1000,
     a                                                   :: produce a.
