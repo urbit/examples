@@ -8,9 +8,9 @@
 !:
 |_  color
 ++  grab  |%
-          ++  noun  color
+          +=  noun  color
           ++  json
-            |=  jon/^json  ^-  color
-            (need (so:jo jon))
+            |=  jon=^json  ^-  color
+            (need (so:dejs-soft:format jon))
           --
 --

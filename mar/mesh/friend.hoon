@@ -8,10 +8,10 @@
 !:
 |_  friend
 ++  grab  |%
-          ++  noun  friend
+          +=  noun  friend
           ++  json
-            |=  jon/^json  ^-  friend
+            |=  jon=^json  ^-  friend
             ~|  [%bad-json jon]
-            `@p`(slav %p (need (so:jo jon)))
+            `@p`(slav %p (need (so:dejs-soft:format jon)))
           --
 --

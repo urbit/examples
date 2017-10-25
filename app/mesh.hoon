@@ -6,30 +6,30 @@
 [. mesh]
 !:
 |%
-++  move  {bone card}
-++  card  $%  {$peer wire dock path}
-              {$pull wire dock $~}
-              {$diff diff-contents}
++=  move  [bone card]
++=  card  $%  [$peer wire dock path]
+              [$pull wire dock $~]
+              [$diff diff-contents]
           ==
-++  diff-contents  $%  {$mesh-friends color friends}
-                       {$mesh-network color network}
++=  diff-contents  $%  [$mesh-friends color friends]
+                       [$mesh-network color network]
                    ==
 --
 ::
-|_  {bow/bowl {col/color net/network}}                  ::<  color, social net.
+|_  [bow=bowl:gall [col=color net=network]]                  ::<  color, social net.
 ::
 ::++  prep  _`.
 ++  poke-mesh-color
-  |=  col/color
-  ^-  {(list move) _+>.$}
+  |=  col=color
+  ^-  [(list move) _+>.$]
   =.  ^col  col
   ~&  mesh+'Color set! Notifying subscribers:'
   ~&  mesh+color+col
   [spam +>.$]
 ::
 ++  poke-mesh-friend
-  |=  fen/friend
-  ^-  {(list move) _+>.$}
+  |=  fen=friend
+  ^-  [(list move) _+>.$]
   ~&  :-  %mesh
     (crip (weld (weld "Friending " (scow %p fen)) "!"))
   :_  +>.$
@@ -42,8 +42,8 @@
   ==
 ::
 ++  reap
-  |=  {wire err/(unit tang)}
-  ^-  {(list move) _+>.$}
+  |=  [wire err=(unit tang)]
+  ^-  [(list move) _+>.$]
   ?^  err  (mean u.err)
   ~!  +<.reap
   =.  net
@@ -57,14 +57,14 @@
   [spam +>.$]
 ::
 ++  coup
-  |=  {wire err/(unit tang)}
-  ^-  {(list move) _+>.$}
+  |=  [wire err=(unit tang)]
+  ^-  [(list move) _+>.$]
   ?^  err  (mean u.err)
   [~ +>.$]
 ::
 ++  diff-mesh-friends
-  |=  {wir/wire col/color fes/friends}
-  ^-  {(list move) _+>.$}
+  |=  [wir=wire col=color fes=friends]
+  ^-  [(list move) _+>.$]
   ~&  mesh+diff+'Network update!'
   ~&  mesh+diff+[source+src.bow color+col friends+fes]
   =+  old-net=net
@@ -79,13 +79,13 @@
 ::
 ++  spam
   ^-  (list move)
-  %+  murn  (~(tap by sup.bow))
-  |=  {ost/bone shp/ship pax/path}
+  %+  murn  ~(tap by sup.bow)
+  |=  [ost=bone shp=ship pax=path]
   %+  bind  ~+((peek shp pax))
-  |=(dif/diff-contents [ost %diff dif])
+  |=(dif=diff-contents [ost %diff dif])
 ::
 ++  peek
-  |=  {src/ship pax/path}
+  |=  [src=ship pax=path]
   ^-  (unit diff-contents)
   ?~  pax   ~
   ?+  i.pax  ~
@@ -104,14 +104,14 @@
   [col (~(get ju net) our.bow)]
 ::
 ++  peer-web
-  |=  pax/path
-  ^-  {(list move) _+>.$}
+  |=  pax=path
+  ^-  [(list move) _+>.$]
   ~&  pax
   [[ost.bow %diff (peek-web src.bow pax)]~ +>.$]
 ::
 ++  peer-mesh-friends
-  |=  pax/path
-  ^-  {(list move) _+>.$}
+  |=  pax=path
+  ^-  [(list move) _+>.$]
   ~&  mesh+'Someone friended you!'
   ~&  mesh+ship+src.bow
   :_  +>.$

@@ -6,8 +6,8 @@
 [. mesh]
 ::
 !:
-|_  {color friends}
+|_  [color friends]
 ++  grab  |%
-          ++  noun  {color friends}
+          +=  noun  [color friends]
           --
 --
