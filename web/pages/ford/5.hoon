@@ -4,10 +4,9 @@
 ::::  /===/web/pages/ford/5/hoon
   ::
 |%
-  ++  dist  {start/@ud end/@ud}
+  +=  dist  [start=@ud end=@ud]
   ++  length
-    |=
-      {d/dist}
+    |=  [d=dist]
     (sub end.d start.d)
 --
 ::

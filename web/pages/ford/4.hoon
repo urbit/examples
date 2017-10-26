@@ -7,8 +7,7 @@
   ++  start  1
   ++  end  10
   ++  length
-    |=
-      {s/@ud e/@ud}
+    |=  [s=@ud e=@ud]
     (sub e s)
 --
 ::

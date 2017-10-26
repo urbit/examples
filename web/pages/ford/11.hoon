@@ -4,7 +4,7 @@
 ::::  /===/web/pages/ford/11/hoon
   ::
 /=  gas
-/$  fuel
+/$  fuel:html
 //  /%%/11/lib
 ::
 !:

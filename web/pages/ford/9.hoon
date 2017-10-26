@@ -4,14 +4,14 @@
 ::::  /===/web/pages/ford/9/hoon
   ::
 /=  gas
-/$  fuel
+/$  fuel:html
 ::
 |%
 ++  fib
-  |=  x/@
-    ?:  (lth x 2)
-      1
-    (add $(x (dec x)) $(x (sub x 2)))
+  |=  x=@
+  ?:  (lth x 2)
+    1
+  (add $(x (dec x)) $(x (sub x 2)))
 ++  arg
   %+  fall
     %+  biff

@@ -4,7 +4,7 @@
 ::::  /===/web/pages/ford/8/hoon
   ::
 /=  gas
-/$  fuel
+/$  fuel:html
 ::
 ^-  manx
 ;html

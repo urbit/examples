@@ -3,18 +3,20 @@
 ::
 ::::  /===/web/pages/ford/12/hoon
   ::
-/=    posts  /:  /%%/12/lib
-             /;  |=(a/(list {@ud manx}) (turn (sort a lor) tail))
-             /;  |=  a/(map @ manx)
-                 ~&  a
-                 %+  murn
-                   (~(tap by a))
-                 |=  {a/@ b/manx}  ^-  (unit {@ud manx})
-                 =+  c=(slaw %ud a)
-                 ?~  c  ~
-                 `[u.c b]
-             /_
-             /elem/
+/=  posts  /:  /%%/12/lib
+           /;  |=  a=(list [@ud manx]) 
+               (turn (sort a lor) tail)
+           /;  |=  a=(map @ manx)
+               ~&  a
+               %+  murn
+                 ~(tap by a)
+               |=  [a=@ b=manx]  
+               ^-  (unit [@ud manx])
+               =+  c=(slaw %ud a)
+               ?~  c  ~
+               `[u.c b]
+           /_
+           /elem/
 ::
 !:
 ^-  manx
