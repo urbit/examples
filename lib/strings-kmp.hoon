@@ -14,13 +14,13 @@
   [(kmp "aaaaaaab" a) (kmp "ipsum" b)]
 ::
 ++  kmp
-  |=  {ptn/tape txt/tape}
+  |=  [ptn=tape txt=tape]
   (skm ptn (gnx ptn) txt)
 ::
 ++  skm
-  |=  {ptn/tape nxt/(list @sd) txt/tape}
-  =|  {i/@sd j/@ud}
-  =|  fnd/(list @ud)                        ::  indices of pattern in text
+  |=  [ptn=tape nxt=(list @sd) txt=tape]
+  =|  [i=@sd j=@ud]
+  =|  fnd=(list @ud)                        ::  indices of pattern in text
   =+  len=(lent txt)
   ^-  (list @ud)  |-
   ?~  txt  (flop fnd)
@@ -33,7 +33,7 @@
   $(i (sun:si k), j +(j), txt +.txt)
 ::
 ++  gnx                                     ::  generate next table
-  |=  ptn/tape
+  |=  ptn=tape
   =+  nxt=`(list @sd)`[-1 ~]
   =+  [i=-1 j=0]
   ^-  (list @sd)  |-

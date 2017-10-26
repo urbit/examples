@@ -3,22 +3,22 @@
 ::  arms accessible in dojo after `/+  sorts` (two spaces (`gap`) in between)
 ::  try `test:sorts`
 ::
-::::  /===/lib/sorts/hoon
+::::  /===/lib=sorts/hoon
   ::
 !:
 ::
 |%
 ++  test
   |=  *
-  =/  a/(list @u)  ~[5 2 3 8 1 13 1]
+  =/  a=(list @u)  ~[5 2 3 8 1 13 1]
   :*  insertion-sort+(insertion-sort a)
       bubble-sort+(bubble-sort a)
       merge-sort+(merge-sort a)
   ==
 ::
 ++  insertion-sort
-  |=  a/(list @u)                                       :: gate, list of numbers
-  =/  b/(list @u)  ~                                    :: var, b = empty list.
+  |=  a=(list @u)                                       :: gate, list of numbers
+  =/  b=(list @u)  ~                                    :: var, b = empty list.
   |-  ^-  (list @u)                                     :: loop, prod. list nums
   ?~  a  b                                              :: ifno a (~), produce b
   %=  $                                                 :: else, call loop:
@@ -31,9 +31,9 @@
   ==
 ::
 ++  bubble-sort
-  |=  a/(list @u)                                       :: gate, list of numbers
-  =/  s/@u  (lent a)                                    :: var, "surface".
-  =/  c/@u  0                                           :: var, counter.
+  |=  a=(list @u)                                       :: gate, list of numbers
+  =/  s=@u  (lent a)                                    :: var, "surface".
+  =/  c=@u  0                                           :: var, counter.
   |-  ^-  (list @u)                                     :: loop, produce list @s
   ?:  =(s 1)                                            :: if surface=1, sorted,
     a                                                   :: so produce a.
@@ -50,7 +50,7 @@
   ==
 ::
 ++  merge-sort
-  |=  a/(list @u)                                       :: gate, list of numbers
+  |=  a=(list @u)                                       :: gate, list of numbers
   ?:  (lth (lent a) 2)                                  :: if <2 elems, "sorted"
     a                                                   :: so produce a.
   =+  mid=(div (lent a) 2)                              :: else pin mid->lenta/2
@@ -59,8 +59,8 @@
       (merge-sort (slag mid a))                         ::  and right list.
 ::
 ++  merge
-  |=  {l/(list @u) r/(list @u)}                         :: gate, two lists/ nums
-  =|  merged/(list @u)                                  :: newvar merged,set l8r
+  |=  [l=(list @u) r=(list @u)]                         :: gate, two lists= nums
+  =|  merged=(list @u)                                  :: newvar merged,set l8r
   |-  ^-  (list @u)                                     :: loop, prod. list nums
   ?.  |(?=($~ l) ?=($~ r))                              :: unless l or r are nil
     ?:  (gth i.l i.r)                                   :: if l head > r head,
