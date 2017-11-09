@@ -30,7 +30,15 @@
     $off  [~ +>.$(on |)]
     $on
       :-  ?:  |(on in-progress)  ~
-          [ost.bow %hiss /request ~ %httr %purl (need (de-purl:html target))]~
+          :~  :*  ost.bow
+                  %hiss
+                  /request
+                  ~
+                  %httr
+                  %purl
+                  (need (de-purl:html target))
+              ==
+          ==
       +>.$(on &, in-progress &)
   ==
 
@@ -51,7 +59,15 @@
   |=  [wir=wire $~]  ^-  [(list move) _+>.$]
   ?:  on
     :_  +>.$
-    [ost.bow %hiss /request ~ %httr %purl (need (de-purl:html target))]~
+    :~  :*  ost.bow
+            %hiss
+            /request
+            ~
+            %httr
+            %purl
+            (need (de-purl:html target))
+        ==
+    ==
   [~ +>.$(in-progress |)]
 ::
 ++  prep  ~&  target  _`.
