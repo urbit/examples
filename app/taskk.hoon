@@ -7,24 +7,24 @@
 [taskk .]
 |%
   ++  card  
-  $%  {$info wire @p toro}                              :: write to clay
-      {$warp wire sock riff}                            :: watch a dir
-      {$diff $taskk-create-issue tape tape tape}        :: update subscribers
-      {$diff $json json} 
+  $%  [%info wire @p toro]                              :: write to clay
+      [%warp wire sock riff]                            :: watch a dir
+      [%diff %taskk-create-issue tape tape tape]        :: update subscribers
+      [%diff %json json] 
   ==
-  ++  move  {bone card}                                  
+  ++  move  [bone card]                                  
 --                                               
 !:                                               
-|_  {hid/bowl state/{subp/path wpat/path}}                         
+|_  [hid=bowl state=[subp=path wpat=path]]                         
 ::
 ++  poke-taskk-create-issue
-  |=  iss/issue
-  ^-  {(list move) _+>.$}
+  |=  iss=issue
+  ^-  [(list move) _+>.$]
   :_  +>.$
   %+  welp                                              
     %+  turn                                            :: notify all subscribers
       (prey subp.state hid)
-    |=  {o/bone *}  
+    |=  [o=bone *]  
     :-  o  
     :+  %diff 
       %taskk-create-issue
@@ -44,9 +44,9 @@
   ==
 ::  delete issue
 ++  poke-taskk-delete-issue
-  |=  iss/issue-ref
+  |=  iss=issue-ref
   ~&  %delete-issue-called
-  ^-  {(list move) _+>.$}
+  ^-  [(list move) _+>.$]
   :_  +>.$
   :~  :-  ost.hid
       :^    %info
@@ -63,10 +63,10 @@
 ::
 ::  change board phase
 ++  poke-taskk-change-phase
-  |=  iss/change-ref
+  |=  iss=change-ref
   ~&  %change-phase-called
-  ^-  {(list move) _+>.$}
-  =/  inp/path
+  ^-  [(list move) _+>.$]
+  =/  inp=path
   %+  welp
     wpat.state
   :~  (crip fpha.iss)
@@ -92,12 +92,12 @@
   ==
 ::  request a board
 ++  poke-taskk-request-board
-  |=  board/{ho/tape bo/tape}
-  ^-  {(list move) _+>.$}
+  |=  board=[ho=tape bo=tape]
+  ^-  [(list move) _+>.$]
   :_  +>.$ 
   %+  turn  
     (prey subp.state hid)
-  |=  {o/bone *}
+  |=  [o=bone *]
   :-  o
   :+  %diff
     %json
@@ -107,14 +107,14 @@
   ==
 ::
 ++  crawl-path
-  |=  pax/path
+  |=  pax=path
   |-  ^-  json
   =+  a=.^(arch cy+pax)
   ?~  fil.a
     :-  %a
       %+  turn
         (sort (~(tap by dir.a)) aor)
-        |=  {p/@t $~}
+        |=  [p=@t ~]
           [%a [[%s p] (crawl-path (welp pax /[p])) ~]]
   =+  txt=.^(@t cx+pax)
   [%s txt]
@@ -122,7 +122,7 @@
 ::  subscribe to taskk front end
 ::
 ++  peer
-  |=  pax/path
+  |=  pax=path
   ~&  [%subscribed-to pax]
   :_  %=  +>.$
         state  :-  pax
@@ -143,7 +143,7 @@
 ::
 ::  watch board dir for changes
 ++  watch-dir
-  |=  a/path
+  |=  a=path
   ::~&  [%watch-dir a]
   ^-  (list move)
   :~  :-  ost.hid
@@ -157,9 +157,9 @@
 ::will update subscribers that node changed
 ::once that works reasonably
 ::++  writ                                         
-::  |=  {way/wire rot/riot}
+::  |=  [way=wire rot=riot]
 ::  ~&  [%rot rot]
-::  =/  car/card
+::  =/  car=card
 ::  :+  %diff
 ::    %json
 ::  %+  joba
@@ -168,7 +168,7 @@
 ::  :-  %+  welp
 ::        %+  turn 
 ::          (prey subp.state hid)
-::        |=  {o/bone *}
+::        |=  [o=bone *]
 ::        [o car]
 ::  [(watch-dir way) +>.$]
 ++  prep  _`.

@@ -8,9 +8,9 @@
 !:
 |%
 +=  move  [bone card]                                   ::<  arvo event
-+=  card  $%  [$diff diff-contents]
++=  card  $%  [%diff diff-contents]
           ==
-+=  diff-contents  $%  [$hello-world hello-world]       ::<  arvo packet
++=  diff-contents  $%  [%hello-world hello-world]       ::<  arvo packet
                    ==
 --
 ::

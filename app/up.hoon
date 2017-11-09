@@ -7,13 +7,13 @@
 |%
 +=  move  [bone card]
 +=  card
-  $%  [$hiss wire $~ $httr [$purl p=purl:eyre]]
-      [$wait wire @da]
+  $%  [%hiss wire ~ %httr [%purl p=purl:eyre]]
+      [%wait wire @da]
   ==
 +=  action
-  $%  [$on $~]            ::  enable polling('on')
-      [$off $~]           ::  disable polling('off)
-      [$target p=cord]    ::  set poll target('http:==...')
+  $%  [%on ~]            ::  enable polling('on')
+      [%off ~]           ::  disable polling('off)
+      [%target p=cord]   ::  set poll target('http:==...')
   ==
 --
 |_  [bow=bowl:gall on=_| in-progress=_| target=@t]
@@ -22,13 +22,13 @@
   |=  url-or-command=@t
   ^-  [(list move) _+>.$]
   =+  ^-  act=action
-      ?:  ?=($on url-or-command)  [%on ~]
-      ?:  ?=($off url-or-command)  [%off ~]
+      ?:  ?=(%on url-or-command)  [%on ~]
+      ?:  ?=(%off url-or-command)  [%off ~]
       [%target url-or-command]
   ?-  -.act
-    $target  [~ +>.$(target p.act)]
-    $off  [~ +>.$(on |)]
-    $on
+    %target  [~ +>.$(target p.act)]
+    %off  [~ +>.$(on |)]
+    %on
       :-  ?:  |(on in-progress)  ~
           :~  :*  ost.bow
                   %hiss
@@ -56,7 +56,7 @@
   :_  +>.$
   [ost.bow %wait /timer (add ~s10 now.bow)]~
 ++  wake-timer
-  |=  [wir=wire $~]  ^-  [(list move) _+>.$]
+  |=  [wir=wire ~]  ^-  [(list move) _+>.$]
   ?:  on
     :_  +>.$
     :~  :*  ost.bow

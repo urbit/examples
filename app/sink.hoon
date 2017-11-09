@@ -5,8 +5,8 @@
 !:
 |%
 +=  move  [bone card]
-+=  card  $%  [$peer wire dock path]
-              [$pull wire dock $~]
++=  card  $%  [%peer wire dock path]
+              [%pull wire dock ~]
           ==
 --
 ::

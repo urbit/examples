@@ -5,17 +5,17 @@
 !:
 |%
 +=  axle
-  $%  [$0 p=(map @t @ud)]
+  $%  [%0 p=(map @t @ud)]
   ==
 +=  diff-contents                                     ::  subscription frame
-  $%  [$json p=json]                                  ::  json
+  $%  [%json p=json]                                  ::  json
   ==                                                  ::
 +=  kiss
-  $%  [$new-lead name=cord]                           ::  new leader
-      [$add-lead name=cord]                           ::  add to leader
+  $%  [%new-lead name=cord]                           ::  new leader
+      [%add-lead name=cord]                           ::  add to leader
   ==
 +=  move  [bone card]                                 ::  output operation
-+=  card  $%  [$diff diff-contents]                     
++=  card  $%  [%diff diff-contents]                     
           ==
 --
 ::
@@ -34,7 +34,7 @@
   :_  ~
   ?+    -.pax
       ~_(leaf+"you need to specify a path" ~|(%not-found !!))
-    $data  [ost.bow %diff %json (frond:enjs:format %conn %b &)]
+    %data  [ost.bow %diff %json (frond:enjs:format %conn %b &)]
   ==
 ::
 ++  vat-json
@@ -62,7 +62,7 @@
           [%add-lead so]
       ==
   ?-  -.jop
-    $new-lead
+    %new-lead
       ?:  (~(has by p.vat) +.jop)
         ~_  [%leaf "That name is already in the leaderboard."]
         ~|(%not-new !!)
@@ -70,7 +70,7 @@
         (~(put by p.vat) name.jop 0)
       :_  +>.$
       (deliver %upd-lead (frond:enjs:format name.jop [%n (scot %ud 0)]))
-    $add-lead
+    %add-lead
       =+  ledr=(~(get by p.vat) name.jop)
       ?~  ledr
         ~_  [%leaf "That name is not in the leaderboard."]

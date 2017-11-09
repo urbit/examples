@@ -7,9 +7,9 @@
 !:
 |%
 +=  move  [bone card]
-+=  card  $%  [$diff diff-content]
++=  card  $%  [%diff diff-content]
           ==
-+=  diff-content  $%  [$click-clicks clicks]
++=  diff-content  $%  [%click-clicks clicks]
                   ==
 --
 ::

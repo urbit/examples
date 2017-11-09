@@ -6,13 +6,13 @@
 ::
 |%
 +=  move  [bone card]
-+=  card  $%  [$diff diff-contents]
++=  card  $%  [%diff diff-contents]
           ==
-+=  diff-contents  $%  [$noun *]
++=  diff-contents  $%  [%noun *]
                    ==
 --
 ::
-|_  [bow=bowl:gall $~]                                  ::<  stateless
+|_  [bow=bowl:gall ~]                                  ::<  stateless
 ::
 ++  poke-noun
   |=  non=*

@@ -5,7 +5,7 @@
 !:                                    ::  insert stack trace for this core
 |%                                    ::  core with data structures
 +=  move  [bone card]
-+=  card  $%  [$diff diff-content]
++=  card  $%  [%diff diff-content]
           ==
 +=  diff-content  $%  [$json json]
                   ==

@@ -7,12 +7,12 @@
 !:
 |%
 +=  move  [bone card]
-+=  card  $%  [$peer wire dock path]
-              [$pull wire dock $~]
-              [$diff diff-contents]
++=  card  $%  [%peer wire dock path]
+              [%pull wire dock $~]
+              [%diff diff-contents]
           ==
-+=  diff-contents  $%  [$mesh-friends color friends]
-                       [$mesh-network color network]
++=  diff-contents  $%  [%mesh-friends color friends]
+                       [%mesh-network color network]
                    ==
 --
 ::
@@ -89,9 +89,9 @@
   ^-  (unit diff-contents)
   ?~  pax   ~
   ?+  i.pax  ~
-    $web
+    %web
       `(peek-web src t.pax)
-    $mesh-friends
+    %mesh-friends
       `(peek-mesh-friends src t.pax)
   ==
 ::

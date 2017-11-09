@@ -5,11 +5,11 @@
 !:
 |%
 +=  move  [bone card]
-+=  card  $%  $~
++=  card  $%  ~
           ==
 --
 ::
-|_  [bow=bowl:gall $~]                                  ::<  stateless
+|_  [bow=bowl:gall ~]                                  ::<  stateless
 ::
 ++  poke-noun
   |=  non=*
