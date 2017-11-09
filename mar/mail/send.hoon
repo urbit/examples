@@ -7,14 +7,14 @@
 |_  mail-send
 ++  grab
   |%
-  ++  noun
+  +=  noun
     mail-send
   ++  json
     |=  jon/^json
     ^-  mail-send
     %-  need
     %.  jon
-    =>  jo
-    (ot to+(ci (slat %p) so) sub+so bod+(cu lore so) ~)
+    =>  dejs-soft:format
+    (ot to+(ci (slat %p) so) sub+so bod+(cu to-wain:format so) ~)
   --
 --
