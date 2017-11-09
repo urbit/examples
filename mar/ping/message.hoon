@@ -7,7 +7,7 @@
 |_  ping-message
 ++  grab
   |%
-  ++  noun
+  +=  noun
     ping-message
   --
 --

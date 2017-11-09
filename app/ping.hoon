@@ -6,26 +6,26 @@
 ::
 !:
 |%
-++  move  {bone card}
-++  card  $%  {$poke wire dock poke-contents}
++=  move  [bone card]
++=  card  $%  [%poke wire dock poke-contents]
           ==
-++  poke-contents  $%  {$atom @}
++=  poke-contents  $%  [%atom @]
                    ==
 --
-|_  {bow/bowl $~}                                       ::<  stateless
+|_  [bow=bowl:gall ~]                                        ::<  stateless
 ::
 ++  poke-ping-message
   |=  ping-message
   ~&  ping+'Message sent!'
-  ^-  {(list move) _+>.$}
+  ^-  [(list move) _+>.$]
   :_  +>.$
   :_  ~
   [ost.bow %poke /sending [to dap.bow] %atom message]
 ::
 ++  poke-atom
-  |=  arg/@
+  |=  arg=@
   ~&  ping+'Message received!'
-  ^-  {(list move) _+>.$}
+  ^-  [(list move) _+>.$]
   ~&  ping+message+(@t arg)
   [~ +>.$]
 ::

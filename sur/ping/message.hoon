@@ -1,1 +1,1 @@
-{to/ship message/cord}
+,[to=ship message=cord]
