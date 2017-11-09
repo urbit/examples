@@ -7,12 +7,12 @@
 !:
 |%
 +=  move  [bone card]
-+=  card  $%  [$poke wire dock poke-contents]
++=  card  $%  [%poke wire dock poke-contents]
           ==
-+=  poke-contents  $%  [$atom @]
++=  poke-contents  $%  [%atom @]
                    ==
 --
-|_  [bow/bowl $~]                                       ::<  stateless
+|_  [bow=bowl:gall ~]                                        ::<  stateless
 ::
 ++  poke-ping-message
   |=  ping-message

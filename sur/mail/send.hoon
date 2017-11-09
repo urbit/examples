@@ -1,1 +1,1 @@
-{to/ship sub/cord bod/wain}
+,[to=ship sub=cord bod=wain]

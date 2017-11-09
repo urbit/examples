@@ -7,30 +7,30 @@
 ::
 !:
 |%
-++  move  {bone card}
-++  card  $%  {$poke path dock poke-contents}
-              {$diff diff-contents}
++=  move  [bone card]
++=  card  $%  [%poke path dock poke-contents]
+              [%diff diff-contents]
           ==
-++  poke-contents  $%  {$mail-message mail-message}
++=  poke-contents  $%  [%mail-message mail-message]
                    ==
-++  diff-contents  $%  {$json json}
++=  diff-contents  $%  [%json json]
                    ==
 --
 ::
-|_  $:  bow/bowl
-        sen/(list mail-message)                         ::<  sent messages
-        rec/(list mail-message)                         ::<  received messages
+|_  $:  bow=bowl:gall
+        sen=(list mail-message)                         ::<  sent messages
+        rec=(list mail-message)                         ::<  received messages
     ==
 ::
 ++  prep  _`.
 ::
 ++  peer
-  |=  pax/path
-  ^-  {(list move) _+>.$}
-  =/  ordered-messages/(list mail-message)
+  |=  pax=path
+  ^-  [(list move) _+>.$]
+  =/  ordered-messages=(list mail-message)
     %+  sort
       rec
-    |=  {a/mail-message b/mail-message}
+    |=  [a=mail-message b=mail-message]
     (gth tim.a tim.b)
   :_  +>.$
   :_  ~
@@ -38,22 +38,22 @@
   (inbox-to-json ordered-messages)
 ::
 ++  inbox-to-json
-  |=  box/(list mail-message)
+  |=  box=(list mail-message)
   ^-  json
   :-  %a
   %+  turn  box
-  |=  a/mail-message
-  %-  jobe
-  :~  tim+(jode tim.a)
+  |=  a=mail-message
+  %-  pairs:enjs:format
+  :~  tim+(time:enjs:format tim.a)
       fom+s+(scot %p fom.a)
       to+s+(scot %p to.a)
       sub+s+sub.a
-      bod+s+(role bod.a)
+      bod+s+(of-wain:format bod.a)
   ==
 ++  poke-mail-send
-  |=  sen/mail-send                                     ::<  to, subject, body
-  ^-  {(list move) _+>.$}
-  =/  out/mail-message
+  |=  sen=mail-send                                     ::<  to, subject, body
+  ^-  [(list move) _+>.$]
+  =/  out=mail-message
     [now.bow our.bow to.sen sub.sen bod.sen]
   =.  ^sen
     [out ^sen]
@@ -66,7 +66,7 @@
       ==
   ==
 ++  poke-mail-message
-  |=  mes/mail-message
+  |=  mes=mail-message
   ?>  =(to.mes our.bow)
   ~&  mail+received+'New message!'
   ~&  mail+time+tim.mes
@@ -76,19 +76,19 @@
   ~&  mail+bod+bod.mes
   =.  rec
     [mes rec]
-  =/  ord/(list mail-message)                           ::<  ordered messages
+  =/  ord=(list mail-message)                           ::<  ordered messages
     %+  sort
       rec
-    |=  {a/mail-message b/mail-message}
+    |=  [a=mail-message b=mail-message]
     (gth tim.a tim.b)
   :_  +>.$
-  %+  turn  (~(tap by sup.bow))
-  |=  {o/bone *}
+  %+  turn  ~(tap by sup.bow)
+  |=  [o=bone *]
   [o %diff %json `json`(inbox-to-json ord)]
  ::
 ++  coup
-  |=  {wir/wire err/(unit tang)}
-  ^-  {(list move) _+>.$}
+  |=  [wir=wire err=(unit tang)]
+  ^-  [(list move) _+>.$]
   ?~  err
     ~&  mail+success+'Message sent!'
     [~ +>.$]

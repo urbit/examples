@@ -7,7 +7,7 @@
 |_  mail-message
 ++  grab
   |%
-  ++  noun
+  +=  noun
     mail-message
   --
 --
