@@ -5,11 +5,11 @@
 !:
 |%                                                      ::>  no moves in :square
 +=  move  [bone card]                                   ::>  no cards in :square
-+=  card  $%  $~
++=  card  $%  ~
           ==
 --
 ::
-|_  [bow=bowl:gall $~]                                  ::<  stateless
+|_  [bow=bowl:gall ~]                                  ::<  stateless
 ::
 ++  poke-atom
   |=  tom=@

@@ -3,10 +3,10 @@
 !:
 |%
 ++  move  {bone card}
-++  card  $%  $~
+++  card  $%  ~
           ==
 --
-|_  {bowl $~}
+|_  {bowl ~}
 ++  poke-noun
   |=  *
   ^-  {(list move) _+>.$}

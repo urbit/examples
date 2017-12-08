@@ -4,13 +4,13 @@
 ::
 |%
 +=  move  [bone card]
-+=  card  $%  $~
++=  card  $%  ~
           ==
 +=  action
-  $%  [$start size=(unit @)]                            :: reset game state
-      [$toggle s=(list spot)]
-      [$step n=(unit @)]
-      [$debug $~]
+  $%  [%start size=(unit @)]                            :: reset game state
+      [%toggle s=(list spot)]
+      [%step n=(unit @)]
+      [%debug ~]
   ==
 ::
 +=  game   $:  size=@
@@ -30,19 +30,19 @@
   |=  a=action
   ^-  [(list move) _+>.$]
   ?-  -.a
-    $start
+    %start
       =+  size=?~(size.a 10 u.size.a)
       ~&  [%starting-at-size size]
       [~ +>.$(g (~(new go g) size))]
-    $toggle
+    %toggle
       ~&  [%toggling-spots s.a]
       :-   ~
       +>.$(g (~(toggle go g) s.a))
-    $step
+    %step
       =+  n=?~(n.a 1 u.n.a)
       ~&  [%stepping-times n]
       [~ +>.$(g (~(step go g) n))]
-    $debug
+    %debug
       ~&  [%debug g]
       [~ +>.$]
   ==

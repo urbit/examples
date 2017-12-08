@@ -6,7 +6,7 @@
 !:
 |%
 +=  move  [bone card]
-+=  card  $%  $~
++=  card  $%  ~
           ==
 --
 |_  [bow=bowl:gall sum=@]                               ::<  sum is our app state
