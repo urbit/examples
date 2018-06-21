@@ -63,7 +63,7 @@ commands (*replacing your urbit's examples desk path as necessary*):
 
     $ git clone https://github.com/urbit/examples.git
     $ cd ./examples/
-    $ for node in {app,gen,lib,mar,sec,sur,web}; do cp -r ./$dir/* /path/to/your-urbit/examples/$node/; done
+    $ for node in {app,gen,lib,mar,sec,sur,web}; do cp -r ./$node/* /path/to/your-urbit/examples/$node/; done
 
 Your Clay filesystem should acknowledge the newly added files.
 
