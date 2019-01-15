@@ -375,9 +375,7 @@
               [%msg "Get back to work."]
           ==
         :~  [%msg "Submit Urbit memes to talkbot@sssoft.io"]
-            [%msg "Urbit must secure the existence of our shitposts and a future for dank memes."]
             [%msg "I'd just like to interject for a moment. What you're referring to as Urbit, is in fact, Arvo/Urbit, or as I've recently taken to calling it, Arvo plus Urbit."]
-            [%act "chugs a gallon of whole milk."]
             [%url "http://i.imgur.com/kXeGKfp.png"]
             [%url "http://i.imgur.com/7gWmwVM.png"]
             [%url "http://i.imgur.com/juUPnDI.jpg"]
