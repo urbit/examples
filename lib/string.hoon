@@ -169,7 +169,7 @@
 ++  trim-left
   |=  str/tape
   ^-  tape
-  (scan str ;~(pfix spac:poja (star next)))
+  (scan str ;~(pfix spac:de-json:html (star next)))
 ::
 ::  Trim whitespace off string right-side.
 ++  trim-right
