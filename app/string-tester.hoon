@@ -2,7 +2,6 @@
 /+  string
 !:
 |_  {bowl:gall $~}
-
 ++  poke-noun
   |=  *
   ^-  {(list move) _+>.$}
