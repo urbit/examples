@@ -1,12 +1,7 @@
 ::  Primitive tester for the String library.
 /+  string
 !:
-|%
-++  move  {bone card}
-++  card  $%  ~
-          ==
---
-|_  {bowl ~}
+|_  {bowl:gall $~}
 ++  poke-noun
   |=  *
   ^-  {(list move) _+>.$}
