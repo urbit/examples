@@ -57,8 +57,8 @@
   %+  turn  row
   |=  solid=?
   ?:  solid
-    ' '
-  '█'
+    '  '
+  '██'
 ::
 ++  encode
   |=  message=tape
@@ -96,22 +96,23 @@
   |=  n=@u
   ^-  grid
   %+  reap  n     
-  %+  reap  (mul 2 n)
-  :: one '█' is too narrow, use two together for each "module"
-  :: TODO yikes module abstraction needed. let pretty-print do this?
-      |
+  %+  reap  n  |
 ::
 ++  add-border
   |=  qr=grid
   ^-  grid
   =/  n=@u  (lent qr)
   =/  i=@u  0
-  :-  (reap (mul 2 (add 2 n)) |)
+  :-  (reap (add 2 n) |)
   |-
   ?:  =(i n)
-    [(reap (mul 2 (add 2 n)) |) ~]
-  :-  (zing [[| | ~] (snag i qr) [| | ~] ~])
-  $(i (add 1 i))
+    [(reap (add 2 n) |) ~]
+  :_  $(i (add 1 i))
+  ;:  weld
+    [| ~]
+    (snag i qr)
+    [| ~]
+  ==
 ::
 ++  add-mask-information
   |=  [mask=@u qr=grid]
@@ -145,27 +146,25 @@
     $(i (add 1 i))
   $(i (add 1 i))
 ::
-++  toggle-module  :: TODO surely there's a cleaner way to do this?
+++  toggle-module
   |=  [coord=[@u @u] b=grid]
   ^-  grid
   =/  c=@u  -.coord
   =/  r=@u  +.coord
   =/  count=@u  0
-  =/  s=@u  (mul 2 c)  :: TODO yikes module abstraction needed
+  =/  s=@u  c
   |-
   ?:  =(count (lent b))
     ~
   =/  row=(list ?)  (snag count b)
-  :-  ?:  =(count r)
-         %-  zing
-         :~  (scag s row)
-             :~  !(snag s row)
-                 !(snag (add 1 s) row)
-             ==
-             (slag (add 2 s) row)
-         ==
-    row
-  $(count (add 1 count))
+  :_  $(count (add 1 count))
+  ?:  =(count r)
+    ;:  weld
+        (scag s row)
+        [!(snag s row) ~]
+        (slag (add 1 s) row)
+    ==
+  row
 ::
 ::::::::::::::::::::::::::::::::::::::::::::::::5: message encoding helpers
 ::
