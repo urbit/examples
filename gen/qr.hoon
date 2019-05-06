@@ -26,8 +26,6 @@
 ::    https://www.thonky.com/qr-code-tutorial/
 ::    https://en.wikiversity.org/wiki/Reed%E2%80%93Solomon_codes_for_coders
 ::
-::::  /~somrem-bosdes/home/gen/qr/hoon  ::::::::::::::::::::::::::::::::::::::::
-::
 ::::::::::::::::::::::::::::::::::::::::::::::::1: main generator
 ::
 :-  %say
@@ -35,14 +33,11 @@
 ::
 ?:  (gth (lent msg) 106)
   :-  %tape
-      "Tape must be 106 characters or less, yours is {<(lent msg)>} characters"
-=-
-:-  %tang
-  %-  pretty-print.qr
-  %-  encode.qr  msg
-::
-^=  qr  |%
-::
+  "Tape must be 106 characters or less, yours is {<(lent msg)>} characters"
+=<  :-  %tang
+    %-  pretty-print
+    (encode msg)
+|%
 ::::::::::::::::::::::::::::::::::::::::::::::::2: types
 ::
 ::  TODO type this better, will ease implementation of new features
@@ -56,11 +51,11 @@
   ^-  tang
   =/  rq  (flop qr)  :: to get around `tang` printing weirdness
   %+  turn  rq
-  |=  row/(list ?)
+  |=  row=(list ?)
   :-  %leaf
   ^-  tape
   %+  turn  row
-  |=  solid/?
+  |=  solid=?
   ?:  solid
     ' '
   '█'
@@ -85,50 +80,52 @@
   ?.  =(version "5L")
     ~&  [%fatal-error "sorry, only QR version 5L is currently supported"]
     !!
-  %-  atm  
-  :-  ;:  weld 
-    dark-module
-    timing-pattern 
-    alignment-pattern
-    finder-pattern
-  ==
+  =/  base=grid  (init-qr-base 37)
+  %+  roll
+    ;:  weld
+      dark-module
+      timing-pattern
+      alignment-pattern
+      finder-pattern
+    ==
+  |=  [c=[@u @u] base=_base]
+  %+  toggle-module  c  base
 ::
-  %-  init-qr-base
-  37  :: hardcoding QR version 5-L
 ::
 ++  init-qr-base
   |=  n=@u
   ^-  grid
   %+  reap  n     
-  %+  reap  (mul 2 n)  :: one '█' is too narrow, use two together for each "module" 
-                       :: TODO yikes module abstraction needed. let pretty-print do this?
-      %.n
+  %+  reap  (mul 2 n)
+  :: one '█' is too narrow, use two together for each "module"
+  :: TODO yikes module abstraction needed. let pretty-print do this?
+      |
 ::
 ++  add-border
   |=  qr=grid
   ^-  grid
   =/  n=@u  (lent qr)
   =/  i=@u  0
-  :-  (reap (mul 2 (add 2 n)) %.n)
+  :-  (reap (mul 2 (add 2 n)) |)
   |-
   ?:  =(i n)
-    :-  (reap (mul 2 (add 2 n)) %.n)  ~
-  :-  (zing [[%.n %.n ~] (snag i qr) [%.n %.n ~] ~])
+    [(reap (mul 2 (add 2 n)) |) ~]
+  :-  (zing [[| | ~] (snag i qr) [| | ~] ~])
   $(i (add 1 i))
 ::
 ++  add-mask-information
   |=  [mask=@u qr=grid]
   ^-  grid
   =/  info  (format-strings mask)
-  =/  i=@u  0  :: TODO dont hardcode mask 000
+  =/  i=@u  0
   |-
   ?:  =(i (lent info))
     qr
   ?:  =((snag i info) 1)
     =/  coords-one  (snag i info-route-one)
     =/  coords-two  (snag i info-route-two)
-    %-  tm  :-  [-.coords-one +.coords-one]
-    %-  tm  :-  [-.coords-two +.coords-two]
+    %+  toggle-module  coords-one
+    %+  toggle-module  coords-two
     $(i (add 1 i))
   $(i (add 1 i))
 ::
@@ -136,28 +133,19 @@
   |=  qr=grid
   ^-  [@u grid]
   =/  i=@u  0
-  :-  0  :: TODO hardcoding mask 000 now. implement other masks + penalty scoring
+  :: TODO implement other masks + penalty scoring
+  :: hardcoding mask 000 now
+  :-  0
   |-
   ?:  =(i (lent data-route))
     qr
   =/  coords  (snag i data-route)
-  =/  x  -.coords
-  =/  y  +.coords
-  ?:  =(0 (mod (add x y) 2))  :: mask 000
-    %-  tm  :-  [x y]
+  ?:  =(0 (mod (add -.coords +.coords) 2))
+    %+  toggle-module  coords
     $(i (add 1 i))
   $(i (add 1 i))
 ::
-
-++  atm  :: TODO surely there's a cleaner way to do this too? (+turn...)
-  |=  [coords=(list [@u @u]) b=grid]
-  ^-  grid
-  |-
-  ?~  coords  b
-  %+  tm  i.coords
-  $(coords t.coords)
-::
-++  tm  :: TODO surely there's a cleaner way to do this?
+++  toggle-module  :: TODO surely there's a cleaner way to do this?
   |=  [coord=[@u @u] b=grid]
   ^-  grid
   =/  c=@u  -.coord
@@ -169,7 +157,13 @@
     ~
   =/  row=(list ?)  (snag count b)
   :-  ?:  =(count r)
-         (zing ~[(scag s row) ~[!(snag s row) !(snag (add 1 s) row)] (slag (add 2 s) row)])
+         %-  zing
+         :~  (scag s row)
+             :~  !(snag s row)
+                 !(snag (add 1 s) row)
+             ==
+             (slag (add 2 s) row)
+         ==
     row
   $(count (add 1 count))
 ::
@@ -190,8 +184,7 @@
   ?:  =(i (lent data))
     qr
   ?:  =((snag i data) 1)
-    =/  coords  (snag i data-route)
-    %-  tm  :-  [-.coords +.coords]
+    %+  toggle-module  (snag i data-route)
     $(i (add 1 i))
   $(i (add 1 i))
 ::
@@ -210,7 +203,7 @@
 ++  char-count-indicator
   |=  l=tape
   ^-  (list @)
-  %-  padding  (lent l)
+  (padding (lent l))
 ::
 ++  byte-encode
   |=  m=(list @)
@@ -227,10 +220,11 @@
   :: pad a string of bits to ensure it is divisble by 8
   |=  wip=(list @)
   ^-  (list @)
-  %-  zing
+  %-  weld
   :-  wip
-  :-  (reap (sub (lent wip) (mul 8 (div (lent wip) 8))) 0)   :: make sure this is an evenly divisible by 8
-  ~
+  %+  reap
+    (sub 8 (mod (lent wip) 8))
+  0
 ::
 ++  add-padding-bytes
   :: pad a string of bits to ensure it is 864 bits long
@@ -255,10 +249,10 @@
   %-  add-padding-bytes
   %-  add-padding-zeros
   %-  zing
-  :-  mode-indicator
-  :-  (char-count-indicator m)
-  :-  (byte-encode m)
-  ~
+  :~  mode-indicator
+      (char-count-indicator m)
+      (byte-encode m)
+  ==
 ::
 ++  codewords-to-polynomial
   ::  chunk a list of bits into bytes, then make a list of integers
@@ -299,8 +293,13 @@
     $(i (add 1 i), j 1)
   ?:  =(j (lent gen))
     $(i (add 1 i), j 1)
-  =/  update  (xor-coefficient [out (add i j) (galois-multiply (snag j gen) (snag i out))])
-  $(j (add 1 j), out update)
+  =;  update
+    $(j (add 1 j), out update)
+  %^  xor-coefficient  out
+    (add i j)
+  %+  galois-multiply
+    (snag j gen)
+  (snag i out)
 ::
 ::::::::::::::::::::::::::::::::::::::::::::::::6: long constants
 ::
