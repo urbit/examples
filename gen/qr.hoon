@@ -11,7 +11,6 @@
 ::
 ::  TODO:  implement the other 7 masks
 ::         penalty scoring
-::         move the "two '█' per module" logic up to pretty-print
 ::
 ::  TOC::...
 ::       :1: main generator
@@ -49,7 +48,7 @@
 ++  pretty-print
   |=  qr=grid
   ^-  tang
-  =/  rq  (flop qr)  :: to get around `tang` printing weirdness
+  =/  rq  (flop qr)
   %+  turn  rq
   |=  row=(list ?)
   :-  %leaf
@@ -67,10 +66,8 @@
   %-  add-mask-information
   %-  pick-mask
   %-  add-data  
-  :-  %-  add-error-correction 
-          message
-  %-  create-base
-    "5L"
+  :-  (add-error-correction message)
+  (create-base "5L")
 ::
 ::::::::::::::::::::::::::::::::::::::::::::::::4: qr formatting helpers
 ::
@@ -88,9 +85,10 @@
       alignment-pattern
       finder-pattern
     ==
-  |=  [c=[@u @u] base=_base]
-  %+  toggle-module  c  base
-::
+  |=  [coords=[@u @u] base=_base]
+  %+  toggle-module
+    coords
+  base
 ::
 ++  init-qr-base
   |=  n=@u
@@ -123,10 +121,10 @@
   ?:  =(i (lent info))
     qr
   ?:  =((snag i info) 1)
-    =/  coords-one  (snag i info-route-one)
-    =/  coords-two  (snag i info-route-two)
-    %+  toggle-module  coords-one
-    %+  toggle-module  coords-two
+    %+  toggle-module
+      (snag i info-route-one)
+    %+  toggle-module
+      (snag i info-route-two)
     $(i (add 1 i))
   $(i (add 1 i))
 ::
@@ -141,24 +139,23 @@
   ?:  =(i (lent data-route))
     qr
   =/  coords  (snag i data-route)
-  ?:  =(0 (mod (add -.coords +.coords) 2))
-    %+  toggle-module  coords
+  ?:  =(0 (mod (add coords) 2))
+    %+  toggle-module
+      coords
     $(i (add 1 i))
   $(i (add 1 i))
 ::
 ++  toggle-module
   |=  [coord=[@u @u] b=grid]
   ^-  grid
-  =/  c=@u  -.coord
-  =/  r=@u  +.coord
   =/  count=@u  0
-  =/  s=@u  c
+  =/  s=@u  -.coord
   |-
   ?:  =(count (lent b))
     ~
   =/  row=(list ?)  (snag count b)
   :_  $(count (add 1 count))
-  ?:  =(count r)
+  ?:  =(count +.coord)
     ;:  weld
         (scag s row)
         [!(snag s row) ~]
@@ -171,9 +168,11 @@
 ++  add-error-correction
   |=  msg=tape
   ^-  (list @)
-  =/  cod  (msg-to-codewords msg)
-  =/  pol  (codewords-to-polynomial cod)
-  (byte-encode (synthetic-div [pol generator-polynomial]))
+  %-  byte-encode
+  %-  synthetic-div
+  :_  generator-polynomial
+  %-  codewords-to-polynomial
+  (msg-to-codewords msg)
 ::
 ++  add-data
   |=  [data=(list @) qr=grid]
@@ -183,17 +182,18 @@
   ?:  =(i (lent data))
     qr
   ?:  =((snag i data) 1)
-    %+  toggle-module  (snag i data-route)
+    %+  toggle-module
+      (snag i data-route)
     $(i (add 1 i))
   $(i (add 1 i))
 ::
-++  padding
+++  pad-char-byte
   |=  char=@tD
   ^-  (list @)
-  =/  binary-list-flipped  (rip 0 char)
-  =/  binary-list  (flop binary-list-flipped)
-  =/  padded  (zing [(reap (sub 8 (lent binary-list)) 0) binary-list ~])
-  padded
+  =/  binary-list  (flop (rip 0 char))
+  %+  weld
+    (reap (sub 8 (lent binary-list)) 0)
+  binary-list
 ::
 ++  mode-indicator
   ^-  (list @)
@@ -202,7 +202,7 @@
 ++  char-count-indicator
   |=  l=tape
   ^-  (list @)
-  (padding (lent l))
+  (pad-char-byte (lent l))
 ::
 ++  byte-encode
   |=  m=(list @)
@@ -212,7 +212,7 @@
   |-
   ?:  =(i (lent m))
     ~
-  :-  (padding (snag i m))
+  :-  (pad-char-byte (snag i m))
   $(i (add 1 i))
 ::
 ++  add-padding-zeros
@@ -247,10 +247,10 @@
   ^-  (list @)
   %-  add-padding-bytes
   %-  add-padding-zeros
-  %-  zing
-  :~  mode-indicator
-      (char-count-indicator m)
-      (byte-encode m)
+  ;:  weld
+    mode-indicator
+    (char-count-indicator m)
+    (byte-encode m)
   ==
 ::
 ++  codewords-to-polynomial
@@ -270,34 +270,43 @@
   ^-  @u
   ?:  =(x 0)  0
   ?:  =(y 0)  0
-  (snag (add (snag x galois-logs) (snag y galois-logs)) galois-antilogs)
+  %+  snag
+    %+  add
+      (snag x galois-logs)
+    (snag y galois-logs)
+  galois-antilogs
 ::
 ++  xor-coefficient
   |=  [l=(list @u) i=@u x=@u]
-  =/  new  (mix x (snag i l))
-  %-  zing 
-  [(scag i l) [new ~] (slag (add 1 i) l) ~]
+  ;:  weld
+    (scag i l)
+    [(mix x (snag i l)) ~]
+    (slag (add 1 i) l)
+  ==
 ::
 ++  synthetic-div
   :: getting help from here https://en.wikiversity.org/wiki/Reed%E2%80%93Solomon_codes_for_coders#Encoding_main_function
-  |=  [data=(list @u) gen=(list @u)]
+  |=  [data=(list @u) poly=(list @u)]
   ^-  (list @u)
   =/  i=@u  0
   =/  j=@u  1
-  =/  out=(list @u)  (zing [data (reap (sub (lent gen) 1) 0) ~])
+  =/  out=(list @u)
+    %+  weld
+      data
+    (reap (sub (lent poly) 1) 0)
   |-
   ?:  =(i (lent data))
-    (zing [data (slag (lent data) out) ~])
+    (weld data (slag (lent data) out))
   ?:  =((snag i out) 0)
     $(i (add 1 i), j 1)
-  ?:  =(j (lent gen))
+  ?:  =(j (lent poly))
     $(i (add 1 i), j 1)
   =;  update
     $(j (add 1 j), out update)
   %^  xor-coefficient  out
     (add i j)
   %+  galois-multiply
-    (snag j gen)
+    (snag j poly)
   (snag i out)
 ::
 ::::::::::::::::::::::::::::::::::::::::::::::::6: long constants
