@@ -15,36 +15,33 @@
 =/  my-map
 %-  (om same)
 u.my-json
-=/  name
-%.  %name
-%~  got  by
-my-map
-=/  weather
-%.  %weather
-%~  got  by
-my-map
-=/  main
-%.  %main
-%~  got  by
-my-map
-=/  wind
-%.  %wind
-%~  got  by
-my-map
+=/  name  (~(got by my-map) %name)
+=/  weather  (~(got by my-map) %weather)
+=/  main  (~(got by my-map) %main)
+=/  wind  (~(got by my-map) %wind)
 %+  produce  %tang
-=/  returned-name  ?~  name  ""  ?+  p.name  ""  @t  (scow %tas p.name)  ==
+=/  returned-name
+?+  name  ""
+  [%s *]  (scow %tas p.name)
+==
 =/  returned-temp
 %.  %temp
 %~  got  by
 %-  (om same)
 main
-=/  temp  ?~  returned-temp  ""  ?+  p.returned-temp  ""  @ta  (scow %tas p.returned-temp)  ==
+=/  temp
+?+  returned-temp  ""
+  [%s *]  (scow %tas p.returned-temp)
+==
 =/  returned-speed
 %.  %speed
 %~  got  by
 %-  (om same)
 wind
-=/  wind-speed  ?~  returned-speed  ""  ?+  p.returned-speed  ""  @ta  (scow %tas p.returned-speed)  ==
+=/  wind-speed
+?+  returned-speed  ""
+  [%s *]  (scow %tas p.returned-speed)
+==
 ::
 :~  leaf+"Wind speed: {wind-speed} meters per second"
     leaf+"Temperature: {temp} degrees kelvin"
