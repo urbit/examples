@@ -18,38 +18,14 @@
 ?~  r.hit  !!
 =/  my-json  (need (de-json:html q.u.r.hit))
 =,  dejs:format
-=/  my-map
-  %-  (om same)
-  my-json
-=/  name  (~(got by my-map) %name)
-=/  weather  (~(got by my-map) %weather)
+=/  my-map  ((om same) my-json)
+=/  name  ((ot 'name'^sa ~) my-json)
 =/  main  (~(got by my-map) %main)
 =/  wind  (~(got by my-map) %wind)
+=/  temp  (trip ((ot 'temp'^no ~) main))
+=/  speed  (trip ((ot 'speed'^no ~) wind))
 %+  produce  %tang
-=/  returned-name
-  ?+  name  ""
-    [%s *]  (scow %tas p.name)
-  ==
-=/  returned-temp
-  %.  %temp
-  %~  got  by
-  %-  (om same)
-  main
-=/  temp
-  ?+  returned-temp  ""
-    [%s *]  (scow %tas p.returned-temp)
-  ==
-=/  returned-speed
-  %.  %speed
-  %~  got  by
-  %-  (om same)
-  wind
-=/  wind-speed
-  ?+  returned-speed  ""
-    [%s *]  (scow %tas p.returned-speed)
-  ==
-::
-:~  leaf+"Wind speed: {wind-speed} meters per second"
+:~  leaf+"Wind speed: {speed} meters per second"
     leaf+"Temperature: {temp} degrees kelvin"
-    leaf+"Results for {returned-name}"
+    leaf+"Results for {name}"
 ==
