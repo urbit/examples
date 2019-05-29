@@ -14,14 +14,13 @@
 =/  escaped-city  (en-urlt:html city)
 =/  escaped-country  (en-urlt:html country)
 %+  curl  (scan "http://api.openweathermap.org/data/2.5/weather?q={escaped-city}%2C{escaped-country}&APPID={appid}" auri:de-purl:html)
-|=  hit/httr:eyre
+|=  hit=httr:eyre
 ?~  r.hit  !!
-=/  my-json  (de-json:html q.u.r.hit)
-?~  my-json  !!
+=/  my-json  (need (de-json:html q.u.r.hit))
 =,  dejs:format
 =/  my-map
   %-  (om same)
-  u.my-json
+  my-json
 =/  name  (~(got by my-map) %name)
 =/  weather  (~(got by my-map) %weather)
 =/  main  (~(got by my-map) %main)
@@ -37,9 +36,9 @@
   %-  (om same)
   main
 =/  temp
-?+  returned-temp  ""
-  [%s *]  (scow %tas p.returned-temp)
-==
+  ?+  returned-temp  ""
+    [%s *]  (scow %tas p.returned-temp)
+  ==
 =/  returned-speed
   %.  %speed
   %~  got  by
