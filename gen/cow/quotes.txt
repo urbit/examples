@@ -1,0 +1,234 @@
+To appreciate programming as an intellectual activity in its own right you must turn to computer programming; you must read and write computer programs — many of them.
+The programmer must seek both perfection of part and adequacy of collection.
+For all its power, the computer is a harsh taskmaster. Its programs must be correct, and what we wish to say must be said accurately in every detail.
+Every computer program is a model, hatched in the mind, of a real or mental process. These processes, arising from human experience and thought, are huge in number, intricate in detail, and at any time only partially understood. They are modeled to our permanent satisfaction rarely by our computer programs.
+The source of the exhilaration associated with computer programming is the continual unfolding within the mind and on the computer of mechanisms expressed as programs and the explosion of perception they generate.
+Unfortunately, as programs get large and complicated, as they almost always do, the adequacy, consistency, and correctness of the specifications themselves become open to doubt, so that complete formal arguments of correctness seldom accompany large programs
+The processes that transform our Lisp programs to “machine” programs are themselves abstract models which we program.
+The computers are never large enough or fast enough. Each breakthrough in hardware technology leads to more massive programming enterprises, new organizational principles, and an enrichment of abstract models.
+Every reader should ask himself periodically “Toward what end, toward what end?” — but do not ask it too often lest you pass up the fun of programming for the constipation of bittersweet philosophy.
+It is better to have 100 functions operate on one data structure than to have 10 functions operate on 10 data structures.
+The critical programming concerns of software engineering and artificial intelligence tend to coalesce as the systems under investigation become larger
+Invent and fit; have fits and reinvent! We toast the Lisp programmer who pens his thoughts within nests of parentheses.
+It is not merely a matter of tactical convenience to separately identify the three foci. Even though, as they say, it’s all in the head, this logical separation induces an acceleration of symbolic traffic between these foci whose richness, vitality, and potential is exceeded in human experience only by the evolution of life itself.
+Mathematics provides a framework for dealing precisely with notions of “what is.” Computation provides a framework for dealing precisely with notions of “how to”.
+First, we want to establish the idea that a computer language is not just a way of getting a computer to perform operations but rather that it is a novel formal medium for expressing ideas about methodology.
+Programs must be written for people to read, and only incidentally for machines to execute
+Computational processes are abstract beings that inhabit computers. As they evolve, processes manipulate other abstract things called data. The evolution of a process is directed by a pattern of rules called a program. People create programs to direct processes. In effect, we conjure the spirits of the computer with our spells.
+The programs we use to conjure processes are like a sorcerer’s spells. They are carefully composed from symbolic expressions in arcane and esoteric programming languages
+It is possible, indeed important, to be able to separate these two notions—to create procedures without naming them, and to give names to procedures that have already been created.
+It is crucial that each procedure accomplishes an identifiable task that can be used as a module in defining other procedures
+A user should not need to know how the procedure is implemented in order to use it.
+In describing a procedure as recursive, we are referring to the syntactic fact that the procedure definition refers to the procedure itself.
+It may seem disturbing that we refer to a certain recursive procedures as generating iterative processes.
+One of the things we should demand from a powerful programming language is the ability to build abstractions by assigning names to common patterns and then to work in terms of the abstractions directly.
+As programmers, we should be alert to opportunities to identify the underlying abstractions in our programs and to build upon them and generalize them to create more powerful abstractions
+Expert programmers know how to choose the level of abstraction appropriate to their task
+“We now come to the decisive step of mathematical abstraction: we forget about what the symbols stand for. … [The mathematician] need not be idle; there are many operations which he may carry out with these symbols, without ever having to look at the things they stand for.”
+Higher-order procedures enhance the power of our language by enabling us to manipulate, and thereby to reason in terms of, general methods of computation. This is much of the essence of programming.
+More often than not one must construct computational objects that have several parts in order to model real-world phenomena that have several aspects.
+Why do we want compound data in a programming language? For the same reasons that we want compound procedures: to elevate the conceptual level at which we can design our programs, to increase the modularity of our designs, and to enhance the expressive power of our language
+We will discover how to form compound data using no special “data” operations at all, only procedures. This will further blur the distinction between “procedure” and “data,” which was already becoming tenuous.
+Our programs should use data in such a way as to make no assumptions about the data that are not strictly necessary for performing the task at hand.
+We are using here a powerful strategy of synthesis: wishful thinking.
+In general, the underlying idea of data abstraction is to identify for each type of data object a basic set of operations in terms of which all manipulations of data objects of that type will be expressed
+In general, we can think of data as defined by some collection of selectors and constructors, together with specified conditions that these procedures must fulfill in order to be a valid representation.
+The point of exhibiting the procedural representation of pairs is not that our language works this way (Scheme, and Lisp systems in general, implement pairs directly, for efficiency reasons) but that it could work this way.
+Procedural representations of data will play a central role in our programming repertoire.
+The ability to manipulate procedures as objects automatically provides the ability to represent compound data.
+An operation for combining data objects satisfies the closure property if the results of combining things with that operation can themselves be combined using the same operation.
+Closure is the key to power in any means of combination because it permits us to create hierarchical structures
+All but the very simplest programs rely on the fact that the elements of a combination can themselves be combinations.
+The word nil is a contraction of the Latin word nihil, which means “nothing.”
+Other dialects of Lisp, including Common Lisp, treat nil as a special symbol. The authors of this book, who have endured too many language standardization brawls, would like to avoid the entire issue.
+In effect, map helps establish an abstraction barrier that isolates the implementation of procedures that transform lists from the details of how the elements of the list are extracted and combined.
+The representation of sequences in terms of lists generalizes naturally to represent sequences whose elements may themselves be sequences.
+The value of expressing programs as sequence operations is that this helps us make program designs that are modular, that is, designs that are constructed by combining relatively independent pieces
+We can encourage modular design by providing a library of standard components together with a conventional interface for connecting the components in flexible ways.
+Modular construction is a powerful strategy for controlling complexity in engineering design.
+Sequence operations provide a library of standard program elements that we can mix and match.
+This is the approach of stratified design, the notion that a complex system should be structured as a sequence of levels that are described using a sequence of languages.
+Each level is constructed by combining parts that are regarded as primitive at that level, and the parts constructed at each level are used as primitives at the next level.
+The language used at each level of a stratified design has primitives, means of combination, and means of abstraction appropriate to that level of detail.
+Stratified design helps make programs robust, that is, it makes it likely that small changes in a specification will require correspondingly small changes in the program.
+Each level of a stratified design provides a different vocabulary for expressing the characteristics of the system, and a different kind of ability to change it.
+We can obtain the empty list by evaluating '(), and thus dispense with the variable nil.
+Symbolic differentiation is of special historical significance in Lisp. It was one of the motivating examples behind the development of a computer language for symbol manipulation.
+Only afterward will we address the representation problem.
+So in addition to the data-abstraction barriers that isolate representation from use, we need abstraction barriers that isolate different design choices from each other and permit different choices to coexist in a single program.
+We need conventions that permit programmers to incorporate modules into larger systems additively, that is, without having to redesign or reimplement these modules.
+One way to view data abstraction is as an application of the “principle of least commitment.”
+This discipline of stripping off and attaching tags as data objects are passed from level to level can be an important organizational strategy
+The general strategy of checking the type of a datum and calling an appropriate procedure is called dispatching on type.
+What we need is a means for modularizing the system design even further. This is provided by the programming technique known as data-directed programming.
+One strategy is to decompose the table into columns and, instead of using “intelligent operations” that dispatch on data types, to work with “intelligent data objects” that dispatch on operation names.
+This style of programming is called message passing. The name comes from the image that a data object is an entity that receives the requested operation name as a “message.”
+Often the different data types are not completely independent, and there may be ways by which objects of one type may be viewed as being of another type. This process is called coercion.
+If the data types in our system can be naturally arranged in a tower, this greatly simplifies the problems of dealing with generic operations on different types, as we have seen. Unfortunately, this is usually not the case.
+The main difference between the confusion that existed ten years ago and the confusion that exists now is that now a variety of inadequate ontological theories have been embodied in a plethora of correspondingly inadequate programming languages.
+The tower strategy is certainly not natural for this domain or for any domain where the user can invent new types dynamically using old types in various combining forms, such as trigonometric functions, power series, and integrals.
+Indeed, it is fair to say that we do not yet completely understand coercion. In fact, we do not yet completely understand the concept of a data type.
+Much of the complexity of object-oriented programming languages – and the subtle and confusing differences among contemporary object-oriented languages – centers on the treatment of generic operations on interrelated types.
+Effective program synthesis also requires organizational principles that can guide us in formulating the overall design of a program.
+To a large extent, then, the way we organize a large program is dictated by our perception of the system to be modelled.
+Both the object-based approach and the stream-processing approach raise significant linguistic issues in programming.
+With objects, we must be concerned with how a computational object can change and yet maintain its identity.
+The difficulties of dealing with objects, change, and identity are a fundamental consequence of the need to grapple with time in our computational models.
+The stream approach can be most fully exploited when we decouple simulated time in our model from the order of the events that take place in the computer during evaluation. We will accomplish this using a technique known as delayed evaluation.
+An object is said to “have state” if its behavior is influenced by its history.
+We can characterize an object’s state by one or more state variables, which among them maintain enough information about history to determine the object’s current behavior.
+The view that a system is composed of separate objects is most useful when the state variables of the system can be grouped into closely coupled subsystems that are only loosely coupled to other subsystems.i
+For such a model to be modular, it should be decomposed into computational objects that model the actual objects in the system.
+If we wish to model state variables by ordinary symbolic names in the programming language, then the language must provide an assignment operator to enable us to change the value associated with a name.
+Observe that the expression (withdraw 25), evaluated twice, yields different values. This is a new kind of behavior for a procedure. Until now, all our procedures could be viewed as specifications for computing mathematical functions.
+Encapsulation reflects the general system-design principle known as the hiding principle: One can make a system more modular and robust by protecting parts of the system from each other.
+The trouble is that, as soon as we introduce assignment into our language, substitution is no longer an adequate model of procedure application.
+As we shall see, introducing assignment into our programming language leads us into a thicket of difficult conceptual issues. Nevertheless, viewing systems as collections of objects with local state is a powerful technique for maintaining a modular design.
+The phenomenon illustrated by the Monte Carlo example is this: From the point of view of one part of a complex process, the other parts appear to change with time. They have hidden time-varying local state.
+It is tempting to conclude this discussion by saying that, by introducing assignment and the technique of hiding state in local variables, we are able to structure systems in a more modular fashion than if all state had to be manipulated explicitly, by passing additional parameters. Unfortunately, as we shall see, the story is not so simple.
+No simple model with “nice” mathematical properties can be an adequate framework for dealing with objects and assignment in programming languages.
+Programming without any use of assignments, as we did throughout the first two chapters of this book, is accordingly known as functional programming.
+But as soon as we introduce set! and the idea that the value of a variable can change, a variable can no longer be simply a name.
+As soon as we introduce change into our computational models, many notions that were previously straightforward become problematical.
+A language that supports the concept that “equals can be substituted for equals” in an expresssion without changing the value of the expression is said to be referentially transparent.
+Once we forgo referential transparency, the notion of what it means for computational objects to be “the same” becomes difficult to capture in a formal way.
+Indeed, the meaning of “same” in the real world that our programs model is hardly clear in itself.
+The phenomenon of a single computational object being accessed by more than one name is known as aliasing.
+Bugs can occur in our programs if we forget that a change to an object may also, as a “side effect,” change a “different” object because the two “different” objects are actually a single object appearing under different aliases.
+In general, so long as we never modify data objects, we can regard a compound data object to be precisely the totality of its pieces.
+In contrast to functional programming, programming that makes extensive use of assignment is known as imperative programming.
+Programs written in imperative style are susceptible to bugs that cannot occur in functional programs.
+In view of this, it is ironic that introductory programming is most often taught in a highly imperative style.
+Whatever the reason, it often saddles beginning programmers with “should I set this variable before or after that one” concerns that can complicate programming and obscure the important ideas.
+The complexity of imperative programs becomes even worse if we consider applications in which several processes execute concurrently.
+An environment is a sequence of frames. Each frame is a table (possibly empty) of bindings, which associate variable names with their corresponding values
+The environment is crucial to the evaluation process, because it determines the context in which an expression should be evaluated.
+Indeed, one could say that expressions in a programming language do not, in themselves, have any meaning. Rather, an expression acquires a meaning only with respect to some environment in which it is evaluated. Even the interpretation of an expression as straightforward as (+ 1 1) depends on an understanding that one is operating in a context in which + is the symbol for addition.
+The evaluation model, though abstract, provides a correct description of how the interpreter evaluates expressions.
+The environment model thus explains the two key properties that make local procedure definitions a useful technique for modularizing programs: The names of the local procedures do not interfere with names external to the enclosing procedure, because the local procedure names will be bound in the frame that the procedure creates when it is run, rather than being bound in the global environment. The local procedures can access the arguments of the enclosing procedure, simply by using parameter names as free variables. This is because the body of the local procedure is evaluated in an environment that is subordinate to the evaluation environment for the enclosing procedure.
+Unless we have a good understanding of how our data objects are shared, mutation can have unanticipated results.
+The truth of the matter is that, in a language in which we can deal with procedures as objects, there is no fundamental difference between “procedures” and “data”, and we can choose our syntactic sugar to allow us to program in whatever style we choose.
+Constraint propagation first appeared in the incredibly forward-looking SKETCHPAD system of Ivan Sutherland (1963).
+Nondirectionality of computation is the distinguishing feature of constraint-based systems.
+Admitting change to our language requires that a compound object must have an “identity” that is something different from the pieces from which it is composed.
+We’ve seen the power of computational objects with local state as tools for modeling. Yet this power extracts a price: the loss of referential transparency, giving rise to a thicket of questions about sameness and change, and the need to abandon the substitution model of evaluation in favor of the more intricate environment model.
+The central issue lurking beneath the complexity of state, sameness, and change is that by introducing assignment we are forced to admit time into our computational models.
+The evaluation occurs before or after these moments. Building models in terms of computational objects with local state forces us to confront time as an essential concept in programming.
+Objects in the world do not change one at a time in sequence. Rather we perceive them as acting concurrently – all at once.
+The practice of writing programs as if they were to be executed concurrently forces the programmer to avoid inessential timing constraints and thus makes programs more modular.
+Unfortunately, the complexities introduced by assignment become even more problematic in the presence of concurrency.
+The fact of concurrent execution, either because the world operates in parallel or because our computers do, entails additional complexity in our understanding of time.
+For example, suppose we have two processes, one with three ordered events (a,b,c) and one with three ordered events (x,y,z). If the two processes run concurrently, with no constraints on how their execution is interleaved, then there are 20 different possible orderings for the events that are consistent with the individual orderings for the two processes.
+Dijkstra’s classic exposition (1968b) was one of the first to clearly present the issues of concurrency control, and showed how to use semaphores to handle a variety of concurrency problems.
+Deadlock is always a danger in systems that provide concurrent access to multiple shared resources.
+In essence, any notion of time in concurrency control must be intimately tied to communication. It is intriguing that a similar connection between time and communication also arises in the Theory of Relativity, where the speed of light (the fastest signal that can be used to synchronize events) is a fundamental constant relating time and space.
+We’ve gained a good understanding of assignment as a tool in modeling, as well as an appreciation of the complex problems that assignment raises.
+Streams can mitigate some of the complexity of modeling state.
+Is there another approach? Can we avoid identifying time in the computer with time in the modeled world? Must we make the model change with time in order to model phenomena in a changing world?
+We introduce the technique of delayed evaluation, which enables us to represent very large (even infinite) sequences as streams.
+Stream processing lets us model systems that have state without ever using assignment or mutable data.
+The stream framework raises difficulties of its own, and the question of which modeling technique leads to more modular and more easily maintained systems remains open.
+With streams we can achieve the best of both worlds: We can formulate programs elegantly as sequence manipulations, while attaining the efficiency of incremental computation.
+We can think of delayed evaluation as “demand-driven” programming, whereby each stage in the stream process is activated only enough to satisfy the next stage.
+The stream approach can be illuminating because it allows us to build systems with different module boundaries than systems organized around assignment to state variables.
+We can use streams to model signal-processing systems in a very direct way, representing the values of a signal at successive time intervals as consecutive elements of a stream.
+One way to avoid the need for two different classes of procedures is to make all procedures take delayed arguments.
+Converting to normal-order evaluation provides a uniform and elegant way to simplify the use of delayed evaluation
+As far as anyone knows, mutability and delayed evaluation do not mix well in programming languages
+Part of the power of stream processing is that it lets us ignore the order in which events actually happen in our programs. Unfortunately, this is precisely what we cannot afford to do in the presence of assignment, which forces us to be concerned with time and change.
+The object model approximates the world by dividing it into separate pieces. The functional model does not modularize along object boundaries.
+Unifying the object view with the functional view may have little to do with programming, but rather with fundamental epistemological issues.
+“… It’s in words that the magic is – Abracadabra, Open Sesame, and the rest – but the magic words in one story aren’t magical in the next. The real magic is to understand which words work, and when, and for what; the trick is to learn the trick. … And those words are made from the letters of our alphabet: a couple-dozen squiggles we can draw with the pen. This is the key! And the treasure, too, if we can only get our hands on it! It’s as if – as if the key to the treasure is the treasure!” John Barth, Chimera
+Expert programmers control the complexity of their designs with the same general techniques used by designers of all complex systems.
+Combine primitive elements to form compound objects, they abstract compound objects to form higher-level building blocks, and they preserve modularity by adopting appropriate large-scale views of system structure.
+as we confront increasingly complex problems, we will find that Lisp, or indeed any fixed programming language, is not sufficient for our needs. We must constantly turn to new languages in order to express our ideas more effectively.
+Establishing new languages is a powerful strategy for controlling complexity in engineering design;
+We can often enhance our ability to deal with a complex problem by adopting a new language that enables us to describe (and hence to think about) the problem in a different way, using primitives, means of combination, and means of abstraction that are particularly well suited to the problem at hand.
+Programming is endowed with a multitude of languages.
+There are physical languages, such as the machine languages for particular computers. These languages are concerned with the representation of data and control in terms of individual bits of storage and primitive machine instructions. The machine-language programmer is concerned with using the given hardware to erect systems and utilities for the efficient implementation of resource-limited computations. High-level languages, erected on a machine-language substrate, hide concerns about the representation of data as collections of bits and the representation of programs as sequences of primitive instructions. These languages have means of combination and abstraction, such as procedure definition, that are appropriate to the larger-scale organization of systems.
+In programming not only can we formulate new languages but we can also implement these languages by constructing evaluators.
+An evaluator (or interpreter) for a programming language is a procedure that, when applied to an expression of the language, performs the actions required to evaluate that expression.
+It is no exaggeration to regard this as the most fundamental idea in programming: The evaluator, which determines the meaning of expressions in a programming language, is just another program.
+To appreciate this point is to change our images of ourselves as programmers. We come to see ourselves as designers of languages, rather than only users of languages designed by others.
+Computer science itself becomes no more (and no less) than the discipline of constructing appropriate descriptive languages.
+We now embark on a tour of the technology by which languages are established in terms of other languages.
+Most language processors contain, deep within them, a little ‘Lisp’ evaluator.
+In this language of nondeterministic computing, it is natural to express processes that generate all possible values for expressions and then search for those values that satisfy certain constraints.
+With our nondeterministic evaluator, keeping track of multiple values and performing searches are handled automatically by the underlying mechanism of the language.
+A logic-programming language in which knowledge is expressed in terms of relations, rather than in terms of computations with inputs and outputs.
+An evaluator that is written in the same language that it evaluates is said to be metacircular.
+One important role of the evaluator is to choreograph procedure composition so that (* 2 3) is reduced to 6 before being passed as an argument to +.
+The evaluation process can be described as the interplay between two procedures: eval and apply.
+In this case, the language being implemented and the implementation language are the same. Contemplation of the meaning of true? here yields expansion of consciousness without the abuse of substance.
+In addition to defining the external syntax of expressions, the evaluator implementation must also define the data structures that the evaluator manipulates internally, as part of the execution of a program, such as the representation of procedures and environments and the representation of true and false.
+Given the evaluator, we have in our hands a description (expressed in Lisp) of the process by which Lisp expressions are evaluated.
+One advantage of expressing the evaluator as a program is that we can run the program.
+This gives us, running within Lisp, a working model of how Lisp itself evaluates expressions.
+Our evaluator is seen to be a universal machine. It mimics other machines when these are described as Lisp programs. This is striking.
+It is remarkable that the program evaluator is a rather simple program.
+That the user’s programs are the evaluator’s data need not be a source of confusion.
+Thus, the notion of “what can in principle be computed” (ignoring practicalities of time and memory required) is independent of the language or the computer.
+Scheme is an applicative-order language, namely, that all the arguments to Scheme procedures are evaluated when the procedure is applied.
+In contrast, normal-order languages delay evaluation of procedure arguments until the actual argument values are needed.
+If the body of a procedure is entered before an argument has been evaluated we say that the procedure is non-strict in that argument.
+If the argument is evaluated before the body of the procedure is entered we say that the procedure is strict in that argument.
+The basic idea is that, when applying a procedure, the interpreter must determine which arguments are to be evaluated and which are to be delayed.
+The delayed arguments are not evaluated; instead, they are transformed into objects called thunks.
+The word thunk was invented by an informal working group that was discussing the implementation of call-by-name in Algol 60. They observed that most of the analysis of (“thinking about”) the expression could be done at compile time; thus, at run time, the expression would already have been “thunk” about.
+A thunk must package an expression together with the environment, so that the argument can be produced later.
+With lazy evaluation, streams and lists can be identical, so there is no need for special forms or for separate list and stream operations.
+Lazy evaluation combined with memoization is sometimes referred to as call-by-need argument passing, in contrast to call-by-name argument passing.
+Call-by-name, introduced in Algol 60, is similar to non-memoized lazy evaluation.
+The nondeterministic program evaluator supports the illusion that time branches, and that our programs have different possible execution histories.
+To extend Scheme to support nondeterminism, we introduce a new special form called amb.
+Abstractly, we can imagine that evaluating an amb expression causes time to split into branches, where the computation continues on each branch with one of the possible values of the expression.
+It is hard to underestimate the cost of mass-produced electronics.
+If a choice results in a failure, then the evaluator automagically backtracks to the most recent choice point and tries the next alternative.
+The advantage of nondeterministic programming is that we can suppress the details of how search is carried out, thereby expressing our programs at a higher level of abstraction.
+Observe that a given input may have more than one legal parse. In the sentence “The professor lectures to the student with the cat,” it may be that the professor is lecturing with the cat, or that the student has the cat. Our nondeterministic program finds both possibilities.
+Automagically: “Automatically, but in a way which, for some reason (typically because it is too complicated, or too ugly, or perhaps even too trivial), the speaker doesn’t feel like explaining.” (Steele 1983, Raymond 1993)
+Expression-oriented languages (such as Lisp, Fortran, and Algol) capitalize on the “pun” that an expression that describes the value of a function may also be interpreted as a means of computing that value.
+In a constraint system the direction and the order of computation are not so well specified
+In a nondeterministic language, expressions can have more than one value, and, as a result, the computation is dealing with relations rather than with single-valued functions.
+Contemporary logic programming languages (including the one we implement here) have substantial deficiencies, in that their general “how to” methods can lead them into spurious infinite loops or other undesirable behavior.
+Logic programming is an active field of research in computer science.
+Interest in logic programming peaked during the early 80s when the Japanese government began an ambitious project aimed at building superfast computers optimized to run logic programming languages. The speed of such computers was to be measured in LIPS (Logical Inferences Per Second) rather than the usual FLOPS (FLoating-point Operations Per Second). Although the project succeeded in developing hardware and software as originally planned, the international computer industry moved in a different direction.
+Even though the query language is very different from Lisp, we will find it convenient to describe the language in terms of the same general framework we have been using all along: as a collection of primitive elements, together with means of combination that enable us to combine simple elements to create more complex elements and means of abstraction that enable us to regard complex elements as single conceptual units.
+The query system is organized around two central operations called pattern matching and unification.
+A pattern matcher is a program that tests whether some datum fits a specified pattern.
+The pattern matcher used by the query system takes as inputs a pattern, a datum, and a frame that specifies bindings for various pattern variables.
+The pattern matcher is all the mechanism that is needed to process simple queries that don’t involve rules.
+Because matching is generally very expensive, we would like to avoid applying the full matcher to every element of the data base. This is usually arranged by breaking up the process into a fast, coarse match and the final match. The coarse match filters the data base to produce a small set of candidates for the final match. With care, we can arrange our data base so that some of the work of coarse matching can be done when the data base is constructed rather then when we want to select the candidates. This is called indexing the data base.
+There is a vast technology built around data-base-indexing schemes. Our implementation, described in section 4.4.4, contains a simple-minded form of such an optimization.
+Rule conclusions are like assertions except that they can contain variables, so we will need a generalization of pattern matching – called unification – in which both the “pattern” and the “datum” may contain variables.
+The unification algorithm is the most technically difficult part of the query system. With complex patterns, performing unification may seem to require deduction.
+The aim of logic programming is to provide the programmer with techniques for decomposing a computational problem into two separate problems: “what” is to be computed, and “how” this should be computed. This is accomplished by selecting a subset of the statements of mathematical logic that is powerful enough to be able to describe anything one might want to compute, yet weak enough to have a controllable procedural interpretation.
+Control (“how” to compute) is effected by using the order of evaluation of the language.
+One of the major concerns of research in logic programming is to find ways to achieve more consistency with mathematical logic without unduly sacrificing expressive power.
+the not of logic programming languages reflects the so-called closed world assumption that all relevant information has been included in the data base.
+One important problem in designing logic programming languages is that of arranging things so that as few irrelevant data-base entries as possible will be examined in checking a given pattern.
+Can you relate any of this to the problem of making deductions in a context (e.g., “If I supposed that P were true, then I would be able to deduce A and B.”) as a method of problem solving? (This problem is open-ended. A good answer is probably worth a Ph.D.)
+These questions remain unanswered because the metacircular evaluator is itself a Lisp program and hence inherits the control structure of the underlying Lisp system. In order to provide a more complete description of the control structure of the Lisp evaluator, we must work at a more primitive level than Lisp itself.
+To design a register machine, we must design its data paths (registers and operations) and the controller that sequences these operations.
+Data-path and controller diagrams are adequate for representing simple machines such as GCD, but they are unwieldy for describing large machines such as a Lisp interpreter.
+This implementation of factorial illustrates the general strategy for realizing recursive algorithms as ordinary register machines augmented by stacks.
+The representation method outlined in section 5.3.1 solves the problem of implementing list structure, provided that we have an infinite amount of memory.
+If we can arrange to collect all the garbage periodically, and if this turns out to recycle memory at about the same rate at which we construct new pairs, we will have preserved the illusion that there is an infinite amount of memory.
+Garbage collection is based on the observation that, at any moment in a Lisp interpretation, the only objects that can affect the future of the computation are those that can be reached by some succession of car and cdr operations starting from the pointers that are currently in the machine registers.14 Any memory cell that is not so accessible may be recycled.
+There are many ways to perform garbage collection. The method we shall examine here is called stop-and-copy. The basic idea is to divide memory into two halves: “working memory” and “free memory.” When working memory is full, we perform garbage collection by locating all the useful pairs in working memory and copying these into consecutive locations in free memory. Nothing in the working memory is needed, since all the useful pairs in it have been copied. Thus, if we interchange the roles of working memory and free memory, we can continue processing; new pairs will be allocated in the new working memory (which was the old free memory). This idea was invented and first implemented by Minsky, as part of the implementation of Lisp for the PDP-1 at the MIT Research Laboratory of Electronics. It was further developed by Fenichel and Yochelson (1969) for use in the Lisp implementation for the Multics time-sharing system. Later, Baker (1978) developed a “real-time” version of the method, which does not require the computation to stop during garbage collection.
+An alternative commonly used garbage-collection technique is the mark-sweep method. This consists of tracing all the structure accessible from the machine registers and marking each pair we reach. We then scan all of memory, and any location that is unmarked is “swept up” as garbage and made available for reuse.
+We now use our register-machine language to describe the stop-and-copy algorithm in more detail. We will assume that there is a register called root that contains a pointer to a structure that eventually points at all accessible data.
+In the car position, we place a special tag that signals that this is an already-moved object (such an object is traditionally called a broken heart.)
+The explicit-control evaluator that we develop in this section shows how the underlying procedure-calling and argument-passing mechanisms used in the evaluation process can be described in terms of operations on registers and stacks.
+For example, with tail recursion, an infinite loop can be expressed using only the procedure-call mechanism. Without tail recursion, such a procedure would eventually run out of stack space, and expressing a true iteration would require some control mechanism other than procedure call.
+With the implementation of the explicit-control evaluator we come to the end of a development, begun in chapter 1, in which we have explored successively more precise models of the evaluation process.
+Commercial general-purpose computers are register machines organized around a collection of registers and operations that constitute an efficient and convenient universal set of data paths.
+The controller for a general-purpose machine is an interpreter for a register-machine language like the one we have been using. This language is called the native language of the machine, or simply machine language.
+There are two common strategies for bridging the gap between higher-level languages and register-machine languages. The explicit-control evaluator illustrates the strategy of interpretation. An interpreter written in the native language of a machine configures the machine to execute programs written in a language (called the source language) that may differ from the native language of the machine performing the evaluation. A program to be interpreted (called the source program) is represented as a data structure. The interpreter traverses this data structure, analyzing the source program. As it does so, it simulates the intended behavior of the source program by calling appropriate primitive subroutines from the library. In this section, we explore the alternative strategy of compilation. A compiler for a given source language and machine translates a source program into an equivalent program (called the object program) written in the machine’s native language.
+Compared with interpretation, compilation can provide a great increase in the efficiency of program execution, as we will explain below in the overview of the compiler. On the other hand, an interpreter provides a more powerful environment for interactive program development and debugging, because the source program being executed is available at run time to be examined and modified.
+Each time the interpreter evaluates an expression – for example, (f 84 96) – it performs the work of classifying the expression (discovering that this is a procedure application) and testing for the end of the operand list (discovering that there are two operands). With a compiler, the expression is analyzed only once, when the instruction sequence is generated at compile time.
+There are further opportunities to gain efficiency in compiled code. As the interpreter runs, it follows a process that must be applicable to any expression in the language. In contrast, a given segment of compiled code is meant to execute some particular expression. This can make a big difference, for example in the use of the stack to save registers. When the interpreter evaluates an expression, it must be prepared for any contingency. Before evaluating a subexpression, the interpreter saves all registers that will be needed later, because the subexpression might require an arbitrary evaluation. A compiler, on the other hand, can exploit the structure of the particular expression it is processing to generate code that avoids unnecessary stack operations.
+An interpreter raises the machine to the level of the user program; a compiler lowers the user program to the level of the machine language. We can regard the Scheme language (or any programming language) as a coherent family of abstractions erected on the machine language.
+Interpreters are good for interactive program development and debugging because the steps of program execution are organized in terms of these abstractions, and are therefore more intelligible to the programmer.
+Compiled code can execute faster, because the steps of program execution are organized in terms of the machine language, and the compiler is free to make optimizations that cut across the higher-level abstractions.
+Compilers for popular languages, such as C and C++, put hardly any error-checking operations into running code, so as to make things run as fast as possible. As a result, it falls to programmers to explicitly provide error checking. Unfortunately, people often neglect to do this, even in critical applications where speed is not a constraint. Their programs lead fast and dangerous lives. For example, the notorious “worm” that paralyzed the Internet in 1988 exploited the UNIX TM operating system’s failure to check whether the input buffer has overflowed in the finger daemon.
