@@ -20,7 +20,7 @@
   =/  bubble  (turn message bars)
   =/  bubble-width  (lent (snag 0 bubble))
   =/  horizontal-border  leaf+(weld "  " (reap (sub bubble-width 5) '-'))
-  =/  slant-gap  (reap (sub (lent (snag 0 bubble)) 5) ' ')
+  =/  slant-gap  (reap (sub bubble-width 5) ' ')
   =/  top-slant  leaf+" /{slant-gap}\\"
   =/  bottom-slant  leaf+" \\{slant-gap}/"
   %+  produce  %tang
