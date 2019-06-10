@@ -2,44 +2,45 @@
 ::
 ::  To see a cow say a quote from gen/cow/quotes.txt run:
 ::
-::  +cow/cow
+::  +cow/say
 ::
 /-  sole
-/+   generators, pretty-file
-=,  generators
+/+   *generators, pretty-file
 :-  %ask
 |=  [[now=@da eny=@uvJ bec=beak] ~ ~]
 =/  max-length  80
-=/  file  (pretty-file .^(noun (cat 3 %c %x) `path`/(scot %p p.bec)/[q.bec]/(scot r.bec)/gen/cow/quotes/txt))
+=/  file-path  `path`/(scot %p p.bec)/[q.bec]/(scot r.bec)/gen/cow/quotes/txt
+=/  file  (pretty-file .^(noun (cat 3 %c %x) file-path))
 =/  line  (snag (~(rad og eny) (lent file)) file)
 =/  tongue  "U"
 =/  thoughts  "o"
 =/  eyes  "oo"
-=<  (cow)
-|%
-++  cow
-    |=  ~
-    ^-  (sole-request:sole (cask tang))
-    =/  bubble  (turn (message) bars)
-    =/  horizontal-border  leaf+(weld "  " (reap (sub (lent (snag 0 bubble)) 5) '-'))
-    =/  slant-gap  (reap (sub (lent (snag 0 bubble)) 5) ' ')
-    =/  top-slant  leaf+" /{slant-gap}\\"
-    =/  bottom-slant  leaf+" \\{slant-gap}/"
-    %+  produce  %tang
-    %+  weld
-      :~  leaf+"            ||     ||"
-          leaf+"          {tongue} ||----w |"
-          leaf+"        (__)\\       )\\/\\"
-          leaf+"      {thoughts} ({eyes})\\_______"
-          leaf+"     {thoughts}  ^__^"
-      ==
-      (weld (weld ~[horizontal-border bottom-slant] bubble) ~[top-slant horizontal-border])
-++  message
-  |=  ~
-  ^-  (list tape)
-  =/  quote  ?+  line  ""
-    [%leaf *]  p.line
+|^
+  ^-  (sole-request:sole (cask tang))
+  =/  bubble  (turn message bars)
+  =/  bubble-width  (lent (snag 0 bubble))
+  =/  horizontal-border  leaf+(weld "  " (reap (sub bubble-width 5) '-'))
+  =/  slant-gap  (reap (sub (lent (snag 0 bubble)) 5) ' ')
+  =/  top-slant  leaf+" /{slant-gap}\\"
+  =/  bottom-slant  leaf+" \\{slant-gap}/"
+  %+  produce  %tang
+  ;:  weld
+    :~  leaf+"            ||     ||"
+        leaf+"          {tongue} ||----w |"
+        leaf+"        (__)\\       )\\/\\"
+        leaf+"      {thoughts} ({eyes})\\_______"
+        leaf+"     {thoughts}  ^__^"
+    ==
+    ~[horizontal-border bottom-slant]
+    bubble
+    ~[top-slant horizontal-border]
   ==
+++  message
+  ^-  (list tape)
+  =/  quote
+    ?+  line  ""
+      [%leaf *]  p.line
+    ==
   (flop (split quote))
 ++  split
   |=  a=tape
