@@ -5,24 +5,25 @@
 ::  +cow/say
 ::
 /-  sole
-/+   *generators, pretty-file
+/+  *generators, pretty-file
 :-  %ask
 |=  [[now=@da eny=@uvJ bec=beak] ~ ~]
-=/  max-length  80
-=/  file-path  `path`/(scot %p p.bec)/[q.bec]/(scot r.bec)/gen/cow/quotes/txt
-=/  file  (pretty-file .^(noun (cat 3 %c %x) file-path))
-=/  line  (snag (~(rad og eny) (lent file)) file)
-=/  tongue  "U"
-=/  thoughts  "o"
-=/  eyes  "oo"
+=/  max-length=@  80
+=/  file-path=path  /(scot %p p.bec)/[q.bec]/(scot r.bec)/gen/cow/quotes/txt
+=/  file=tang  (pretty-file .^(noun (cat 3 %c %x) file-path))
+=/  line=tank  (snag (~(rad og eny) (lent file)) file)
+=/  tongue=tape  "U"
+=/  thoughts=tape  "o"
+=/  eyes=tape  "oo"
 |^
   ^-  (sole-request:sole (cask tang))
-  =/  bubble  (turn message bars)
-  =/  bubble-width  (lent (snag 0 bubble))
-  =/  horizontal-border  leaf+(weld "  " (reap (sub bubble-width 5) '-'))
-  =/  slant-gap  (reap (sub bubble-width 5) ' ')
-  =/  top-slant  leaf+" /{slant-gap}\\"
-  =/  bottom-slant  leaf+" \\{slant-gap}/"
+  =/  bubble=(list [%leaf tape])  (turn message bars)
+  =/  bubble-width=@  (lent (snag 0 bubble))
+  =/  horizontal-border=[%leaf tape]
+    leaf+(weld "  " (reap (sub bubble-width 5) '-'))
+  =/  slant-gap=tape  (reap (sub bubble-width 5) ' ')
+  =/  top-slant=[%leaf tape]  leaf+" /{slant-gap}\\"
+  =/  bottom-slant=[%leaf tape]  leaf+" \\{slant-gap}/"
   %+  produce  %tang
   ;:  weld
     :~  leaf+"            ||     ||"
@@ -37,24 +38,24 @@
   ==
 ++  message
   ^-  (list tape)
-  =/  quote
+  =/  quote=tape
     ?+  line  ""
       [%leaf *]  p.line
     ==
   (flop (split quote))
 ++  split
-  |=  a=tape
+  |=  tap=tape
   ^-  (list tape)
-  ?:  (gth (lent a) max-length)
-    =/  trimmed  (trim max-length a)
+  ?:  (gth (lent tap) max-length)
+    =/  trimmed=[p=tape q=tape]  (trim max-length tap)
     (weld ~[p.trimmed] (split q.trimmed))
-  ~[a]
+  ~[tap]
 ++  bars
-  |=  a=tape
+  |=  tap=tape
   ^-  [%leaf tape]
-  =/  tape-length  (lent a)
+  =/  tape-length=@  (lent tap)
   ?:  (lth tape-length max-length)
-    =/  b  (weld a (reap (sub max-length tape-length) ' '))
-    leaf+"| {b} |"
-  leaf+"| {a} |"
+    =/  padded-tap=tape  (weld tap (reap (sub max-length tape-length) ' '))
+    leaf+"| {padded-tap} |"
+  leaf+"| {tap} |"
 --
