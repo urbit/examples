@@ -8,10 +8,7 @@ There are generators (short Dojo commands), libraries (to be loaded into
 Dojo), web pages (built by Ford), applications (run by Gall), and marks
 and structures that these example Gall apps use.
 
-The code is both here on Github and now on a desk on an Urbit ship
-(`~nosnup-nomzod`). Now you can just merge the desk over the live network to get
-our examples and docs onto any of your live urbits. Give these a try by
-following the installation instructions below.
+Give these a try by following the installation instructions below.
 
 ## Installation
 
@@ -19,34 +16,8 @@ First, you'll need a running urbit. Follow our urbit.org [install
 instructions](https://urbit.org/docs/using/install/), then
 [setup](https://urbit.org/docs/using/setup/) an urbit.
 
-Follow the *Network install* below if your urbit is running on the live network
-(comets are usually best for development). Follow the *Local install* instead if
-you're on a [fake
-ship](https://fora.urbit.org/general/posts/~2017.1.5..21.31.04..20f3~/) or are otherwise
-experiencing problems with the network install.
-
-### Network install
-
-In your urbit's Dojo, run the command:
-
-    ~your-urbit:dojo> |sync %examples ~nosnup-nomzod %examples
-
-Depending on network traffic, this initial merge and sync could take anywhere
-between thirty seconds to several minutes. Upon a successful sync you'll see the
-output:
-
-    sync succeeded from %examples on ~nosnup-nomzod to %examples
-
-In which case, next run the commands:
-
-    ~your-urbit:dojo> =dir /=examples=
-    ~your-urbit:dojo/examples> |serve %/web
-    ~your-urbit:dojo/examples> |mount %
-
-If your sync isn't succeeding after a few minutes for whatever reason, run
-`|cancel %examples` in your Dojo and follow the local install below instead.
-
-### Local install
+[Fake
+ships](https://fora.urbit.org/general/posts/~2017.1.5..21.31.04..20f3~/) are best for development. If you need live network connectivity, comets are recommended.
 
 In your urbit's Dojo:
 
