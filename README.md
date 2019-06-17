@@ -8,10 +8,7 @@ There are generators (short Dojo commands), libraries (to be loaded into
 Dojo), web pages (built by Ford), applications (run by Gall), and marks
 and structures that these example Gall apps use.
 
-The code is both here on Github and now on a desk on an Urbit ship
-(`~nosnup-nomzod`). Now you can just merge the desk over the live network to get
-our examples and docs onto any of your live urbits. Give these a try by
-following the installation instructions below.
+Give these a try by following the installation instructions below.
 
 ## Installation
 
