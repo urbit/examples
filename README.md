@@ -1,12 +1,6 @@
-```
-Since Urbit version 0.8.0, changes to [eyre](https://urbit.org/docs/learn/arvo/eyre/), 
-the HTTP vane of the [Arvo](https://urbit.org/docs/learn/arvo/) operating system, have depricated
-a significant number of the examples in this repository, 
-and the repository is currently being renovated accordingly.
+> Since Urbit version 0.8.0, changes to [eyre](https://urbit.org/docs/learn/arvo/eyre/), the HTTP vane of the [Arvo](https://urbit.org/docs/learn/arvo/) operating system, have depricated a significant number of the examples in this repository, and the repository is currently being renovated accordingly.
 
-All examples in the top level directory have been updated or otherwise confirmed working --
-everything in `wip` is for the intrepid only!
-```
+>All examples in the top level directory have been updated or otherwise confirmed working -- everything in `wip` is for the intrepid only!
 
 ## Introduction
 
