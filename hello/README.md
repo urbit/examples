@@ -19,7 +19,7 @@ It tells eyre, the HTTP vane of Arvo, where it's located, and the `launch` and `
 applications to subscribe to it and present it as a tile in Landscape. Landscape provides
 access to your ship with an `api` window object.
 
-The 'hello' [tile.js](tile/tile.js), mounted in Landscape as part of the application, 
+The 'hello' [tile.js](src/tile/tile.js), mounted in Landscape as part of the application, 
 uses that api window object to poke the running hello application, which, when it receives
 a poke with JSON, prints it to the Dojo. 
 
