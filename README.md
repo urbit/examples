@@ -1,14 +1,17 @@
-![Urbit examples](https://storage.googleapis.com/media.urbit.org/site/examples-screen.png)
+> Since Urbit version 0.8.0, changes to [eyre](https://urbit.org/docs/learn/arvo/eyre/), the HTTP vane of the [Arvo](https://urbit.org/docs/learn/arvo/) operating system, have depricated a significant number of the examples in this repository, and the repository is currently being renovated accordingly.
+
+>All examples in the top level directory have been updated or otherwise confirmed working -- everything in `wip` is for the intrepid only!
 
 ## Introduction
 
 This is an open repository for Urbit example code.
 
 There are generators (short Dojo commands), libraries (to be loaded into
-Dojo), web pages (built by Ford), applications (run by Gall), and marks
-and structures that these example Gall apps use.
+Dojo), Landscape and Gall applications, and marks and structures that 
+these example appilcations use.
 
-Give these a try by following the installation instructions below.
+Give these a try by following the installation instructions below, and
+[peruse the list](#examples).
 
 ## Installation
 
@@ -19,40 +22,42 @@ Urbit](https://urbit.org/docs/getting-started/installing-urbit/), then
 For development purposes, [fake ships](https://urbit.org/docs/using/creating-a-development-ship/)
 are best. If you need live network connectivity, comets are recommended.
 
-In your urbit's Dojo:
-
-    ~your-urbit:dojo> |merge %examples our %base, =gem %that
-    ~your-urbit:dojo> =dir /=examples=
-    ~your-urbit:dojo/examples> |serve %/web
-    ~your-urbit:dojo/examples> |mount %
-
-You can now find your examples desk at the path `/path/to/your-urbit/examples/`.
-
-Lastly, in Unix, clone this repo somewhere and copy in the `examples` files to
-your urbit's new mounted `%examples` desk. You can run the following shell
-commands (*replacing your urbit's examples desk path as necessary*):
-
-    $ git clone https://github.com/urbit/examples.git
-    $ cd ./examples/
-    $ for node in {app,gen,lib,mar,sec,sur,web}; do cp -r ./$node/* /path/to/your-urbit/examples/$node/; done
-
-Your Clay filesystem should acknowledge the newly added files.
-
 ## Get started!
 
-In your web browser, head to the next examples `README` page now being served
-locally on your urbit to get started running your first examples:
+Some applications are working examples of Landscape applications with specific
+types of functionality you can play around with. 
+Others are generators, libraries for Dojo, and more.
 
-    http://localhost:8080/~~/examples/
+The top folder directory is listed per example; each example has folders you
+copy into your Urbit ship (eg. /app, /lib, /mar). Once you've copied the
+example into your ship, 
+`|commit %home` (or whatever [%desk](https://urbit.org/docs/using/filesystem/#quickstart) you're using)
+to update your ship filesystem.
 
-The `/~~/` in the URL will direct you to `Log In` via your web interface so you
-can authenticate yourself and run your first examples smoothly.
+### Getting started with Landscape tiles
 
-> If you're running multiple ships locally, your port number will be `8081`,
-> `8082`, and so on. Check your Dojo output for the correct local port of
-> your examples urbit, or view these at `https://your-urbit.arvo.network` over DNS
-> instead for live-network ships. You can also replace `localhost` with the IP
-> of your instance, if you're running your urbit in the cloud.
+Landscape tiles also use the [React](https://reactjs.org/) framework and require 
+compilation if you want to change them -- find their source in the /src folder, 
+`npm install` their dependencies, change the Urbit ship location in the `.urbitrc` file to your ship location, and `npm run serve`.
+
+If you just want to try out the Landscape tile examples, then all you need
+to do is copy the other folders into your ship.
+
+You'll find Landscape running on http://localhost:PORT, PORT being 80, 8080, 8081, 
+and so on, depending on your operating system's free ports; see your ship's boot message
+for a notification as to what port HTTP is available on. If you haven't used
+Landscape before, you'll need to enter `+code` on your ship to get the password
+to authenticate yourself with on the Landscape interface.
+
+See also the [Urbit documentation](https://urbit.org/docs/getting-started/booting-a-ship/#using-landscape)
+for more information.
+
+## Examples
+
+Each example has more information in its directory -- click an example below
+to learn more about it.
+
+* [hello](hello)
 
 ## Learn a lot, and have fun!
 
@@ -60,8 +65,6 @@ The number one goal for this repository is for it to be fun! People are always
 around on [Talk](https://urbit.org/docs/using/messaging/). Help each other out, and don't hesitate if
 you have an idea for a contribution. We'd love to make this both a learning
 resource and a record of what people in the community are coming up with.
-
-## Contributing / Feedback
 
 Give us feedback [via email](mailto:support@urbit.org) after
 you've played around with these for a little bit. Let us know about your ideas,
