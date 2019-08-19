@@ -10,7 +10,8 @@ There are generators (short Dojo commands), libraries (to be loaded into
 Dojo), Landscape and Gall applications, and marks and structures that 
 these example appilcations use.
 
-Give these a try by following the installation instructions below.
+Give these a try by following the installation instructions below, and
+[peruse the list](#examples).
 
 ## Installation
 
@@ -35,10 +36,9 @@ to update your ship filesystem.
 
 ### Getting started with Landscape tiles
 
-Landscape tiles also use the React framework and require compilation if you want
-to play around -- find their source in /src, `npm install` their dependencies, 
-change the Urbit ship location in the `.urbitrc` file to your ship location, 
-and `npm run serve`.
+Landscape tiles also use the [React](https://reactjs.org/) framework and require 
+compilation if you want to change them -- find their source in the /src folder, 
+`npm install` their dependencies, change the Urbit ship location in the `.urbitrc` file to your ship location, and `npm run serve`.
 
 If you just want to try out the Landscape tile examples, then all you need
 to do is copy the other folders into your ship.
@@ -49,15 +49,15 @@ for a notification as to what port HTTP is available on. If you haven't used
 Landscape before, you'll need to enter `+code` on your ship to get the password
 to authenticate yourself with on the Landscape interface.
 
-### Example listing
+See also the [Urbit documentation](https://urbit.org/docs/getting-started/booting-a-ship/#using-landscape)
+for more information.
 
-Each application is briefly listed below.
+## Examples
 
-#### hello
+Each example has more information in its directory -- click an example below
+to learn more about it.
 
-A Landscape tile that sends a hello with some JSON back to your Dojo. 
-Copy /app into your ship, `|commit %home` and `|start %hello` to see your new tile in
-Landscape.
+* [hello](hello)
 
 ## Learn a lot, and have fun!
 
