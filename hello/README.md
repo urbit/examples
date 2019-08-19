@@ -14,7 +14,7 @@ for more information.
 
 ## How 'hello' works
 
-The application is started with `hello.hoon` in the [/app](/app) folder on your ship.
+The application is started with `hello.hoon` in the [/app](app) folder on your ship.
 It tells eyre, the HTTP vane of Arvo, where it's located, and the `launch` and `modulo`
 applications to subscribe to it and present it as a tile in Landscape. Landscape provides
 access to your ship with an `api` window object.
