@@ -77,35 +77,6 @@ information on generators at the [`gen`](/~~/examples/gen) page.
 
 Let's look at libraries next.
 
-#### `/+hello` library
-
-Let's load up your first library. From `:dojo`:
-
-    ~your-urbit:dojo/examples> /+  hello
-    ~your-urbit:dojo/examples> (world:hello 'world')
-    'Hello, world!'
-
-(Note the two spaces - this is a tall-form `%ford` rune)
-
-Libraries are a great way to keep useful Hoon cores in one place to share
-between apps, generators and the rest of the Arvo system. The source for this
-library is at `/lib/hello.hoon` of this repository. More details on libraries at
-the [`lib`](/~~/examples/lib) page.
-
-Finally, a web page built by `%ford`.
-
-#### `hello` web page
-
-Load up the `hello` web page by visiting this link in your browser:
-
-    http://localhost:8443/~~/pages/ford/hello
-
-The source files for this web page and the library it pulls from are at
-`/web/pages/ford/hello.hoon` and `/web/pages/ford/hello/lib.hoon` of this
-repository, respectively. You can learn about Urbit web pages at the
-[`web`](/~~/examples/web) page.
-
-<br />
 
 ### Contributing / Feedback
 
