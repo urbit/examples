@@ -59,6 +59,7 @@ to learn more about it.
 
 * [click](click)
 * [hello](hello)
+* [speakrune](speakrune)
 
 ## Learn a lot, and have fun!
 
