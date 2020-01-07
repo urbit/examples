@@ -1,6 +1,4 @@
-> Since Urbit version 0.8.0, changes to [eyre](https://urbit.org/docs/learn/arvo/eyre/), the HTTP vane of the [Arvo](https://urbit.org/docs/learn/arvo/) operating system, have depricated a significant number of the examples in this repository, and the repository is currently being renovated accordingly.
-
->All examples in the top level directory have been updated or otherwise confirmed working -- everything in `wip` is for the intrepid only!
+> Since Urbit version 0.10.0, changes to Gall have rendered all current examples presently invalid. Stand by for updates...
 
 ## Introduction
 
@@ -16,10 +14,10 @@ Give these a try by following the installation instructions below, and
 ## Installation
 
 First, you'll need a running urbit. [Install
-Urbit](https://urbit.org/docs/getting-started/installing-urbit/), then
-[boot a ship](https://urbit.org/docs/getting-started/booting-a-ship/).
+Urbit](https://urbit.org/using/install), then
+[boot a ship](https://urbit.org/using/install/#booting-your-ship).
 
-For development purposes, [fake ships](https://urbit.org/docs/using/creating-a-development-ship/)
+For development purposes, [fake ships](https://urbit.org/using/develop/#creating-a-development-ship)
 are best. If you need live network connectivity, comets are recommended.
 
 ## Get started!
@@ -31,7 +29,7 @@ Others are generators, libraries for Dojo, and more.
 The top folder directory is listed per example; each example has folders you
 copy into your Urbit ship (eg. /app, /lib, /mar). Once you've copied the
 example into your ship, 
-`|commit %home` (or whatever [%desk](https://urbit.org/docs/using/filesystem/#quickstart) you're using)
+`|commit %home` (or whatever [%desk](https://urbit.org/using/operations/using-your-ship/#quickstart-2) you're using)
 to update your ship filesystem.
 
 ### Getting started with Landscape tiles
@@ -49,7 +47,7 @@ for a notification as to what port HTTP is available on. If you haven't used
 Landscape before, you'll need to enter `+code` on your ship to get the password
 to authenticate yourself with on the Landscape interface.
 
-See also the [Urbit documentation](https://urbit.org/docs/getting-started/booting-a-ship/#using-landscape)
+See also the [Urbit documentation](https://urbit.org/using/install/#using-landscape)
 for more information.
 
 ## Examples
@@ -57,14 +55,10 @@ for more information.
 Each example has more information in its directory -- click an example below
 to learn more about it.
 
-* [click](click)
-* [hello](hello)
-* [speakrune](speakrune)
-
 ## Learn a lot, and have fun!
 
 The number one goal for this repository is for it to be fun! People are always
-around on [Talk](https://urbit.org/docs/using/messaging/). Help each other out, and don't hesitate if
+around on [Chat](https://urbit.org/using/operations/using-your-ship/#quickstart). Help each other out, and don't hesitate if
 you have an idea for a contribution. We'd love to make this both a learning
 resource and a record of what people in the community are coming up with.
 
