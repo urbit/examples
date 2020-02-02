@@ -16,7 +16,7 @@
 =/  thoughts=tape  "o"
 =/  eyes=tape  "oo"
 |^
-  ^-  (sole-request:sole (cask tang))
+  ^-  (sole-product:sole (cask tang))
   =/  bubble=(list [%leaf tape])  (turn message bars)
   =/  bubble-width=@  (lent (snag 0 bubble))
   =/  horizontal-border=[%leaf tape]
