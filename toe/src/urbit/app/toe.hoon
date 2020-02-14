@@ -28,7 +28,7 @@
           ::  %active: room that receives console board moves
           ::
           active=(unit ship)
-          ::  %next: flag to indicate a confirmed replay
+          ::  %next: flag to indicate a confirmed rematch
           ::
           next=?
           ::  %game: game loop global state
@@ -225,7 +225,7 @@
       cards
     ^-  (list card)
     :_  ~
-    :^  %give  %fact  `/room/(scot %p ship:current:room-core)
+    :^  %give  %fact  [/room/(scot %p ship:current:room-core) ~]
     ?:  =(~ out:bc)
       [%toe-turno !>(turno:bc)]
     [%toe-winner !>([(end:co:view [out:bc who]) turno:bc])]
@@ -256,7 +256,7 @@
         (waiting:updates:fe:view guest)
         [%pass /request %agent [guest %toe] %poke %urbit !>(our.bowl)]
     ==
-  ::  %receive: a guest ship sends an invite to play/replay
+  ::  %receive: a guest ship sends an invite to play/rematch
   ::
   ++  receive
     |=  guest=@p
@@ -282,20 +282,18 @@
     =/  who=@p
       ?~  active  our.bowl
       ?:(=(%.y ^next) our.bowl ze)
-    =/  request=(list card)
-      ?.  =(game %rematch)
-        [%pass /play %agent [ze %toe] %watch /room/(scot %p our.bowl)]~
-      ::  %next is set if our opponent already confirmed the replay
-      ::
-      ?:  =(%.y next)  ~
-      =/  =toe-player  [%rematch [%'X' %g]]
-      [%pass /replay %agent [ze %toe] %poke %toe-player !>(toe-player)]~
     =.  rooms  [[ze `[*board-game toers who=who]] t.rooms]
     :_  state(active `ze, game %play)
-    %+  weld  request
-    :~  (playing:updates:co:view ze)
-        (playing:updates:fe:view ze)
-    ==
+    ?.  =(game %rematch)
+      [%pass /play %agent [ze %toe] %watch /room/(scot %p our.bowl)]~
+    %+  weld
+      ~[(playing:updates:co:view ze) (playing:updates:fe:view ze)]
+    ::  %next is set if our opponent already confirmed the rematch
+    ::
+    ^-  (list card)
+    ?:  =(%.y next)
+      ~
+    [%pass /rematch %agent [ze %toe] %poke %toe-player !>(rematch+[%'X' %g])]~
   ::  +close: leaves the current rooms and closes subscriptions
   ::
   ++  close
@@ -310,12 +308,13 @@
         ?:  =(kicked %.y)  ~
         [%pass /cancel %agent [ze %toe] %poke %toe-cancel !>(%bye)]~
       ?:  =(kicked %.y)  ~
+      ^-  (list card)
       :~  ::  we leave our subscription
           ::
           [%pass /play %agent [ze %toe] %leave ~]
-          ::  ...and kick our subscriber
+          ::  and kick our subscriber
           ::
-          [%give %kick `/room/(scot %p ze) ~]
+          [%give %kick [/room/(scot %p ze) ~] ~]
       ==
     =.  room.i.rooms   ~
     ?~  t.rooms
@@ -647,7 +646,7 @@
     ++  send
       |=  pairs=(list [@t json])
       ^-  card
-      [%give %fact `/toetile %json !>((pairs:enjs:format pairs))]
+      [%give %fact [/toetile ~] %json !>((pairs:enjs:format pairs))]
     ::
     ++  updates
       |%
@@ -822,7 +821,7 @@
     ++  send
       |=  effect=sole-effect
       ^-  card
-      [%give %fact [~ /sole/drum] %sole-effect !>(effect)]
+      [%give %fact [/sole/drum ~] %sole-effect !>(effect)]
     ::
     ++  updates
       |%
