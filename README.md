@@ -1,4 +1,4 @@
-> Since Urbit version 0.10.0, changes to Gall have rendered all current examples presently invalid. Stand by for updates...
+**All examples in this repository are obsolete as of late 2020 (with most in /wip/ obsolete even earlier). Please consult the [developer's guide](https://urbit.org/using/develop/) or community projects like [Urbit Lab](https://gitlab.com/lannel-holten/urbit-lab).**
 
 ## Introduction
 
